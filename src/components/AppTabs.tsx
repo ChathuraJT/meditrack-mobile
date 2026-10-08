@@ -1,4 +1,9 @@
 import {
+  createThemedStyles,
+  useThemedStyles,
+  useTheme,
+} from '@/theme/ThemeProvider';
+import {
   Tabs,
   TabList,
   TabTrigger,
@@ -10,13 +15,15 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { ComponentProps } from 'react';
 import { AppText } from '@/components/ui/AppText';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing } from '@/theme/tokens';
 
 type ButtonProps = TabTriggerSlotProps & {
   icon: ComponentProps<typeof Ionicons>['name'];
   label: string;
 };
 function TabButton({ icon, label, isFocused, ...props }: ButtonProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(themedStyles);
   return (
     <Pressable
       {...props}
@@ -45,6 +52,7 @@ function TabButton({ icon, label, isFocused, ...props }: ButtonProps) {
   );
 }
 export function AppTabs() {
+  const styles = useThemedStyles(themedStyles);
   const insets = useSafeAreaInsets();
   return (
     <Tabs style={styles.tabs}>
@@ -77,25 +85,27 @@ export function AppTabs() {
     </Tabs>
   );
 }
-const styles = StyleSheet.create({
-  tabs: { flex: 1, backgroundColor: colors.background },
-  slot: { flex: 1 },
-  list: {
-    flexDirection: 'row',
-    backgroundColor: colors.surface,
-    borderTopWidth: 1,
-    borderColor: colors.border,
-    paddingTop: spacing.sm,
-  },
-  button: {
-    flex: 1,
-    minHeight: 56,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.xs,
-    gap: spacing.xs,
-    borderRadius: 10,
-  },
-  selected: { backgroundColor: colors.background },
-  pressed: { opacity: 0.6 },
-});
+const themedStyles = createThemedStyles((colors) =>
+  StyleSheet.create({
+    tabs: { flex: 1, backgroundColor: colors.background },
+    slot: { flex: 1 },
+    list: {
+      flexDirection: 'row',
+      backgroundColor: colors.surface,
+      borderTopWidth: 1,
+      borderColor: colors.border,
+      paddingTop: spacing.sm,
+    },
+    button: {
+      flex: 1,
+      minHeight: 56,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: spacing.xs,
+      gap: spacing.xs,
+      borderRadius: 10,
+    },
+    selected: { backgroundColor: colors.background },
+    pressed: { opacity: 0.6 },
+  }),
+);

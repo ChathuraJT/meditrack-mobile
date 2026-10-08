@@ -1,132 +1,119 @@
-import {
-  parsePhoneNumberFromString,
-  type CountryCode,
-} from 'libphonenumber-js';
 import { z } from 'zod';
-
-export const genders = [
-  'Female',
-  'Male',
-  'Other',
-  'Prefer not to say',
-] as const;
-export function normalizePhone(value: string, country: CountryCode = 'LK') {
-  const phone = parsePhoneNumberFromString(value.trim(), {
-    defaultCountry: country,
-    extract: false,
-  });
-  return phone?.isValid() && !phone.ext ? phone.number : null;
-}
-export function parseIdentifier(
-  value: string,
-): { email: string } | { phone: string } | null {
-  const identifier = value.trim();
-  if (identifier.includes('@'))
-    return z.email().safeParse(identifier).success
-      ? { email: identifier }
-      : null;
-  const phone = normalizePhone(identifier);
-  return phone ? { phone } : null;
-}
-export const optionalEmail = z
-  .string()
-  .trim()
-  .refine(
-    (value) => value === '' || z.email().safeParse(value).success,
-    'Enter a valid email address.',
-  );
-export const profileSchema = z.object({
-  full_name: z
-    .string()
-    .trim()
-    .min(2, 'Enter at least 2 characters.')
-    .max(100, 'Use 100 characters or fewer.'),
-  age: z
-    .string()
-    .regex(/^\d{1,3}$/, 'Enter a whole number from 1 to 120.')
-    .refine(
-      (value) => Number(value) >= 1 && Number(value) <= 120,
-      'Enter an age from 1 to 120.',
-    ),
-  gender: z.enum(genders, { error: 'Select a gender option.' }),
-});
-export const signupSchema = profileSchema
-  .extend({
-    email: optionalEmail,
-    country: z.string(),
-    phone: z.string().min(1, 'Enter your mobile number.'),
-    password: z.string().min(8, 'Use at least 8 characters.'),
-    confirmPassword: z.string().min(1, 'Confirm your password.'),
-  })
-  .superRefine((values, ctx) => {
-    if (!normalizePhone(values.phone, values.country as CountryCode))
-      ctx.addIssue({
-        code: 'custom',
-        path: ['phone'],
-        message: 'Enter a valid mobile number for the selected country.',
-      });
-    if (values.password !== values.confirmPassword)
-      ctx.addIssue({
-        code: 'custom',
-        path: ['confirmPassword'],
-        message: 'Passwords must match exactly.',
-      });
-  });
+const required = 'Please fill in all required fields.';
+const field = (max: number) => z.string().trim().min(1, required).max(max);
 export const loginSchema = z.object({
   identifier: z
     .string()
     .trim()
-    .min(1, 'Enter your email or mobile number.')
-    .refine(
-      (value) => !!parseIdentifier(value),
-      'Enter a valid email or phone number (Sri Lanka by default, or use +country code).',
-    ),
+    .email('Enter the email address for your account.'),
   password: z.string().min(1, 'Enter your password.'),
 });
+export const signupSchema = z
+  .object({
+    username: field(150),
+    email: field(254).email('Enter a valid email address.'),
+    password: z
+      .string()
+      .min(
+        6,
+        'Use at least 6 characters. The server may require a stronger password.',
+      ),
+    confirmPassword: z.string(),
+    phone: field(15),
+    NIC_number: field(12),
+    birthday: field(10).refine(
+      (v) =>
+        /^\d{4}-\d{2}-\d{2}$/.test(v) &&
+        !Number.isNaN(Date.parse(v)) &&
+        new Date(v).toISOString().slice(0, 10) === v,
+      'Enter a valid birthday as YYYY-MM-DD.',
+    ),
+    role: z.enum(['patient', 'doctor', 'lab']),
+    degrees: z.string().trim().max(100),
+    university: z.string().trim().max(100),
+    working_hospital: z.string().trim().max(150),
+    lab_name: z.string().trim().max(150),
+    lab_address: z.string().trim().max(255),
+    license_id: z.string().trim().max(50),
+  })
+  .superRefine((v, ctx) => {
+    if (v.password !== v.confirmPassword)
+      ctx.addIssue({
+        code: 'custom',
+        path: ['confirmPassword'],
+        message: 'Passwords do not match.',
+      });
+    if (v.role === 'lab')
+      for (const key of ['lab_name', 'lab_address', 'license_id'] as const)
+        if (!v[key])
+          ctx.addIssue({
+            code: 'custom',
+            path: [key],
+            message: 'Please fill in all laboratory details.',
+          });
+  });
 export type SignupValues = z.infer<typeof signupSchema>;
-export type ProfileValues = z.infer<typeof profileSchema>;
-export type RegistrationDraft = Omit<
-  SignupValues,
-  'password' | 'confirmPassword'
->;
-export const emptyDraft: RegistrationDraft = {
-  full_name: '',
-  age: '',
-  gender: '' as SignupValues['gender'],
+export const emptySignup: SignupValues = {
+  username: '',
   email: '',
-  country: 'LK',
+  password: '',
+  confirmPassword: '',
   phone: '',
+  NIC_number: '',
+  birthday: '',
+  role: 'patient',
+  degrees: '',
+  university: '',
+  working_hospital: '',
+  lab_name: '',
+  lab_address: '',
+  license_id: '',
 };
-export type AuthStatus = 'initializing' | 'signedOut' | 'signedIn' | 'error';
+export function signupPayload(values: SignupValues) {
+  const { confirmPassword: _confirmation, ...payload } =
+    signupSchema.parse(values);
+  if (payload.role !== 'doctor') {
+    payload.degrees = '';
+    payload.university = '';
+    payload.working_hospital = '';
+  }
+  if (payload.role !== 'lab') {
+    payload.lab_name = '';
+    payload.lab_address = '';
+    payload.license_id = '';
+  }
+  const now = new Date().toISOString();
+  return { ...payload, created_at: now, updated_at: now };
+}
+export type UserProfile = import('./supabase-auth').AccountProfile;
 export function launchDestination(
   initializing: boolean,
-  hasSession: boolean,
+  profile: UserProfile | null,
   onboarded: boolean,
 ) {
   if (initializing) return 'loading';
-  if (hasSession) return 'patient';
+  if (profile && profile.approval_status === 'approved')
+    return profile.role === 'patient' ? 'patient' : 'unsupported';
   return onboarded ? 'login' : 'onboarding';
 }
-export function authErrorMessage(
-  error: unknown,
-  context: 'login' | 'signup' | 'verify' | 'email' | 'general' = 'general',
+export function signupOutcome(
+  role: SignupValues['role'],
+  needsConfirmation = true,
 ) {
-  const e = error as { status?: number; code?: string; name?: string };
-  if (e?.status === 429 || e?.code?.includes('rate_limit'))
-    return 'Too many attempts. Wait before trying again; the server controls the retry window.';
-  if (e?.name === 'AuthRetryableFetchError' || e instanceof TypeError)
-    return 'Unable to reach the service. Check your connection and try again.';
-  if (e?.code === 'phone_provider_disabled' || e?.code === 'sms_send_failed')
-    return 'Phone verification is unavailable. Please try later or contact the MediTrack team.';
-  if (e?.code === 'weak_password')
-    return 'This password does not meet the server’s password policy. Use a longer, stronger password and try again.';
-  if (context === 'login')
-    return 'Unable to sign in. Check your credentials and confirm your account, then try again.';
-  if (context === 'verify')
-    return 'The code could not be verified. Check it or request a new code if it has expired.';
-  if (context === 'email')
-    return 'This email could not be linked or verified. Try another address or continue with your phone account.';
-  if (context === 'signup')
-    return 'Account creation could not be completed. Check your details, try signing in if you already registered, or try again later.';
-  return 'The request could not be completed. Please try again.';
+  return {
+    redirect: !needsConfirmation && role !== 'doctor',
+    message: needsConfirmation
+      ? 'Registration received. Check your email to confirm your account, then sign in.' +
+        (role === 'doctor'
+          ? ' Doctor accounts also need administrator approval.'
+          : '')
+      : role === 'doctor'
+        ? 'Registration submitted for administrator approval. Sign in after approval.'
+        : 'Account created successfully! Redirecting to login...',
+  };
+}
+export function authErrorMessage(error: unknown) {
+  return error instanceof Error
+    ? error.message
+    : 'Something went wrong. Please try again.';
 }

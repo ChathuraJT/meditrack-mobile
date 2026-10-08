@@ -9,7 +9,24 @@ export const colors = {
   success: '#00AA8B',
   warning: '#F59E0B',
   error: '#B42318',
+  onPrimary: '#FFFFFF',
 };
+export type ThemeColors = typeof colors;
+export type ThemeMode = 'light' | 'dark';
+export const darkColors: ThemeColors = {
+  primary: '#8AC4FF',
+  accent: '#53D5D9',
+  background: '#0C1422',
+  surface: '#172337',
+  text: '#EDF4FF',
+  secondary: '#A6B8D1',
+  border: '#34465F',
+  success: '#5DDFC1',
+  warning: '#F9C464',
+  error: '#FFADA5',
+  onPrimary: '#10243C',
+};
+export const palettes = { light: colors, dark: darkColors };
 export const spacing = { xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48 };
 export const radius = { sm: 10, md: 18, lg: 26 };
 export const typography = {

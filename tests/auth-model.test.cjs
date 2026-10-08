@@ -4,101 +4,212 @@ const fs = require('node:fs');
 const ts = require('typescript');
 const Module = require('node:module');
 const path = require('node:path');
-// Transpile the pure production model, using the existing TypeScript toolchain.
-const filename = path.resolve('src/features/auth/model.ts');
-const compiled = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
-  compilerOptions: {
-    module: ts.ModuleKind.CommonJS,
-    target: ts.ScriptTarget.ES2022,
-  },
-}).outputText;
-const modelModule = new Module(filename, module);
-modelModule.filename = filename;
-modelModule.paths = Module._nodeModulePaths(path.dirname(filename));
-modelModule._compile(compiled, filename);
-const {
-  parseIdentifier,
-  normalizePhone,
-  optionalEmail,
-  signupSchema,
-  launchDestination,
-  authErrorMessage,
-} = modelModule.exports;
-
-const valid = {
-  full_name: 'නිමල් පෙරේරා',
-  age: '24',
-  gender: 'Prefer not to say',
-  email: '',
-  country: 'LK',
+function load(file) {
+  const filename = path.resolve(file);
+  const compiled = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2022,
+    },
+  }).outputText;
+  const mod = new Module(filename, module);
+  mod.filename = filename;
+  mod.paths = Module._nodeModulePaths(path.dirname(filename));
+  mod._compile(compiled, filename);
+  return mod.exports;
+}
+const model = load('src/features/auth/model.ts');
+const { postJson } = load('src/lib/api.ts');
+const patient = {
+  ...model.emptySignup,
+  username: ' alice ',
+  email: 'alice@example.com',
+  password: ' x ',
+  confirmPassword: ' x ',
   phone: '0771234567',
-  password: ' a password ',
-  confirmPassword: ' a password ',
+  NIC_number: '001234567V',
+  birthday: '1998-05-20',
 };
-test('identifier distinguishes email and phone without account lookup', () => {
-  assert.deepEqual(parseIdentifier('  patient@example.com  '), {
-    email: 'patient@example.com',
+const profile = {
+  username: 'alice',
+  role: 'patient',
+  doctorID: null,
+  lab_name: null,
+  license_id: null,
+  lab_address: null,
+};
+test('login accepts username/email, trims only identifier and requires inputs', () => {
+  for (const identifier of [' Alice ', ' Alice@example.com '])
+    assert.deepEqual(model.loginSchema.parse({ identifier, password: ' x ' }), {
+      identifier: identifier.trim(),
+      password: ' x ',
+    });
+  assert.equal(
+    model.loginSchema.safeParse({ identifier: ' ', password: '' }).success,
+    false,
+  );
+});
+test('signup exact payload, leading zeros, unchanged password and optional fields', () => {
+  const payload = model.signupPayload({
+    ...patient,
+    degrees: 'stale',
+    license_id: 'stale',
   });
-  assert.deepEqual(parseIdentifier('077 123 4567'), { phone: '+94771234567' });
-  assert.equal(parseIdentifier('bad@'), null);
-  assert.equal(parseIdentifier(''), null);
-  assert.equal(parseIdentifier('1234'), null);
+  assert.equal(payload.username, 'alice');
+  assert.equal(payload.password, ' x ');
+  assert.equal(payload.phone, '0771234567');
+  assert.equal(payload.NIC_number, '001234567V');
+  assert.equal(payload.birthday, '1998-05-20');
+  assert.equal(payload.degrees, '');
+  assert.equal(payload.license_id, '');
+  for (const key of ['confirmPassword', 'doctorID', 'is_approved'])
+    assert.equal(key in payload, false);
+  assert.ok(!Number.isNaN(Date.parse(payload.created_at)));
 });
-test('Sri Lankan local and international numbers normalize to E.164', () => {
-  assert.equal(normalizePhone('0771234567'), '+94771234567');
-  assert.equal(normalizePhone('+94 77 123 4567'), '+94771234567');
-  assert.equal(normalizePhone('+44 7911 123456'), '+447911123456');
-  assert.equal(normalizePhone('07911 123456', 'GB'), '+447911123456');
-  assert.equal(normalizePhone('0771234567 ext 4'), null);
-  assert.equal(normalizePhone('call 0771234567'), null);
-});
-test('optional email accepts blank and rejects malformed input', () => {
-  for (const value of ['', '   ', 'patient@example.com'])
-    assert.equal(optionalEmail.safeParse(value).success, true);
-  assert.equal(optionalEmail.safeParse('not-an-email').success, false);
-});
-test('signup preserves password whitespace, supports Unicode, and validates exact confirmation', () => {
-  const result = signupSchema.parse(valid);
-  assert.equal(result.password, ' a password ');
-  assert.equal(result.full_name, valid.full_name);
+test('role, required fields, lengths, real dates and confirmation validation', () => {
+  for (const edit of [
+    { role: 'admin' },
+    { email: 'wrong' },
+    { birthday: '2025-02-29' },
+    { birthday: '01/01/2000' },
+    { phone: '1'.repeat(16) },
+    { NIC_number: '1'.repeat(13) },
+    { username: '' },
+    { confirmPassword: 'x' },
+  ])
+    assert.equal(
+      model.signupSchema.safeParse({ ...patient, ...edit }).success,
+      false,
+    );
   assert.equal(
-    signupSchema.safeParse({ ...valid, confirmPassword: valid.password.trim() })
-      .success,
+    model.signupSchema.safeParse({ ...patient, role: 'doctor' }).success,
+    true,
+  );
+  assert.equal(
+    model.signupSchema.safeParse({ ...patient, role: 'lab' }).success,
     false,
   );
   assert.equal(
-    signupSchema.safeParse({
-      ...valid,
-      password: 'short',
-      confirmPassword: 'short',
+    model.signupSchema.safeParse({
+      ...patient,
+      role: 'lab',
+      lab_name: 'Lab',
+      lab_address: 'Address',
+      license_id: '123',
     }).success,
-    false,
-  );
-  assert.equal(signupSchema.safeParse({ ...valid, age: '2.5' }).success, false);
-  assert.equal(signupSchema.safeParse({ ...valid, age: '121' }).success, false);
-  assert.equal(
-    signupSchema.safeParse({ ...valid, gender: 'Doctor' }).success,
-    false,
+    true,
   );
 });
-test('launch never exposes tabs before restoration and requires a session', () => {
-  for (const session of [false, true])
-    for (const onboarded of [false, true])
-      assert.equal(launchDestination(true, session, onboarded), 'loading');
-  assert.equal(launchDestination(false, false, false), 'onboarding');
-  assert.equal(launchDestination(false, false, true), 'login');
-  assert.equal(launchDestination(false, true, false), 'patient');
-  assert.equal(launchDestination(false, true, true), 'patient');
-  // Sign-out keeps onboarding complete while removing access to patient tabs.
-  assert.equal(launchDestination(false, false, true), 'login');
+test('signup outcomes never auto-login and doctors stay pending', () => {
+  assert.equal(model.signupOutcome('doctor').redirect, false);
+  assert.equal(model.signupOutcome('patient').redirect, true);
+  assert.equal(model.signupOutcome('lab').redirect, true);
 });
-test('login errors do not distinguish account existence', () => {
-  assert.equal(
-    authErrorMessage({ code: 'invalid_credentials' }, 'login'),
-    authErrorMessage({ code: 'user_not_found' }, 'login'),
+test('profile validation and launch routing deny every non-patient role', () => {
+  assert.deepEqual(
+    model.profileSchema.parse({ ...profile, password: 'not retained' }),
+    profile,
   );
-  assert.match(
-    authErrorMessage({ status: 429 }, 'verify'),
-    /Too many attempts/,
+  for (const bad of [
+    {},
+    { ...profile, doctorID: 12 },
+    { ...profile, username: '' },
+  ])
+    assert.equal(model.profileSchema.safeParse(bad).success, false);
+  assert.equal(model.launchDestination(true, null, false), 'loading');
+  assert.equal(model.launchDestination(false, null, false), 'onboarding');
+  assert.equal(model.launchDestination(false, null, true), 'login');
+  assert.equal(model.launchDestination(false, profile, false), 'patient');
+  for (const role of ['doctor', 'lab', 'admin', 'unknown'])
+    assert.equal(
+      model.launchDestination(false, { ...profile, role }, true),
+      'unsupported',
+    );
+});
+test('HTTP request shape and success', async (t) => {
+  t.mock.method(global, 'fetch', async (url, options) => {
+    assert.equal(url, 'https://example.test/login/');
+    assert.equal(options.headers['Content-Type'], 'application/json');
+    assert.equal(options.method, 'POST');
+    assert.deepEqual(JSON.parse(options.body), {
+      username: 'alice',
+      password: ' x ',
+    });
+    assert.equal(options.headers.Authorization, undefined);
+    return new Response(JSON.stringify(profile), { status: 200 });
+  });
+  assert.deepEqual(
+    await postJson('https://example.test/', '/login/', {
+      username: 'alice',
+      password: ' x ',
+    }),
+    profile,
   );
+});
+test('HTTP errors preserve API messages and status', async (t) => {
+  for (const status of [400, 401, 403, 500]) {
+    t.mock.method(
+      global,
+      'fetch',
+      async () =>
+        new Response(
+          JSON.stringify({ error: 'Server explanation', message: 'secondary' }),
+          { status },
+        ),
+    );
+    await assert.rejects(
+      postJson('https://example.test', '/login/', {}),
+      (e) => e.status === status && e.message === 'Server explanation',
+    );
+  }
+});
+test('non-JSON, network errors, message fallback and timeout', async (t) => {
+  t.mock.method(
+    global,
+    'fetch',
+    async () => new Response('<html>private error</html>', { status: 500 }),
+  );
+  await assert.rejects(
+    postJson('https://example.test', '/login/', {}),
+    /Request failed \(500\)/,
+  );
+  t.mock.method(
+    global,
+    'fetch',
+    async () => new Response('<html>oops</html>', { status: 200 }),
+  );
+  await assert.rejects(
+    postJson('https://example.test', '/login/', {}),
+    /unexpected response/,
+  );
+  t.mock.method(
+    global,
+    'fetch',
+    async () =>
+      new Response(JSON.stringify({ message: 'Try later' }), { status: 400 }),
+  );
+  await assert.rejects(
+    postJson('https://example.test', '/login/', {}),
+    /Try later/,
+  );
+  t.mock.method(global, 'fetch', async () => {
+    throw new TypeError('fetch failed');
+  });
+  await assert.rejects(
+    postJson('https://example.test', '/login/', {}),
+    /Unable to reach/,
+  );
+  t.mock.method(
+    global,
+    'fetch',
+    (_url, { signal }) =>
+      new Promise((_resolve, reject) =>
+        signal.addEventListener('abort', () => reject(new Error('aborted'))),
+      ),
+  );
+  await assert.rejects(
+    postJson('https://example.test', '/login/', {}, 5),
+    /timed out/,
+  );
+  await assert.rejects(postJson(null, '/login/', {}), /Configure/);
 });

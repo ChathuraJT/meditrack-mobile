@@ -1,36 +1,27 @@
 import 'react-native-url-polyfill/auto';
-
-type Configuration = { url: string; publishableKey: string };
-type Result =
-  { config: Configuration; message: null } | { config: null; message: string };
-
-function readConfiguration(): Result {
-  const url = process.env.EXPO_PUBLIC_SUPABASE_URL?.trim();
-  const publishableKey =
-    process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim();
-  const invalid: Result = {
-    config: null,
-    message:
-      'Supabase is not configured. Copy .env.example to .env and set the project HTTPS URL and sb_publishable_ key. Restart Expo after editing. The shell works without a backend.',
-  };
-  if (!url || !publishableKey) return invalid;
+export function readSupabaseConfiguration(
+  url: string | undefined,
+  key: string | undefined,
+) {
+  if (!url || !key) return null;
   try {
-    const parsed = new URL(url);
+    const parsed = new URL(url.trim());
     if (
       parsed.protocol !== 'https:' ||
-      !parsed.hostname.includes('.') ||
       parsed.username ||
       parsed.password ||
       parsed.search ||
       parsed.hash ||
       parsed.pathname !== '/'
     )
-      return invalid;
-    if (!/^sb_publishable_[A-Za-z0-9_-]+$/.test(publishableKey)) return invalid;
-    return { config: { url: parsed.origin, publishableKey }, message: null };
+      return null;
+    if (!/^sb_publishable_[A-Za-z0-9_-]+$/.test(key.trim())) return null;
+    return { url: parsed.origin, publishableKey: key.trim() };
   } catch {
-    return invalid;
+    return null;
   }
 }
-// Format validation is not a connectivity or authorization check.
-export const supabaseConfiguration = readConfiguration();
+export const supabaseConfiguration = readSupabaseConfiguration(
+  process.env.EXPO_PUBLIC_SUPABASE_URL,
+  process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+);

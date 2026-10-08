@@ -1,3 +1,4 @@
+import { createThemedStyles, useThemedStyles } from '@/theme/ThemeProvider';
 import type { PropsWithChildren } from 'react';
 import {
   ScrollView,
@@ -7,8 +8,9 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing } from '@/theme/tokens';
 export function Screen({ children }: PropsWithChildren) {
+  const styles = useThemedStyles(themedStyles);
   return (
     <SafeAreaView
       style={styles.safe}
@@ -29,13 +31,15 @@ export function Screen({ children }: PropsWithChildren) {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.background },
-  scroll: { flexGrow: 1, padding: spacing.lg, paddingBottom: spacing.xl },
-  content: {
-    width: '100%',
-    maxWidth: 680,
-    alignSelf: 'center',
-    gap: spacing.lg,
-  },
-});
+const themedStyles = createThemedStyles((colors) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: colors.background },
+    scroll: { flexGrow: 1, padding: spacing.lg, paddingBottom: spacing.xl },
+    content: {
+      width: '100%',
+      maxWidth: 680,
+      alignSelf: 'center',
+      gap: spacing.lg,
+    },
+  }),
+);

@@ -1,3 +1,8 @@
+import {
+  createThemedStyles,
+  useThemedStyles,
+  useTheme,
+} from '@/theme/ThemeProvider';
 import { router } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -5,8 +10,10 @@ import { Screen } from '@/components/ui/Screen';
 import { AppText } from '@/components/ui/AppText';
 import { AppCard } from '@/components/ui/AppCard';
 import { AppButton } from '@/components/ui/AppButton';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing } from '@/theme/tokens';
 export function HomeScreen() {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(themedStyles);
   return (
     <Screen>
       <View style={styles.brand}>
@@ -56,8 +63,10 @@ export function HomeScreen() {
     </Screen>
   );
 }
-const styles = StyleSheet.create({
-  brand: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  intro: { gap: spacing.md, paddingVertical: spacing.md },
-  eyebrow: { color: colors.primary, fontWeight: '700', letterSpacing: 2 },
-});
+const themedStyles = createThemedStyles((colors) =>
+  StyleSheet.create({
+    brand: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+    intro: { gap: spacing.md, paddingVertical: spacing.md },
+    eyebrow: { color: colors.primary, fontWeight: '700', letterSpacing: 2 },
+  }),
+);

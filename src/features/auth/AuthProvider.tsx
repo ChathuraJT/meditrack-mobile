@@ -1,6 +1,5 @@
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -8,16 +7,17 @@ import {
   type PropsWithChildren,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { Session } from '@supabase/supabase-js';
+import { AppState, Platform } from 'react-native';
 import { supabase } from '@/lib/supabase';
 import { queryClient } from '@/lib/query-client';
-import { useSupabaseLifecycle } from '@/hooks/useSupabaseLifecycle';
-import { emptyDraft, type RegistrationDraft, type AuthStatus } from './model';
-
+import {
+  currentAccount,
+  signOutAccount,
+  type AccountProfile,
+} from './supabase-auth';
 const onboardingKey = 'meditrack.onboarding.completed.v1';
 type AuthContextValue = {
-  session: Session | null;
-  status: AuthStatus;
+  profile: AccountProfile | null;
   initializing: boolean;
   onboarded: boolean;
   error: string | null;
@@ -25,148 +25,134 @@ type AuthContextValue = {
   retry: () => void;
   completeOnboarding: () => Promise<void>;
   signOut: () => Promise<void>;
-  draft: RegistrationDraft;
-  setDraft: (draft: RegistrationDraft) => void;
-  pendingPhone: string;
-  setPendingPhone: (phone: string) => void;
-  smsSentAt: number;
-  setSmsSentAt: (value: number) => void;
+  signIn: (email: string, password: string) => Promise<void>;
 };
 const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: PropsWithChildren) {
-  useSupabaseLifecycle();
-  const [session, setSession] = useState<Session | null>(null);
+  const [profile, setProfile] = useState<AccountProfile | null>(null);
   const [initializing, setInitializing] = useState(true);
   const [onboarded, setOnboarded] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
-  const [draft, setDraft] = useState(emptyDraft);
-  const [pendingPhone, setPendingPhone] = useState('');
-  const [smsSentAt, setSmsSentAt] = useState(0);
-  const userId = useRef<string | undefined>(undefined);
-  const clearUserData = useCallback(() => {
-    void queryClient.cancelQueries();
-    queryClient.clear();
-    setDraft(emptyDraft);
-    setPendingPhone('');
-    setSmsSentAt(0);
-  }, []);
+  const signingIn = useRef(false);
+  const revision = useRef(0);
   useEffect(() => {
     let active = true;
-    let revision = 0;
-    const applySession = (next: Session | null) => {
-      if (!active) return;
-      if (userId.current !== next?.user.id) {
-        void queryClient.cancelQueries();
-        queryClient.clear();
-        // Preserve a registration draft only when first signing in.
-        if (userId.current) clearUserData();
-      }
-      userId.current = next?.user.id;
-      setSession(next);
-      if (next) {
-        setOnboarded(true);
-        void AsyncStorage.setItem(onboardingKey, 'true').catch(() => {
-          // Session restoration still opens the app if local flag storage fails.
-        });
-      }
-    };
-    const subscription = supabase?.auth.onAuthStateChange((event, next) => {
-      if (!active || event === 'INITIAL_SESSION') return;
-      revision++;
-      applySession(next);
-      setError(null);
-    }).data.subscription;
-    void (async () => {
+    async function restore() {
+      const request = ++revision.current;
       try {
         const completed = await AsyncStorage.getItem(onboardingKey);
-        if (!active) return;
-        // Replay onboarding on development reloads so Expo Go previews start here.
-        // Restored sessions still open the patient app; release builds keep persistence.
-        setOnboarded(!__DEV__ && completed === 'true');
-        if (supabase) {
-          const startRevision = revision;
-          const { data, error: restoreError } =
-            await supabase.auth.getSession();
-          if (restoreError) throw restoreError;
-          let restored = data.session;
-          if (restored) {
-            const { data: validated, error: validationError } =
-              await supabase.auth.getUser();
-            if (validationError) {
-              if (
-                validationError.status === 401 ||
-                validationError.status === 403
-              ) {
-                await supabase.auth.signOut({ scope: 'local' });
-                restored = null;
-              } else throw validationError;
-            } else if (validated.user)
-              restored = { ...restored, user: validated.user };
-          }
-          if (revision === startRevision) applySession(restored);
+        await AsyncStorage.removeItem('meditrack_user');
+        const next = supabase ? await currentAccount(supabase) : null;
+        if (active && request === revision.current) {
+          setProfile(next);
+          setOnboarded(completed === 'true' || !!next);
+          setError(null);
         }
-      } catch {
-        if (active)
+      } catch (failure) {
+        if (active && request === revision.current) {
+          setProfile(null);
           setError(
-            'We couldn’t restore your account or local setup. Check your connection and retry.',
+            failure instanceof Error
+              ? failure.message
+              : 'Unable to restore your account. Retry or sign out.',
           );
+        }
       } finally {
-        if (active) setInitializing(false);
+        if (active && request === revision.current) setInitializing(false);
       }
-    })();
+    }
+    void restore();
+    // No awaited Supabase calls inside onAuthStateChange (the SDK holds its auth lock).
+    const subscription = supabase?.auth.onAuthStateChange((event) => {
+      if (!active || event === 'INITIAL_SESSION' || signingIn.current) return;
+      if (event === 'SIGNED_OUT') {
+        revision.current++;
+        setProfile(null);
+        setError(null);
+        setInitializing(false);
+        void queryClient.cancelQueries();
+        queryClient.clear();
+      } else {
+        setTimeout(() => {
+          if (active) void restore();
+        }, 0);
+      }
+    }).data.subscription;
+    const lifecycle = AppState.addEventListener('change', (state) => {
+      if (state === 'active') {
+        if (Platform.OS !== 'web') supabase?.auth.startAutoRefresh();
+        if (!signingIn.current) void restore();
+      } else if (Platform.OS !== 'web') supabase?.auth.stopAutoRefresh();
+    });
+    if (Platform.OS !== 'web' && AppState.currentState === 'active')
+      supabase?.auth.startAutoRefresh();
     return () => {
       active = false;
+      revision.current++;
       subscription?.unsubscribe();
+      lifecycle.remove();
+      if (Platform.OS !== 'web') supabase?.auth.stopAutoRefresh();
     };
-  }, [attempt, clearUserData]);
-  const completeOnboarding = async () => {
+  }, [attempt]);
+  async function completeOnboarding() {
     await AsyncStorage.setItem(onboardingKey, 'true');
     setOnboarded(true);
-  };
-  const signOut = async () => {
-    if (supabase) {
-      const { error: signOutError } = await supabase.auth.signOut({
-        scope: 'local',
+  }
+  async function signIn(email: string, password: string) {
+    if (!supabase || signingIn.current) return;
+    signingIn.current = true;
+    revision.current++;
+    try {
+      const { error: loginError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
       });
-      if (signOutError) throw signOutError;
+      if (loginError) throw loginError;
+      const next = await currentAccount(supabase);
+      if (!next)
+        throw new Error('No session was returned. Please sign in again.');
+      await AsyncStorage.setItem(onboardingKey, 'true');
+      await queryClient.cancelQueries();
+      queryClient.clear();
+      setProfile(next);
+      setOnboarded(true);
+      setError(null);
+    } catch (failure) {
+      await supabase.auth.signOut({ scope: 'local' });
+      setProfile(null);
+      throw failure;
+    } finally {
+      signingIn.current = false;
     }
+  }
+  async function signOut() {
+    if (supabase) await signOutAccount(supabase);
+    revision.current++;
+    await AsyncStorage.removeItem('meditrack_user');
     await queryClient.cancelQueries();
-    clearUserData();
-    userId.current = undefined;
-    setSession(null);
+    queryClient.clear();
+    setProfile(null);
     setError(null);
     setOnboarded(true);
-  };
-  const status: AuthStatus = initializing
-    ? 'initializing'
-    : error || !supabase
-      ? 'error'
-      : session
-        ? 'signedIn'
-        : 'signedOut';
+    setInitializing(false);
+  }
   return (
     <AuthContext.Provider
       value={{
-        session,
-        status,
+        profile,
         initializing,
         onboarded,
         error,
         available: !!supabase,
         retry: () => {
-          setInitializing(true);
           setError(null);
+          setInitializing(true);
           setAttempt((v) => v + 1);
         },
         completeOnboarding,
+        signIn,
         signOut,
-        draft,
-        setDraft,
-        pendingPhone,
-        setPendingPhone,
-        smsSentAt,
-        setSmsSentAt,
       }}
     >
       {children}

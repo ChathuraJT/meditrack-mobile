@@ -13,6 +13,7 @@ import { AppInput } from '@/components/ui/AppInput';
 import { AppCard } from '@/components/ui/AppCard';
 import { colors, spacing } from '@/theme/tokens';
 import { useAuth } from './AuthProvider';
+import { useTheme } from '@/theme/ThemeProvider';
 
 export function AuthScreen({
   title,
@@ -42,8 +43,8 @@ export function AuthScreen({
       {!available && (
         <AppCard>
           <AppText accessibilityRole="alert">
-            Authentication is unavailable because Supabase is not configured.
-            You can preview these forms, but cannot submit them.
+            Authentication is unavailable because the MediTrack API URL is not
+            configured. You can preview these forms, but cannot submit them.
           </AppText>
         </AppCard>
       )}
@@ -109,6 +110,7 @@ export function FormField<T extends FieldValues>({
   );
 }
 export function Feedback({ message }: { message: string }) {
+  const { colors } = useTheme();
   return message ? (
     <AppText
       accessibilityRole="alert"

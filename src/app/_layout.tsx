@@ -8,14 +8,16 @@ import { AuthProvider, useAuth } from '@/features/auth/AuthProvider';
 import { Screen } from '@/components/ui/Screen';
 import { AppText } from '@/components/ui/AppText';
 import { AppButton } from '@/components/ui/AppButton';
-import { colors } from '@/theme/tokens';
+import { ThemeProvider, useTheme } from '@/theme/ThemeProvider';
+import { SignOutButton } from '@/features/auth/SignOutButton';
 import { launchDestination } from '@/features/auth/model';
 
 function Routes() {
   const auth = useAuth();
+  const { colors, ready } = useTheme();
   const destination = launchDestination(
-    auth.initializing,
-    !!auth.session,
+    auth.initializing || !ready,
+    auth.profile,
     auth.onboarded,
   );
   if (destination === 'loading')
@@ -33,15 +35,24 @@ function Routes() {
       <Screen>
         <AppText accessibilityRole="alert">{auth.error}</AppText>
         <AppButton label="Try again" onPress={auth.retry} />
+        <SignOutButton />
       </Screen>
     );
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: colors.background },
+      }}
+    >
       <Stack.Protected guard={destination === 'onboarding'}>
         <Stack.Screen name="onboarding" />
       </Stack.Protected>
       <Stack.Protected guard={destination === 'login'}>
         <Stack.Screen name="(auth)" />
+      </Stack.Protected>
+      <Stack.Protected guard={destination === 'unsupported'}>
+        <Stack.Screen name="unsupported-role" />
       </Stack.Protected>
       <Stack.Protected guard={destination === 'patient'}>
         <Stack.Screen name="(patient)" />
@@ -54,10 +65,26 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <StatusBar style="dark" />
-          <Routes />
+          <ThemedApp />
         </AuthProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
+  );
+}
+function ThemedApp() {
+  const { profile } = useAuth();
+  return (
+    <ThemeProvider enabled={!!profile}>
+      <ThemedRoutes />
+    </ThemeProvider>
+  );
+}
+function ThemedRoutes() {
+  const { mode } = useTheme();
+  return (
+    <>
+      <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
+      <Routes />
+    </>
   );
 }
