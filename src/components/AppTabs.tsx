@@ -51,14 +51,14 @@ export function AppTabs() {
       <TabSlot style={styles.slot} />
       <TabList asChild>
         <View
-          style={[
+          style={StyleSheet.flatten([
             styles.list,
             {
               paddingBottom: Math.max(insets.bottom, spacing.sm),
               paddingLeft: Math.max(insets.left, spacing.xs),
               paddingRight: Math.max(insets.right, spacing.xs),
             },
-          ]}
+          ])}
         >
           <TabTrigger name="home" href="/" asChild>
             <TabButton icon="home-outline" label="Home" />

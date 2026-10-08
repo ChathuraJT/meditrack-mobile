@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import { View } from 'react-native';
-import { supabase } from '@/lib/supabase';
+import { apiFetch } from '@/lib/api';
 import { AppButton } from '@/components/ui/AppButton';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from './AuthProvider';
-import { loginSchema, parseIdentifier, authErrorMessage } from './model';
+import { loginSchema, parseIdentifier } from './model';
 import {
   AuthScreen,
   Feedback,
@@ -16,35 +16,55 @@ import {
   formStyles,
   useSubmission,
 } from './components';
+
 export function LoginScreen() {
-  const { available, setPendingPhone, setDraft } = useAuth();
+  const { available, signIn, setPendingPhone, setDraft } = useAuth();
   const [message, setMessage] = useState('');
   const { busy, run } = useSubmission();
+
   const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: { identifier: '', password: '' },
   });
+
   const submit = form.handleSubmit((values) =>
     run(async () => {
-      if (!supabase) return;
       setMessage('');
-      const identifier = parseIdentifier(values.identifier);
-      if (!identifier) return;
       try {
-        const { data, error } = await supabase.auth.signInWithPassword({
-          ...identifier,
-          password: values.password,
+        const data = await apiFetch('/mobile/auth/login/', {
+          method: 'POST',
+          body: JSON.stringify({
+            username: values.identifier.trim(),
+            password: values.password,
+          }),
         });
-        if (error) throw error;
-        if (!data.session) throw new Error('No session');
+        
+        if (!data || !data.access_token || !data.user) {
+          throw new Error('Invalid response from server');
+        }
+
+        await signIn(data);
         // Stack.Protected removes login history as the session changes.
-      } catch (error) {
-        setMessage(authErrorMessage(error, 'login'));
+      } catch (error: any) {
+        if (error.status === 400) {
+          setMessage(error.data?.error || 'Validation error. Please check your inputs.');
+        } else if (error.status === 401) {
+          setMessage('Invalid username or password.');
+        } else if (error.status === 403) {
+          setMessage('Your account is pending administrator approval.');
+        } else if (error.status === 429) {
+          setMessage('Too many attempts. Wait before trying again.');
+        } else if (error.status === 408 || error.status === 0) {
+          setMessage('Unable to reach the service. Check your connection and try again.');
+        } else {
+          setMessage('Unable to sign in. The request could not be completed.');
+        }
       } finally {
         form.setValue('password', '');
       }
     }),
   );
+
   function verifyExisting() {
     const identifier = parseIdentifier(form.getValues('identifier'));
     if (!identifier || !('phone' in identifier)) {
@@ -67,6 +87,7 @@ export function LoginScreen() {
     setPendingPhone(identifier.phone);
     router.push('/verify-phone');
   }
+
   return (
     <AuthScreen
       title="Welcome back"
@@ -76,7 +97,7 @@ export function LoginScreen() {
         <FormField
           control={form.control}
           name="identifier"
-          label="Email or mobile number"
+          label="Username or email"
           keyboardType="default"
           autoComplete="username"
           textContentType="username"
@@ -84,8 +105,7 @@ export function LoginScreen() {
           onSubmitEditing={() => form.setFocus('password')}
         />
         <AppText variant="caption" muted>
-          Phone numbers default to Sri Lanka (+94). For another country, include
-          + and the country code.
+          Enter your registered username or email address.
         </AppText>
         <FormField
           control={form.control}
@@ -105,7 +125,7 @@ export function LoginScreen() {
           onPress={submit}
         />
         <TextAction
-          label="Verify a pending phone registration"
+          label="Verify a pending phone registration (Unsupported)"
           onPress={verifyExisting}
           disabled={busy}
         />
