@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: radius.sm,
-    backgroundColor: colors.surface,
+    backgroundColor: 'transparent',
   },
   modal: {
     flex: 1,

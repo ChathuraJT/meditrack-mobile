@@ -12,6 +12,7 @@ import {
   type SignupValues,
 } from './model';
 import { SelectField, countryOptions } from './SelectField';
+import { AppCard } from '@/components/ui/AppCard';
 import {
   AuthScreen,
   FormField,
@@ -52,78 +53,78 @@ export function SignupScreen() {
       description="Start your MediTrack journey."
     >
       <View style={formStyles.stack}>
-        <FormField
-          control={form.control}
-          name="full_name"
-          label="Full name"
-          autoCapitalize="words"
-          autoComplete="name"
-          textContentType="name"
-        />
-        <FormField
-          control={form.control}
-          name="age"
-          label="Age"
-          keyboardType="number-pad"
-          maxLength={3}
-        />
-        <SelectField
-          control={form.control}
-          name="gender"
-          label="Gender"
-          options={genders.map((g) => ({ value: g, label: g }))}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          label="Email (optional)"
-          keyboardType="email-address"
-          autoComplete="email"
-          textContentType="emailAddress"
-        />
-        <View style={formStyles.stack}>
-          <SelectField
-            control={form.control}
-            name="country"
-            label="Mobile country"
-            options={countryOptions}
-          />
-          <FormField
-            control={form.control}
-            name="phone"
-            label="Mobile number"
-            keyboardType="phone-pad"
-            autoComplete="tel"
-            textContentType="telephoneNumber"
-          />
-        </View>
-        <FormField
-          control={form.control}
-          name="password"
-          label="Create password"
-          password
-          autoComplete="new-password"
-          textContentType="newPassword"
-        />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          label="Confirm password"
-          password
-          autoComplete="new-password"
-          textContentType="newPassword"
-        />
-        <AppText variant="caption" muted>
-          Use at least 8 characters. Your account may require a stronger
-          password. We’ll verify your mobile first; email can be verified later.
-        </AppText>
-        <Feedback message={message} />
-        <AppButton
-          label="Create Account"
-          loading={busy}
-          disabled={!available}
-          onPress={submit}
-        />
+        <AppCard>
+          <View style={formStyles.stack}>
+            <FormField
+              control={form.control}
+              name="full_name"
+              label="Full name"
+              autoCapitalize="words"
+              autoComplete="name"
+              textContentType="name"
+            />
+            <FormField
+              control={form.control}
+              name="age"
+              label="Age"
+              keyboardType="number-pad"
+              maxLength={3}
+            />
+            <SelectField
+              control={form.control}
+              name="gender"
+              label="Gender"
+              options={genders.map((g) => ({ value: g, label: g }))}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              label="Email (optional)"
+              keyboardType="email-address"
+              autoComplete="email"
+              textContentType="emailAddress"
+            />
+            <View style={formStyles.stack}>
+              <SelectField
+                control={form.control}
+                name="country"
+                label="Mobile country"
+                options={countryOptions}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                label="Mobile number"
+                keyboardType="phone-pad"
+                autoComplete="tel"
+                textContentType="telephoneNumber"
+              />
+            </View>
+            <FormField
+              control={form.control}
+              name="password"
+              label="Create password"
+              password
+              autoComplete="new-password"
+              textContentType="newPassword"
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              label="Confirm password"
+              password
+              autoComplete="new-password"
+              textContentType="newPassword"
+            />
+            <Feedback message={message} />
+            <AppButton
+              label="Create Account"
+              loading={busy}
+              disabled={!available}
+              onPress={submit}
+            />
+          </View>
+        </AppCard>
         <TextAction
           label="Already have an account? Sign In"
           disabled={busy}

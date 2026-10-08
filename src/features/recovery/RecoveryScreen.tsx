@@ -4,10 +4,10 @@ import { EmptyState } from '@/components/ui/EmptyState';
 export function RecoveryScreen() {
   return (
     <Screen>
-      <AppText variant="title" accessibilityRole="header">
+      <AppText variant="title" accessibilityRole="header" style={{ textAlign: 'center' }}>
         Recovery
       </AppText>
-      <AppText muted>Room to reflect on your care journey.</AppText>
+      <AppText muted style={{ textAlign: 'center' }}>Room to reflect on your care journey.</AppText>
       <EmptyState
         icon="heart-outline"
         title="Recovery starts with understanding"

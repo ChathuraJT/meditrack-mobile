@@ -1,21 +1,22 @@
-import { useRef, useState, useEffect } from 'react';
+import { MedicalPatternBackground } from '@/components/MedicalPatternBackground';
+import { AppButton } from '@/components/ui/AppButton';
+import { AppText } from '@/components/ui/AppText';
+import { useAuth } from '@/features/auth/AuthProvider';
+import { colors, spacing } from '@/theme/tokens';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useEffect, useRef, useState } from 'react';
 import {
   Animated,
-  ScrollView,
-  View,
-  StyleSheet,
-  Pressable,
   Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
   useWindowDimensions,
+  View,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { AppText } from '@/components/ui/AppText';
-import { AppButton } from '@/components/ui/AppButton';
-import { colors, spacing } from '@/theme/tokens';
-import { useAuth } from '@/features/auth/AuthProvider';
 import { OnboardingArtwork, type Scene } from './OnboardingArtwork';
 import { useOnboardingMotion } from './useOnboardingMotion';
 
@@ -25,28 +26,28 @@ const slides: {
   scene: Scene;
   label: string;
 }[] = [
-  {
-    title: 'Smarter healthcare starts here',
-    description:
-      'Record your symptoms and connect with suitable doctors for your next step.',
-    scene: 'consultation',
-    label: 'CARE THAT STARTS WITH YOU',
-  },
-  {
-    title: 'Stay on track with your recovery',
-    description:
-      'Keep track of prescribed medicines, record your progress, and share recovery updates.',
-    scene: 'recovery',
-    label: 'SMALL STEPS, STEADY SUPPORT',
-  },
-  {
-    title: 'Stay informed. Stay in control.',
-    description:
-      'Choose whether to enable nearby exposure alerts and explore privacy-aware area risk information.',
-    scene: 'privacy',
-    label: 'YOUR CHOICES COME FIRST',
-  },
-];
+    {
+      title: 'Smarter healthcare starts here',
+      description:
+        'Record your symptoms and connect with suitable doctors for your next step.',
+      scene: 'consultation',
+      label: 'CARE THAT STARTS WITH YOU',
+    },
+    {
+      title: 'Stay on track with your recovery',
+      description:
+        'Keep track of prescribed medicines, record your progress, and share recovery updates.',
+      scene: 'recovery',
+      label: 'SMALL STEPS, STEADY SUPPORT',
+    },
+    {
+      title: 'Stay informed. Stay in control.',
+      description:
+        'Choose whether to enable nearby exposure alerts and explore privacy-aware area risk information.',
+      scene: 'privacy',
+      label: 'YOUR CHOICES COME FIRST',
+    },
+  ];
 export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
   const { width: windowWidth } = useWindowDimensions();
   const [width, setWidth] = useState(windowWidth);
@@ -98,73 +99,74 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
     }
   }
   return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.top}>
-        {index > 0 ? (
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Previous onboarding page"
-            onPress={() => goTo(index - 1)}
-            disabled={busy}
-            style={styles.headerAction}
-          >
-            <Ionicons name="arrow-back" size={23} color={colors.primary} />
-          </Pressable>
-        ) : (
-          <View style={styles.headerAction}>
-            <Ionicons
-              name="medical-outline"
-              size={24}
-              color={colors.primary}
-              accessible={false}
-            />
-          </View>
-        )}
-        <AppText style={styles.brand}>MediTrack</AppText>
-        {index < 2 ? (
-          <Pressable
-            accessibilityRole="button"
-            onPress={finish}
-            disabled={busy}
-            style={styles.headerAction}
-          >
-            <AppText variant="caption" style={{ color: colors.primary }}>
-              Skip
-            </AppText>
-          </Pressable>
-        ) : (
-          <View style={styles.headerAction} />
-        )}
-      </View>
-      <Animated.ScrollView
-        ref={pager}
-        onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        style={styles.pager}
-        scrollEnabled={!busy}
-        scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: Platform.OS !== 'web', listener: trackPage },
-        )}
-        onMomentumScrollEnd={trackPage}
-      >
-        {slides.map((slide, page) => {
-          const inputRange = [
-            (page - 1) * width,
-            page * width,
-            (page + 1) * width,
-          ];
-          const fade = scrollX.interpolate({
-            inputRange,
-            outputRange: [0.15, 1, 0.15],
-            extrapolate: 'clamp',
-          });
-          const artworkMotion = reduceMotion
-            ? undefined
-            : {
+    <MedicalPatternBackground density="balanced" opacity={0.35}>
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.top}>
+          {index > 0 ? (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Previous onboarding page"
+              onPress={() => goTo(index - 1)}
+              disabled={busy}
+              style={styles.headerAction}
+            >
+              <Ionicons name="arrow-back" size={23} color={colors.primary} />
+            </Pressable>
+          ) : (
+            <View style={styles.headerAction}>
+              <Ionicons
+                name="medical-outline"
+                size={24}
+                color={colors.primary}
+                accessible={false}
+              />
+            </View>
+          )}
+          <AppText style={styles.brand}>MediTrack</AppText>
+          {index < 2 ? (
+            <Pressable
+              accessibilityRole="button"
+              onPress={finish}
+              disabled={busy}
+              style={styles.headerAction}
+            >
+              <AppText variant="caption" style={{ color: colors.primary }}>
+                Skip
+              </AppText>
+            </Pressable>
+          ) : (
+            <View style={styles.headerAction} />
+          )}
+        </View>
+        <Animated.ScrollView
+          ref={pager}
+          onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          style={styles.pager}
+          scrollEnabled={!busy}
+          scrollEventThrottle={16}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            { useNativeDriver: Platform.OS !== 'web', listener: trackPage },
+          )}
+          onMomentumScrollEnd={trackPage}
+        >
+          {slides.map((slide, page) => {
+            const inputRange = [
+              (page - 1) * width,
+              page * width,
+              (page + 1) * width,
+            ];
+            const fade = scrollX.interpolate({
+              inputRange,
+              outputRange: [0.15, 1, 0.15],
+              extrapolate: 'clamp',
+            });
+            const artworkMotion = reduceMotion
+              ? undefined
+              : {
                 opacity: fade,
                 transform: [
                   {
@@ -183,9 +185,9 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                   },
                 ],
               };
-          const textMotion = reduceMotion
-            ? undefined
-            : {
+            const textMotion = reduceMotion
+              ? undefined
+              : {
                 opacity: fade,
                 transform: [
                   {
@@ -204,68 +206,68 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                   },
                 ],
               };
-          return (
-            <ScrollView
-              key={slide.scene}
-              style={{ width }}
-              contentContainerStyle={styles.slide}
-              showsVerticalScrollIndicator={false}
-              accessibilityElementsHidden={page !== index}
-              importantForAccessibility={
-                page !== index ? 'no-hide-descendants' : 'auto'
-              }
-            >
-              <Animated.View style={[styles.artwork, artworkMotion]}>
-                <OnboardingArtwork
-                  scene={slide.scene}
-                  animate={animate && page === index}
-                />
-              </Animated.View>
-              <Animated.View style={[styles.copy, textMotion]}>
-                <AppText variant="caption" style={styles.eyebrow}>
-                  {slide.label}
-                </AppText>
-                <AppText
-                  variant="title"
-                  accessibilityRole="header"
-                  style={styles.title}
-                >
-                  {slide.title}
-                </AppText>
-                <AppText muted style={styles.description}>
-                  {slide.description}
-                </AppText>
-              </Animated.View>
-            </ScrollView>
-          );
-        })}
-      </Animated.ScrollView>
-      <View style={styles.footer}>
-        <View
-          style={styles.dots}
-          accessibilityLabel={`Page ${index + 1} of 3`}
-          accessibilityLiveRegion="polite"
-        >
-          {slides.map((slide, page) => (
-            <Pressable
-              key={slide.scene}
-              accessibilityRole="button"
-              accessibilityLabel={`Go to onboarding page ${page + 1}`}
-              accessibilityState={{ selected: index === page }}
-              disabled={busy}
-              onPress={() => goTo(page)}
-              style={styles.dotTarget}
-            >
-              <View style={styles.dotTrack} />
-              <Animated.View
-                style={[
-                  styles.dot,
-                  {
-                    opacity: reduceMotion
-                      ? index === page
-                        ? 1
-                        : 0
-                      : scrollX.interpolate({
+            return (
+              <ScrollView
+                key={slide.scene}
+                style={{ width }}
+                contentContainerStyle={styles.slide}
+                showsVerticalScrollIndicator={false}
+                accessibilityElementsHidden={page !== index}
+                importantForAccessibility={
+                  page !== index ? 'no-hide-descendants' : 'auto'
+                }
+              >
+                <Animated.View style={[styles.artwork, artworkMotion]}>
+                  <OnboardingArtwork
+                    scene={slide.scene}
+                    animate={animate && page === index}
+                  />
+                </Animated.View>
+                <Animated.View style={[styles.copy, textMotion]}>
+                  <AppText variant="caption" style={styles.eyebrow}>
+                    {slide.label}
+                  </AppText>
+                  <AppText
+                    variant="title"
+                    accessibilityRole="header"
+                    style={styles.title}
+                  >
+                    {slide.title}
+                  </AppText>
+                  <AppText muted style={styles.description}>
+                    {slide.description}
+                  </AppText>
+                </Animated.View>
+              </ScrollView>
+            );
+          })}
+        </Animated.ScrollView>
+        <View style={styles.footer}>
+          <View
+            style={styles.dots}
+            accessibilityLabel={`Page ${index + 1} of 3`}
+            accessibilityLiveRegion="polite"
+          >
+            {slides.map((slide, page) => (
+              <Pressable
+                key={slide.scene}
+                accessibilityRole="button"
+                accessibilityLabel={`Go to onboarding page ${page + 1}`}
+                accessibilityState={{ selected: index === page }}
+                disabled={busy}
+                onPress={() => goTo(page)}
+                style={styles.dotTarget}
+              >
+                <View style={styles.dotTrack} />
+                <Animated.View
+                  style={[
+                    styles.dot,
+                    {
+                      opacity: reduceMotion
+                        ? index === page
+                          ? 1
+                          : 0
+                        : scrollX.interpolate({
                           inputRange: [
                             (page - 1) * width,
                             page * width,
@@ -274,33 +276,34 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                           outputRange: [0, 1, 0],
                           extrapolate: 'clamp',
                         }),
-                  },
-                ]}
-              />
-            </Pressable>
-          ))}
-        </View>
-        {!!error && (
-          <AppText accessibilityRole="alert" style={{ color: colors.error }}>
-            {error}
+                    },
+                  ]}
+                />
+              </Pressable>
+            ))}
+          </View>
+          {!!error && (
+            <AppText accessibilityRole="alert" style={{ color: colors.error }}>
+              {error}
+            </AppText>
+          )}
+          <AppButton
+            label={index === 2 ? 'Get Started' : 'Next'}
+            loading={busy}
+            onPress={() => (index === 2 ? void finish() : goTo(index + 1))}
+          />
+          <AppText variant="caption" muted style={styles.note}>
+            {index === 2
+              ? 'Continuing does not grant location or health-data consent.'
+              : 'A thoughtful start to your care journey.'}
           </AppText>
-        )}
-        <AppButton
-          label={index === 2 ? 'Get Started' : 'Next'}
-          loading={busy}
-          onPress={() => (index === 2 ? void finish() : goTo(index + 1))}
-        />
-        <AppText variant="caption" muted style={styles.note}>
-          {index === 2
-            ? 'Continuing does not grant location or health-data consent.'
-            : 'A thoughtful start to your care journey.'}
-        </AppText>
-      </View>
-    </SafeAreaView>
+        </View>
+      </SafeAreaView>
+    </MedicalPatternBackground>
   );
 }
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.background },
+  safe: { flex: 1, backgroundColor: 'transparent' },
   top: {
     flexDirection: 'row',
     alignItems: 'center',

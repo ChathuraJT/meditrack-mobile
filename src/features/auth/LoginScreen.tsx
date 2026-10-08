@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
-import { View } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
 import { apiFetch } from '@/lib/api';
 import { AppButton } from '@/components/ui/AppButton';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from './AuthProvider';
 import { loginSchema, parseIdentifier } from './model';
+import { AppCard } from '@/components/ui/AppCard';
+import { colors, spacing } from '@/theme/tokens';
 import {
   AuthScreen,
   Feedback,
@@ -94,36 +96,47 @@ export function LoginScreen() {
       description="Sign in to continue your care journey."
     >
       <View style={formStyles.stack}>
-        <FormField
-          control={form.control}
-          name="identifier"
-          label="Username or email"
-          keyboardType="default"
-          autoComplete="username"
-          textContentType="username"
-          returnKeyType="next"
-          onSubmitEditing={() => form.setFocus('password')}
-        />
-        <AppText variant="caption" muted>
-          Enter your registered username or email address.
-        </AppText>
-        <FormField
-          control={form.control}
-          name="password"
-          label="Password"
-          password
-          autoComplete="current-password"
-          textContentType="password"
-          returnKeyType="go"
-          onSubmitEditing={submit}
-        />
-        <Feedback message={message} />
-        <AppButton
-          label="Sign In"
-          loading={busy}
-          disabled={!available}
-          onPress={submit}
-        />
+        <AppCard>
+          <View style={formStyles.stack}>
+            <FormField
+              control={form.control}
+              name="identifier"
+              label="Username or email"
+              keyboardType="default"
+              autoComplete="username"
+              textContentType="username"
+              returnKeyType="next"
+              onSubmitEditing={() => form.setFocus('password')}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              label="Password"
+              password
+              autoComplete="current-password"
+              textContentType="password"
+              returnKeyType="go"
+              onSubmitEditing={submit}
+            />
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Forgot password?"
+              onPress={() => router.push('/forgot-password')}
+              style={styles.forgotPassword}
+            >
+              <AppText variant="caption" style={{ color: colors.primary, fontWeight: '600' }}>
+                Forgot password?
+              </AppText>
+            </Pressable>
+            <Feedback message={message} />
+            <AppButton
+              label="Sign In"
+              loading={busy}
+              disabled={!available}
+              onPress={submit}
+            />
+          </View>
+        </AppCard>
         <TextAction
           label="Verify a pending phone registration (Unsupported)"
           onPress={verifyExisting}
@@ -149,3 +162,10 @@ export function LoginScreen() {
     </AuthScreen>
   );
 }
+
+const styles = StyleSheet.create({
+  forgotPassword: {
+    alignSelf: 'flex-end',
+    paddingVertical: spacing.xs,
+  },
+});

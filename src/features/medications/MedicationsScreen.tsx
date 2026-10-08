@@ -1,13 +1,10 @@
-import { Screen } from '@/components/ui/Screen';
 import { AppText } from '@/components/ui/AppText';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { Screen } from '@/components/ui/Screen';
 export function MedicationsScreen() {
   return (
     <Screen>
-      <AppText variant="title" accessibilityRole="header">
-        Medications
-      </AppText>
-      <AppText muted>A place for clearer medication routines.</AppText>
+      <AppText muted style={{ textAlign: 'center' }}>A place for clearer medication routines.</AppText>
       <EmptyState
         icon="medical-outline"
         title="Your medication space is taking shape"

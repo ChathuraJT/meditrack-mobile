@@ -1,17 +1,17 @@
-import { useRef, useState, useEffect, type PropsWithChildren } from 'react';
-import { Pressable, View, StyleSheet, type TextInputProps } from 'react-native';
+import { AppCard } from '@/components/ui/AppCard';
+import { AppInput } from '@/components/ui/AppInput';
+import { AppText } from '@/components/ui/AppText';
+import { Screen } from '@/components/ui/Screen';
+import { colors, spacing } from '@/theme/tokens';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useEffect, useRef, useState, type PropsWithChildren } from 'react';
 import {
   Controller,
   type Control,
   type FieldValues,
   type Path,
 } from 'react-hook-form';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Screen } from '@/components/ui/Screen';
-import { AppText } from '@/components/ui/AppText';
-import { AppInput } from '@/components/ui/AppInput';
-import { AppCard } from '@/components/ui/AppCard';
-import { colors, spacing } from '@/theme/tokens';
+import { Pressable, StyleSheet, View, type TextInputProps } from 'react-native';
 import { useAuth } from './AuthProvider';
 
 export function AuthScreen({
@@ -21,27 +21,29 @@ export function AuthScreen({
 }: PropsWithChildren<{ title: string; description: string }>) {
   const { available } = useAuth();
   return (
-    <Screen>
+    <Screen edges={['top', 'left', 'right', 'bottom']}>
       <View style={styles.brand}>
         <Ionicons
           name="medical-outline"
-          size={30}
+          size={32}
           color={colors.primary}
           accessible={false}
         />
-        <AppText variant="heading" style={{ color: colors.primary }}>
+        <AppText variant="heading" style={{ color: colors.primary, fontWeight: '700' }}>
           MediTrack
         </AppText>
       </View>
-      <View style={styles.stack}>
-        <AppText variant="title" accessibilityRole="header">
+      <View style={styles.headerStack}>
+        <AppText variant="title" accessibilityRole="header" style={styles.centerText}>
           {title}
         </AppText>
-        <AppText muted>{description}</AppText>
+        <AppText muted style={styles.centerText}>
+          {description}
+        </AppText>
       </View>
       {!available && (
         <AppCard>
-          <AppText accessibilityRole="alert">
+          <AppText accessibilityRole="alert" style={styles.centerText}>
             Authentication is unavailable because Supabase is not configured.
             You can preview these forms, but cannot submit them.
           </AppText>
@@ -84,25 +86,25 @@ export function FormField<T extends FieldValues>({
             secureTextEntry={password && !visible}
             autoCapitalize={props.autoCapitalize ?? 'none'}
             autoCorrect={false}
+            rightAccessory={
+              password ? (
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel={`${visible ? 'Hide' : 'Show'} ${label.toLowerCase()}`}
+                  accessibilityState={{ expanded: visible }}
+                  onPress={() => setVisible(!visible)}
+                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                  style={styles.eyeButton}
+                >
+                  <Ionicons
+                    name={visible ? 'eye-off-outline' : 'eye-outline'}
+                    color={colors.primary}
+                    size={22}
+                  />
+                </Pressable>
+              ) : undefined
+            }
           />
-          {password && (
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={`${visible ? 'Hide' : 'Show'} ${label.toLowerCase()}`}
-              accessibilityState={{ expanded: visible }}
-              onPress={() => setVisible(!visible)}
-              style={styles.visibility}
-            >
-              <Ionicons
-                name={visible ? 'eye-off-outline' : 'eye-outline'}
-                color={colors.primary}
-                size={20}
-              />
-              <AppText variant="caption" style={{ color: colors.primary }}>
-                {visible ? 'Hide password' : 'Show password'}
-              </AppText>
-            </Pressable>
-          )}
         </View>
       )}
     />
@@ -172,17 +174,24 @@ const styles = StyleSheet.create({
   brand: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: spacing.sm,
     paddingVertical: spacing.md,
   },
-  stack: { gap: spacing.sm },
-  visibility: {
-    minHeight: 44,
-    flexDirection: 'row',
-    alignItems: 'center',
+  headerStack: {
     gap: spacing.sm,
-    alignSelf: 'flex-end',
+    alignItems: 'center',
+    marginBottom: spacing.sm,
+  },
+  centerText: {
+    textAlign: 'center',
+  },
+  stack: { gap: spacing.sm },
+  eyeButton: {
     paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   action: { minHeight: 48, padding: spacing.sm, justifyContent: 'center' },
 });
