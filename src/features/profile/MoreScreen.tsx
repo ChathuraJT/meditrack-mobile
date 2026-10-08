@@ -1,36 +1,30 @@
-import { router } from 'expo-router';
-import { Screen } from '@/components/ui/Screen';
-import { AppText } from '@/components/ui/AppText';
 import { AppCard } from '@/components/ui/AppCard';
-import { AppButton } from '@/components/ui/AppButton';
+import { AppText } from '@/components/ui/AppText';
+import { Screen } from '@/components/ui/Screen';
 import { useAuth } from '@/features/auth/AuthProvider';
-import { usePatientProfile } from '@/features/auth/profile';
 import { SignOutButton } from '@/features/auth/SignOutButton';
+
 export function MoreScreen() {
   const { session } = useAuth();
-  const { data: profile } = usePatientProfile();
+
   return (
     <Screen>
-      <AppText variant="title" accessibilityRole="header">
-        More
+      <AppText variant="title" accessibilityRole="header" style={{ textAlign: 'center' }}>
+        Profile
       </AppText>
       <AppCard>
-        <AppText variant="heading">Your account</AppText>
-        <AppText>{profile?.full_name}</AppText>
-        <AppText muted>{session?.user.phone}</AppText>
-        <AppText muted>
-          {session?.user.email_confirmed_at && session.user.email
-            ? `Verified email: ${session.user.email}`
-            : 'Email is optional. Add and verify it for another way to sign in.'}
-        </AppText>
-        <AppButton
-          label="Email verification"
-          onPress={() => router.push('/email-link')}
-        />
+        <AppText variant="heading" style={{ textAlign: 'center' }}>Your account</AppText>
+        <AppText style={{ textAlign: 'center' }}>Username: {session?.user.username}</AppText>
+        <AppText muted style={{ textAlign: 'center' }}>Email: {session?.user.email || 'None'}</AppText>
+        <AppText muted style={{ textAlign: 'center' }}>Role: {session?.user.role}</AppText>
+        {session?.user.doctorID && <AppText muted style={{ textAlign: 'center' }}>Doctor ID: {session?.user.doctorID}</AppText>}
+        {session?.user.lab_name && <AppText muted style={{ textAlign: 'center' }}>Lab Name: {session?.user.lab_name}</AppText>}
+        {session?.user.license_id && <AppText muted style={{ textAlign: 'center' }}>License ID: {session?.user.license_id}</AppText>}
+        {session?.user.lab_address && <AppText muted style={{ textAlign: 'center' }}>Lab Address: {session?.user.lab_address}</AppText>}
       </AppCard>
       <AppCard>
-        <AppText variant="heading">Built for healthcare research</AppText>
-        <AppText muted>
+        <AppText variant="heading" style={{ textAlign: 'center' }}>Built for healthcare research</AppText>
+        <AppText muted style={{ textAlign: 'center' }}>
           Symptom intelligence, doctor matching, doctor-approved prescription
           support, adherence, recovery, disease intelligence, and laboratory
           workflows are planned for later phases.

@@ -1,15 +1,15 @@
-import { Stack } from 'expo-router';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ActivityIndicator } from 'react-native';
-import { queryClient } from '@/lib/query-client';
-import { AuthProvider, useAuth } from '@/features/auth/AuthProvider';
-import { Screen } from '@/components/ui/Screen';
-import { AppText } from '@/components/ui/AppText';
 import { AppButton } from '@/components/ui/AppButton';
-import { colors } from '@/theme/tokens';
+import { AppText } from '@/components/ui/AppText';
+import { Screen } from '@/components/ui/Screen';
+import { AuthProvider, useAuth } from '@/features/auth/AuthProvider';
 import { launchDestination } from '@/features/auth/model';
+import { queryClient } from '@/lib/query-client';
+import { colors } from '@/theme/tokens';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { ActivityIndicator } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function Routes() {
   const auth = useAuth();

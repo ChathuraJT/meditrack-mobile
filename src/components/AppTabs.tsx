@@ -1,16 +1,19 @@
-import {
-  Tabs,
-  TabList,
-  TabTrigger,
-  TabSlot,
-  type TabTriggerSlotProps,
-} from 'expo-router/ui';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Pressable, StyleSheet, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { ComponentProps } from 'react';
 import { AppText } from '@/components/ui/AppText';
 import { colors, spacing } from '@/theme/tokens';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import {
+  TabList,
+  Tabs,
+  TabSlot,
+  TabTrigger,
+  type TabTriggerSlotProps,
+} from 'expo-router/ui';
+import type { ComponentProps } from 'react';
+import { Pressable, StyleSheet, View, useColorScheme } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { AppHeader } from '@/components/AppHeader';
+import { MedicalPatternBackground } from '@/components/MedicalPatternBackground';
 
 type ButtonProps = TabTriggerSlotProps & {
   icon: ComponentProps<typeof Ionicons>['name'];
@@ -46,20 +49,33 @@ function TabButton({ icon, label, isFocused, ...props }: ButtonProps) {
 }
 export function AppTabs() {
   const insets = useSafeAreaInsets();
+  const isDark = useColorScheme() === 'dark';
+
   return (
-    <Tabs style={styles.tabs}>
-      <TabSlot style={styles.slot} />
-      <TabList asChild>
-        <View
-          style={[
+    <View style={styles.container}>
+      <AppHeader />
+      <Tabs style={styles.tabs}>
+        <TabSlot style={styles.slot} />
+        <TabList
+          style={StyleSheet.flatten([
             styles.list,
             {
               paddingBottom: Math.max(insets.bottom, spacing.sm),
               paddingLeft: Math.max(insets.left, spacing.xs),
               paddingRight: Math.max(insets.right, spacing.xs),
+              backgroundColor: isDark ? '#0A2540' : colors.surface,
+              borderColor: isDark ? '#1A3B5C' : colors.border,
             },
-          ]}
+          ])}
         >
+          <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+            <MedicalPatternBackground
+              density="sparse"
+              opacity={isDark ? 0.16 : 0.2}
+              backgroundColor="transparent"
+              style={StyleSheet.absoluteFill}
+            />
+          </View>
           <TabTrigger name="home" href="/" asChild>
             <TabButton icon="home-outline" label="Home" />
           </TabTrigger>
@@ -69,15 +85,16 @@ export function AppTabs() {
           <TabTrigger name="recovery" href="/recovery" asChild>
             <TabButton icon="heart-outline" label="Recovery" />
           </TabTrigger>
-          <TabTrigger name="more" href="/more" asChild>
-            <TabButton icon="grid-outline" label="More" />
+          <TabTrigger name="map" href="/map" asChild>
+            <TabButton icon="map-outline" label="Map" />
           </TabTrigger>
-        </View>
-      </TabList>
-    </Tabs>
+        </TabList>
+      </Tabs>
+    </View>
   );
 }
 const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: colors.background },
   tabs: { flex: 1, backgroundColor: colors.background },
   slot: { flex: 1 },
   list: {
@@ -86,6 +103,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: colors.border,
     paddingTop: spacing.sm,
+    overflow: 'hidden',
   },
   button: {
     flex: 1,

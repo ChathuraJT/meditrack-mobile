@@ -1,11 +1,11 @@
-import { router } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Screen } from '@/components/ui/Screen';
-import { AppText } from '@/components/ui/AppText';
-import { AppCard } from '@/components/ui/AppCard';
 import { AppButton } from '@/components/ui/AppButton';
+import { AppCard } from '@/components/ui/AppCard';
+import { AppText } from '@/components/ui/AppText';
+import { Screen } from '@/components/ui/Screen';
 import { colors, spacing } from '@/theme/tokens';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 export function HomeScreen() {
   return (
     <Screen>
@@ -16,23 +16,11 @@ export function HomeScreen() {
           color={colors.primary}
           accessible={false}
         />
-        <AppText variant="heading">MediTrack</AppText>
-      </View>
-      <View style={styles.intro}>
-        <AppText variant="caption" style={styles.eyebrow}>
-          CARE, CONNECTED
-        </AppText>
-        <AppText variant="title" accessibilityRole="header">
-          Welcome to MediTrack
-        </AppText>
-        <AppText muted>
-          A thoughtful place for your care journey. Your account is ready; care
-          features are being built one step at a time.
-        </AppText>
+        <AppText variant="heading" style={styles.centerText}>MediTrack</AppText>
       </View>
       <AppCard>
-        <AppText variant="heading">Your care space</AppText>
-        <AppText muted>
+        <AppText variant="heading" style={styles.centerText}>Your care space</AppText>
+        <AppText muted style={styles.centerText}>
           Explore the areas that will support medication routines and recovery
           in future research phases.
         </AppText>
@@ -45,19 +33,29 @@ export function HomeScreen() {
           onPress={() => router.navigate('/recovery')}
         />
         <AppButton
-          label="Your account and more"
-          onPress={() => router.navigate('/more')}
+          label="Explore healthcare map"
+          onPress={() => router.navigate('/map')}
+        />
+        <AppButton
+          label="Your profile"
+          onPress={() => router.navigate('/profile')}
         />
       </AppCard>
-      <AppText variant="caption" muted>
-        University research project · Account preview. Clinical features are not
-        available yet.
-      </AppText>
     </Screen>
   );
 }
 const styles = StyleSheet.create({
-  brand: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  intro: { gap: spacing.md, paddingVertical: spacing.md },
+  brand: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.sm,
+  },
+  intro: {
+    gap: spacing.md,
+    paddingVertical: spacing.md,
+    alignItems: 'center',
+  },
   eyebrow: { color: colors.primary, fontWeight: '700', letterSpacing: 2 },
+  centerText: { textAlign: 'center' },
 });
