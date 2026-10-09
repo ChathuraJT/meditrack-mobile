@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { AppButton } from '@/components/ui/AppButton';
+import { AppCard } from '@/components/ui/AppCard';
+import { AppText } from '@/components/ui/AppText';
+import { apiFetch } from '@/lib/api';
+import { colors, radius, spacing } from '@/theme/tokens';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
-import { View, Pressable, StyleSheet } from 'react-native';
-import { apiFetch } from '@/lib/api';
-import { AppButton } from '@/components/ui/AppButton';
-import { AppText } from '@/components/ui/AppText';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Alert, Pressable, StyleSheet, View } from 'react-native';
 import { useAuth } from './AuthProvider';
-import { loginSchema, parseIdentifier } from './model';
-import { AppCard } from '@/components/ui/AppCard';
-import { colors, spacing } from '@/theme/tokens';
 import {
   AuthScreen,
   Feedback,
@@ -18,6 +18,7 @@ import {
   formStyles,
   useSubmission,
 } from './components';
+import { loginSchema, parseIdentifier } from './model';
 
 export function LoginScreen() {
   const { available, signIn, setPendingPhone, setDraft } = useAuth();
@@ -40,7 +41,7 @@ export function LoginScreen() {
             password: values.password,
           }),
         });
-        
+
         if (!data || !data.access_token || !data.user) {
           throw new Error('Invalid response from server');
         }
@@ -90,6 +91,14 @@ export function LoginScreen() {
     router.push('/verify-phone');
   }
 
+  function handleSocialLogin(provider: 'Google' | 'Facebook') {
+    Alert.alert(
+      `${provider} Sign-In`,
+      `${provider} authentication will be supported in an upcoming update.`,
+      [{ text: 'OK' }],
+    );
+  }
+
   return (
     <AuthScreen
       title="Welcome back"
@@ -135,13 +144,42 @@ export function LoginScreen() {
               disabled={!available}
               onPress={submit}
             />
+
+            <View style={styles.dividerContainer}>
+              <View style={styles.dividerLine} />
+              <AppText variant="caption" muted style={styles.dividerText}>
+                or continue with
+              </AppText>
+              <View style={styles.dividerLine} />
+            </View>
+
+            <View style={styles.socialRow}>
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="Sign in with Google"
+                onPress={() => handleSocialLogin('Google')}
+                style={({ pressed }) => [
+                  styles.socialCircleButton,
+                  pressed && styles.socialCircleButtonPressed,
+                ]}
+              >
+                <Ionicons name="logo-google" size={28} color={colors.primary} />
+              </Pressable>
+
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="Sign in with Facebook"
+                onPress={() => handleSocialLogin('Facebook')}
+                style={({ pressed }) => [
+                  styles.socialCircleButton,
+                  pressed && styles.socialCircleButtonPressed,
+                ]}
+              >
+                <Ionicons name="logo-facebook" size={30} color={colors.primary} />
+              </Pressable>
+            </View>
           </View>
         </AppCard>
-        <TextAction
-          label="Verify a pending phone registration (Unsupported)"
-          onPress={verifyExisting}
-          disabled={busy}
-        />
         <TextAction
           label="Don’t have an account? Sign Up"
           onPress={() => {
@@ -167,5 +205,40 @@ const styles = StyleSheet.create({
   forgotPassword: {
     alignSelf: 'flex-end',
     paddingVertical: spacing.xs,
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.xs,
+    gap: spacing.sm,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.border,
+  },
+  dividerText: {
+    paddingHorizontal: spacing.xs,
+  },
+  socialRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: spacing.lg,
+    paddingVertical: spacing.xs,
+  },
+  socialCircleButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: colors.primary,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  socialCircleButtonPressed: {
+    opacity: 0.7,
+    backgroundColor: 'rgba(20, 93, 160, 0.08)',
   },
 });
