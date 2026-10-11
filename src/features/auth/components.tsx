@@ -11,7 +11,7 @@ import {
   type FieldValues,
   type Path,
 } from 'react-hook-form';
-import { Pressable, StyleSheet, View, type TextInputProps } from 'react-native';
+import { Pressable, StyleSheet, View, useColorScheme, type TextInputProps } from 'react-native';
 import { useAuth } from './AuthProvider';
 
 export function AuthScreen({
@@ -20,27 +20,31 @@ export function AuthScreen({
   children,
 }: PropsWithChildren<{ title: string; description: string }>) {
   const { available } = useAuth();
+  const isDark = useColorScheme() === 'dark';
+  const brandColor = isDark ? '#38BDF8' : colors.primary;
+
   return (
     <Screen edges={['top', 'left', 'right', 'bottom']}>
       <View style={styles.brand}>
         <Ionicons
           name="medical-outline"
           size={32}
-          color={colors.primary}
+          color={brandColor}
           accessible={false}
         />
-        <AppText variant="heading" style={{ color: colors.primary, fontWeight: '700' }}>
+        <AppText variant="heading" style={{ color: brandColor, fontWeight: '700' }}>
           MediTrack
         </AppText>
       </View>
       <View style={styles.headerStack}>
-        <AppText variant="title" accessibilityRole="header" style={styles.centerText}>
+        <AppText variant="title" accessibilityRole="header" style={[styles.centerText, { color: isDark ? '#FFFFFF' : colors.text }]}>
           {title}
         </AppText>
-        <AppText muted style={styles.centerText}>
+        <AppText muted style={[styles.centerText, { color: isDark ? '#94A3B8' : colors.secondary }]}>
           {description}
         </AppText>
       </View>
+
       {!available && (
         <AppCard>
           <AppText accessibilityRole="alert" style={styles.centerText}>
@@ -98,7 +102,7 @@ export function FormField<T extends FieldValues>({
                 >
                   <Ionicons
                     name={visible ? 'eye-off-outline' : 'eye-outline'}
-                    color={colors.primary}
+                    color={useColorScheme() === 'dark' ? '#38BDF8' : colors.primary}
                     size={22}
                   />
                 </Pressable>
@@ -111,11 +115,12 @@ export function FormField<T extends FieldValues>({
   );
 }
 export function Feedback({ message }: { message: string }) {
+  const isDark = useColorScheme() === 'dark';
   return message ? (
     <AppText
       accessibilityRole="alert"
       accessibilityLiveRegion="polite"
-      style={{ color: colors.error }}
+      style={{ color: isDark ? '#FCA5A5' : colors.error, fontWeight: '500' }}
     >
       {message}
     </AppText>
@@ -130,6 +135,7 @@ export function TextAction({
   onPress: () => void;
   disabled?: boolean;
 }) {
+  const isDark = useColorScheme() === 'dark';
   return (
     <Pressable
       accessibilityRole="button"
@@ -138,12 +144,13 @@ export function TextAction({
       onPress={onPress}
       style={styles.action}
     >
-      <AppText style={{ color: colors.primary, textAlign: 'center' }}>
+      <AppText style={{ color: isDark ? '#38BDF8' : colors.primary, textAlign: 'center', fontWeight: '600' }}>
         {label}
       </AppText>
     </Pressable>
   );
 }
+
 // Prevent multiple in-flight requests even before React has rendered a busy state.
 export function useSubmission() {
   const lock = useRef(false);

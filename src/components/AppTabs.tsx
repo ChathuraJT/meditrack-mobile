@@ -52,9 +52,9 @@ export function AppTabs() {
   const isDark = useColorScheme() === 'dark';
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: '#F8FAFC' }]}>
       <AppHeader />
-      <Tabs style={styles.tabs}>
+      <Tabs style={[styles.tabs, { backgroundColor: '#F8FAFC' }]}>
         <TabSlot style={styles.slot} />
         <TabList
           style={StyleSheet.flatten([
@@ -63,19 +63,12 @@ export function AppTabs() {
               paddingBottom: Math.max(insets.bottom, spacing.sm),
               paddingLeft: Math.max(insets.left, spacing.xs),
               paddingRight: Math.max(insets.right, spacing.xs),
-              backgroundColor: isDark ? '#0A2540' : colors.surface,
-              borderColor: isDark ? '#1A3B5C' : colors.border,
+              backgroundColor: '#FFFFFF',
+              borderTopWidth: 1,
+              borderColor: '#E2E8F0',
             },
           ])}
         >
-          <View pointerEvents="none" style={StyleSheet.absoluteFill}>
-            <MedicalPatternBackground
-              density="sparse"
-              opacity={isDark ? 0.16 : 0.2}
-              backgroundColor="transparent"
-              style={StyleSheet.absoluteFill}
-            />
-          </View>
           <TabTrigger name="home" href="/" asChild>
             <TabButton icon="home-outline" label="Home" />
           </TabTrigger>

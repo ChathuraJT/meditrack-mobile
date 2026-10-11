@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  useColorScheme,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -19,18 +20,21 @@ type ScreenProps = PropsWithChildren<{
 
 export function Screen({
   children,
-  withPattern = true,
+  withPattern = false,
   patternDensity = 'sparse',
-  patternOpacity = 0.12,
+  patternOpacity = 0.06,
   edges = ['left', 'right'],
 }: ScreenProps) {
   const content = (
     <SafeAreaView
-      style={[styles.safe, withPattern && styles.transparent]}
+      style={[
+        styles.safe,
+        { backgroundColor: '#F8FAFC' },
+      ]}
       edges={edges}
     >
       <KeyboardAvoidingView
-        style={styles.safe}
+        style={[styles.safe, { backgroundColor: 'transparent' }]}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView
@@ -49,6 +53,7 @@ export function Screen({
       <MedicalPatternBackground
         density={patternDensity}
         opacity={patternOpacity}
+        backgroundColor="#F8FAFC"
       >
         {content}
       </MedicalPatternBackground>
@@ -57,9 +62,9 @@ export function Screen({
 
   return content;
 }
+
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.background },
-  transparent: { backgroundColor: 'transparent' },
+  safe: { flex: 1 },
   scroll: {
     flexGrow: 1,
     paddingHorizontal: spacing.md,
@@ -73,4 +78,5 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
 });
+
 
