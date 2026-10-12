@@ -1,3 +1,5 @@
+import { useColorScheme } from 'react-native';
+
 export const colors = {
   primary: '#145DA0',
   accent: '#00A6AD',
@@ -10,6 +12,25 @@ export const colors = {
   warning: '#F59E0B',
   error: '#B42318',
 };
+
+export const darkColors = {
+  primary: '#38BDF8',
+  accent: '#2DD4BF',
+  background: '#082B50',
+  surface: '#0C3154',
+  text: '#FFFFFF',
+  secondary: '#94A3B8',
+  border: '#1C4A75',
+  success: '#34D399',
+  warning: '#FBBF24',
+  error: '#F87171',
+};
+
+export function useThemeColors() {
+  const isDark = useColorScheme() === 'dark';
+  return isDark ? darkColors : colors;
+}
+
 export const spacing = { xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48 };
 export const radius = { sm: 10, md: 18, lg: 26 };
 export const typography = {
@@ -18,3 +39,4 @@ export const typography = {
   body: { fontSize: 16, lineHeight: 25 },
   caption: { fontSize: 13, lineHeight: 20 },
 };
+

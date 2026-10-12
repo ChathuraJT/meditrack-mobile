@@ -44,19 +44,12 @@ export function AppHeader() {
         styles.container,
         {
           paddingTop: Math.max(insets.top, spacing.sm),
-          backgroundColor: isDark ? '#0A2540' : colors.surface,
-          borderColor: isDark ? '#1A3B5C' : colors.border,
+          backgroundColor: '#FFFFFF',
+          borderBottomWidth: 1,
+          borderBottomColor: '#E2E8F0',
         },
       ]}
     >
-      <View pointerEvents="none" style={StyleSheet.absoluteFill}>
-        <MedicalPatternBackground
-          density="sparse"
-          opacity={isDark ? 0.18 : 0.22}
-          backgroundColor="transparent"
-          style={StyleSheet.absoluteFill}
-        />
-      </View>
       <View style={styles.content}>
         {/* Logo and Brand */}
         <Pressable

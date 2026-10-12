@@ -1,4 +1,4 @@
-import { Text, type TextProps } from 'react-native';
+import { Text, useColorScheme, type TextProps } from 'react-native';
 import { colors, typography } from '@/theme/tokens';
 
 type Props = TextProps & { variant?: keyof typeof typography; muted?: boolean };
@@ -8,14 +8,20 @@ export function AppText({
   style,
   ...props
 }: Props) {
+  const isDark = useColorScheme() === 'dark';
+  const defaultColor = muted
+    ? (isDark ? '#94A3B8' : colors.secondary)
+    : (isDark ? '#FFFFFF' : colors.text);
+
   return (
     <Text
       {...props}
       style={[
         typography[variant],
-        { color: muted ? colors.secondary : colors.text },
+        { color: defaultColor },
         style,
       ]}
     />
   );
 }
+

@@ -2,14 +2,17 @@ import {
   ActivityIndicator,
   Pressable,
   StyleSheet,
+  useColorScheme,
   type PressableProps,
 } from 'react-native';
 import { AppText } from './AppText';
 import { colors, radius, spacing } from '@/theme/tokens';
+
 type Props = Omit<PressableProps, 'children'> & {
   label: string;
   loading?: boolean;
 };
+
 export function AppButton({
   label,
   loading = false,
@@ -17,7 +20,9 @@ export function AppButton({
   style,
   ...props
 }: Props) {
+  const isDark = useColorScheme() === 'dark';
   const unavailable = disabled || loading;
+
   return (
     <Pressable
       {...props}
@@ -27,6 +32,7 @@ export function AppButton({
       disabled={unavailable}
       style={(state) => [
         styles.button,
+        { backgroundColor: isDark ? '#0284C7' : colors.primary },
         (unavailable || state.pressed) && styles.dimmed,
         typeof style === 'function' ? style(state) : style,
       ]}
@@ -36,6 +42,7 @@ export function AppButton({
     </Pressable>
   );
 }
+
 const styles = StyleSheet.create({
   button: {
     minHeight: 48,

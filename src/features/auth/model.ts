@@ -19,14 +19,17 @@ export function normalizePhone(value: string, country: CountryCode = 'LK') {
 }
 export function parseIdentifier(
   value: string,
-): { email: string } | { phone: string } | null {
+): { email: string } | { phone: string } | { username: string } | null {
   const identifier = value.trim();
+  if (!identifier) return null;
   if (identifier.includes('@'))
     return z.email().safeParse(identifier).success
       ? { email: identifier }
       : null;
   const phone = normalizePhone(identifier);
-  return phone ? { phone } : null;
+  if (phone) return { phone };
+  if (identifier.length >= 2) return { username: identifier };
+  return null;
 }
 export const optionalEmail = z
   .string()
@@ -76,10 +79,10 @@ export const loginSchema = z.object({
   identifier: z
     .string()
     .trim()
-    .min(1, 'Enter your email or mobile number.')
+    .min(1, 'Enter your username, email or mobile number.')
     .refine(
       (value) => !!parseIdentifier(value),
-      'Enter a valid email or phone number (Sri Lanka by default, or use +country code).',
+      'Enter a valid username, email or phone number.',
     ),
   password: z.string().min(1, 'Enter your password.'),
 });

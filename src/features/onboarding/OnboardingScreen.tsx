@@ -13,9 +13,11 @@ import {
   StyleSheet,
   useWindowDimensions,
   View,
+  useColorScheme,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from 'react-native';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { OnboardingArtwork, type Scene } from './OnboardingArtwork';
 import { useOnboardingMotion } from './useOnboardingMotion';
@@ -49,6 +51,14 @@ const slides: {
     },
   ];
 export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
+  const isDark = useColorScheme() === 'dark';
+  const brandColor = isDark ? '#38BDF8' : colors.primary;
+  const dotTrackColor = isDark ? '#1C4A75' : colors.border;
+  const dotActiveColor = isDark ? '#38BDF8' : colors.primary;
+  const eyebrowColor = isDark ? '#38BDF8' : colors.primary;
+  const titleColor = isDark ? '#FFFFFF' : colors.text;
+  const descColor = isDark ? '#CBD5E1' : colors.secondary;
+
   const { width: windowWidth } = useWindowDimensions();
   const [width, setWidth] = useState(windowWidth);
   const pager = useRef<ScrollView>(null);
@@ -110,19 +120,19 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
               disabled={busy}
               style={styles.headerAction}
             >
-              <Ionicons name="arrow-back" size={23} color={colors.primary} />
+              <Ionicons name="arrow-back" size={23} color={brandColor} />
             </Pressable>
           ) : (
             <View style={styles.headerAction}>
               <Ionicons
                 name="medical-outline"
                 size={24}
-                color={colors.primary}
+                color={brandColor}
                 accessible={false}
               />
             </View>
           )}
-          <AppText style={styles.brand}>MediTrack</AppText>
+          <AppText style={[styles.brand, { color: brandColor }]}>MediTrack</AppText>
           {index < 2 ? (
             <Pressable
               accessibilityRole="button"
@@ -130,7 +140,7 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
               disabled={busy}
               style={styles.headerAction}
             >
-              <AppText variant="caption" style={{ color: colors.primary }}>
+              <AppText variant="caption" style={{ color: brandColor, fontWeight: '600' }}>
                 Skip
               </AppText>
             </Pressable>
@@ -138,6 +148,7 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
             <View style={styles.headerAction} />
           )}
         </View>
+
         <Animated.ScrollView
           ref={pager}
           onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
@@ -224,17 +235,17 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                   />
                 </Animated.View>
                 <Animated.View style={[styles.copy, textMotion]}>
-                  <AppText variant="caption" style={styles.eyebrow}>
+                  <AppText variant="caption" style={[styles.eyebrow, { color: eyebrowColor }]}>
                     {slide.label}
                   </AppText>
                   <AppText
                     variant="title"
                     accessibilityRole="header"
-                    style={styles.title}
+                    style={[styles.title, { color: titleColor, fontWeight: '700' }]}
                   >
                     {slide.title}
                   </AppText>
-                  <AppText muted style={styles.description}>
+                  <AppText muted style={[styles.description, { color: descColor, fontSize: 16, lineHeight: 24 }]}>
                     {slide.description}
                   </AppText>
                 </Animated.View>
@@ -258,11 +269,12 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                 onPress={() => goTo(page)}
                 style={styles.dotTarget}
               >
-                <View style={styles.dotTrack} />
+                <View style={[styles.dotTrack, { backgroundColor: dotTrackColor }]} />
                 <Animated.View
                   style={[
                     styles.dot,
                     {
+                      backgroundColor: dotActiveColor,
                       opacity: reduceMotion
                         ? index === page
                           ? 1
@@ -292,12 +304,13 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
             loading={busy}
             onPress={() => (index === 2 ? void finish() : goTo(index + 1))}
           />
-          <AppText variant="caption" muted style={styles.note}>
+          <AppText variant="caption" muted style={[styles.note, { color: isDark ? '#94A3B8' : colors.secondary }]}>
             {index === 2
               ? 'Continuing does not grant location or health-data consent.'
               : 'A thoughtful start to your care journey.'}
           </AppText>
         </View>
+
       </SafeAreaView>
     </MedicalPatternBackground>
   );
