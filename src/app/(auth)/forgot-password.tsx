@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, useColorScheme } from 'react-native';
 import { router } from 'expo-router';
 import { AuthScreen, TextAction, formStyles } from '@/features/auth/components';
 import { AppCard } from '@/components/ui/AppCard';
@@ -9,6 +9,7 @@ import { colors, spacing } from '@/theme/tokens';
 import { useState } from 'react';
 
 export default function ForgotPasswordScreen() {
+  const isDark = useColorScheme() === 'dark';
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -22,7 +23,8 @@ export default function ForgotPasswordScreen() {
           <View style={formStyles.stack}>
             {submitted ? (
               <View style={styles.confirmation}>
-                <AppText style={styles.confirmTitle}>Check your inbox</AppText>
+                <AppText style={[styles.confirmTitle, { color: isDark ? '#38BDF8' : colors.primary }]}>Check your inbox</AppText>
+
                 <AppText muted style={styles.confirmText}>
                   If an account exists for {emailOrPhone}, we have sent password reset instructions.
                 </AppText>

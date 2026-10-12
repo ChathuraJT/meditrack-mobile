@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal, Pressable, View, FlatList, StyleSheet } from 'react-native';
+import { Modal, Pressable, View, FlatList, StyleSheet, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Controller,
@@ -13,6 +13,7 @@ import { AppText } from '@/components/ui/AppText';
 import { AppInput } from '@/components/ui/AppInput';
 import { colors, radius, spacing } from '@/theme/tokens';
 import { TextAction } from './components';
+
 export type Option = { value: string; label: string };
 export const countryOptions: Option[] = getCountries()
   .map((code) => ({
@@ -26,6 +27,7 @@ export const countryOptions: Option[] = getCountries()
         ? 1
         : a.value.localeCompare(b.value),
   );
+
 export function SelectField<T extends FieldValues>({
   control,
   name,
@@ -39,13 +41,17 @@ export function SelectField<T extends FieldValues>({
 }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const isDark = useColorScheme() === 'dark';
+
   return (
     <Controller
       control={control}
       name={name}
       render={({ field, fieldState }) => (
-        <View style={{ gap: spacing.sm }}>
-          <AppText>{label}</AppText>
+        <View style={{ gap: spacing.xs }}>
+          <AppText style={{ color: isDark ? '#E2E8F0' : colors.text, fontWeight: '600', fontSize: 14 }}>
+            {label}
+          </AppText>
           <Pressable
             ref={field.ref}
             onBlur={field.onBlur}
@@ -56,21 +62,27 @@ export function SelectField<T extends FieldValues>({
               setSearch('');
               setOpen(true);
             }}
-            style={styles.select}
+            style={[
+              styles.select,
+              {
+                borderColor: fieldState.error ? colors.error : (isDark ? '#2D557C' : colors.border),
+                backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : '#FFFFFF',
+              },
+            ]}
           >
-            <AppText style={{ flex: 1 }}>
+            <AppText style={{ flex: 1, color: isDark ? '#FFFFFF' : colors.text }}>
               {options.find((o) => o.value === field.value)?.label ??
                 'Select an option'}
             </AppText>
             <Ionicons
               name="chevron-down-outline"
               size={20}
-              color={colors.secondary}
+              color={isDark ? '#7E9BB8' : colors.secondary}
             />
           </Pressable>
           {fieldState.error && (
             <AppText
-              style={{ color: colors.error }}
+              style={{ color: isDark ? '#FCA5A5' : colors.error, fontSize: 13 }}
               accessibilityLiveRegion="polite"
             >
               {fieldState.error.message}
@@ -81,8 +93,8 @@ export function SelectField<T extends FieldValues>({
             animationType="slide"
             onRequestClose={() => setOpen(false)}
           >
-            <SafeAreaView style={styles.modal}>
-              <AppText variant="heading" accessibilityRole="header">
+            <SafeAreaView style={[styles.modal, { backgroundColor: isDark ? '#082B50' : colors.background }]}>
+              <AppText variant="heading" accessibilityRole="header" style={{ color: isDark ? '#FFFFFF' : colors.text }}>
                 {label}
               </AppText>
               {options.length > 10 && (
@@ -103,14 +115,14 @@ export function SelectField<T extends FieldValues>({
                   <Pressable
                     accessibilityRole="radio"
                     accessibilityState={{ checked: field.value === item.value }}
-                    style={styles.option}
+                    style={[styles.option, { borderColor: isDark ? '#1C4A75' : colors.border }]}
                     onPress={() => {
                       field.onChange(item.value);
                       field.onBlur();
                       setOpen(false);
                     }}
                   >
-                    <AppText>{item.label}</AppText>
+                    <AppText style={{ color: isDark ? '#FFFFFF' : colors.text }}>{item.label}</AppText>
                   </Pressable>
                 )}
               />
@@ -122,28 +134,27 @@ export function SelectField<T extends FieldValues>({
     />
   );
 }
+
 const styles = StyleSheet.create({
   select: {
-    minHeight: 52,
-    padding: spacing.md,
+    minHeight: 50,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderWidth: 1.5,
     borderRadius: radius.sm,
-    backgroundColor: 'transparent',
   },
   modal: {
     flex: 1,
     padding: spacing.lg,
     gap: spacing.md,
-    backgroundColor: colors.background,
   },
   option: {
     padding: spacing.md,
     minHeight: 52,
     borderBottomWidth: 1,
-    borderColor: colors.border,
   },
 });
+

@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Alert, Pressable, StyleSheet, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, View, useColorScheme } from 'react-native';
 import { useAuth } from './AuthProvider';
 import {
   AuthScreen,
@@ -21,9 +21,15 @@ import {
 import { loginSchema, parseIdentifier } from './model';
 
 export function LoginScreen() {
+  const isDark = useColorScheme() === 'dark';
+  const primaryColor = isDark ? '#38BDF8' : colors.primary;
+  const dividerLineColor = isDark ? '#1C4A75' : colors.border;
+  const dividerTextColor = isDark ? '#94A3B8' : colors.secondary;
+
   const { available, signIn, setPendingPhone, setDraft } = useAuth();
   const [message, setMessage] = useState('');
   const { busy, run } = useSubmission();
+
 
   const form = useForm({
     resolver: zodResolver(loginSchema),
@@ -133,7 +139,7 @@ export function LoginScreen() {
               onPress={() => router.push('/forgot-password')}
               style={styles.forgotPassword}
             >
-              <AppText variant="caption" style={{ color: colors.primary, fontWeight: '600' }}>
+              <AppText variant="caption" style={{ color: primaryColor, fontWeight: '600' }}>
                 Forgot password?
               </AppText>
             </Pressable>
@@ -146,11 +152,11 @@ export function LoginScreen() {
             />
 
             <View style={styles.dividerContainer}>
-              <View style={styles.dividerLine} />
-              <AppText variant="caption" muted style={styles.dividerText}>
+              <View style={[styles.dividerLine, { backgroundColor: dividerLineColor }]} />
+              <AppText variant="caption" muted style={[styles.dividerText, { color: dividerTextColor }]}>
                 or continue with
               </AppText>
-              <View style={styles.dividerLine} />
+              <View style={[styles.dividerLine, { backgroundColor: dividerLineColor }]} />
             </View>
 
             <View style={styles.socialRow}>
@@ -160,10 +166,14 @@ export function LoginScreen() {
                 onPress={() => handleSocialLogin('Google')}
                 style={({ pressed }) => [
                   styles.socialCircleButton,
-                  pressed && styles.socialCircleButtonPressed,
+                  { borderColor: primaryColor },
+                  pressed && [
+                    styles.socialCircleButtonPressed,
+                    { backgroundColor: isDark ? 'rgba(56, 189, 248, 0.15)' : 'rgba(20, 93, 160, 0.08)' }
+                  ],
                 ]}
               >
-                <Ionicons name="logo-google" size={28} color={colors.primary} />
+                <Ionicons name="logo-google" size={28} color={primaryColor} />
               </Pressable>
 
               <Pressable
@@ -172,14 +182,19 @@ export function LoginScreen() {
                 onPress={() => handleSocialLogin('Facebook')}
                 style={({ pressed }) => [
                   styles.socialCircleButton,
-                  pressed && styles.socialCircleButtonPressed,
+                  { borderColor: primaryColor },
+                  pressed && [
+                    styles.socialCircleButtonPressed,
+                    { backgroundColor: isDark ? 'rgba(56, 189, 248, 0.15)' : 'rgba(20, 93, 160, 0.08)' }
+                  ],
                 ]}
               >
-                <Ionicons name="logo-facebook" size={30} color={colors.primary} />
+                <Ionicons name="logo-facebook" size={30} color={primaryColor} />
               </Pressable>
             </View>
           </View>
         </AppCard>
+
         <TextAction
           label="Don’t have an account? Sign Up"
           onPress={() => {
