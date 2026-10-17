@@ -48,7 +48,7 @@ export function AuthScreen({
       {!available && (
         <AppCard>
           <AppText accessibilityRole="alert" style={styles.centerText}>
-            Authentication is unavailable because Supabase is not configured.
+            Authentication is unavailable because the backend address is not configured.
             You can preview these forms, but cannot submit them.
           </AppText>
         </AppCard>
@@ -70,6 +70,7 @@ export function FormField<T extends FieldValues>({
   password?: boolean;
 } & TextInputProps) {
   const [visible, setVisible] = useState(false);
+  const isDark = useColorScheme() === 'dark';
   return (
     <Controller
       control={control}
@@ -102,7 +103,7 @@ export function FormField<T extends FieldValues>({
                 >
                   <Ionicons
                     name={visible ? 'eye-off-outline' : 'eye-outline'}
-                    color={useColorScheme() === 'dark' ? '#38BDF8' : colors.primary}
+                    color={isDark ? '#38BDF8' : colors.primary}
                     size={22}
                   />
                 </Pressable>

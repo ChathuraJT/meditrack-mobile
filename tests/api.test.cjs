@@ -6,6 +6,7 @@ const Module = require('node:module');
 const path = require('node:path');
 
 process.env.EXPO_PUBLIC_API_BASE_URL = 'http://localhost:8000';
+process.env.EXPO_PUBLIC_DJANGO_API_URL = 'http://192.0.2.1:8000/';
 
 // Mock expo-secure-store and react-native
 const mockStore = new Map();
@@ -83,4 +84,41 @@ test('network failure handling throws ApiError', async () => {
     assert.equal(error.status, 0);
     assert.equal(error.message, 'Network request failed. Check your connection.');
   }
+});
+
+test('login and logout use cookies and fresh CSRF tokens without bearer credentials', async () => {
+  await setSessionToken('obsolete-bearer-token');
+  const requests = [];
+  let csrf = 'before-login';
+  global.fetch = async (url, options) => {
+    requests.push({ url, options });
+    if (url.endsWith('/session/')) {
+      return new Response(JSON.stringify({ user: null, csrfToken: csrf }));
+    }
+    csrf = 'after-login';
+    return new Response(JSON.stringify({ id: 1, username: 'patient' }));
+  };
+  await apiFetch('/login/', { method: 'POST', body: JSON.stringify({ username: 'patient', password: ' test ' }) });
+  await apiFetch('/logout/', { method: 'POST' });
+  assert.deepEqual(requests.map(({ url }) => url), [
+    'http://192.0.2.1:8000/session/', 'http://192.0.2.1:8000/login/',
+    'http://192.0.2.1:8000/session/', 'http://192.0.2.1:8000/logout/',
+  ]);
+  for (const { options } of requests) {
+    assert.equal(options.credentials, 'include');
+    assert.equal(options.headers.has('Authorization'), false);
+  }
+  assert.equal(requests[1].options.headers.get('X-CSRFToken'), 'before-login');
+  assert.equal(requests[3].options.headers.get('X-CSRFToken'), 'after-login');
+  assert.equal(JSON.parse(requests[1].options.body).password, ' test ');
+});
+
+test('a missing CSRF token prevents submitting credentials', async () => {
+  let calls = 0;
+  global.fetch = async () => {
+    calls++;
+    return new Response(JSON.stringify({ user: null }));
+  };
+  await assert.rejects(apiFetch('/login/', { method: 'POST' }), /secure session/);
+  assert.equal(calls, 1);
 });

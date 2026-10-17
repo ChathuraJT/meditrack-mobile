@@ -40,7 +40,7 @@ export function LoginScreen() {
     run(async () => {
       setMessage('');
       try {
-        const data = await apiFetch('/mobile/auth/login/', {
+        const data = await apiFetch('/login/', {
           method: 'POST',
           body: JSON.stringify({
             username: values.identifier.trim(),
@@ -48,11 +48,11 @@ export function LoginScreen() {
           }),
         });
 
-        if (!data || !data.access_token || !data.user) {
+        if (!data?.id) {
           throw new Error('Invalid response from server');
         }
 
-        await signIn(data);
+        await signIn();
         // Stack.Protected removes login history as the session changes.
       } catch (error: any) {
         if (error.status === 400) {
@@ -60,11 +60,15 @@ export function LoginScreen() {
         } else if (error.status === 401) {
           setMessage('Invalid username or password.');
         } else if (error.status === 403) {
-          setMessage('Your account is pending administrator approval.');
+          setMessage(error.data?.error || 'The session could not be verified. Reload the app and try again.');
         } else if (error.status === 429) {
           setMessage('Too many attempts. Wait before trying again.');
         } else if (error.status === 408 || error.status === 0) {
           setMessage('Unable to reach the service. Check your connection and try again.');
+        } else if (error.status >= 500) {
+          setMessage('The server could not complete login. Please try again shortly.');
+        } else if (error.status === 404) {
+          setMessage('The login service was not found. Check the configured backend address.');
         } else {
           setMessage('Unable to sign in. The request could not be completed.');
         }

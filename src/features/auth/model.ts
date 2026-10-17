@@ -79,11 +79,7 @@ export const loginSchema = z.object({
   identifier: z
     .string()
     .trim()
-    .min(1, 'Enter your username, email or mobile number.')
-    .refine(
-      (value) => !!parseIdentifier(value),
-      'Enter a valid username, email or phone number.',
-    ),
+    .min(1, 'Enter your username or email.'),
   password: z.string().min(1, 'Enter your password.'),
 });
 export type SignupValues = z.infer<typeof signupSchema>;

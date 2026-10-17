@@ -8,15 +8,16 @@ import {
   useColorScheme,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, usePathname } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from '@/features/auth/AuthProvider';
-import { MedicalPatternBackground } from '@/components/MedicalPatternBackground';
 import { colors, spacing, radius } from '@/theme/tokens';
 
 export function AppHeader() {
   const insets = useSafeAreaInsets();
+  const pathname = usePathname();
+  const showBack = ['/profile', '/email-link'].includes(pathname);
   const { session, signOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const colorScheme = useColorScheme();
@@ -51,6 +52,18 @@ export function AppHeader() {
       ]}
     >
       <View style={styles.content}>
+        {showBack && (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+            style={styles.backButton}
+            onPress={() =>
+              router.canGoBack() ? router.back() : router.replace('/')
+            }
+          >
+            <Ionicons name="arrow-back" size={24} color={colors.primary} />
+          </Pressable>
+        )}
         {/* Logo and Brand */}
         <Pressable
           style={styles.brand}
@@ -74,13 +87,13 @@ export function AppHeader() {
           <View>
             <AppText
               variant="heading"
-              style={[styles.brandTitle, { color: isDark ? '#FFFFFF' : colors.text }]}
+              style={[styles.brandTitle, { color: colors.text }]}
             >
               MediTrack
             </AppText>
             <AppText
               variant="caption"
-              style={[styles.brandSubtitle, { color: isDark ? '#86CFE0' : colors.secondary }]}
+              style={[styles.brandSubtitle, { color: colors.secondary }]}
             >
               Care Companion
             </AppText>
@@ -159,7 +172,10 @@ export function AppHeader() {
                 <Pressable
                   style={({ pressed }) => [
                     styles.menuItem,
-                    pressed && (isDark ? styles.menuItemPressedDark : styles.menuItemPressed),
+                    pressed &&
+                      (isDark
+                        ? styles.menuItemPressedDark
+                        : styles.menuItemPressed),
                   ]}
                   onPress={handleProfileClick}
                   accessibilityRole="button"
@@ -182,7 +198,10 @@ export function AppHeader() {
                 <Pressable
                   style={({ pressed }) => [
                     styles.menuItem,
-                    pressed && (isDark ? styles.menuItemPressedDark : styles.menuItemPressed),
+                    pressed &&
+                      (isDark
+                        ? styles.menuItemPressedDark
+                        : styles.menuItemPressed),
                   ]}
                   onPress={handleSignOut}
                   accessibilityRole="button"
@@ -208,6 +227,12 @@ export function AppHeader() {
 }
 
 const styles = StyleSheet.create({
+  backButton: {
+    minWidth: 44,
+    minHeight: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     borderBottomWidth: 1,
     zIndex: 100,
@@ -222,6 +247,7 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.md,
   },
   brand: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
@@ -239,6 +265,7 @@ const styles = StyleSheet.create({
     lineHeight: 26,
   },
   brandSubtitle: {
+    textAlign: 'center',
     fontSize: 12,
     lineHeight: 16,
     fontWeight: '500',

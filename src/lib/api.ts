@@ -1,21 +1,20 @@
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 
-const LAN_IP = '10.113.207.98';
-
 function getApiBaseUrl(): string {
   const envUrl = process.env.EXPO_PUBLIC_DJANGO_API_URL || process.env.EXPO_PUBLIC_API_BASE_URL;
   if (Platform.OS === 'web') {
     return envUrl || 'http://127.0.0.1:8000';
   }
-  const lanUrl = process.env.EXPO_PUBLIC_LAN_API_URL || `http://${LAN_IP}:8000`;
+  const lanUrl = process.env.EXPO_PUBLIC_LAN_API_URL || '';
   if (envUrl && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
     return envUrl;
   }
   return lanUrl;
 }
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl().trim().replace(/\/+$/, '');
+export const apiConfigured = !!API_BASE_URL;
 
 export const SESSION_TOKEN_KEY = 'meditrack_session_token';
 export const SESSION_EXPIRY_KEY = 'meditrack_session_expiry';
@@ -67,19 +66,23 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
     throw new Error('API Base URL is not configured. Please set EXPO_PUBLIC_DJANGO_API_URL.');
   }
 
-  const token = await getSessionToken();
   const headers = new Headers(options.headers);
   headers.set('Content-Type', 'application/json');
-  if (token) {
-    headers.set('Authorization', `Bearer ${token}`);
+  const method = (options.method || 'GET').toUpperCase();
+  if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) {
+    // Django rotates CSRF tokens at login. Fetch the current token before writes.
+    const session = await apiFetch('/session/');
+    if (!session?.csrfToken) throw new ApiError('Unable to initialize a secure session.');
+    headers.set('X-CSRFToken', session.csrfToken);
   }
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 150000);
+  const timeout = setTimeout(() => controller.abort(), 15000);
   
   try {
     const response = await fetch(`${API_BASE_URL}${path}`, {
       ...options,
+      credentials: 'include',
       headers,
       signal: controller.signal,
     });
