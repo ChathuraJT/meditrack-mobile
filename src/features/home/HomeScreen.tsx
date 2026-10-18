@@ -1,28 +1,40 @@
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, useColorScheme } from 'react-native';
 import { router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Screen } from '@/components/ui/Screen';
-import CareCard from '@/components/ui/CareCard';
-import { useCareCardColors } from '@/theme/careCard';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from '@/features/auth/AuthProvider';
-import { colors, radius, spacing } from '@/theme/tokens';
+import { colors, darkColors, radius, spacing } from '@/theme/tokens';
 
 export function HomeScreen() {
   const { session } = useAuth();
-  const cardTheme = useCareCardColors();
-  const styles = createStyles(cardTheme);
+  const isDark = useColorScheme() === 'dark';
   const username = session?.user.username || 'Patient';
+  const theme = isDark ? darkColors : colors;
 
   return (
     <Screen withPattern>
-      <CareCard
-        tone="blue"
-        style={{ borderRadius: radius.lg }}
-        contentStyle={styles.profileCard}
+      {/* Patient Profile Companion Card */}
+      <View
+        style={[
+          styles.profileCard,
+          {
+            backgroundColor: theme.surface,
+            borderColor: theme.border,
+          },
+        ]}
       >
         <View style={styles.profileTop}>
-          <View style={styles.avatar}>
+          <View
+            style={[
+              styles.avatar,
+              {
+                backgroundColor: isDark
+                  ? 'rgba(56, 189, 248, 0.15)'
+                  : '#E6F4FE',
+              },
+            ]}
+          >
             <AppText style={styles.initial}>
               {username.charAt(0).toUpperCase()}
             </AppText>
@@ -37,14 +49,22 @@ export function HomeScreen() {
             </AppText>
           </View>
         </View>
-        <View style={styles.profileFooter}>
+        <View
+          style={[
+            styles.profileFooter,
+            { borderTopColor: theme.border },
+          ]}
+        >
           <View style={styles.patientBadge}>
             <Ionicons
               name="shield-checkmark-outline"
               size={16}
-              color={cardTheme.accents.blue}
+              color={theme.primary}
             />
-            <AppText variant="caption" style={styles.badgeText}>
+            <AppText
+              variant="caption"
+              style={[styles.badgeText, { color: theme.primary }]}
+            >
               Patient portal
             </AppText>
           </View>
@@ -53,193 +73,342 @@ export function HomeScreen() {
             onPress={() => router.push('/profile')}
             style={styles.profileLink}
           >
-            <AppText variant="caption" style={styles.linkText}>
+            <AppText
+              variant="caption"
+              style={[styles.linkText, { color: theme.primary }]}
+            >
               View profile
             </AppText>
             <Ionicons
               name="chevron-forward"
               size={16}
-              color={cardTheme.accents.blue}
+              color={theme.primary}
             />
           </Pressable>
         </View>
-      </CareCard>
+      </View>
 
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel="Channel a Doctor. Find doctors, book an appointment and view your live clinic queue."
-        onPress={() => router.push('/channel-doctor')}
-        style={({ pressed }) => [pressed && styles.pressed]}
-      >
-        <CareCard
-          tone="blue"
-          style={{ borderRadius: radius.lg }}
-          contentStyle={styles.channelCard}
-        >
-          <View style={styles.channelIcon}>
-            <Ionicons
-              name="medkit-outline"
-              size={28}
-              color={cardTheme.accents.blue}
-            />
-          </View>
-          <AppText variant="heading" style={styles.channelTitle}>
-            Channel a Doctor
-          </AppText>
-          <AppText style={styles.channelDescription}>
-            Find the right doctor and keep track of your clinic visit.
-          </AppText>
-          <View style={styles.channelFooter}>
-            <AppText style={styles.channelAction}>
-              Find doctors & view queue
-            </AppText>
-            <Ionicons
-              name="arrow-forward"
-              size={22}
-              color={cardTheme.accents.blue}
-            />
-          </View>
-        </CareCard>
-      </Pressable>
+      {/* Section Header */}
+      <View style={styles.sectionHeader}>
+        <AppText variant="heading" style={styles.sectionTitle}>
+          Dashboard Services
+        </AppText>
+        <AppText variant="caption" muted>
+          Select a service to manage your health journey
+        </AppText>
+      </View>
 
-      <Pressable
-        accessibilityRole="button"
-        onPress={() => router.navigate('/medications')}
-        style={({ pressed }) => [pressed && styles.pressed]}
-      >
-        <CareCard
-          tone="amber"
-          style={{ borderRadius: radius.md }}
-          contentStyle={styles.medicationCard}
-        >
-          <View style={styles.smallIcon}>
-            <Ionicons
-              name="medical-outline"
-              size={24}
-              color={cardTheme.accents.amber}
-            />
-          </View>
-          <View style={styles.profileCopy}>
-            <AppText style={styles.actionTitle}>Daily medications</AppText>
-            <AppText variant="caption" style={styles.secondary}>
-              View your schedule and track doses
-            </AppText>
-          </View>
-          <Ionicons
-            name="chevron-forward"
-            size={20}
-            color={cardTheme.accents.blue}
-          />
-        </CareCard>
-      </Pressable>
+      {/* 2x2 Square Cards Grid */}
+      <View style={styles.grid}>
+        {/* Row 1: Channel Doctor & Daily Medication */}
+        <View style={styles.gridRow}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Channel Doctor. Find doctors, book an appointment, and view your live clinic queue."
+            onPress={() => router.push('/channel-doctor')}
+            style={({ pressed }) => [
+              styles.squareCard,
+              {
+                backgroundColor: theme.surface,
+                borderColor: theme.border,
+              },
+              pressed && styles.pressed,
+            ]}
+          >
+            <View style={styles.cardTopRow}>
+              <View
+                style={[
+                  styles.iconBox,
+                  {
+                    backgroundColor: isDark
+                      ? 'rgba(56, 189, 248, 0.15)'
+                      : '#E6F4FE',
+                  },
+                ]}
+              >
+                <Ionicons
+                  name="medkit-outline"
+                  size={26}
+                  color={isDark ? '#38BDF8' : colors.primary}
+                />
+              </View>
+              <Ionicons
+                name="arrow-forward-circle-outline"
+                size={20}
+                color={isDark ? '#94A3B8' : '#94A3B8'}
+              />
+            </View>
+            <View style={styles.cardBottom}>
+              <AppText style={styles.cardTitle}>Channel Doctor</AppText>
+              <AppText
+                variant="caption"
+                muted
+                numberOfLines={2}
+                style={styles.cardSubtitle}
+              >
+                Find doctors & appointments
+              </AppText>
+            </View>
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Daily Medication. View schedule and track doses."
+            onPress={() => router.navigate('/medications')}
+            style={({ pressed }) => [
+              styles.squareCard,
+              {
+                backgroundColor: theme.surface,
+                borderColor: theme.border,
+              },
+              pressed && styles.pressed,
+            ]}
+          >
+            <View style={styles.cardTopRow}>
+              <View
+                style={[
+                  styles.iconBox,
+                  {
+                    backgroundColor: isDark
+                      ? 'rgba(251, 191, 36, 0.15)'
+                      : '#FEF3C7',
+                  },
+                ]}
+              >
+                <Ionicons
+                  name="medical-outline"
+                  size={26}
+                  color={isDark ? '#FBBF24' : '#D97706'}
+                />
+              </View>
+              <Ionicons
+                name="arrow-forward-circle-outline"
+                size={20}
+                color={isDark ? '#94A3B8' : '#94A3B8'}
+              />
+            </View>
+            <View style={styles.cardBottom}>
+              <AppText style={styles.cardTitle}>Daily Medication</AppText>
+              <AppText
+                variant="caption"
+                muted
+                numberOfLines={2}
+                style={styles.cardSubtitle}
+              >
+                Track schedules & doses
+              </AppText>
+            </View>
+          </Pressable>
+        </View>
+
+        {/* Row 2: Recovery & Map */}
+        <View style={styles.gridRow}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Recovery. Care plan, activities, and recovery milestones."
+            onPress={() => router.navigate('/recovery')}
+            style={({ pressed }) => [
+              styles.squareCard,
+              {
+                backgroundColor: theme.surface,
+                borderColor: theme.border,
+              },
+              pressed && styles.pressed,
+            ]}
+          >
+            <View style={styles.cardTopRow}>
+              <View
+                style={[
+                  styles.iconBox,
+                  {
+                    backgroundColor: isDark
+                      ? 'rgba(52, 211, 153, 0.15)'
+                      : '#D1FAE5',
+                  },
+                ]}
+              >
+                <Ionicons
+                  name="pulse-outline"
+                  size={26}
+                  color={isDark ? '#34D399' : '#059669'}
+                />
+              </View>
+              <Ionicons
+                name="arrow-forward-circle-outline"
+                size={20}
+                color={isDark ? '#94A3B8' : '#94A3B8'}
+              />
+            </View>
+            <View style={styles.cardBottom}>
+              <AppText style={styles.cardTitle}>Recovery</AppText>
+              <AppText
+                variant="caption"
+                muted
+                numberOfLines={2}
+                style={styles.cardSubtitle}
+              >
+                Care plan & milestones
+              </AppText>
+            </View>
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Map. Interactive health locator and nearby medical centers."
+            onPress={() => router.navigate('/map')}
+            style={({ pressed }) => [
+              styles.squareCard,
+              {
+                backgroundColor: theme.surface,
+                borderColor: theme.border,
+              },
+              pressed && styles.pressed,
+            ]}
+          >
+            <View style={styles.cardTopRow}>
+              <View
+                style={[
+                  styles.iconBox,
+                  {
+                    backgroundColor: isDark
+                      ? 'rgba(167, 139, 250, 0.15)'
+                      : '#EDE9FE',
+                  },
+                ]}
+              >
+                <Ionicons
+                  name="map-outline"
+                  size={26}
+                  color={isDark ? '#A78BFA' : '#7C3AED'}
+                />
+              </View>
+              <Ionicons
+                name="arrow-forward-circle-outline"
+                size={20}
+                color={isDark ? '#94A3B8' : '#94A3B8'}
+              />
+            </View>
+            <View style={styles.cardBottom}>
+              <AppText style={styles.cardTitle}>Map</AppText>
+              <AppText
+                variant="caption"
+                muted
+                numberOfLines={2}
+                style={styles.cardSubtitle}
+              >
+                Nearby medical centers
+              </AppText>
+            </View>
+          </Pressable>
+        </View>
+      </View>
     </Screen>
   );
 }
 
-const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
-  StyleSheet.create({
-    profileCard: {
-      padding: spacing.md,
-      gap: spacing.md,
-    },
-    profileTop: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
-    avatar: {
-      width: 56,
-      height: 56,
-      borderRadius: radius.md,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: cardTheme.subtle,
-    },
-    initial: { fontSize: 26, fontWeight: '700', color: cardTheme.accents.blue },
-    profileCopy: { flex: 1, minWidth: 0 },
-    eyebrow: {
-      fontSize: 10,
-      lineHeight: 16,
-      letterSpacing: 1.2,
-      color: cardTheme.supporting,
-      fontWeight: '700',
-    },
-    name: { color: cardTheme.heading, flexShrink: 1 },
-    profileMeta: { color: cardTheme.supporting },
-    profileFooter: {
-      borderTopWidth: 1,
-      borderTopColor: colors.border,
-      paddingTop: spacing.sm,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: spacing.sm,
-    },
-    patientBadge: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-    badgeText: { color: cardTheme.accents.blue, fontWeight: '600' },
-    profileLink: {
-      minHeight: 44,
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 4,
-    },
-    linkText: { color: cardTheme.accents.blue, fontWeight: '600' },
-    sectionIntro: { gap: spacing.xs, marginTop: spacing.sm },
-    heading: { color: cardTheme.heading, fontSize: 22, textAlign: 'center' },
-    secondary: { color: cardTheme.supporting, textAlign: 'center' },
-    channelCard: {
-      padding: spacing.lg,
-      gap: spacing.sm,
-    },
-    channelIcon: {
-      alignSelf: 'center',
-      backgroundColor: cardTheme.subtle,
-      width: 52,
-      height: 52,
-      borderRadius: radius.md,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: spacing.sm,
-    },
-    channelTitle: {
-      color: cardTheme.heading,
-      fontWeight: '700',
-      textAlign: 'center',
-    },
-    channelDescription: {
-      color: cardTheme.supporting,
-      fontSize: 15,
-      lineHeight: 23,
-      textAlign: 'center',
-    },
-    channelFooter: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: spacing.sm,
-      paddingTop: spacing.md,
-      marginTop: spacing.sm,
-      borderTopWidth: 1,
-      borderTopColor: cardTheme.border,
-    },
-    channelAction: {
-      color: cardTheme.heading,
-      flex: 1,
-      fontSize: 14,
-      fontWeight: '700',
-    },
-    medicationCard: {
-      padding: spacing.md,
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.sm,
-      minHeight: 88,
-    },
-    smallIcon: {
-      width: 44,
-      height: 44,
-      borderRadius: radius.sm,
-      backgroundColor: cardTheme.subtle,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    actionTitle: { color: cardTheme.heading, fontWeight: '700' },
-    pressed: { opacity: 0.8 },
-  });
+const styles = StyleSheet.create({
+  profileCard: {
+    borderWidth: 1,
+    borderRadius: radius.lg,
+    padding: spacing.md,
+    gap: spacing.md,
+    shadowColor: '#64748B',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
+  },
+  profileTop: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
+  avatar: {
+    width: 54,
+    height: 54,
+    borderRadius: radius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  initial: { fontSize: 24, fontWeight: '700', color: colors.primary },
+  profileCopy: { flex: 1, minWidth: 0 },
+  eyebrow: {
+    fontSize: 10,
+    lineHeight: 16,
+    letterSpacing: 1.2,
+    color: colors.secondary,
+    fontWeight: '700',
+  },
+  name: { flexShrink: 1 },
+  profileMeta: { color: colors.secondary },
+  profileFooter: {
+    borderTopWidth: 1,
+    paddingTop: spacing.sm,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: spacing.sm,
+  },
+  patientBadge: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  badgeText: { fontWeight: '600' },
+  profileLink: {
+    minHeight: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  linkText: { fontWeight: '600' },
+  sectionHeader: {
+    marginTop: spacing.sm,
+    gap: spacing.xs,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  grid: {
+    gap: spacing.md,
+  },
+  gridRow: {
+    flexDirection: 'row',
+    gap: spacing.md,
+  },
+  squareCard: {
+    flex: 1,
+    aspectRatio: 1,
+    borderWidth: 1,
+    borderRadius: radius.lg,
+    padding: spacing.md,
+    justifyContent: 'space-between',
+    shadowColor: '#64748B',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.07,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  cardTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  iconBox: {
+    width: 44,
+    height: 44,
+    borderRadius: radius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cardBottom: {
+    gap: 2,
+  },
+  cardTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    lineHeight: 20,
+  },
+  cardSubtitle: {
+    fontSize: 11,
+    lineHeight: 15,
+  },
+  pressed: {
+    opacity: 0.82,
+    transform: [{ scale: 0.98 }],
+  },
+});

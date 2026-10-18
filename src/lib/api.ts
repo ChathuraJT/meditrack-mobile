@@ -1,11 +1,29 @@
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 
-function getApiBaseUrl(): string {
-  const envUrl = process.env.EXPO_PUBLIC_DJANGO_API_URL || process.env.EXPO_PUBLIC_API_BASE_URL;
+export function getApiBaseUrl(): string {
   if (Platform.OS === 'web') {
-    return envUrl || 'http://127.0.0.1:8000';
+    if (typeof window !== 'undefined' && window.location?.hostname) {
+      const envUrl =
+        process.env.EXPO_PUBLIC_WEB_API_URL ||
+        process.env.EXPO_PUBLIC_DJANGO_API_URL ||
+        process.env.EXPO_PUBLIC_API_BASE_URL;
+      let port = '8000';
+      if (envUrl) {
+        try {
+          const parsed = new URL(envUrl);
+          if (parsed.port) port = parsed.port;
+        } catch {}
+      }
+      return `${window.location.protocol}//${window.location.hostname}:${port}`;
+    }
+    return (
+      process.env.EXPO_PUBLIC_WEB_API_URL ||
+      process.env.EXPO_PUBLIC_DJANGO_API_URL ||
+      'http://localhost:8000'
+    );
   }
+  const envUrl = process.env.EXPO_PUBLIC_DJANGO_API_URL || process.env.EXPO_PUBLIC_API_BASE_URL;
   const lanUrl = process.env.EXPO_PUBLIC_LAN_API_URL || '';
   if (envUrl && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
     return envUrl;
@@ -13,8 +31,7 @@ function getApiBaseUrl(): string {
   return lanUrl;
 }
 
-const API_BASE_URL = getApiBaseUrl().trim().replace(/\/+$/, '');
-export const apiConfigured = !!API_BASE_URL;
+export const apiConfigured = !!getApiBaseUrl();
 
 export const SESSION_TOKEN_KEY = 'meditrack_session_token';
 export const SESSION_EXPIRY_KEY = 'meditrack_session_expiry';
@@ -62,7 +79,8 @@ class ApiError extends Error {
 }
 
 export async function apiFetch(path: string, options: RequestInit = {}) {
-  if (!API_BASE_URL) {
+  const baseUrl = getApiBaseUrl().trim().replace(/\/+$/, '');
+  if (!baseUrl) {
     throw new Error('API Base URL is not configured. Please set EXPO_PUBLIC_DJANGO_API_URL.');
   }
 
@@ -80,7 +98,7 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
   const timeout = setTimeout(() => controller.abort(), 15000);
   
   try {
-    const response = await fetch(`${API_BASE_URL}${path}`, {
+    const response = await fetch(`${baseUrl}${path}`, {
       ...options,
       credentials: 'include',
       headers,
