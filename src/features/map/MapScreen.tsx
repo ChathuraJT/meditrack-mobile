@@ -4,10 +4,11 @@ import { Screen } from '@/components/ui/Screen';
 import { colors, spacing } from '@/theme/tokens';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, View } from 'react-native';
+import { RegionalRadarCard } from '@/features/home/RegionalRadarCard';
 
 export function MapScreen() {
   return (
-    <Screen>
+    <Screen withPattern>
 
       <AppCard>
         <View style={styles.cardHeader}>
@@ -46,6 +47,8 @@ export function MapScreen() {
           </View>
         </View>
       </AppCard>
+
+      <RegionalRadarCard />
     </Screen>
   );
 }

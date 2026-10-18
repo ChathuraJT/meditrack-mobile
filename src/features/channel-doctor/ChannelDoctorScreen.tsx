@@ -12,7 +12,8 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Screen } from '@/components/ui/Screen';
 import { AppText } from '@/components/ui/AppText';
-import { AppCard } from '@/components/ui/AppCard';
+import CareCard from '@/components/ui/CareCard';
+import { useCareCardColors } from '@/theme/careCard';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { apiFetch } from '@/lib/api';
 import { colors, spacing, radius } from '@/theme/tokens';
@@ -84,6 +85,8 @@ const DEFAULT_DOCTORS: Doctor[] = [
 ];
 
 export function ChannelDoctorScreen() {
+  const cardTheme = useCareCardColors();
+  const styles = createStyles(cardTheme);
   const { session } = useAuth();
   const username = session?.user?.username || 'Dulaksha';
 
@@ -303,7 +306,7 @@ export function ChannelDoctorScreen() {
   const activeAppt = queueData?.appointment;
 
   return (
-    <Screen withPattern={false}>
+    <Screen withPattern>
       <AppText
         variant="heading"
         style={{ color: colors.text, textAlign: 'center' }}
@@ -323,7 +326,13 @@ export function ChannelDoctorScreen() {
       {/* 2. LIVE CLINIC QUEUE STATUS CARD (Real Backend Data)                       */}
       {/* ========================================================================= */}
       {queueError ? (
-        <AppCard style={styles.card}>
+        <CareCard
+          tone="blue"
+          contentStyle={[
+            styles.card,
+            { padding: spacing.md + spacing.lg, gap: spacing.md },
+          ]}
+        >
           <AppText
             variant="heading"
             style={{ color: colors.primary, textAlign: 'center' }}
@@ -345,9 +354,13 @@ export function ChannelDoctorScreen() {
               <AppText style={styles.docBookButtonText}>Try again</AppText>
             </Pressable>
           )}
-        </AppCard>
+        </CareCard>
       ) : !loadingQueue ? (
-        <View style={styles.queueCard}>
+        <CareCard
+          tone="blue"
+          style={{ borderRadius: radius.lg }}
+          contentStyle={styles.queueCard}
+        >
           {/* Header */}
           <View style={styles.queueHeader}>
             <View style={styles.liveIndicatorRow}>
@@ -428,7 +441,7 @@ export function ChannelDoctorScreen() {
                 <AppText
                   variant="caption"
                   style={{
-                    color: '#DCE7F2',
+                    color: cardTheme.supporting,
                     fontWeight: '800',
                     fontSize: 11,
                     letterSpacing: 0.5,
@@ -543,7 +556,11 @@ export function ChannelDoctorScreen() {
           <View style={styles.queueFooter}>
             <View style={styles.doctorInfoRow}>
               <View style={styles.doctorIconBox}>
-                <Ionicons name="medkit-outline" size={18} color="#FFFFFF" />
+                <Ionicons
+                  name="medkit-outline"
+                  size={18}
+                  color={cardTheme.accents.blue}
+                />
               </View>
               <View style={{ flex: 1 }}>
                 <AppText style={styles.queueDoctorName}>
@@ -571,7 +588,11 @@ export function ChannelDoctorScreen() {
                 <AppText style={styles.viewPassButtonText}>
                   Digital Pass
                 </AppText>
-                <Ionicons name="chevron-forward" size={14} color="#145DA0" />
+                <Ionicons
+                  name="chevron-forward"
+                  size={14}
+                  color={cardTheme.accents.blue}
+                />
               </Pressable>
             ) : (
               <Pressable
@@ -588,20 +609,30 @@ export function ChannelDoctorScreen() {
                     ? 'Book Token'
                     : 'Doctor Offline'}
                 </AppText>
-                <Ionicons name="add" size={14} color="#145DA0" />
+                <Ionicons name="add" size={14} color={cardTheme.accents.blue} />
               </Pressable>
             )}
           </View>
-        </View>
+        </CareCard>
       ) : null}
 
       {/* 5. FIND MEDICAL CONSULTANTS & LIVE QUEUE BOOKING                          */}
       {/* ========================================================================= */}
-      <AppCard style={styles.card}>
+      <CareCard
+        tone="blue"
+        contentStyle={[
+          styles.card,
+          { padding: spacing.md + spacing.lg, gap: spacing.md },
+        ]}
+      >
         <View style={styles.doctorsHeaderRow}>
           <View style={styles.titleWithIcon}>
             <View style={styles.iconSquareBlue}>
-              <Ionicons name="medkit-outline" size={18} color="#145DA0" />
+              <Ionicons
+                name="medkit-outline"
+                size={18}
+                color={cardTheme.accents.blue}
+              />
             </View>
             <View style={{ flex: 1 }}>
               <AppText variant="heading" style={styles.sectionHeading}>
@@ -699,11 +730,19 @@ export function ChannelDoctorScreen() {
 
         {/* Doctors List */}
         {loadingDoctors ? (
-          <ActivityIndicator color="#145DA0" style={{ marginVertical: 20 }} />
+          <ActivityIndicator
+            color={cardTheme.accents.blue}
+            style={{ marginVertical: 20 }}
+          />
         ) : (
           <View style={styles.doctorsList}>
             {filteredDoctors.map((doc) => (
-              <View key={doc.doctor_id} style={styles.doctorCard}>
+              <CareCard
+                tone="blue"
+                key={doc.doctor_id}
+                style={{ borderRadius: radius.md }}
+                contentStyle={styles.doctorCard}
+              >
                 <View style={styles.docCardTop}>
                   <View style={styles.docAvatar}>
                     <AppText style={styles.docAvatarText}>DR</AppText>
@@ -797,11 +836,11 @@ export function ChannelDoctorScreen() {
                           : 'Book Queue Token'}
                   </AppText>
                 </Pressable>
-              </View>
+              </CareCard>
             ))}
           </View>
         )}
-      </AppCard>
+      </CareCard>
 
       {/* ========================================================================= */}
       {/* 6. APPOINTMENT QUEUE BOOKING MODAL                                        */}
@@ -936,7 +975,11 @@ export function ChannelDoctorScreen() {
                 Appointment Date (YYYY-MM-DD)
               </AppText>
               <View style={styles.dateInputRow}>
-                <Ionicons name="calendar" size={16} color="#145DA0" />
+                <Ionicons
+                  name="calendar"
+                  size={16}
+                  color={cardTheme.accents.blue}
+                />
                 <TextInput
                   value={bookingDate}
                   onChangeText={(text) => {
@@ -957,7 +1000,10 @@ export function ChannelDoctorScreen() {
             {/* Doctor Availability Live Status */}
             {checkingAvailability ? (
               <View style={styles.checkingBox}>
-                <ActivityIndicator size="small" color="#145DA0" />
+                <ActivityIndicator
+                  size="small"
+                  color={cardTheme.accents.blue}
+                />
                 <AppText variant="caption" muted>
                   Checking doctor consultation schedule...
                 </AppText>
@@ -1055,7 +1101,11 @@ export function ChannelDoctorScreen() {
               </Pressable>
             </View>
 
-            <View style={styles.modalPassCard}>
+            <CareCard
+              tone="blue"
+              style={{ borderRadius: radius.md }}
+              contentStyle={styles.modalPassCard}
+            >
               <AppText variant="caption" style={styles.modalClinicName}>
                 {activeAppt?.hospital_name || 'COLOMBO OUTPATIENT CLINIC'}
               </AppText>
@@ -1116,7 +1166,7 @@ export function ChannelDoctorScreen() {
                   {activeAppt?.estimated_wait_minutes || 0} mins)
                 </AppText>
               </View>
-            </View>
+            </CareCard>
 
             <Pressable
               style={styles.modalCloseButton}
@@ -1133,467 +1183,438 @@ export function ChannelDoctorScreen() {
 
 export default ChannelDoctorScreen;
 
-const styles = StyleSheet.create({
-  queueCard: {
-    backgroundColor: '#145DA0',
-    borderRadius: radius.lg,
-    padding: spacing.md,
-    gap: spacing.md,
-    shadowColor: '#145DA0',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.35,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  queueHeader: {
-    flexWrap: 'wrap',
-    gap: spacing.sm,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.15)',
-    paddingBottom: spacing.xs,
-  },
-  liveIndicatorRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  pulsingDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#34D399',
-  },
-  queueHeaderTitle: {
-    color: '#DCE7F2',
-    fontWeight: '800',
-    fontSize: 11,
-    letterSpacing: 0.8,
-  },
-  activeConsultBadge: {
-    backgroundColor: 'rgba(255, 255, 255, 0.16)',
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 8,
-  },
-  activeConsultText: {
-    color: '#FFFFFF',
-    fontWeight: '700',
-    fontSize: 10,
-  },
-  queueMetricsRow: {
-    flexDirection: 'row',
-    gap: spacing.sm,
-  },
-  queueTile: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.15)',
-    borderRadius: radius.md,
-    padding: spacing.sm,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 2,
-  },
-  queueTileHighlight: {
-    backgroundColor: 'rgba(255, 255, 255, 0.18)',
-    borderColor: 'rgba(251, 191, 36, 0.5)',
-  },
-  queueTileLabel: {
-    color: '#DCE7F2',
-    fontWeight: '700',
-    fontSize: 10,
-    textTransform: 'uppercase',
-  },
-  tileCallingHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  amberDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#FBBF24',
-  },
-  queueTileLabelAmber: {
-    color: '#FBBF24',
-    fontWeight: '800',
-    fontSize: 10,
-    textTransform: 'uppercase',
-  },
-  queueTileBigValue: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 24,
-  },
-  queueTileBigValueAmber: {
-    color: '#FBBF24',
-    fontWeight: '900',
-    fontSize: 24,
-  },
-  queueTileSubTextGreen: {
-    color: '#6EE7B7',
-    fontWeight: '700',
-    fontSize: 10,
-  },
-  queueTileSubTextLight: {
-    color: '#DCE7F2',
-    fontSize: 10,
-  },
-  queueFooter: {
-    flexWrap: 'wrap',
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(255, 255, 255, 0.15)',
-    paddingTop: spacing.sm,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
-  doctorInfoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    flex: 1,
-  },
-  doctorIconBox: {
-    width: 32,
-    height: 32,
-    borderRadius: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  queueDoctorName: {
-    color: '#FFFFFF',
-    fontWeight: '800',
-    fontSize: 12,
-  },
-  queueRoomText: {
-    color: '#DCE7F2',
-    fontSize: 10,
-  },
-  viewPassButton: {
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  viewPassButtonText: {
-    color: '#145DA0',
-    fontWeight: '800',
-    fontSize: 11,
-  },
+const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
+  StyleSheet.create({
+    queueCard: { padding: spacing.md, gap: spacing.md },
+    queueHeader: {
+      flexWrap: 'wrap',
+      gap: spacing.sm,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: cardTheme.border,
+      paddingBottom: spacing.xs,
+    },
+    liveIndicatorRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 6,
+    },
+    pulsingDot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      backgroundColor: '#34D399',
+    },
+    queueHeaderTitle: {
+      color: cardTheme.heading,
+      fontWeight: '800',
+      fontSize: 11,
+      letterSpacing: 0.8,
+    },
+    activeConsultBadge: {
+      backgroundColor: cardTheme.subtle,
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: 8,
+    },
+    activeConsultText: {
+      color: cardTheme.heading,
+      fontWeight: '700',
+      fontSize: 10,
+    },
+    queueMetricsRow: {
+      flexDirection: 'row',
+      gap: spacing.sm,
+    },
+    queueTile: {
+      flex: 1,
+      backgroundColor: cardTheme.subtle,
+      borderWidth: 1,
+      borderColor: cardTheme.border,
+      borderRadius: radius.md,
+      padding: spacing.sm,
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 2,
+    },
+    queueTileHighlight: {
+      backgroundColor: cardTheme.subtle,
+      borderColor: 'rgba(251, 191, 36, 0.5)',
+    },
+    queueTileLabel: {
+      color: cardTheme.supporting,
+      fontWeight: '700',
+      fontSize: 10,
+      textTransform: 'uppercase',
+    },
+    tileCallingHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+    },
+    amberDot: {
+      width: 6,
+      height: 6,
+      borderRadius: 3,
+      backgroundColor: '#FBBF24',
+    },
+    queueTileLabelAmber: {
+      color: cardTheme.supporting,
+      fontWeight: '800',
+      fontSize: 10,
+      textTransform: 'uppercase',
+    },
+    queueTileBigValue: {
+      color: cardTheme.heading,
+      fontWeight: '900',
+      fontSize: 24,
+    },
+    queueTileBigValueAmber: {
+      color: cardTheme.heading,
+      fontWeight: '900',
+      fontSize: 24,
+    },
+    queueTileSubTextGreen: {
+      color: cardTheme.supporting,
+      fontWeight: '700',
+      fontSize: 10,
+    },
+    queueTileSubTextLight: {
+      color: cardTheme.supporting,
+      fontSize: 10,
+    },
+    queueFooter: {
+      flexWrap: 'wrap',
+      borderTopWidth: 1,
+      borderTopColor: cardTheme.border,
+      paddingTop: spacing.sm,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: spacing.sm,
+    },
+    doctorInfoRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      flex: 1,
+    },
+    doctorIconBox: {
+      width: 32,
+      height: 32,
+      borderRadius: 10,
+      backgroundColor: cardTheme.subtle,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    queueDoctorName: {
+      color: cardTheme.heading,
+      fontWeight: '800',
+      fontSize: 12,
+    },
+    queueRoomText: {
+      color: cardTheme.supporting,
+      fontSize: 10,
+    },
+    viewPassButton: {
+      backgroundColor: '#FFFFFF',
+      paddingHorizontal: 12,
+      paddingVertical: 7,
+      borderRadius: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+    },
+    viewPassButtonText: {
+      color: cardTheme.accents.blue,
+      fontWeight: '800',
+      fontSize: 11,
+    },
 
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#DCE7F2',
-    borderRadius: radius.md,
-    padding: spacing.md,
-    gap: spacing.sm,
-  },
-  titleWithIcon: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    flex: 1,
-  },
-  iconSquareBlue: {
-    width: 34,
-    height: 34,
-    borderRadius: 10,
-    backgroundColor: '#DBEAFE',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  sectionHeading: {
-    fontSize: 15,
-    fontWeight: '800',
-    color: '#10234B',
-  },
-  doctorsHeaderRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F3F8FC',
-    borderWidth: 1,
-    borderColor: '#DCE7F2',
-    borderRadius: radius.md,
-    paddingHorizontal: spacing.sm,
-    gap: spacing.xs,
-    height: 42,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 13,
-    color: '#10234B',
-  },
-  doctorsList: {
-    gap: spacing.xs,
-  },
-  doctorCard: {
-    backgroundColor: '#F3F8FC',
-    borderWidth: 1,
-    borderColor: '#DCE7F2',
-    borderRadius: radius.md,
-    padding: spacing.sm,
-    gap: 4,
-  },
-  docCardTop: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  docAvatar: {
-    width: 28,
-    height: 28,
-    borderRadius: 8,
-    backgroundColor: '#145DA0',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  docAvatarText: {
-    color: '#FFFFFF',
-    fontWeight: '800',
-    fontSize: 11,
-  },
-  regBadge: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#DCE7F2',
-    paddingHorizontal: 6,
-    paddingVertical: 1,
-    borderRadius: 6,
-  },
-  regBadgeText: {
-    color: '#145DA0',
-    fontWeight: '700',
-    fontSize: 9,
-  },
-  doctorNameText: {
-    fontWeight: '800',
-    fontSize: 13,
-    color: '#10234B',
-  },
-  doctorDegreesText: {
-    color: '#145DA0',
-    fontWeight: '700',
-    fontSize: 11,
-  },
-  doctorHospitalText: {
-    fontSize: 10,
-  },
-  docBookButton: {
-    marginTop: 6,
-    paddingVertical: 8,
-    borderRadius: 8,
-    backgroundColor: '#145DA0',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-  },
-  docBookButtonText: {
-    fontWeight: '800',
-    color: '#FFFFFF',
-    fontSize: 11,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.65)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: spacing.md,
-  },
-  bookingModalContent: {
-    width: '100%',
-    maxWidth: 440,
-    backgroundColor: '#FFFFFF',
-    borderRadius: radius.lg,
-    padding: spacing.lg,
-    gap: spacing.md,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: '800',
-    color: '#10234B',
-  },
-  selectedDocBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    backgroundColor: '#F3F8FC',
-    borderWidth: 1,
-    borderColor: '#DCE7F2',
-    padding: spacing.sm,
-    borderRadius: radius.md,
-  },
-  fieldBlock: {
-    gap: 4,
-  },
-  fieldLabel: {
-    fontWeight: '700',
-    color: '#475569',
-    fontSize: 11,
-  },
-  dateInputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    backgroundColor: '#F3F8FC',
-    borderWidth: 1,
-    borderColor: '#CBD5E1',
-    borderRadius: 8,
-    paddingHorizontal: spacing.sm,
-    height: 40,
-  },
-  dateTextInput: {
-    flex: 1,
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#10234B',
-  },
-  reasonInput: {
-    backgroundColor: '#F3F8FC',
-    borderWidth: 1,
-    borderColor: '#CBD5E1',
-    borderRadius: 8,
-    padding: spacing.sm,
-    fontSize: 12,
-    color: '#10234B',
-    minHeight: 50,
-  },
-  checkingBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    padding: spacing.sm,
-    backgroundColor: '#F1F5F9',
-    borderRadius: 8,
-  },
-  availBoxGreen: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    padding: spacing.sm,
-    backgroundColor: '#ECFDF5',
-    borderWidth: 1,
-    borderColor: '#A7F3D0',
-    borderRadius: 8,
-  },
-  availTitleGreen: {
-    fontWeight: '800',
-    color: '#065F46',
-    fontSize: 12,
-  },
-  availDescGreen: {
-    color: '#047857',
-    fontSize: 11,
-  },
-  availBoxAmber: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    padding: spacing.sm,
-    backgroundColor: '#FFFBEB',
-    borderWidth: 1,
-    borderColor: '#FDE68A',
-    borderRadius: 8,
-  },
-  availTitleAmber: {
-    fontWeight: '800',
-    color: '#92400E',
-    fontSize: 12,
-  },
-  availDescAmber: {
-    color: '#B45309',
-    fontSize: 11,
-  },
-  confirmBookingButton: {
-    backgroundColor: '#145DA0',
-    paddingVertical: 12,
-    borderRadius: radius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  confirmBookingDisabled: {
-    backgroundColor: '#94A3B8',
-    opacity: 0.7,
-  },
-  confirmBookingText: {
-    color: '#FFFFFF',
-    fontWeight: '800',
-    fontSize: 13,
-  },
-  modalContent: {
-    width: '100%',
-    maxWidth: 400,
-    backgroundColor: '#FFFFFF',
-    borderRadius: radius.lg,
-    padding: spacing.lg,
-    gap: spacing.md,
-  },
-  modalPassCard: {
-    backgroundColor: '#145DA0',
-    borderRadius: radius.md,
-    padding: spacing.md,
-    alignItems: 'center',
-    gap: 4,
-  },
-  modalClinicName: {
-    color: '#DCE7F2',
-    fontWeight: '800',
-    fontSize: 10,
-    letterSpacing: 1,
-  },
-  modalBigToken: {
-    color: '#FBBF24',
-    fontWeight: '900',
-    fontSize: 48,
-  },
-  modalTokenDesc: {
-    color: '#FFFFFF',
-    fontWeight: '700',
-    fontSize: 12,
-  },
-  modalDivider: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    marginVertical: spacing.xs,
-  },
-  modalInfoRow: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 2,
-  },
-  modalCloseButton: {
-    backgroundColor: '#145DA0',
-    paddingVertical: 12,
-    borderRadius: radius.md,
-    alignItems: 'center',
-  },
-  modalCloseButtonText: {
-    color: '#FFFFFF',
-    fontWeight: '800',
-    fontSize: 14,
-  },
-});
+    card: { padding: spacing.md, gap: spacing.sm },
+    titleWithIcon: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      flex: 1,
+    },
+    iconSquareBlue: {
+      width: 34,
+      height: 34,
+      borderRadius: 10,
+      backgroundColor: '#DBEAFE',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    sectionHeading: {
+      fontSize: 15,
+      fontWeight: '800',
+      color: cardTheme.heading,
+    },
+    doctorsHeaderRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    searchBar: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: '#F3F8FC',
+      borderWidth: 1,
+      borderColor: '#DCE7F2',
+      borderRadius: radius.md,
+      paddingHorizontal: spacing.sm,
+      gap: spacing.xs,
+      height: 42,
+    },
+    searchInput: {
+      flex: 1,
+      fontSize: 13,
+      color: cardTheme.heading,
+    },
+    doctorsList: {
+      gap: spacing.xs,
+    },
+    doctorCard: { padding: spacing.sm, gap: 4 },
+    docCardTop: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    docAvatar: {
+      width: 28,
+      height: 28,
+      borderRadius: 8,
+      backgroundColor: '#145DA0',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    docAvatarText: {
+      color: '#FFFFFF',
+      fontWeight: '800',
+      fontSize: 11,
+    },
+    regBadge: {
+      backgroundColor: '#FFFFFF',
+      borderWidth: 1,
+      borderColor: '#DCE7F2',
+      paddingHorizontal: 6,
+      paddingVertical: 1,
+      borderRadius: 6,
+    },
+    regBadgeText: {
+      color: cardTheme.accents.blue,
+      fontWeight: '700',
+      fontSize: 9,
+    },
+    doctorNameText: {
+      fontWeight: '800',
+      fontSize: 13,
+      color: cardTheme.heading,
+    },
+    doctorDegreesText: {
+      color: cardTheme.accents.blue,
+      fontWeight: '700',
+      fontSize: 11,
+    },
+    doctorHospitalText: {
+      fontSize: 10,
+    },
+    docBookButton: {
+      marginTop: 6,
+      paddingVertical: 8,
+      borderRadius: 8,
+      backgroundColor: '#145DA0',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 6,
+    },
+    docBookButtonText: {
+      fontWeight: '800',
+      color: '#FFFFFF',
+      fontSize: 11,
+    },
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.65)',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: spacing.md,
+    },
+    bookingModalContent: {
+      width: '100%',
+      maxWidth: 440,
+      backgroundColor: '#FFFFFF',
+      borderRadius: radius.lg,
+      padding: spacing.lg,
+      gap: spacing.md,
+    },
+    modalHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    modalTitle: {
+      fontSize: 18,
+      fontWeight: '800',
+      color: cardTheme.heading,
+    },
+    selectedDocBox: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      backgroundColor: '#F3F8FC',
+      borderWidth: 1,
+      borderColor: '#DCE7F2',
+      padding: spacing.sm,
+      borderRadius: radius.md,
+    },
+    fieldBlock: {
+      gap: 4,
+    },
+    fieldLabel: {
+      fontWeight: '700',
+      color: '#475569',
+      fontSize: 11,
+    },
+    dateInputRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      backgroundColor: '#F3F8FC',
+      borderWidth: 1,
+      borderColor: '#CBD5E1',
+      borderRadius: 8,
+      paddingHorizontal: spacing.sm,
+      height: 40,
+    },
+    dateTextInput: {
+      flex: 1,
+      fontSize: 13,
+      fontWeight: '600',
+      color: cardTheme.heading,
+    },
+    reasonInput: {
+      backgroundColor: '#F3F8FC',
+      borderWidth: 1,
+      borderColor: '#CBD5E1',
+      borderRadius: 8,
+      padding: spacing.sm,
+      fontSize: 12,
+      color: cardTheme.heading,
+      minHeight: 50,
+    },
+    checkingBox: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      padding: spacing.sm,
+      backgroundColor: '#F1F5F9',
+      borderRadius: 8,
+    },
+    availBoxGreen: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      padding: spacing.sm,
+      backgroundColor: '#ECFDF5',
+      borderWidth: 1,
+      borderColor: '#A7F3D0',
+      borderRadius: 8,
+    },
+    availTitleGreen: {
+      fontWeight: '800',
+      color: '#065F46',
+      fontSize: 12,
+    },
+    availDescGreen: {
+      color: '#047857',
+      fontSize: 11,
+    },
+    availBoxAmber: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      padding: spacing.sm,
+      backgroundColor: '#FFFBEB',
+      borderWidth: 1,
+      borderColor: '#FDE68A',
+      borderRadius: 8,
+    },
+    availTitleAmber: {
+      fontWeight: '800',
+      color: '#92400E',
+      fontSize: 12,
+    },
+    availDescAmber: {
+      color: '#B45309',
+      fontSize: 11,
+    },
+    confirmBookingButton: {
+      backgroundColor: '#145DA0',
+      paddingVertical: 12,
+      borderRadius: radius.md,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    confirmBookingDisabled: {
+      backgroundColor: '#94A3B8',
+      opacity: 0.7,
+    },
+    confirmBookingText: {
+      color: '#FFFFFF',
+      fontWeight: '800',
+      fontSize: 13,
+    },
+    modalContent: {
+      width: '100%',
+      maxWidth: 400,
+      backgroundColor: '#FFFFFF',
+      borderRadius: radius.lg,
+      padding: spacing.lg,
+      gap: spacing.md,
+    },
+    modalPassCard: { padding: spacing.md, alignItems: 'center', gap: 4 },
+    modalClinicName: {
+      color: cardTheme.supporting,
+      fontWeight: '800',
+      fontSize: 10,
+      letterSpacing: 1,
+    },
+    modalBigToken: {
+      color: cardTheme.heading,
+      fontWeight: '900',
+      fontSize: 48,
+    },
+    modalTokenDesc: {
+      color: cardTheme.heading,
+      fontWeight: '700',
+      fontSize: 12,
+    },
+    modalDivider: {
+      width: '100%',
+      height: 1,
+      backgroundColor: cardTheme.subtle,
+      marginVertical: spacing.xs,
+    },
+    modalInfoRow: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingVertical: 2,
+    },
+    modalCloseButton: {
+      backgroundColor: '#145DA0',
+      paddingVertical: 12,
+      borderRadius: radius.md,
+      alignItems: 'center',
+    },
+    modalCloseButtonText: {
+      color: '#FFFFFF',
+      fontWeight: '800',
+      fontSize: 14,
+    },
+  });

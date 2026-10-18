@@ -3,26 +3,28 @@ import { router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AppText } from '@/components/ui/AppText';
 import { AppCard } from '@/components/ui/AppCard';
-import { spacing, radius } from '@/theme/tokens';
+import { colors, spacing, radius } from '@/theme/tokens';
+
 export function RegionalRadarCard() {
   return (
-    <>
-      <AppCard style={styles.card}>
+    <AppCard>
         <View style={styles.radarHeaderRow}>
           <View style={styles.titleWithIcon}>
             <View style={styles.iconSquareAmber}>
-              <Ionicons name="radio-outline" size={18} color="#D97706" />
+              <Ionicons name="radio-outline" size={19} color={colors.warning} />
             </View>
-            <View style={{ flex: 1 }}>
+            <View style={styles.titleCopy}>
               <AppText variant="heading" style={styles.sectionHeading}>
                 Regional Viral Outbreak Radar
               </AppText>
-              <AppText variant="caption" muted style={{ textAlign: 'center' }}>
+              <AppText variant="caption" muted>
                 Epidemic surveillance & district threat levels
               </AppText>
             </View>
           </View>
           <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Open regional outbreak radar map"
             onPress={() => router.navigate('/map')}
             style={styles.radarMapLink}
           >
@@ -32,9 +34,7 @@ export function RegionalRadarCard() {
             <Ionicons name="chevron-forward" size={13} color="#145DA0" />
           </Pressable>
         </View>
-
         <View style={styles.districtList}>
-          {/* Colombo District */}
           <View style={styles.districtAlertBoxRed}>
             <View style={styles.districtHeader}>
               <View style={styles.districtNameRow}>
@@ -60,7 +60,6 @@ export function RegionalRadarCard() {
             </AppText>
           </View>
 
-          {/* Gampaha District */}
           <View style={styles.districtAlertBoxAmber}>
             <View style={styles.districtHeader}>
               <View style={styles.districtNameRow}>
@@ -84,7 +83,6 @@ export function RegionalRadarCard() {
             </AppText>
           </View>
 
-          {/* Kandy District */}
           <View style={styles.districtAlertBoxGreen}>
             <View style={styles.districtHeader}>
               <View style={styles.districtNameRow}>
@@ -103,37 +101,35 @@ export function RegionalRadarCard() {
             </View>
           </View>
         </View>
-      </AppCard>
-    </>
+    </AppCard>
   );
 }
+
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#DCE7F2',
-    borderRadius: radius.md,
-    padding: spacing.md,
-    gap: spacing.sm,
-  },
   titleWithIcon: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.xs,
+    gap: spacing.sm,
     flex: 1,
+    minWidth: 0,
+  },
+  titleCopy: {
+    flex: 1,
+    minWidth: 0,
   },
   iconSquareAmber: {
-    width: 34,
-    height: 34,
-    borderRadius: 10,
+    width: 40,
+    height: 40,
+    borderRadius: radius.sm,
     backgroundColor: '#FEF3C7',
     alignItems: 'center',
     justifyContent: 'center',
   },
   sectionHeading: {
-    fontSize: 15,
-    fontWeight: '800',
-    color: '#10234B',
+    fontSize: 17,
+    lineHeight: 23,
+    fontWeight: '700',
+    color: colors.text,
   },
   radarHeaderRow: {
     flexWrap: 'wrap',
@@ -143,25 +139,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   radarMapLink: {
+    minHeight: 44,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 2,
+    paddingHorizontal: spacing.xs,
   },
   radarMapLinkText: {
-    color: '#145DA0',
-    fontWeight: '800',
-    fontSize: 11,
+    color: colors.primary,
+    fontWeight: '700',
   },
   districtList: {
-    gap: spacing.xs,
+    gap: spacing.sm,
   },
   districtAlertBoxRed: {
     backgroundColor: '#FFF1F2',
     borderWidth: 1,
     borderColor: '#FECDD3',
-    borderRadius: radius.md,
+    borderRadius: radius.sm,
     padding: spacing.sm,
-    gap: 4,
+    gap: spacing.xs,
   },
   districtHeader: {
     flexWrap: 'wrap',
@@ -177,68 +174,59 @@ const styles = StyleSheet.create({
   },
   districtTitleRed: {
     color: '#9F1239',
-    fontWeight: '800',
-    fontSize: 12,
+    fontWeight: '700',
   },
   highSpikeBadge: {
     backgroundColor: '#E11D48',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 8,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: 20,
   },
   highSpikeText: {
     color: '#FFFFFF',
-    fontWeight: '800',
-    fontSize: 10,
+    fontWeight: '700',
   },
   districtDescRed: {
     color: '#881337',
-    fontSize: 11,
-    lineHeight: 16,
   },
   districtAlertBoxAmber: {
     backgroundColor: '#FFFBEB',
     borderWidth: 1,
     borderColor: '#FDE68A',
-    borderRadius: radius.md,
+    borderRadius: radius.sm,
     padding: spacing.sm,
-    gap: 4,
+    gap: spacing.xs,
   },
   districtTitleAmber: {
     color: '#92400E',
-    fontWeight: '800',
-    fontSize: 12,
+    fontWeight: '700',
   },
   moderateBadge: {
     backgroundColor: '#D97706',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 8,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: 20,
   },
   moderateText: {
     color: '#FFFFFF',
-    fontWeight: '800',
-    fontSize: 10,
+    fontWeight: '700',
   },
   districtDescAmber: {
     color: '#78350F',
-    fontSize: 11,
   },
   districtAlertBoxGreen: {
     backgroundColor: '#ECFDF5',
     borderWidth: 1,
     borderColor: '#A7F3D0',
-    borderRadius: radius.md,
+    borderRadius: radius.sm,
     padding: spacing.sm,
   },
   districtTitleGreen: {
     color: '#065F46',
-    fontWeight: '800',
-    fontSize: 12,
+    fontWeight: '700',
   },
   lowRiskText: {
     color: '#059669',
     fontWeight: '700',
-    fontSize: 10,
   },
 });

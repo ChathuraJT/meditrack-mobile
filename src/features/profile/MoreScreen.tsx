@@ -8,7 +8,7 @@ export function MoreScreen() {
   const { session } = useAuth();
 
   return (
-    <Screen>
+    <Screen withPattern>
       <AppText variant="title" accessibilityRole="header" style={{ textAlign: 'center' }}>
         Profile
       </AppText>

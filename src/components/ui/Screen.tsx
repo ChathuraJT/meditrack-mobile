@@ -1,5 +1,5 @@
 import { MedicalPatternBackground } from '@/components/MedicalPatternBackground';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing } from '@/theme/tokens';
 import type { PropsWithChildren } from 'react';
 import {
   KeyboardAvoidingView,
@@ -7,7 +7,6 @@ import {
   ScrollView,
   StyleSheet,
   View,
-  useColorScheme,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -22,14 +21,14 @@ export function Screen({
   children,
   withPattern = false,
   patternDensity = 'sparse',
-  patternOpacity = 0.06,
+  patternOpacity = 0.22,
   edges = ['left', 'right'],
 }: ScreenProps) {
   const content = (
     <SafeAreaView
       style={[
         styles.safe,
-        { backgroundColor: '#F8FAFC' },
+        { backgroundColor: withPattern ? 'transparent' : '#FFFFFF' },
       ]}
       edges={edges}
     >
@@ -38,6 +37,7 @@ export function Screen({
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView
+          style={styles.transparent}
           contentContainerStyle={styles.scroll}
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag"
@@ -53,7 +53,7 @@ export function Screen({
       <MedicalPatternBackground
         density={patternDensity}
         opacity={patternOpacity}
-        backgroundColor="#F8FAFC"
+        backgroundColor="#FFFFFF"
       >
         {content}
       </MedicalPatternBackground>
@@ -65,6 +65,7 @@ export function Screen({
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
+  transparent: { backgroundColor: 'transparent' },
   scroll: {
     flexGrow: 1,
     paddingHorizontal: spacing.md,
@@ -78,5 +79,3 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
 });
-
-
