@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,6 +9,8 @@ import {
   Alert,
 } from 'react-native';
 
+import { useFocusEffect } from 'expo-router';
+import { localDate, isBookableDate } from './booking';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Screen } from '@/components/ui/Screen';
 import { AppText } from '@/components/ui/AppText';
@@ -47,48 +49,11 @@ interface QueueStatus {
   };
 }
 
-const DEFAULT_DOCTORS: Doctor[] = [
-  {
-    doctor_id: 'DOC-0003',
-    register_id: 'SLMC-10003',
-    doctors_name: 'Dr. CS023',
-    degrees: 'MBBS, MD',
-    working_hospital: 'MediTrack General Hospital',
-    is_available: true,
-    available_until: '05:00 PM',
-  },
-  {
-    doctor_id: 'DOC-0001',
-    register_id: 'SLMC-10002',
-    doctors_name: 'Dr. Priya Singh',
-    degrees: 'MBBS, MD',
-    working_hospital: 'MediTrack General Hospital',
-    is_available: true,
-    available_until: '05:00 PM',
-  },
-  {
-    doctor_id: 'DOC-0004',
-    register_id: 'SLMC-10004',
-    doctors_name: 'Dr. Chathura',
-    degrees: 'MBBS',
-    working_hospital: 'National Hospital of Sri Lanka',
-    is_available: false,
-  },
-  {
-    doctor_id: 'DOC-0010',
-    register_id: 'SLMC-10010',
-    doctors_name: 'Dr. Saman',
-    degrees: 'MBBS',
-    working_hospital: 'Matara General Hospital',
-    is_available: false,
-  },
-];
-
 export function ChannelDoctorScreen() {
   const cardTheme = useCareCardColors();
   const styles = createStyles(cardTheme);
   const { session } = useAuth();
-  const username = session?.user?.username || 'Dulaksha';
+  const username = session?.user?.username || '';
 
   // Live Queue State from Backend
   const [queueData, setQueueData] = useState<QueueStatus | null>(null);
@@ -109,12 +74,12 @@ export function ChannelDoctorScreen() {
   const [bookingModalVisible, setBookingModalVisible] = useState(false);
   const [selectedDoctorForBooking, setSelectedDoctorForBooking] =
     useState<Doctor | null>(null);
-  const [bookingDate, setBookingDate] = useState(
-    new Date().toISOString().split('T')[0],
-  );
+  const [bookingDate, setBookingDate] = useState(localDate());
   const [bookingReason, setBookingReason] = useState('');
   const [availability, setAvailability] = useState<{
     checked: boolean;
+    doctorId?: string;
+    date?: string;
     available: boolean;
     doctor_name?: string;
     start_time?: string;
@@ -126,24 +91,34 @@ export function ChannelDoctorScreen() {
   const [bookingSubmitting, setBookingSubmitting] = useState(false);
 
   // Doctors Search
-  const [doctors, setDoctors] = useState<Doctor[]>(DEFAULT_DOCTORS);
+  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [doctorsError, setDoctorsError] = useState('');
+  const [doctorAttempt, setDoctorAttempt] = useState(0);
+  const availabilityRequest = useRef(0);
+  const bookingInFlight = useRef(false);
+  const queueRequest = useRef(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [loadingDoctors, setLoadingDoctors] = useState(false);
 
-  // Fetch Live Queue from Backend
-  const fetchLiveQueue = async () => {
+  const fetchLiveQueue = useCallback(async () => {
+    const request = ++queueRequest.current;
+    if (!username) {
+      setLoadingQueue(false);
+      return;
+    }
     try {
-      setLoadingQueue(true);
-      setQueueError('');
       const data = await apiFetch(
         `/api/appointments/my-queue/?username=${encodeURIComponent(username)}`,
       );
-      if (data) {
-        setQueueData(data);
-        setQueueUnavailable(false);
-      }
-    } catch (e) {
-      const missing = (e as { status?: number })?.status === 404;
+      if (request !== queueRequest.current) return;
+      if (typeof data?.has_appointment !== 'boolean')
+        throw new Error('Invalid queue response');
+      setQueueData(data);
+      setQueueUnavailable(false);
+      setQueueError('');
+    } catch (error) {
+      if (request !== queueRequest.current) return;
+      const missing = (error as { status?: number })?.status === 404;
       setQueueUnavailable(missing);
       setQueueData(null);
       setQueueError(
@@ -152,69 +127,90 @@ export function ChannelDoctorScreen() {
           : 'Unable to load your clinic queue. Check your connection and try again.',
       );
     } finally {
-      setLoadingQueue(false);
+      if (request === queueRequest.current) setLoadingQueue(false);
     }
-  };
-
-  useEffect(() => {
-    let active = true;
-    apiFetch(
-      `/api/appointments/my-queue/?username=${encodeURIComponent(username)}`,
-    )
-      .then((data) => {
-        if (active) setQueueData(data);
-      })
-      .catch((error) => {
-        if (!active) return;
-        const missing = error?.status === 404;
-        setQueueUnavailable(missing);
-        setQueueData(null);
-        setQueueError(
-          missing
-            ? 'Live queue and appointment booking are not available yet.'
-            : 'Unable to load your clinic queue. Check your connection and try again.',
-        );
-      })
-      .finally(() => {
-        if (active) setLoadingQueue(false);
-      });
-    return () => {
-      active = false;
-    };
   }, [username]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setQueueData(null);
+      setQueueError('');
+      setQueueUnavailable(false);
+      setLoadingQueue(true);
+      void fetchLiveQueue();
+      const timer = setInterval(() => void fetchLiveQueue(), 30000);
+      return () => {
+        queueRequest.current++;
+        clearInterval(timer);
+      };
+    }, [fetchLiveQueue]),
+  );
+
+  useEffect(
+    () => () => {
+      availabilityRequest.current++;
+    },
+    [],
+  );
 
   // Load doctors from backend API
   useEffect(() => {
+    let active = true;
     async function loadDoctors() {
       try {
         setLoadingDoctors(true);
+        setDoctorsError('');
         const data = await apiFetch('/get-doctor/');
-        if (data?.doctors && data.doctors.length > 0) {
-          setDoctors(data.doctors);
-          const live = data.doctors.find((d: Doctor) => d.is_available);
-          setSelectedQueueDoctor((prev) => prev || live || data.doctors[0]);
-        }
+        if (!active) return;
+        if (!Array.isArray(data?.doctors))
+          throw new Error('Invalid doctor response');
+        setDoctors(data.doctors);
+        const live = data.doctors.find((d: Doctor) => d.is_available);
+        setSelectedQueueDoctor(live || data.doctors[0] || null);
       } catch {
-        // Fallback to verified local doctors
+        if (active) {
+          setDoctors([]);
+          setSelectedQueueDoctor(null);
+          setDoctorsError('Unable to load doctors. Please try again.');
+        }
       } finally {
-        setLoadingDoctors(false);
+        if (active) setLoadingDoctors(false);
       }
     }
-    loadDoctors();
-  }, []);
+    void loadDoctors();
+    return () => {
+      active = false;
+    };
+  }, [doctorAttempt]);
 
   // Check Doctor Availability when modal opens or date changes
   const checkAvailability = async (docId: string, date: string) => {
+    const request = ++availabilityRequest.current;
+    setAvailability(null);
+    if (!isBookableDate(date)) {
+      setCheckingAvailability(false);
+      setAvailability({
+        checked: true,
+        available: false,
+        message: 'Enter a valid date (YYYY-MM-DD), today or later.',
+      });
+      return;
+    }
     try {
       setCheckingAvailability(true);
       setAvailability(null);
       const res = await apiFetch(
         `/api/appointments/availability/?doctor_id=${encodeURIComponent(docId)}&date=${encodeURIComponent(date)}`,
       );
+      if (request !== availabilityRequest.current) return;
+      if (typeof res?.available !== 'boolean')
+        throw new Error('Invalid availability response');
       if (res) {
         setAvailability({
           checked: true,
-          available: !!res.available,
+          available: res.available,
+          doctorId: docId,
+          date,
           doctor_name: res.doctor_name,
           start_time: res.start_time,
           end_time: res.end_time,
@@ -228,20 +224,28 @@ export function ChannelDoctorScreen() {
         }
       }
     } catch {
+      if (request !== availabilityRequest.current) return;
       setAvailability({
         checked: true,
         available: false,
         message: 'Could not verify doctor schedule. Please try again.',
       });
     } finally {
-      setCheckingAvailability(false);
+      if (request === availabilityRequest.current)
+        setCheckingAvailability(false);
     }
   };
 
   const handleOpenBooking = (doc: Doctor) => {
-    if (queueUnavailable || loadingQueue) return;
+    if (
+      !username ||
+      queueUnavailable ||
+      loadingQueue ||
+      bookingInFlight.current
+    )
+      return;
     setSelectedDoctorForBooking(doc);
-    const today = new Date().toISOString().split('T')[0];
+    const today = localDate();
     setBookingDate(today);
     setBookingReason('');
     setBookingModalVisible(true);
@@ -249,7 +253,18 @@ export function ChannelDoctorScreen() {
   };
 
   const handleConfirmBooking = async () => {
-    if (!selectedDoctorForBooking || !availability?.available) return;
+    if (
+      !username ||
+      !selectedDoctorForBooking ||
+      !availability?.available ||
+      checkingAvailability ||
+      bookingInFlight.current ||
+      !isBookableDate(bookingDate) ||
+      availability.doctorId !== selectedDoctorForBooking.doctor_id ||
+      availability.date !== bookingDate
+    )
+      return;
+    bookingInFlight.current = true;
 
     try {
       setBookingSubmitting(true);
@@ -265,12 +280,16 @@ export function ChannelDoctorScreen() {
         }),
       });
 
-      if (res?.appointment) {
+      if (!res?.appointment)
+        throw new Error(
+          'The server did not confirm your appointment. Check your queue before trying again.',
+        );
+      if (res.appointment) {
         setBookingModalVisible(false);
         await fetchLiveQueue();
         Alert.alert(
           'Queue Token Confirmed! 🎉',
-          `Your queue token is ${res.appointment.token_label}.\n\nDoctor: ${res.appointment.doctor_name}\nTime: ${res.appointment.session_start_time || '09:00 AM'}\nEstimated Wait: ${res.appointment.estimated_wait_minutes || 0} mins`,
+          `Your queue token is ${res.appointment.token_label}.\n\nDoctor: ${res.appointment.doctor_name}\nTime: ${res.appointment.session_start_time || 'Not provided'}\nEstimated Wait: ${res.appointment.estimated_wait_minutes || 0} mins`,
           [
             {
               text: 'View Queue Pass',
@@ -285,6 +304,7 @@ export function ChannelDoctorScreen() {
         err?.message || 'Could not complete booking. Please try again.',
       );
     } finally {
+      bookingInFlight.current = false;
       setBookingSubmitting(false);
     }
   };
@@ -303,7 +323,14 @@ export function ChannelDoctorScreen() {
     return matchesSearch;
   });
 
-  const activeAppt = queueData?.appointment;
+  const activeAppt = queueData?.has_appointment
+    ? queueData.appointment
+    : undefined;
+  const closeBooking = () => {
+    if (bookingInFlight.current) return;
+    availabilityRequest.current++;
+    setBookingModalVisible(false);
+  };
 
   return (
     <Screen withPattern>
@@ -402,7 +429,7 @@ export function ChannelDoctorScreen() {
                 </AppText>
               </View>
               <AppText style={styles.queueTileBigValueAmber}>
-                {activeAppt ? activeAppt.current_serving_token : '#01'}
+                {activeAppt ? activeAppt.current_serving_token : '--'}
               </AppText>
               <AppText variant="caption" style={styles.queueTileSubTextLight}>
                 {activeAppt
@@ -600,14 +627,13 @@ export function ChannelDoctorScreen() {
                   styles.viewPassButton,
                   !activeQueueDoctor?.is_available && { opacity: 0.6 },
                 ]}
+                disabled={!activeQueueDoctor || !username}
                 onPress={() => {
                   if (activeQueueDoctor) handleOpenBooking(activeQueueDoctor);
                 }}
               >
                 <AppText style={styles.viewPassButtonText}>
-                  {activeQueueDoctor?.is_available
-                    ? 'Book Token'
-                    : 'Doctor Offline'}
+                  {activeQueueDoctor ? 'Book Token' : 'No doctors available'}
                 </AppText>
                 <Ionicons name="add" size={14} color={cardTheme.accents.blue} />
               </Pressable>
@@ -728,6 +754,19 @@ export function ChannelDoctorScreen() {
           )}
         </View>
 
+        {doctorsError ? (
+          <View>
+            <AppText accessibilityRole="alert">{doctorsError}</AppText>
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => setDoctorAttempt((value) => value + 1)}
+            >
+              <AppText>Retry loading doctors</AppText>
+            </Pressable>
+          </View>
+        ) : !loadingDoctors && filteredDoctors.length === 0 ? (
+          <AppText>No doctors match your search or filter.</AppText>
+        ) : null}
         {/* Doctors List */}
         {loadingDoctors ? (
           <ActivityIndicator
@@ -849,12 +888,9 @@ export function ChannelDoctorScreen() {
         visible={bookingModalVisible}
         transparent
         animationType="slide"
-        onRequestClose={() => setBookingModalVisible(false)}
+        onRequestClose={closeBooking}
       >
-        <Pressable
-          style={styles.modalOverlay}
-          onPress={() => setBookingModalVisible(false)}
-        >
+        <Pressable style={styles.modalOverlay} onPress={closeBooking}>
           <Pressable
             style={styles.bookingModalContent}
             onPress={(e) => e.stopPropagation()}
@@ -868,7 +904,7 @@ export function ChannelDoctorScreen() {
                   Verified appointment through clinic queue
                 </AppText>
               </View>
-              <Pressable onPress={() => setBookingModalVisible(false)}>
+              <Pressable onPress={closeBooking}>
                 <Ionicons name="close-circle" size={26} color="#64799A" />
               </Pressable>
             </View>
@@ -912,6 +948,7 @@ export function ChannelDoctorScreen() {
                     <Pressable
                       key={doc.doctor_id}
                       onPress={() => {
+                        if (bookingInFlight.current) return;
                         setSelectedDoctorForBooking(doc);
                         checkAvailability(doc.doctor_id, bookingDate);
                       }}
@@ -981,10 +1018,11 @@ export function ChannelDoctorScreen() {
                   color={cardTheme.accents.blue}
                 />
                 <TextInput
+                  editable={!bookingSubmitting}
                   value={bookingDate}
                   onChangeText={(text) => {
                     setBookingDate(text);
-                    if (selectedDoctorForBooking && text.length === 10) {
+                    if (selectedDoctorForBooking) {
                       checkAvailability(
                         selectedDoctorForBooking.doctor_id,
                         text,
@@ -1014,7 +1052,7 @@ export function ChannelDoctorScreen() {
                   <Ionicons name="checkmark-circle" size={18} color="#059669" />
                   <View style={{ flex: 1 }}>
                     <AppText style={styles.availTitleGreen}>
-                      Doctor Available Today
+                      Doctor Available on Selected Date
                     </AppText>
                     <AppText variant="caption" style={styles.availDescGreen}>
                       Hours: {availability.start_time} - {availability.end_time}{' '}
@@ -1044,6 +1082,7 @@ export function ChannelDoctorScreen() {
                 Reason for Visit / Symptoms (Optional)
               </AppText>
               <TextInput
+                editable={!bookingSubmitting}
                 value={bookingReason}
                 onChangeText={setBookingReason}
                 placeholder="e.g. Headache, Routine checkup, Blood pressure check"
@@ -1058,10 +1097,16 @@ export function ChannelDoctorScreen() {
             <Pressable
               style={[
                 styles.confirmBookingButton,
-                (!availability?.available || bookingSubmitting) &&
+                (!availability?.available ||
+                  checkingAvailability ||
+                  bookingSubmitting) &&
                   styles.confirmBookingDisabled,
               ]}
-              disabled={!availability?.available || bookingSubmitting}
+              disabled={
+                !availability?.available ||
+                checkingAvailability ||
+                bookingSubmitting
+              }
               onPress={handleConfirmBooking}
             >
               {bookingSubmitting ? (
@@ -1082,7 +1127,7 @@ export function ChannelDoctorScreen() {
       {/* 7. DIGITAL QUEUE PASS MODAL                                               */}
       {/* ========================================================================= */}
       <Modal
-        visible={passModalVisible}
+        visible={passModalVisible && !!activeAppt}
         transparent
         animationType="fade"
         onRequestClose={() => setPassModalVisible(false)}
@@ -1139,7 +1184,7 @@ export function ChannelDoctorScreen() {
                   Session Time:
                 </AppText>
                 <AppText variant="caption" style={{ fontWeight: '700' }}>
-                  {activeAppt?.session_start_time || '09:00 AM'}
+                  {activeAppt?.session_start_time || 'Not provided'}
                 </AppText>
               </View>
               <View style={styles.modalInfoRow}>
@@ -1162,7 +1207,7 @@ export function ChannelDoctorScreen() {
                   variant="caption"
                   style={{ fontWeight: '700', color: '#059669' }}
                 >
-                  {activeAppt?.estimated_time || '09:00 AM'} (~
+                  {activeAppt?.estimated_time || 'Not provided'} (~
                   {activeAppt?.estimated_wait_minutes || 0} mins)
                 </AppText>
               </View>
