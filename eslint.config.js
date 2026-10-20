@@ -3,6 +3,7 @@ const expoConfig = require('eslint-config-expo/flat');
 const prettier = require('eslint-config-prettier/flat');
 module.exports = defineConfig([
   expoConfig,
+  { ignores: ['research/.venv/**'] },
   prettier,
   {
     // A relative project path avoids glob characters in the checkout path.

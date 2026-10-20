@@ -1,0 +1,226 @@
+{
+  "seeds": {
+    "generation": 20261020,
+    "proximity": 20261021,
+    "split": 731
+  },
+  "proximity_config": {
+    "radius_m": 50,
+    "min_overlap_minutes": 5
+  },
+  "nearby_pairs": 1841,
+  "train_users": 70,
+  "test_users": 30,
+  "threshold": 0.5,
+  "logistic_regression": {
+    "label_accuracy": 0.7944444444444444,
+    "macro_f1": 0.2365319865319865,
+    "macro_balanced_accuracy": 0.5804957421805249,
+    "exact_match_accuracy": 0.23333333333333334
+  },
+  "majority_baseline": {
+    "label_accuracy": 0.7888888888888889,
+    "macro_f1": 0,
+    "macro_balanced_accuracy": 0.5
+  },
+  "per_disease": {
+    "influenza": {
+      "logistic_regression": {
+        "n": 30,
+        "positives": 6,
+        "negatives": 24,
+        "tp": 2,
+        "tn": 23,
+        "fp": 1,
+        "fn": 4,
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.6458333333333334,
+        "precision": 0.6666666666666666,
+        "recall": 0.3333333333333333,
+        "f1": 0.4444444444444444,
+        "brier": 0.1514736115893771
+      },
+      "majority_baseline": {
+        "n": 30,
+        "positives": 6,
+        "negatives": 24,
+        "tp": 0,
+        "tn": 24,
+        "fp": 0,
+        "fn": 6,
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.16020408163265315
+      },
+      "train_positives": 15
+    },
+    "chickenpox": {
+      "logistic_regression": {
+        "n": 30,
+        "positives": 11,
+        "negatives": 19,
+        "tp": 1,
+        "tn": 19,
+        "fp": 0,
+        "fn": 10,
+        "accuracy": 0.6666666666666666,
+        "balanced_accuracy": 0.5454545454545454,
+        "precision": 1,
+        "recall": 0.09090909090909091,
+        "f1": 0.16666666666666666,
+        "brier": 0.20647874502697547
+      },
+      "majority_baseline": {
+        "n": 30,
+        "positives": 11,
+        "negatives": 19,
+        "tp": 0,
+        "tn": 19,
+        "fp": 0,
+        "fn": 11,
+        "accuracy": 0.6333333333333333,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.2475510204081634
+      },
+      "train_positives": 17
+    },
+    "measles": {
+      "logistic_regression": {
+        "n": 30,
+        "positives": 3,
+        "negatives": 27,
+        "tp": 0,
+        "tn": 27,
+        "fp": 0,
+        "fn": 3,
+        "accuracy": 0.9,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.10150694935583479
+      },
+      "majority_baseline": {
+        "n": 30,
+        "positives": 3,
+        "negatives": 27,
+        "tp": 0,
+        "tn": 27,
+        "fp": 0,
+        "fn": 3,
+        "accuracy": 0.9,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.09510204081632648
+      },
+      "train_positives": 12
+    },
+    "mumps": {
+      "logistic_regression": {
+        "n": 30,
+        "positives": 7,
+        "negatives": 23,
+        "tp": 0,
+        "tn": 23,
+        "fp": 0,
+        "fn": 7,
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.20134378091378158
+      },
+      "majority_baseline": {
+        "n": 30,
+        "positives": 7,
+        "negatives": 23,
+        "tp": 0,
+        "tn": 23,
+        "fp": 0,
+        "fn": 7,
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.18707482993197272
+      },
+      "train_positives": 10
+    },
+    "viral_conjunctivitis": {
+      "logistic_regression": {
+        "n": 30,
+        "positives": 4,
+        "negatives": 26,
+        "tp": 2,
+        "tn": 23,
+        "fp": 3,
+        "fn": 2,
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.6923076923076923,
+        "precision": 0.4,
+        "recall": 0.5,
+        "f1": 0.4444444444444444,
+        "brier": 0.168036571705969
+      },
+      "majority_baseline": {
+        "n": 30,
+        "positives": 4,
+        "negatives": 26,
+        "tp": 0,
+        "tn": 26,
+        "fp": 0,
+        "fn": 4,
+        "accuracy": 0.8666666666666667,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.14333333333333326
+      },
+      "train_positives": 21
+    },
+    "viral_gastroenteritis": {
+      "logistic_regression": {
+        "n": 30,
+        "positives": 7,
+        "negatives": 23,
+        "tp": 2,
+        "tn": 21,
+        "fp": 2,
+        "fn": 5,
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.5993788819875776,
+        "precision": 0.5,
+        "recall": 0.2857142857142857,
+        "f1": 0.36363636363636365,
+        "brier": 0.16429387305239582
+      },
+      "majority_baseline": {
+        "n": 30,
+        "positives": 7,
+        "negatives": 23,
+        "tp": 0,
+        "tn": 23,
+        "fp": 0,
+        "fn": 7,
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "brier": 0.18795918367346945
+      },
+      "train_positives": 23
+    }
+  }
+}
