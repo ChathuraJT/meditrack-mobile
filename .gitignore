@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# Research dependency download cache
+research/.wheel-cache/
+
 # Expo
 .expo/
 dist/
