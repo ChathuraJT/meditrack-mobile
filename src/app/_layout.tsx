@@ -4,14 +4,16 @@ import { Screen } from '@/components/ui/Screen';
 import { AuthProvider, useAuth } from '@/features/auth/AuthProvider';
 import { launchDestination } from '@/features/auth/model';
 import { queryClient } from '@/lib/query-client';
-import { colors } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/tokens';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator } from 'react-native';
+import { ThemeProvider, useColorScheme } from '@/theme/ThemeProvider';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function Routes() {
+  const colors = useThemeColors();
   const auth = useAuth();
   const destination = launchDestination(
     auth.initializing,
@@ -36,7 +38,12 @@ function Routes() {
       </Screen>
     );
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: colors.background },
+      }}
+    >
       <Stack.Protected guard={destination === 'onboarding'}>
         <Stack.Screen name="onboarding" />
       </Stack.Protected>
@@ -51,10 +58,19 @@ function Routes() {
 }
 export default function RootLayout() {
   return (
+    <ThemeProvider>
+      <ThemedRoot />
+    </ThemeProvider>
+  );
+}
+
+function ThemedRoot() {
+  const scheme = useColorScheme();
+  return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <StatusBar style="dark" />
+          <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
           <Routes />
         </AuthProvider>
       </QueryClientProvider>

@@ -1,0 +1,48 @@
+{
+  "pages": 8,
+  "bytes": 421581,
+  "embedded_sinhala_fonts": true,
+  "content_and_bounds_checks": "passed",
+  "details": [
+    {
+      "page": 1,
+      "sinhala_characters": 593,
+      "body_bottom_pt": 649.81
+    },
+    {
+      "page": 2,
+      "sinhala_characters": 494,
+      "body_bottom_pt": 665.56
+    },
+    {
+      "page": 3,
+      "sinhala_characters": 523,
+      "body_bottom_pt": 660.31
+    },
+    {
+      "page": 4,
+      "sinhala_characters": 356,
+      "body_bottom_pt": 697.52
+    },
+    {
+      "page": 5,
+      "sinhala_characters": 385,
+      "body_bottom_pt": 681.02
+    },
+    {
+      "page": 6,
+      "sinhala_characters": 255,
+      "body_bottom_pt": 759.02
+    },
+    {
+      "page": 7,
+      "sinhala_characters": 244,
+      "body_bottom_pt": 733.52
+    },
+    {
+      "page": 8,
+      "sinhala_characters": 555,
+      "body_bottom_pt": 632.05
+    }
+  ]
+}

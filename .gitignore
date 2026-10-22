@@ -44,6 +44,9 @@ example
 
 # MediTrack local state and secrets
 coverage/
+research/.venv/
+research/.wheel-cache/
+scripts/__pycache__/
 .env
 .env.*
 !.env.example

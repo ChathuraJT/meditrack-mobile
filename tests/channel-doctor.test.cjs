@@ -94,7 +94,7 @@ test('changing dates discards stale availability and blocks invalid booking and 
     '@/components/ui/AppText': { AppText: 'Text' },
     '@/components/ui/CareCard': 'Card',
     '@/theme/careCard': { useCareCardColors: () => theme },
-    '@/theme/tokens': { colors: {}, spacing: {}, radius: {} },
+    '@/theme/tokens': { useThemeColors: () => ({}), spacing: {}, radius: {} },
     '@/features/auth/AuthProvider': {
       useAuth: () => ({ session: { user: { username: 'patient' } } }),
     },

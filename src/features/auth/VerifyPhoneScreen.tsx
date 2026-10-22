@@ -8,9 +8,13 @@ export function VerifyPhoneScreen() {
     <Screen>
       <AppText variant="title">Verify your mobile</AppText>
       <AppText>
-        Phone verification via SMS is not currently supported in this backend. Please sign in with an approved account.
+        Phone verification via SMS is not currently supported in this backend.
+        Please sign in with an approved account.
       </AppText>
-      <AppButton label="Go to Sign In" onPress={() => router.replace('/login')} />
+      <AppButton
+        label="Go to Sign In"
+        onPress={() => router.replace('/login')}
+      />
     </Screen>
   );
 }

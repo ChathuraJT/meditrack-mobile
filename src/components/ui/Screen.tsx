@@ -1,5 +1,5 @@
 import { MedicalPatternBackground } from '@/components/MedicalPatternBackground';
-import { spacing } from '@/theme/tokens';
+import { spacing, useThemeColors } from '@/theme/tokens';
 import type { PropsWithChildren } from 'react';
 import {
   KeyboardAvoidingView,
@@ -24,11 +24,12 @@ export function Screen({
   patternOpacity = 0.22,
   edges = ['left', 'right'],
 }: ScreenProps) {
+  const colors = useThemeColors();
   const content = (
     <SafeAreaView
       style={[
         styles.safe,
-        { backgroundColor: withPattern ? 'transparent' : '#FFFFFF' },
+        { backgroundColor: withPattern ? 'transparent' : colors.background },
       ]}
       edges={edges}
     >
@@ -53,7 +54,7 @@ export function Screen({
       <MedicalPatternBackground
         density={patternDensity}
         opacity={patternOpacity}
-        backgroundColor="#FFFFFF"
+        backgroundColor={colors.background}
       >
         {content}
       </MedicalPatternBackground>

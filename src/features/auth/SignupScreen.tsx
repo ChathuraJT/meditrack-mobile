@@ -6,11 +6,7 @@ import { router } from 'expo-router';
 import { AppButton } from '@/components/ui/AppButton';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from './AuthProvider';
-import {
-  signupSchema,
-  genders,
-  type SignupValues,
-} from './model';
+import { signupSchema, genders, type SignupValues } from './model';
 import { SelectField, countryOptions } from './SelectField';
 import { AppCard } from '@/components/ui/AppCard';
 import {
@@ -35,13 +31,19 @@ export function SignupScreen() {
   const submit = form.handleSubmit((values) =>
     run(async () => {
       setMessage('');
-      const { password, confirmPassword: _confirmPassword, ...nonSecret } = values;
+      const {
+        password,
+        confirmPassword: _confirmPassword,
+        ...nonSecret
+      } = values;
       setDraft(nonSecret);
-      
+
       // Simulate network request delay
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      setMessage('Registration integration is pending. Please sign in with an existing approved account for now.');
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      setMessage(
+        'Registration integration is pending. Please sign in with an existing approved account for now.',
+      );
       form.setValue('password', '');
       form.setValue('confirmPassword', '');
     }),

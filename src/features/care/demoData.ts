@@ -11,7 +11,8 @@ export type DemoScenario =
 export type DoseStatus = 'upcoming' | 'taken' | 'skipped' | 'not-recorded';
 export type TimeSlot = 'Morning' | 'Afternoon' | 'Evening';
 export type CheckInFeeling = 'Better' | 'Same' | 'Worse';
-export type ActivityLevel = 'Normal' | 'Some difficulty' | 'Significant difficulty';
+export type ActivityLevel =
+  'Normal' | 'Some difficulty' | 'Significant difficulty';
 
 export interface Medication {
   id: string;
@@ -132,7 +133,8 @@ export function getFixture(scenario: DemoScenario = 'approved'): DemoState {
     foodInstruction: 'After breakfast with water',
     startDate,
     endDate,
-    doctorInstructions: 'Illustrative instruction: take consistently and contact the clinic with questions.',
+    doctorInstructions:
+      'Illustrative instruction: take consistently and contact the clinic with questions.',
   };
   const medicationB: Medication = {
     id: 'demo-med-b',
@@ -143,7 +145,8 @@ export function getFixture(scenario: DemoScenario = 'approved'): DemoState {
     foodInstruction: 'With the evening meal',
     startDate,
     endDate,
-    doctorInstructions: 'Illustrative instruction: follow the prescribed evening schedule.',
+    doctorInstructions:
+      'Illustrative instruction: follow the prescribed evening schedule.',
   };
   const asNeeded: Medication = {
     id: 'demo-med-prn',
@@ -155,7 +158,8 @@ export function getFixture(scenario: DemoScenario = 'approved'): DemoState {
     startDate,
     endDate,
     asNeeded: true,
-    doctorInstructions: 'Illustrative as-needed option. Log use only when you choose to use it.',
+    doctorInstructions:
+      'Illustrative as-needed option. Log use only when you choose to use it.',
   };
   const prescription: Prescription = {
     reference: 'RX-DEMO-001',
@@ -164,7 +168,8 @@ export function getFixture(scenario: DemoScenario = 'approved'): DemoState {
     version: 1,
     startDate,
     endDate,
-    instructions: 'Illustrative demo prescription. This is not a treatment recommendation.',
+    instructions:
+      'Illustrative demo prescription. This is not a treatment recommendation.',
     medications: [medicationA, medicationB, asNeeded],
   };
   const pendingPrescription: Prescription = {
@@ -178,14 +183,41 @@ export function getFixture(scenario: DemoScenario = 'approved'): DemoState {
   for (let offset = -2; offset <= 2; offset += 1) {
     const date = dateKey(addDays(today, offset));
     doses.push(
-      { id: `demo-med-a-${date}`, medicationId: medicationA.id, date, time: '08:00', timeSlot: 'Morning' },
-      { id: `demo-med-b-${date}`, medicationId: medicationB.id, date, time: '18:30', timeSlot: 'Evening' },
+      {
+        id: `demo-med-a-${date}`,
+        medicationId: medicationA.id,
+        date,
+        time: '08:00',
+        timeSlot: 'Morning',
+      },
+      {
+        id: `demo-med-b-${date}`,
+        medicationId: medicationB.id,
+        date,
+        time: '18:30',
+        timeSlot: 'Evening',
+      },
     );
   }
   const records: DoseRecord[] = [
-    { doseId: `demo-med-a-${dateKey(addDays(today, -2))}`, status: 'taken', recordedAt: isoAt(dateKey(addDays(today, -2)), '08:12'), intakeTime: isoAt(dateKey(addDays(today, -2)), '08:12') },
-    { doseId: `demo-med-b-${dateKey(addDays(today, -2))}`, status: 'skipped', recordedAt: isoAt(dateKey(addDays(today, -2)), '19:10'), reason: 'Forgot' },
-    { doseId: `demo-med-a-${dateKey(addDays(today, -1))}`, status: 'taken', recordedAt: isoAt(dateKey(addDays(today, -1)), '08:05'), intakeTime: isoAt(dateKey(addDays(today, -1)), '08:05') },
+    {
+      doseId: `demo-med-a-${dateKey(addDays(today, -2))}`,
+      status: 'taken',
+      recordedAt: isoAt(dateKey(addDays(today, -2)), '08:12'),
+      intakeTime: isoAt(dateKey(addDays(today, -2)), '08:12'),
+    },
+    {
+      doseId: `demo-med-b-${dateKey(addDays(today, -2))}`,
+      status: 'skipped',
+      recordedAt: isoAt(dateKey(addDays(today, -2)), '19:10'),
+      reason: 'Forgot',
+    },
+    {
+      doseId: `demo-med-a-${dateKey(addDays(today, -1))}`,
+      status: 'taken',
+      recordedAt: isoAt(dateKey(addDays(today, -1)), '08:05'),
+      intakeTime: isoAt(dateKey(addDays(today, -1)), '08:05'),
+    },
   ];
   const checkIns: RecoveryCheckIn[] = Array.from({ length: 7 }, (_, index) => {
     const date = dateKey(addDays(today, index - 6));
@@ -201,14 +233,30 @@ export function getFixture(scenario: DemoScenario = 'approved'): DemoState {
       status: index === 6 ? 'Awaiting review' : 'Reviewed',
     };
   });
-  const base: DemoState = { scenario, prescription, pendingPrescription, doses, records, checkIns };
-  if (scenario === 'pending' || scenario === 'changes-requested' || scenario === 'no-prescription') {
+  const base: DemoState = {
+    scenario,
+    prescription,
+    pendingPrescription,
+    doses,
+    records,
+    checkIns,
+  };
+  if (
+    scenario === 'pending' ||
+    scenario === 'changes-requested' ||
+    scenario === 'no-prescription'
+  ) {
     base.prescription = null;
   }
   if (scenario === 'pending') base.pendingPrescription = prescription;
-  if (scenario === 'changes-requested') base.pendingPrescription = { ...pendingPrescription, instructions: 'Doctor requested changes to this illustrative plan.' };
+  if (scenario === 'changes-requested')
+    base.pendingPrescription = {
+      ...pendingPrescription,
+      instructions: 'Doctor requested changes to this illustrative plan.',
+    };
   if (scenario === 'no-prescription') base.pendingPrescription = null;
-  if (scenario === 'update-pending') base.pendingPrescription = pendingPrescription;
+  if (scenario === 'update-pending')
+    base.pendingPrescription = pendingPrescription;
   if (scenario === 'offline') base.scenario = 'offline';
   return base;
 }
@@ -217,7 +265,11 @@ export function isDoseDue(dose: DoseOccurrence, now = new Date()) {
   return new Date(`${dose.date}T${dose.time}:00+05:30`) <= now;
 }
 
-export function doseStatus(dose: DoseOccurrence, records: DoseRecord[], now = new Date()): DoseStatus {
+export function doseStatus(
+  dose: DoseOccurrence,
+  records: DoseRecord[],
+  now = new Date(),
+): DoseStatus {
   const record = records.find((item) => item.doseId === dose.id);
   if (record) return record.status;
   return isDoseDue(dose, now) ? 'not-recorded' : 'upcoming';

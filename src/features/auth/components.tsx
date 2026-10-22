@@ -2,7 +2,7 @@ import { AppCard } from '@/components/ui/AppCard';
 import { AppInput } from '@/components/ui/AppInput';
 import { AppText } from '@/components/ui/AppText';
 import { Screen } from '@/components/ui/Screen';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing, useThemeColors } from '@/theme/tokens';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useRef, useState, type PropsWithChildren } from 'react';
 import {
@@ -11,7 +11,8 @@ import {
   type FieldValues,
   type Path,
 } from 'react-hook-form';
-import { Pressable, StyleSheet, View, useColorScheme, type TextInputProps } from 'react-native';
+import { Pressable, StyleSheet, View, type TextInputProps } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import { useAuth } from './AuthProvider';
 
 export function AuthScreen({
@@ -19,6 +20,8 @@ export function AuthScreen({
   description,
   children,
 }: PropsWithChildren<{ title: string; description: string }>) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const { available } = useAuth();
   const isDark = useColorScheme() === 'dark';
   const brandColor = isDark ? '#38BDF8' : colors.primary;
@@ -32,15 +35,31 @@ export function AuthScreen({
           color={brandColor}
           accessible={false}
         />
-        <AppText variant="heading" style={{ color: brandColor, fontWeight: '700' }}>
+        <AppText
+          variant="heading"
+          style={{ color: brandColor, fontWeight: '700' }}
+        >
           MediTrack
         </AppText>
       </View>
       <View style={styles.headerStack}>
-        <AppText variant="title" accessibilityRole="header" style={[styles.centerText, { color: isDark ? '#FFFFFF' : colors.text }]}>
+        <AppText
+          variant="title"
+          accessibilityRole="header"
+          style={[
+            styles.centerText,
+            { color: isDark ? '#FFFFFF' : colors.text },
+          ]}
+        >
           {title}
         </AppText>
-        <AppText muted style={[styles.centerText, { color: isDark ? '#94A3B8' : colors.secondary }]}>
+        <AppText
+          muted
+          style={[
+            styles.centerText,
+            { color: isDark ? '#94A3B8' : colors.secondary },
+          ]}
+        >
           {description}
         </AppText>
       </View>
@@ -48,8 +67,8 @@ export function AuthScreen({
       {!available && (
         <AppCard>
           <AppText accessibilityRole="alert" style={styles.centerText}>
-            Authentication is unavailable because the backend address is not configured.
-            You can preview these forms, but cannot submit them.
+            Authentication is unavailable because the backend address is not
+            configured. You can preview these forms, but cannot submit them.
           </AppText>
         </AppCard>
       )}
@@ -69,6 +88,8 @@ export function FormField<T extends FieldValues>({
   label: string;
   password?: boolean;
 } & TextInputProps) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const [visible, setVisible] = useState(false);
   const isDark = useColorScheme() === 'dark';
   return (
@@ -116,6 +137,7 @@ export function FormField<T extends FieldValues>({
   );
 }
 export function Feedback({ message }: { message: string }) {
+  const colors = useThemeColors();
   const isDark = useColorScheme() === 'dark';
   return message ? (
     <AppText
@@ -136,6 +158,8 @@ export function TextAction({
   onPress: () => void;
   disabled?: boolean;
 }) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const isDark = useColorScheme() === 'dark';
   return (
     <Pressable
@@ -145,7 +169,13 @@ export function TextAction({
       onPress={onPress}
       style={styles.action}
     >
-      <AppText style={{ color: isDark ? '#38BDF8' : colors.primary, textAlign: 'center', fontWeight: '600' }}>
+      <AppText
+        style={{
+          color: isDark ? '#38BDF8' : colors.primary,
+          textAlign: 'center',
+          fontWeight: '600',
+        }}
+      >
         {label}
       </AppText>
     </Pressable>
@@ -178,28 +208,29 @@ export function useCooldown(sentAt: number) {
   return Math.max(0, Math.min(60, Math.ceil((sentAt + 60000 - now) / 1000)));
 }
 export const formStyles = StyleSheet.create({ stack: { gap: spacing.md } });
-const styles = StyleSheet.create({
-  brand: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing.sm,
-    paddingVertical: spacing.md,
-  },
-  headerStack: {
-    gap: spacing.sm,
-    alignItems: 'center',
-    marginBottom: spacing.sm,
-  },
-  centerText: {
-    textAlign: 'center',
-  },
-  stack: { gap: spacing.sm },
-  eyeButton: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  action: { minHeight: 48, padding: spacing.sm, justifyContent: 'center' },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    brand: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: spacing.sm,
+      paddingVertical: spacing.md,
+    },
+    headerStack: {
+      gap: spacing.sm,
+      alignItems: 'center',
+      marginBottom: spacing.sm,
+    },
+    centerText: {
+      textAlign: 'center',
+    },
+    stack: { gap: spacing.sm },
+    eyeButton: {
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    action: { minHeight: 48, padding: spacing.sm, justifyContent: 'center' },
+  });

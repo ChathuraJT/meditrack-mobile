@@ -6,6 +6,7 @@ import { SignOutButton } from './SignOutButton';
 import { View } from 'react-native';
 import { AppHeader } from '@/components/AppHeader';
 import { AppBottomNav } from '@/components/AppBottomNav';
+import { TrackingProvider } from '@/features/tracking/TrackingProvider';
 
 export function PatientLayout() {
   const { session } = useAuth();
@@ -27,20 +28,22 @@ export function PatientLayout() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <AppHeader />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen
-          name="channel-doctor"
-          options={{
-            headerShown: false,
-            title: 'Channel a Doctor',
-            headerShadowVisible: false,
-          }}
-        />
-      </Stack>
-      <AppBottomNav />
-    </View>
+    <TrackingProvider key={session!.user.id} userId={session!.user.id}>
+      <View style={{ flex: 1 }}>
+        <AppHeader />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="channel-doctor"
+            options={{
+              headerShown: false,
+              title: 'Channel a Doctor',
+              headerShadowVisible: false,
+            }}
+          />
+        </Stack>
+        <AppBottomNav />
+      </View>
+    </TrackingProvider>
   );
 }

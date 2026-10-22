@@ -13,7 +13,7 @@ import CareCard from '@/components/ui/CareCard';
 import { careCardAccents } from '@/theme/careCard';
 import { AppText } from '@/components/ui/AppText';
 import { Screen } from '@/components/ui/Screen';
-import { colors, radius, spacing } from '@/theme/tokens';
+import { radius, spacing, useThemeColors } from '@/theme/tokens';
 import {
   DEMO_TIMEZONE,
   doseDateTime,
@@ -46,6 +46,8 @@ function StatusPill({
   status: ReturnType<typeof doseStatus>;
   overdue?: boolean;
 }) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const label =
     status === 'not-recorded' && overdue
       ? 'Not recorded · overdue'
@@ -83,6 +85,8 @@ function DoseCard({
   onDetails: () => void;
   onUndo: () => void;
 }) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const status = doseStatus(dose, record ? [record] : []);
   const overdue = status === 'not-recorded' && isDoseDue(dose);
   return (
@@ -163,6 +167,8 @@ function DoseCard({
 }
 
 export function MedicationsScreen() {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const scenario = getDemoScenario();
   const [state, setState] = useState<DemoState | null>(null);
   const [selectedDate, setSelectedDate] = useState(todayKey());
@@ -609,6 +615,8 @@ export function MedicationsScreen() {
                   Actual intake time (for example, Oct 18, 8:15 AM)
                 </AppText>
                 <TextInput
+                  placeholderTextColor={colors.secondary}
+                  selectionColor={colors.primary}
                   value={intakeTimeText}
                   onChangeText={setIntakeTimeText}
                   style={styles.input}
@@ -670,6 +678,8 @@ function Summary({
   value: number;
   color: string;
 }) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   return (
     <View style={styles.summaryItem}>
       <AppText variant="heading" style={{ color }}>
@@ -682,143 +692,151 @@ function Summary({
   );
 }
 
-const styles = StyleSheet.create({
-  flex: { flex: 1 },
-  demoBanner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    backgroundColor: '#E8F4FB',
-    padding: spacing.sm,
-    borderRadius: radius.sm,
-  },
-  demoText: { color: colors.primary },
-  debugCard: { padding: spacing.sm },
-  debugLabel: { fontWeight: '700', marginBottom: spacing.xs },
-  scenarioWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
-  scenarioChip: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 20,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-  },
-  scenarioChipActive: {
-    backgroundColor: '#D9F1F2',
-    borderColor: colors.accent,
-  },
-  scenarioTextActive: { color: colors.primary, fontWeight: '700' },
-  infoBanner: {
-    padding: spacing.sm,
-    backgroundColor: '#EFF6FF',
-    borderRadius: radius.sm,
-  },
-  warningBanner: {
-    padding: spacing.sm,
-    backgroundColor: '#FFF7DE',
-    borderRadius: radius.sm,
-  },
-  warningText: { color: '#8A5A00' },
-  cardHeading: { flexDirection: 'row', gap: spacing.sm },
-  approvedBadge: {
-    backgroundColor: '#DDF7EE',
-    borderRadius: 20,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    height: 28,
-  },
-  approvedText: { color: '#087A5B', fontWeight: '700' },
-  metaGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
-  metaValue: { fontWeight: '700' },
-  dateSelector: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: spacing.xs,
-  },
-  dateItem: {
-    alignItems: 'center',
-    padding: spacing.sm,
-    borderRadius: radius.sm,
-    minWidth: 52,
-  },
-  dateItemActive: { backgroundColor: colors.primary },
-  dateTextActive: { color: '#FFFFFF', fontWeight: '700' },
-  dateNumber: { fontSize: 18, fontWeight: '700', color: colors.text },
-  summaryRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  summaryItem: { alignItems: 'center' },
-  progressTrack: {
-    height: 8,
-    backgroundColor: colors.border,
-    borderRadius: 5,
-    overflow: 'hidden',
-  },
-  progressFill: { height: '100%', backgroundColor: careCardAccents.purple },
-  progressLabel: { fontWeight: '600' },
-  slotHeading: { marginTop: spacing.sm },
-  doseCard: { marginBottom: spacing.sm },
-  overdueCard: { borderColor: '#F3B6B0', borderWidth: 1 },
-  doseTop: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  doseIcon: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    backgroundColor: '#E8F4FB',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  medicationName: { fontWeight: '700', fontSize: 16 },
-  statusPill: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: 20,
-    backgroundColor: '#E8F4FB',
-  },
-  takenPill: { backgroundColor: '#DDF7EE' },
-  skippedPill: { backgroundColor: '#FFF0D4' },
-  overduePill: { backgroundColor: '#FDE4E1' },
-  statusText: { textTransform: 'capitalize', fontWeight: '700' },
-  recorded: { color: colors.secondary },
-  actionRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    flexWrap: 'wrap',
-  },
-  actionButton: { flex: 1, minHeight: 42 },
-  secondaryAction: {
-    minHeight: 42,
-    justifyContent: 'center',
-    paddingHorizontal: spacing.xs,
-  },
-  secondaryActionText: { color: colors.error, fontWeight: '700' },
-  detailsText: { color: colors.primary, fontWeight: '700' },
-  reset: { alignItems: 'center', padding: spacing.md },
-  modalBackdrop: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(15, 23, 42, 0.35)',
-  },
-  sheet: {
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: radius.lg,
-    borderTopRightRadius: radius.lg,
-    padding: spacing.lg,
-    gap: spacing.md,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.sm,
-    padding: spacing.md,
-    color: colors.text,
-  },
-  cancel: { color: colors.secondary, textAlign: 'center', padding: spacing.sm },
-  reasonWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
-  reasonChip: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 20,
-    padding: spacing.sm,
-  },
-  reasonActive: { backgroundColor: '#D9F1F2', borderColor: colors.accent },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    flex: { flex: 1 },
+    demoBanner: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      backgroundColor: colors.subtle,
+      padding: spacing.sm,
+      borderRadius: radius.sm,
+    },
+    demoText: { color: colors.primary },
+    debugCard: { padding: spacing.sm },
+    debugLabel: { fontWeight: '700', marginBottom: spacing.xs },
+    scenarioWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
+    scenarioChip: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: 20,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs,
+    },
+    scenarioChipActive: {
+      backgroundColor: colors.selected,
+      borderColor: colors.accent,
+    },
+    scenarioTextActive: { color: colors.primary, fontWeight: '700' },
+    infoBanner: {
+      padding: spacing.sm,
+      backgroundColor: colors.subtle,
+      borderRadius: radius.sm,
+    },
+    warningBanner: {
+      padding: spacing.sm,
+      backgroundColor: colors.warningSurface,
+      borderRadius: radius.sm,
+    },
+    warningText: { color: colors.warningText },
+    cardHeading: { flexDirection: 'row', gap: spacing.sm },
+    approvedBadge: {
+      backgroundColor: colors.successSurface,
+      borderRadius: 20,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs,
+      height: 28,
+    },
+    approvedText: { color: colors.successText, fontWeight: '700' },
+    metaGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
+    metaValue: { fontWeight: '700' },
+    dateSelector: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      gap: spacing.xs,
+    },
+    dateItem: {
+      alignItems: 'center',
+      padding: spacing.sm,
+      borderRadius: radius.sm,
+      minWidth: 52,
+    },
+    dateItemActive: { backgroundColor: colors.button },
+    dateTextActive: { color: '#FFFFFF', fontWeight: '700' },
+    dateNumber: { fontSize: 18, fontWeight: '700', color: colors.text },
+    summaryRow: { flexDirection: 'row', justifyContent: 'space-between' },
+    summaryItem: { alignItems: 'center' },
+    progressTrack: {
+      height: 8,
+      backgroundColor: colors.border,
+      borderRadius: 5,
+      overflow: 'hidden',
+    },
+    progressFill: { height: '100%', backgroundColor: careCardAccents.purple },
+    progressLabel: { fontWeight: '600' },
+    slotHeading: { marginTop: spacing.sm },
+    doseCard: { marginBottom: spacing.sm },
+    overdueCard: { borderColor: colors.border, borderWidth: 1 },
+    doseTop: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+    doseIcon: {
+      width: 38,
+      height: 38,
+      borderRadius: 12,
+      backgroundColor: colors.subtle,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    medicationName: { fontWeight: '700', fontSize: 16 },
+    statusPill: {
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs,
+      borderRadius: 20,
+      backgroundColor: colors.subtle,
+    },
+    takenPill: { backgroundColor: colors.successSurface },
+    skippedPill: { backgroundColor: colors.warningSurface },
+    overduePill: { backgroundColor: colors.errorSurface },
+    statusText: { textTransform: 'capitalize', fontWeight: '700' },
+    recorded: { color: colors.secondary },
+    actionRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      flexWrap: 'wrap',
+    },
+    actionButton: { flex: 1, minHeight: 42 },
+    secondaryAction: {
+      minHeight: 42,
+      justifyContent: 'center',
+      paddingHorizontal: spacing.xs,
+    },
+    secondaryActionText: { color: colors.error, fontWeight: '700' },
+    detailsText: { color: colors.primary, fontWeight: '700' },
+    reset: { alignItems: 'center', padding: spacing.md },
+    modalBackdrop: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      backgroundColor: 'rgba(15, 23, 42, 0.35)',
+    },
+    sheet: {
+      backgroundColor: colors.surface,
+      borderTopLeftRadius: radius.lg,
+      borderTopRightRadius: radius.lg,
+      padding: spacing.lg,
+      gap: spacing.md,
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: radius.sm,
+      padding: spacing.md,
+      color: colors.text,
+    },
+    cancel: {
+      color: colors.secondary,
+      textAlign: 'center',
+      padding: spacing.sm,
+    },
+    reasonWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+    reasonChip: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: 20,
+      padding: spacing.sm,
+    },
+    reasonActive: {
+      backgroundColor: colors.selected,
+      borderColor: colors.accent,
+    },
+  });

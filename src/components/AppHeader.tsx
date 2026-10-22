@@ -1,23 +1,34 @@
 import { useState } from 'react';
+import { ThemeToggle } from './ThemeToggle';
 import {
   View,
   StyleSheet,
   Pressable,
   Modal,
   TouchableWithoutFeedback,
-  useColorScheme,
 } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router, usePathname } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from '@/features/auth/AuthProvider';
-import { colors, spacing, radius } from '@/theme/tokens';
+import { spacing, radius, useThemeColors } from '@/theme/tokens';
 
 export function AppHeader() {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const insets = useSafeAreaInsets();
   const pathname = usePathname();
-  const showBack = ['/profile', '/email-link'].includes(pathname);
+  const showBack = [
+    '/profile',
+    '/email-link',
+    '/tracking',
+    '/location-history',
+    '/exposure-analysis',
+    '/nearby-devices',
+    '/nearby-devices',
+  ].includes(pathname);
   const { session, signOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const colorScheme = useColorScheme();
@@ -45,9 +56,9 @@ export function AppHeader() {
         styles.container,
         {
           paddingTop: Math.max(insets.top, spacing.sm),
-          backgroundColor: '#FFFFFF',
+          backgroundColor: colors.surface,
           borderBottomWidth: 1,
-          borderBottomColor: '#E2E8F0',
+          borderBottomColor: colors.border,
         },
       ]}
     >
@@ -101,6 +112,7 @@ export function AppHeader() {
         </Pressable>
 
         {/* Profile Avatar Trigger */}
+        <ThemeToggle />
         <Pressable
           style={({ pressed }) => [
             styles.profileButton,
@@ -226,120 +238,121 @@ export function AppHeader() {
   );
 }
 
-const styles = StyleSheet.create({
-  backButton: {
-    minWidth: 44,
-    minHeight: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  container: {
-    borderBottomWidth: 1,
-    zIndex: 100,
-    overflow: 'hidden',
-  },
-  content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    minHeight: 58,
-    paddingHorizontal: spacing.md,
-    paddingBottom: spacing.md,
-  },
-  brand: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
-  logoBadge: {
-    width: 44,
-    height: 44,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  brandTitle: {
-    fontSize: 21,
-    fontWeight: '700',
-    lineHeight: 26,
-  },
-  brandSubtitle: {
-    textAlign: 'center',
-    fontSize: 12,
-    lineHeight: 16,
-    fontWeight: '500',
-  },
-  profileButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    borderWidth: 1.5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-  },
-  pressed: {
-    opacity: 0.6,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
-  },
-  dropdownMenu: {
-    position: 'absolute',
-    right: spacing.md,
-    width: 220,
-    borderRadius: radius.md,
-    borderWidth: 1,
-    padding: spacing.sm,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    elevation: 8,
-  },
-  menuHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    padding: spacing.xs,
-  },
-  menuAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#E6F4FE',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  userInfo: {
-    flex: 1,
-  },
-  usernameText: {
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  divider: {
-    height: 1,
-    marginVertical: spacing.xs,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.xs,
-    borderRadius: radius.sm,
-  },
-  menuItemPressed: {
-    backgroundColor: '#F3F8FC',
-  },
-  menuItemPressedDark: {
-    backgroundColor: '#133E68',
-  },
-  menuItemLabel: {
-    fontSize: 14,
-    fontWeight: '500',
-  },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    backButton: {
+      minWidth: 44,
+      minHeight: 44,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    container: {
+      borderBottomWidth: 1,
+      zIndex: 100,
+      overflow: 'hidden',
+    },
+    content: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      minHeight: 58,
+      paddingHorizontal: spacing.md,
+      paddingBottom: spacing.md,
+    },
+    brand: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+    },
+    logoBadge: {
+      width: 44,
+      height: 44,
+      borderRadius: 12,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    brandTitle: {
+      fontSize: 21,
+      fontWeight: '700',
+      lineHeight: 26,
+    },
+    brandSubtitle: {
+      textAlign: 'center',
+      fontSize: 12,
+      lineHeight: 16,
+      fontWeight: '500',
+    },
+    profileButton: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      borderWidth: 1.5,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'transparent',
+    },
+    pressed: {
+      opacity: 0.6,
+    },
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    },
+    dropdownMenu: {
+      position: 'absolute',
+      right: spacing.md,
+      width: 220,
+      borderRadius: radius.md,
+      borderWidth: 1,
+      padding: spacing.sm,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 10,
+      elevation: 8,
+    },
+    menuHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      padding: spacing.xs,
+    },
+    menuAvatar: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: colors.subtle,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    userInfo: {
+      flex: 1,
+    },
+    usernameText: {
+      fontWeight: '600',
+      fontSize: 15,
+    },
+    divider: {
+      height: 1,
+      marginVertical: spacing.xs,
+    },
+    menuItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      paddingVertical: spacing.sm,
+      paddingHorizontal: spacing.xs,
+      borderRadius: radius.sm,
+    },
+    menuItemPressed: {
+      backgroundColor: colors.background,
+    },
+    menuItemPressedDark: {
+      backgroundColor: '#133E68',
+    },
+    menuItemLabel: {
+      fontSize: 14,
+      fontWeight: '500',
+    },
+  });

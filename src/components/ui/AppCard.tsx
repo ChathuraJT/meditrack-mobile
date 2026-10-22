@@ -1,7 +1,10 @@
-import { View, StyleSheet, useColorScheme, type ViewProps } from 'react-native';
-import { colors, darkColors, radius, spacing } from '@/theme/tokens';
+import { View, StyleSheet, type ViewProps } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
+import { darkColors, radius, spacing, useThemeColors } from '@/theme/tokens';
 
 export function AppCard({ style, children, ...props }: ViewProps) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const isDark = useColorScheme() === 'dark';
 
   return (
@@ -26,14 +29,15 @@ export function AppCard({ style, children, ...props }: ViewProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  card: {
-    borderWidth: 1,
-    borderRadius: radius.md,
-    overflow: 'hidden',
-  },
-  content: {
-    padding: spacing.lg,
-    gap: spacing.md,
-  },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    card: {
+      borderWidth: 1,
+      borderRadius: radius.md,
+      overflow: 'hidden',
+    },
+    content: {
+      padding: spacing.lg,
+      gap: spacing.md,
+    },
+  });
