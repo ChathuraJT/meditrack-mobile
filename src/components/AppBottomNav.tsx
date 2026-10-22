@@ -1,5 +1,5 @@
 import { AppText } from '@/components/ui/AppText';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing, useThemeColors } from '@/theme/tokens';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, usePathname } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
@@ -13,6 +13,8 @@ const destinations = [
 ] as const;
 
 export function AppBottomNav() {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const insets = useSafeAreaInsets();
   const pathname = usePathname();
   return (
@@ -63,24 +65,25 @@ export function AppBottomNav() {
   );
 }
 
-const styles = StyleSheet.create({
-  list: {
-    flexDirection: 'row',
-    backgroundColor: colors.surface,
-    borderTopWidth: 1,
-    borderColor: colors.border,
-    paddingTop: spacing.sm,
-  },
-  button: {
-    flex: 1,
-    minHeight: 56,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.xs,
-    gap: spacing.xs,
-    borderRadius: 10,
-  },
-  label: { textAlign: 'center', fontSize: 12 },
-  selected: { backgroundColor: colors.background },
-  pressed: { opacity: 0.6 },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    list: {
+      flexDirection: 'row',
+      backgroundColor: colors.surface,
+      borderTopWidth: 1,
+      borderColor: colors.border,
+      paddingTop: spacing.sm,
+    },
+    button: {
+      flex: 1,
+      minHeight: 56,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: spacing.xs,
+      gap: spacing.xs,
+      borderRadius: 10,
+    },
+    label: { textAlign: 'center', fontSize: 12 },
+    selected: { backgroundColor: colors.background },
+    pressed: { opacity: 0.6 },
+  });

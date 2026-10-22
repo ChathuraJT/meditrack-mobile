@@ -1,12 +1,15 @@
-import { Pressable, StyleSheet, View, useColorScheme } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import { router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Screen } from '@/components/ui/Screen';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from '@/features/auth/AuthProvider';
-import { colors, darkColors, radius, spacing } from '@/theme/tokens';
+import { darkColors, radius, spacing, useThemeColors } from '@/theme/tokens';
 
 export function HomeScreen() {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const { session } = useAuth();
   const isDark = useColorScheme() === 'dark';
   const username = session?.user.username || 'Patient';
@@ -49,12 +52,7 @@ export function HomeScreen() {
             </AppText>
           </View>
         </View>
-        <View
-          style={[
-            styles.profileFooter,
-            { borderTopColor: theme.border },
-          ]}
-        >
+        <View style={[styles.profileFooter, { borderTopColor: theme.border }]}>
           <View style={styles.patientBadge}>
             <Ionicons
               name="shield-checkmark-outline"
@@ -79,11 +77,7 @@ export function HomeScreen() {
             >
               View profile
             </AppText>
-            <Ionicons
-              name="chevron-forward"
-              size={16}
-              color={theme.primary}
-            />
+            <Ionicons name="chevron-forward" size={16} color={theme.primary} />
           </Pressable>
         </View>
       </View>
@@ -306,109 +300,110 @@ export function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  profileCard: {
-    borderWidth: 1,
-    borderRadius: radius.lg,
-    padding: spacing.md,
-    gap: spacing.md,
-    shadowColor: '#64748B',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 6,
-    elevation: 2,
-  },
-  profileTop: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
-  avatar: {
-    width: 54,
-    height: 54,
-    borderRadius: radius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  initial: { fontSize: 24, fontWeight: '700', color: colors.primary },
-  profileCopy: { flex: 1, minWidth: 0 },
-  eyebrow: {
-    fontSize: 10,
-    lineHeight: 16,
-    letterSpacing: 1.2,
-    color: colors.secondary,
-    fontWeight: '700',
-  },
-  name: { flexShrink: 1 },
-  profileMeta: { color: colors.secondary },
-  profileFooter: {
-    borderTopWidth: 1,
-    paddingTop: spacing.sm,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: spacing.sm,
-  },
-  patientBadge: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  badgeText: { fontWeight: '600' },
-  profileLink: {
-    minHeight: 44,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  linkText: { fontWeight: '600' },
-  sectionHeader: {
-    marginTop: spacing.sm,
-    gap: spacing.xs,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-  },
-  grid: {
-    gap: spacing.md,
-  },
-  gridRow: {
-    flexDirection: 'row',
-    gap: spacing.md,
-  },
-  squareCard: {
-    flex: 1,
-    aspectRatio: 1,
-    borderWidth: 1,
-    borderRadius: radius.lg,
-    padding: spacing.md,
-    justifyContent: 'space-between',
-    shadowColor: '#64748B',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.07,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  cardTopRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
-  iconBox: {
-    width: 44,
-    height: 44,
-    borderRadius: radius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cardBottom: {
-    gap: 2,
-  },
-  cardTitle: {
-    fontSize: 15,
-    fontWeight: '700',
-    lineHeight: 20,
-  },
-  cardSubtitle: {
-    fontSize: 11,
-    lineHeight: 15,
-  },
-  pressed: {
-    opacity: 0.82,
-    transform: [{ scale: 0.98 }],
-  },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    profileCard: {
+      borderWidth: 1,
+      borderRadius: radius.lg,
+      padding: spacing.md,
+      gap: spacing.md,
+      shadowColor: '#64748B',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 6,
+      elevation: 2,
+    },
+    profileTop: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
+    avatar: {
+      width: 54,
+      height: 54,
+      borderRadius: radius.md,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    initial: { fontSize: 24, fontWeight: '700', color: colors.primary },
+    profileCopy: { flex: 1, minWidth: 0 },
+    eyebrow: {
+      fontSize: 10,
+      lineHeight: 16,
+      letterSpacing: 1.2,
+      color: colors.secondary,
+      fontWeight: '700',
+    },
+    name: { flexShrink: 1 },
+    profileMeta: { color: colors.secondary },
+    profileFooter: {
+      borderTopWidth: 1,
+      paddingTop: spacing.sm,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: spacing.sm,
+    },
+    patientBadge: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+    badgeText: { fontWeight: '600' },
+    profileLink: {
+      minHeight: 44,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+    },
+    linkText: { fontWeight: '600' },
+    sectionHeader: {
+      marginTop: spacing.sm,
+      gap: spacing.xs,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: '700',
+    },
+    grid: {
+      gap: spacing.md,
+    },
+    gridRow: {
+      flexDirection: 'row',
+      gap: spacing.md,
+    },
+    squareCard: {
+      flex: 1,
+      aspectRatio: 1,
+      borderWidth: 1,
+      borderRadius: radius.lg,
+      padding: spacing.md,
+      justifyContent: 'space-between',
+      shadowColor: '#64748B',
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity: 0.07,
+      shadowRadius: 8,
+      elevation: 2,
+    },
+    cardTopRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+    },
+    iconBox: {
+      width: 44,
+      height: 44,
+      borderRadius: radius.md,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    cardBottom: {
+      gap: 2,
+    },
+    cardTitle: {
+      fontSize: 15,
+      fontWeight: '700',
+      lineHeight: 20,
+    },
+    cardSubtitle: {
+      fontSize: 11,
+      lineHeight: 15,
+    },
+    pressed: {
+      opacity: 0.82,
+      transform: [{ scale: 0.98 }],
+    },
+  });

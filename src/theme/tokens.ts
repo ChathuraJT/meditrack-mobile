@@ -1,4 +1,4 @@
-import { useColorScheme } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 
 export const colors = {
   primary: '#145DA0',
@@ -6,11 +6,21 @@ export const colors = {
   background: '#F3F8FC',
   surface: '#FFFFFF',
   text: '#10234B',
-  secondary: '#64799A',
+  secondary: '#536884',
   border: '#DCE7F2',
   success: '#00AA8B',
   warning: '#F59E0B',
   error: '#B42318',
+  button: '#145DA0',
+  subtle: '#E8F4FB',
+  selected: '#D9F1F2',
+  warningSurface: '#FFF7DE',
+  warningText: '#8A5A00',
+  successSurface: '#DDF7EE',
+  successText: '#087A5B',
+  successButton: '#087A5B',
+  errorSurface: '#FDE4E1',
+  errorText: '#9F1239',
 };
 
 export const darkColors = {
@@ -19,11 +29,21 @@ export const darkColors = {
   background: '#082B50',
   surface: '#0C3154',
   text: '#FFFFFF',
-  secondary: '#94A3B8',
+  secondary: '#B8C8DB',
   border: '#1C4A75',
   success: '#34D399',
   warning: '#FBBF24',
   error: '#F87171',
+  button: '#1669A8',
+  subtle: '#133E68',
+  selected: '#144D55',
+  warningSurface: '#49391C',
+  warningText: '#FDE68A',
+  successSurface: '#123F39',
+  successText: '#8DE4C5',
+  successButton: '#12634F',
+  errorSurface: '#4A2738',
+  errorText: '#FFB5C3',
 };
 
 export function useThemeColors() {
@@ -39,4 +59,3 @@ export const typography = {
   body: { fontSize: 16, lineHeight: 25 },
   caption: { fontSize: 13, lineHeight: 20 },
 };
-

@@ -1,7 +1,8 @@
 import { useId, type Ref } from 'react';
-import { View, TextInput, StyleSheet, useColorScheme, type TextInputProps } from 'react-native';
+import { View, TextInput, StyleSheet, type TextInputProps } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import { AppText } from './AppText';
-import { colors, radius, spacing } from '@/theme/tokens';
+import { radius, spacing, useThemeColors } from '@/theme/tokens';
 
 type Props = TextInputProps & {
   label: string;
@@ -10,7 +11,15 @@ type Props = TextInputProps & {
   rightAccessory?: React.ReactNode;
 };
 
-export function AppInput({ label, error, style, rightAccessory, ...props }: Props) {
+export function AppInput({
+  label,
+  error,
+  style,
+  rightAccessory,
+  ...props
+}: Props) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const id = useId();
   const isDark = useColorScheme() === 'dark';
 
@@ -30,8 +39,14 @@ export function AppInput({ label, error, style, rightAccessory, ...props }: Prop
         style={[
           styles.inputWrapper,
           {
-            borderColor: error ? colors.error : (isDark ? '#2D557C' : colors.border),
-            backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : '#FFFFFF',
+            borderColor: error
+              ? colors.error
+              : isDark
+                ? '#2D557C'
+                : colors.border,
+            backgroundColor: isDark
+              ? 'rgba(255, 255, 255, 0.08)'
+              : colors.surface,
           },
         ]}
       >
@@ -52,7 +67,10 @@ export function AppInput({ label, error, style, rightAccessory, ...props }: Prop
         )}
       </View>
       {error && (
-        <AppText accessibilityLiveRegion="polite" style={{ color: isDark ? '#FCA5A5' : colors.error, fontSize: 13 }}>
+        <AppText
+          accessibilityLiveRegion="polite"
+          style={{ color: isDark ? '#FCA5A5' : colors.error, fontSize: 13 }}
+        >
           {error}
         </AppText>
       )}
@@ -60,27 +78,27 @@ export function AppInput({ label, error, style, rightAccessory, ...props }: Prop
   );
 }
 
-const styles = StyleSheet.create({
-  container: { gap: spacing.xs },
-  inputWrapper: {
-    minHeight: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1.5,
-    borderRadius: radius.sm,
-  },
-  input: {
-    flex: 1,
-    minHeight: 48,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    backgroundColor: 'transparent',
-    fontSize: 16,
-  },
-  accessory: {
-    paddingRight: spacing.sm,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    container: { gap: spacing.xs },
+    inputWrapper: {
+      minHeight: 50,
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 1.5,
+      borderRadius: radius.sm,
+    },
+    input: {
+      flex: 1,
+      minHeight: 48,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      backgroundColor: 'transparent',
+      fontSize: 16,
+    },
+    accessory: {
+      paddingRight: spacing.sm,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });

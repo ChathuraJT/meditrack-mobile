@@ -13,7 +13,7 @@ import CareCard from '@/components/ui/CareCard';
 import { careCardAccents } from '@/theme/careCard';
 import { AppText } from '@/components/ui/AppText';
 import { Screen } from '@/components/ui/Screen';
-import { colors, radius, spacing } from '@/theme/tokens';
+import { radius, spacing, useThemeColors } from '@/theme/tokens';
 import {
   dateKey,
   formatDate,
@@ -34,6 +34,8 @@ function getDemoScenario(): DemoScenario {
 }
 
 export function RecoveryScreen() {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const scenario = getDemoScenario();
   const [state, setState] = useState<DemoState | null>(null);
   const [loading, setLoading] = useState(true);
@@ -353,7 +355,14 @@ export function RecoveryScreen() {
                     value === severity && styles.numberActive,
                   ]}
                 >
-                  <AppText variant="caption">{value}</AppText>
+                  <AppText
+                    variant="caption"
+                    style={
+                      value === severity ? { color: '#FFFFFF' } : undefined
+                    }
+                  >
+                    {value}
+                  </AppText>
                 </Pressable>
               ))}
             </View>
@@ -367,12 +376,16 @@ export function RecoveryScreen() {
             />
             <AppText variant="caption">Side effects</AppText>
             <TextInput
+              placeholderTextColor={colors.secondary}
+              selectionColor={colors.primary}
               value={sideEffects}
               onChangeText={setSideEffects}
               placeholder="None reported / add details"
               style={styles.input}
             />
             <TextInput
+              placeholderTextColor={colors.secondary}
+              selectionColor={colors.primary}
               value={notes}
               onChangeText={setNotes}
               placeholder="Optional notes"
@@ -402,6 +415,8 @@ function ChoiceRow({
   selected: string;
   onSelect: (value: string) => void;
 }) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   return (
     <View style={styles.choiceRow}>
       {values.map((value) => (
@@ -417,133 +432,141 @@ function ChoiceRow({
   );
 }
 
-const styles = StyleSheet.create({
-  flex: { flex: 1 },
-  demoBanner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    backgroundColor: '#E8F4FB',
-    padding: spacing.sm,
-    borderRadius: radius.sm,
-  },
-  demoText: { color: colors.primary },
-  debugCard: { padding: spacing.sm },
-  debugLabel: { fontWeight: '700', marginBottom: spacing.xs },
-  scenarioWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
-  scenarioChip: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 20,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-  },
-  scenarioChipActive: {
-    backgroundColor: '#D9F1F2',
-    borderColor: colors.accent,
-  },
-  infoBanner: {
-    padding: spacing.sm,
-    backgroundColor: '#EFF6FF',
-    borderRadius: radius.sm,
-  },
-  warningBanner: {
-    padding: spacing.sm,
-    backgroundColor: '#FFF7DE',
-    borderRadius: radius.sm,
-  },
-  warningText: { color: '#8A5A00' },
-  cardHeading: { flexDirection: 'row', gap: spacing.sm },
-  approvedBadge: {
-    backgroundColor: '#DDF7EE',
-    borderRadius: 20,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    height: 28,
-  },
-  approvedText: { color: '#087A5B', fontWeight: '700' },
-  chart: { gap: spacing.xs, marginTop: spacing.md },
-  chartRow: { flexDirection: 'row', alignItems: 'flex-end', height: 38 },
-  axisLabel: { width: 24 },
-  barArea: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-around',
-    borderBottomWidth: 1,
-    borderColor: colors.border,
-    height: '100%',
-  },
-  barColumn: {
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    gap: 2,
-  },
-  bar: {
-    width: 20,
-    minHeight: 4,
-    backgroundColor: colors.accent,
-    borderRadius: 4,
-  },
-  awaitingBar: { backgroundColor: colors.warning },
-  simulated: { color: colors.secondary, fontStyle: 'italic' },
-  historyItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    paddingVertical: spacing.sm,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  historyDate: { fontWeight: '700' },
-  reviewPill: {
-    backgroundColor: '#DDF7EE',
-    padding: spacing.xs,
-    borderRadius: 14,
-  },
-  awaitingPill: { backgroundColor: '#FFF0D4' },
-  followUp: { color: colors.primary, fontWeight: '700' },
-  reset: { alignItems: 'center', padding: spacing.md },
-  detailsText: { color: colors.primary, fontWeight: '700' },
-  modalBackdrop: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(15, 23, 42, 0.35)',
-  },
-  sheet: {
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: radius.lg,
-    borderTopRightRadius: radius.lg,
-    padding: spacing.lg,
-    gap: spacing.md,
-  },
-  choiceRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
-  choice: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 20,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.sm,
-  },
-  choiceActive: { backgroundColor: '#D9F1F2', borderColor: colors.accent },
-  numberRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  numberButton: {
-    width: 26,
-    height: 32,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F1F5F9',
-  },
-  numberActive: { backgroundColor: colors.primary },
-  input: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.sm,
-    padding: spacing.md,
-    color: colors.text,
-  },
-  notesInput: { minHeight: 64, textAlignVertical: 'top' },
-  cancel: { color: colors.secondary, textAlign: 'center', padding: spacing.sm },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    flex: { flex: 1 },
+    demoBanner: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      backgroundColor: colors.subtle,
+      padding: spacing.sm,
+      borderRadius: radius.sm,
+    },
+    demoText: { color: colors.primary },
+    debugCard: { padding: spacing.sm },
+    debugLabel: { fontWeight: '700', marginBottom: spacing.xs },
+    scenarioWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
+    scenarioChip: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: 20,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs,
+    },
+    scenarioChipActive: {
+      backgroundColor: colors.selected,
+      borderColor: colors.accent,
+    },
+    infoBanner: {
+      padding: spacing.sm,
+      backgroundColor: colors.subtle,
+      borderRadius: radius.sm,
+    },
+    warningBanner: {
+      padding: spacing.sm,
+      backgroundColor: colors.warningSurface,
+      borderRadius: radius.sm,
+    },
+    warningText: { color: colors.warningText },
+    cardHeading: { flexDirection: 'row', gap: spacing.sm },
+    approvedBadge: {
+      backgroundColor: colors.successSurface,
+      borderRadius: 20,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs,
+      height: 28,
+    },
+    approvedText: { color: colors.successText, fontWeight: '700' },
+    chart: { gap: spacing.xs, marginTop: spacing.md },
+    chartRow: { flexDirection: 'row', alignItems: 'flex-end', height: 38 },
+    axisLabel: { width: 24 },
+    barArea: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'space-around',
+      borderBottomWidth: 1,
+      borderColor: colors.border,
+      height: '100%',
+    },
+    barColumn: {
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      gap: 2,
+    },
+    bar: {
+      width: 20,
+      minHeight: 4,
+      backgroundColor: colors.accent,
+      borderRadius: 4,
+    },
+    awaitingBar: { backgroundColor: colors.warning },
+    simulated: { color: colors.secondary, fontStyle: 'italic' },
+    historyItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      paddingVertical: spacing.sm,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.border,
+    },
+    historyDate: { fontWeight: '700' },
+    reviewPill: {
+      backgroundColor: colors.successSurface,
+      padding: spacing.xs,
+      borderRadius: 14,
+    },
+    awaitingPill: { backgroundColor: colors.warningSurface },
+    followUp: { color: colors.primary, fontWeight: '700' },
+    reset: { alignItems: 'center', padding: spacing.md },
+    detailsText: { color: colors.primary, fontWeight: '700' },
+    modalBackdrop: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      backgroundColor: 'rgba(15, 23, 42, 0.35)',
+    },
+    sheet: {
+      backgroundColor: colors.surface,
+      borderTopLeftRadius: radius.lg,
+      borderTopRightRadius: radius.lg,
+      padding: spacing.lg,
+      gap: spacing.md,
+    },
+    choiceRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+    choice: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: 20,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.sm,
+    },
+    choiceActive: {
+      backgroundColor: colors.selected,
+      borderColor: colors.accent,
+    },
+    numberRow: { flexDirection: 'row', justifyContent: 'space-between' },
+    numberButton: {
+      width: 26,
+      height: 32,
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.subtle,
+    },
+    numberActive: { backgroundColor: colors.button },
+    input: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: radius.sm,
+      padding: spacing.md,
+      color: colors.text,
+    },
+    notesInput: { minHeight: 64, textAlignVertical: 'top' },
+    cancel: {
+      color: colors.secondary,
+      textAlign: 'center',
+      padding: spacing.sm,
+    },
+  });

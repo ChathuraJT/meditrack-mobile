@@ -1,14 +1,17 @@
-import { View, StyleSheet, useColorScheme } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import { router } from 'expo-router';
 import { AuthScreen, TextAction, formStyles } from '@/features/auth/components';
 import { AppCard } from '@/components/ui/AppCard';
 import { AppText } from '@/components/ui/AppText';
 import { AppInput } from '@/components/ui/AppInput';
 import { AppButton } from '@/components/ui/AppButton';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing, useThemeColors } from '@/theme/tokens';
 import { useState } from 'react';
 
 export default function ForgotPasswordScreen() {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const isDark = useColorScheme() === 'dark';
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -23,10 +26,18 @@ export default function ForgotPasswordScreen() {
           <View style={formStyles.stack}>
             {submitted ? (
               <View style={styles.confirmation}>
-                <AppText style={[styles.confirmTitle, { color: isDark ? '#38BDF8' : colors.primary }]}>Check your inbox</AppText>
+                <AppText
+                  style={[
+                    styles.confirmTitle,
+                    { color: isDark ? '#38BDF8' : colors.primary },
+                  ]}
+                >
+                  Check your inbox
+                </AppText>
 
                 <AppText muted style={styles.confirmText}>
-                  If an account exists for {emailOrPhone}, we have sent password reset instructions.
+                  If an account exists for {emailOrPhone}, we have sent password
+                  reset instructions.
                 </AppText>
               </View>
             ) : (
@@ -56,19 +67,20 @@ export default function ForgotPasswordScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  confirmation: {
-    paddingVertical: spacing.md,
-    gap: spacing.sm,
-    alignItems: 'center',
-  },
-  confirmTitle: {
-    fontWeight: '600',
-    fontSize: 18,
-    color: colors.primary,
-    textAlign: 'center',
-  },
-  confirmText: {
-    textAlign: 'center',
-  },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    confirmation: {
+      paddingVertical: spacing.md,
+      gap: spacing.sm,
+      alignItems: 'center',
+    },
+    confirmTitle: {
+      fontWeight: '600',
+      fontSize: 18,
+      color: colors.primary,
+      textAlign: 'center',
+    },
+    confirmText: {
+      textAlign: 'center',
+    },
+  });

@@ -61,7 +61,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [draft, setDraft] = useState(emptyDraft);
   const [pendingPhone, setPendingPhone] = useState('');
   const [smsSentAt, setSmsSentAt] = useState(0);
-  
+
   const userId = useRef<number | undefined>(undefined);
 
   const clearUserData = useCallback(() => {
@@ -72,19 +72,22 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setSmsSentAt(0);
   }, []);
 
-  const applySession = useCallback((next: DjangoSession | null) => {
-    if (userId.current !== next?.user.id) {
-      void queryClient.cancelQueries();
-      queryClient.clear();
-      if (userId.current) clearUserData();
-    }
-    userId.current = next?.user.id;
-    setSession(next);
-    if (next) {
-      setOnboarded(true);
-      void AsyncStorage.setItem(onboardingKey, 'true').catch(() => {});
-    }
-  }, [clearUserData]);
+  const applySession = useCallback(
+    (next: DjangoSession | null) => {
+      if (userId.current !== next?.user.id) {
+        void queryClient.cancelQueries();
+        queryClient.clear();
+        if (userId.current) clearUserData();
+      }
+      userId.current = next?.user.id;
+      setSession(next);
+      if (next) {
+        setOnboarded(true);
+        void AsyncStorage.setItem(onboardingKey, 'true').catch(() => {});
+      }
+    },
+    [clearUserData],
+  );
 
   useEffect(() => {
     let active = true;
@@ -98,7 +101,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
         if (apiConfigured) {
           try {
             const data = await apiFetch('/session/');
-            if (!data || !('user' in data)) throw new Error('Invalid session response');
+            if (!data || !('user' in data))
+              throw new Error('Invalid session response');
             if (active) applySession(data.user ? { user: data.user } : null);
           } catch (e: any) {
             if (e?.status === 401 || e?.status === 403) {
@@ -112,7 +116,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
         }
       } catch {
         if (active) {
-          setError('We couldn’t restore your account or local setup. Check your connection and retry.');
+          setError(
+            'We couldn’t restore your account or local setup. Check your connection and retry.',
+          );
         }
       } finally {
         if (active) setInitializing(false);
@@ -132,7 +138,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const signIn = async () => {
     // Confirm the server cookie was retained before exposing protected screens.
     const data = await apiFetch('/session/');
-    if (!data?.user?.id) throw new Error('The login session could not be restored.');
+    if (!data?.user?.id)
+      throw new Error('The login session could not be restored.');
     await clearSessionToken();
     setError(null);
     applySession({ user: data.user });

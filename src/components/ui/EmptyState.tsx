@@ -2,13 +2,14 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import type { ComponentProps } from 'react';
 import { AppCard } from './AppCard';
 import { AppText } from './AppText';
-import { colors } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/tokens';
 type Props = {
   icon: ComponentProps<typeof Ionicons>['name'];
   title: string;
   description: string;
 };
 export function EmptyState({ icon, title, description }: Props) {
+  const colors = useThemeColors();
   return (
     <AppCard>
       <Ionicons

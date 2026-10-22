@@ -1,4 +1,4 @@
-import { useColorScheme } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import { darkColors } from './tokens';
 
 export const careCardAccents = {

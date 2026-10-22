@@ -18,7 +18,7 @@ import CareCard from '@/components/ui/CareCard';
 import { useCareCardColors } from '@/theme/careCard';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { apiFetch } from '@/lib/api';
-import { colors, spacing, radius } from '@/theme/tokens';
+import { spacing, radius, useThemeColors } from '@/theme/tokens';
 
 interface Doctor {
   doctor_id: string;
@@ -50,8 +50,9 @@ interface QueueStatus {
 }
 
 export function ChannelDoctorScreen() {
+  const colors = useThemeColors();
   const cardTheme = useCareCardColors();
-  const styles = createStyles(cardTheme);
+  const styles = createStyles(cardTheme, colors);
   const { session } = useAuth();
   const username = session?.user?.username || '';
 
@@ -514,7 +515,9 @@ export function ChannelDoctorScreen() {
                         paddingHorizontal: 12,
                         paddingVertical: 7,
                         borderRadius: 14,
-                        backgroundColor: isSelected ? '#FFFFFF' : '#3B076470',
+                        backgroundColor: isSelected
+                          ? colors.surface
+                          : '#3B076470',
                         borderWidth: 1.5,
                         borderColor: isSelected
                           ? '#C084FC'
@@ -537,7 +540,7 @@ export function ChannelDoctorScreen() {
                         style={{
                           fontSize: 12,
                           fontWeight: isSelected ? '800' : '600',
-                          color: isSelected ? '#145DA0' : '#FFFFFF',
+                          color: isSelected ? colors.primary : '#FFFFFF',
                         }}
                       >
                         {doc.doctors_name}
@@ -545,7 +548,9 @@ export function ChannelDoctorScreen() {
                       {doc.is_available ? (
                         <View
                           style={{
-                            backgroundColor: isSelected ? '#DCFCE7' : '#16A34A',
+                            backgroundColor: isSelected
+                              ? colors.successSurface
+                              : colors.successButton,
                             paddingHorizontal: 5,
                             paddingVertical: 1,
                             borderRadius: 6,
@@ -555,7 +560,9 @@ export function ChannelDoctorScreen() {
                             style={{
                               fontSize: 9,
                               fontWeight: '800',
-                              color: isSelected ? '#15803D' : '#FFFFFF',
+                              color: isSelected
+                                ? colors.successText
+                                : '#FFFFFF',
                             }}
                           >
                             LIVE
@@ -565,7 +572,7 @@ export function ChannelDoctorScreen() {
                         <AppText
                           style={{
                             fontSize: 9,
-                            color: isSelected ? '#64799A' : '#A855F7',
+                            color: isSelected ? colors.secondary : '#A855F7',
                             fontWeight: '500',
                           }}
                         >
@@ -687,14 +694,15 @@ export function ChannelDoctorScreen() {
               paddingVertical: 7,
               borderRadius: 20,
               backgroundColor:
-                consultantFilter === 'all' ? '#145DA0' : '#F1F5F9',
+                consultantFilter === 'all' ? colors.button : colors.subtle,
             }}
           >
             <AppText
               style={{
                 fontSize: 12,
                 fontWeight: '700',
-                color: consultantFilter === 'all' ? '#FFFFFF' : '#64799A',
+                color:
+                  consultantFilter === 'all' ? '#FFFFFF' : colors.secondary,
               }}
             >
               All Doctors ({doctors.length})
@@ -711,7 +719,9 @@ export function ChannelDoctorScreen() {
               paddingVertical: 7,
               borderRadius: 20,
               backgroundColor:
-                consultantFilter === 'available' ? '#16A34A' : '#DCFCE7',
+                consultantFilter === 'available'
+                  ? colors.successButton
+                  : colors.successSurface,
               borderWidth: 1,
               borderColor: '#86EFAC',
             }}
@@ -722,14 +732,19 @@ export function ChannelDoctorScreen() {
                 height: 7,
                 borderRadius: 4,
                 backgroundColor:
-                  consultantFilter === 'available' ? '#FFFFFF' : '#16A34A',
+                  consultantFilter === 'available'
+                    ? '#FFFFFF'
+                    : colors.successText,
               }}
             />
             <AppText
               style={{
                 fontSize: 12,
                 fontWeight: '800',
-                color: consultantFilter === 'available' ? '#FFFFFF' : '#15803D',
+                color:
+                  consultantFilter === 'available'
+                    ? '#FFFFFF'
+                    : colors.successText,
               }}
             >
               Available Now ({doctors.filter((d) => d.is_available).length})
@@ -796,7 +811,7 @@ export function ChannelDoctorScreen() {
                     {doc.is_available ? (
                       <View
                         style={{
-                          backgroundColor: '#DCFCE7',
+                          backgroundColor: colors.successSurface,
                           paddingHorizontal: 8,
                           paddingVertical: 2,
                           borderRadius: 12,
@@ -812,13 +827,13 @@ export function ChannelDoctorScreen() {
                             width: 6,
                             height: 6,
                             borderRadius: 3,
-                            backgroundColor: '#16A34A',
+                            backgroundColor: colors.successText,
                           }}
                         />
                         <AppText
                           variant="caption"
                           style={{
-                            color: '#15803D',
+                            color: colors.successText,
                             fontWeight: '700',
                             fontSize: 10,
                           }}
@@ -856,7 +871,9 @@ export function ChannelDoctorScreen() {
                 <Pressable
                   style={[
                     styles.docBookButton,
-                    doc.is_available && { backgroundColor: '#16A34A' },
+                    doc.is_available && {
+                      backgroundColor: colors.successButton,
+                    },
                   ]}
                   disabled={queueUnavailable || loadingQueue}
                   accessibilityState={{
@@ -905,7 +922,11 @@ export function ChannelDoctorScreen() {
                 </AppText>
               </View>
               <Pressable onPress={closeBooking}>
-                <Ionicons name="close-circle" size={26} color="#64799A" />
+                <Ionicons
+                  name="close-circle"
+                  size={26}
+                  color={colors.secondary}
+                />
               </Pressable>
             </View>
 
@@ -932,7 +953,7 @@ export function ChannelDoctorScreen() {
                 variant="caption"
                 style={{
                   fontWeight: '700',
-                  color: '#475569',
+                  color: colors.secondary,
                   marginBottom: 6,
                   fontSize: 11,
                   textTransform: 'uppercase',
@@ -959,7 +980,7 @@ export function ChannelDoctorScreen() {
                         paddingHorizontal: 10,
                         paddingVertical: 6,
                         borderRadius: 12,
-                        backgroundColor: isCur ? '#145DA0' : '#F1F5F9',
+                        backgroundColor: isCur ? colors.button : colors.subtle,
                         borderWidth: 1,
                         borderColor: isCur
                           ? '#145DA0'
@@ -976,7 +997,7 @@ export function ChannelDoctorScreen() {
                           backgroundColor: isCur
                             ? '#FFFFFF'
                             : doc.is_available
-                              ? '#16A34A'
+                              ? colors.successText
                               : '#94A3B8',
                         }}
                       />
@@ -984,7 +1005,7 @@ export function ChannelDoctorScreen() {
                         style={{
                           fontSize: 11,
                           fontWeight: isCur ? '800' : '600',
-                          color: isCur ? '#FFFFFF' : '#1E293B',
+                          color: isCur ? '#FFFFFF' : colors.text,
                         }}
                       >
                         {doc.doctors_name}
@@ -994,7 +1015,7 @@ export function ChannelDoctorScreen() {
                           style={{
                             fontSize: 9,
                             fontWeight: '700',
-                            color: isCur ? '#A7F3D0' : '#15803D',
+                            color: isCur ? '#A7F3D0' : colors.successText,
                           }}
                         >
                           LIVE
@@ -1049,7 +1070,11 @@ export function ChannelDoctorScreen() {
             ) : availability ? (
               availability.available ? (
                 <View style={styles.availBoxGreen}>
-                  <Ionicons name="checkmark-circle" size={18} color="#059669" />
+                  <Ionicons
+                    name="checkmark-circle"
+                    size={18}
+                    color={colors.successText}
+                  />
                   <View style={{ flex: 1 }}>
                     <AppText style={styles.availTitleGreen}>
                       Doctor Available on Selected Date
@@ -1142,7 +1167,7 @@ export function ChannelDoctorScreen() {
                 Digital Clinic Pass
               </AppText>
               <Pressable onPress={() => setPassModalVisible(false)}>
-                <Ionicons name="close" size={22} color="#64799A" />
+                <Ionicons name="close" size={22} color={colors.secondary} />
               </Pressable>
             </View>
 
@@ -1193,7 +1218,7 @@ export function ChannelDoctorScreen() {
                 </AppText>
                 <AppText
                   variant="caption"
-                  style={{ fontWeight: '700', color: '#D97706' }}
+                  style={{ fontWeight: '700', color: colors.warningText }}
                 >
                   {activeAppt?.current_serving_token || '#01'} (
                   {activeAppt?.patients_ahead || 0} Ahead)
@@ -1205,7 +1230,7 @@ export function ChannelDoctorScreen() {
                 </AppText>
                 <AppText
                   variant="caption"
-                  style={{ fontWeight: '700', color: '#059669' }}
+                  style={{ fontWeight: '700', color: colors.successText }}
                 >
                   {activeAppt?.estimated_time || 'Not provided'} (~
                   {activeAppt?.estimated_wait_minutes || 0} mins)
@@ -1228,7 +1253,10 @@ export function ChannelDoctorScreen() {
 
 export default ChannelDoctorScreen;
 
-const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
+const createStyles = (
+  cardTheme: ReturnType<typeof useCareCardColors>,
+  colors: ReturnType<typeof useThemeColors>,
+) =>
   StyleSheet.create({
     queueCard: { padding: spacing.md, gap: spacing.md },
     queueHeader: {
@@ -1364,7 +1392,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       fontSize: 10,
     },
     viewPassButton: {
-      backgroundColor: '#FFFFFF',
+      backgroundColor: colors.surface,
       paddingHorizontal: 12,
       paddingVertical: 7,
       borderRadius: 10,
@@ -1389,7 +1417,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       width: 34,
       height: 34,
       borderRadius: 10,
-      backgroundColor: '#DBEAFE',
+      backgroundColor: colors.subtle,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -1406,9 +1434,9 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
     searchBar: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: '#F3F8FC',
+      backgroundColor: colors.background,
       borderWidth: 1,
-      borderColor: '#DCE7F2',
+      borderColor: colors.border,
       borderRadius: radius.md,
       paddingHorizontal: spacing.sm,
       gap: spacing.xs,
@@ -1432,7 +1460,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       width: 28,
       height: 28,
       borderRadius: 8,
-      backgroundColor: '#145DA0',
+      backgroundColor: colors.button,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -1442,9 +1470,9 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       fontSize: 11,
     },
     regBadge: {
-      backgroundColor: '#FFFFFF',
+      backgroundColor: colors.surface,
       borderWidth: 1,
-      borderColor: '#DCE7F2',
+      borderColor: colors.border,
       paddingHorizontal: 6,
       paddingVertical: 1,
       borderRadius: 6,
@@ -1471,7 +1499,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       marginTop: 6,
       paddingVertical: 8,
       borderRadius: 8,
-      backgroundColor: '#145DA0',
+      backgroundColor: colors.button,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
@@ -1492,7 +1520,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
     bookingModalContent: {
       width: '100%',
       maxWidth: 440,
-      backgroundColor: '#FFFFFF',
+      backgroundColor: colors.surface,
       borderRadius: radius.lg,
       padding: spacing.lg,
       gap: spacing.md,
@@ -1511,9 +1539,9 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       flexDirection: 'row',
       alignItems: 'center',
       gap: spacing.sm,
-      backgroundColor: '#F3F8FC',
+      backgroundColor: colors.background,
       borderWidth: 1,
-      borderColor: '#DCE7F2',
+      borderColor: colors.border,
       padding: spacing.sm,
       borderRadius: radius.md,
     },
@@ -1522,16 +1550,16 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
     },
     fieldLabel: {
       fontWeight: '700',
-      color: '#475569',
+      color: colors.secondary,
       fontSize: 11,
     },
     dateInputRow: {
       flexDirection: 'row',
       alignItems: 'center',
       gap: spacing.xs,
-      backgroundColor: '#F3F8FC',
+      backgroundColor: colors.background,
       borderWidth: 1,
-      borderColor: '#CBD5E1',
+      borderColor: colors.border,
       borderRadius: 8,
       paddingHorizontal: spacing.sm,
       height: 40,
@@ -1543,9 +1571,9 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       color: cardTheme.heading,
     },
     reasonInput: {
-      backgroundColor: '#F3F8FC',
+      backgroundColor: colors.background,
       borderWidth: 1,
-      borderColor: '#CBD5E1',
+      borderColor: colors.border,
       borderRadius: 8,
       padding: spacing.sm,
       fontSize: 12,
@@ -1557,7 +1585,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       alignItems: 'center',
       gap: spacing.xs,
       padding: spacing.sm,
-      backgroundColor: '#F1F5F9',
+      backgroundColor: colors.subtle,
       borderRadius: 8,
     },
     availBoxGreen: {
@@ -1565,18 +1593,18 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       alignItems: 'center',
       gap: spacing.xs,
       padding: spacing.sm,
-      backgroundColor: '#ECFDF5',
+      backgroundColor: colors.successSurface,
       borderWidth: 1,
-      borderColor: '#A7F3D0',
+      borderColor: colors.border,
       borderRadius: 8,
     },
     availTitleGreen: {
       fontWeight: '800',
-      color: '#065F46',
+      color: colors.successText,
       fontSize: 12,
     },
     availDescGreen: {
-      color: '#047857',
+      color: colors.successText,
       fontSize: 11,
     },
     availBoxAmber: {
@@ -1584,22 +1612,22 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       alignItems: 'center',
       gap: spacing.xs,
       padding: spacing.sm,
-      backgroundColor: '#FFFBEB',
+      backgroundColor: colors.warningSurface,
       borderWidth: 1,
-      borderColor: '#FDE68A',
+      borderColor: colors.border,
       borderRadius: 8,
     },
     availTitleAmber: {
       fontWeight: '800',
-      color: '#92400E',
+      color: colors.warningText,
       fontSize: 12,
     },
     availDescAmber: {
-      color: '#B45309',
+      color: colors.warningText,
       fontSize: 11,
     },
     confirmBookingButton: {
-      backgroundColor: '#145DA0',
+      backgroundColor: colors.button,
       paddingVertical: 12,
       borderRadius: radius.md,
       alignItems: 'center',
@@ -1617,7 +1645,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
     modalContent: {
       width: '100%',
       maxWidth: 400,
-      backgroundColor: '#FFFFFF',
+      backgroundColor: colors.surface,
       borderRadius: radius.lg,
       padding: spacing.lg,
       gap: spacing.md,
@@ -1652,7 +1680,7 @@ const createStyles = (cardTheme: ReturnType<typeof useCareCardColors>) =>
       paddingVertical: 2,
     },
     modalCloseButton: {
-      backgroundColor: '#145DA0',
+      backgroundColor: colors.button,
       paddingVertical: 12,
       borderRadius: radius.md,
       alignItems: 'center',
