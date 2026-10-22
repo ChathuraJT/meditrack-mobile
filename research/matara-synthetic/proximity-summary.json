@@ -1,0 +1,11 @@
+{
+  "config": {
+    "radius_m": 50,
+    "min_overlap_minutes": 5
+  },
+  "visit_rows": 2800,
+  "pair_rows": 1841,
+  "ble_rows": 91,
+  "source_episode_rows": 157,
+  "disease_exposure_rows": 22092
+}

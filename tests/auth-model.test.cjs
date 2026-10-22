@@ -21,6 +21,7 @@ const {
   normalizePhone,
   optionalEmail,
   signupSchema,
+  loginSchema,
   launchDestination,
   authErrorMessage,
 } = modelModule.exports;
@@ -42,7 +43,16 @@ test('identifier distinguishes email and phone without account lookup', () => {
   assert.deepEqual(parseIdentifier('077 123 4567'), { phone: '+94771234567' });
   assert.equal(parseIdentifier('bad@'), null);
   assert.equal(parseIdentifier(''), null);
-  assert.equal(parseIdentifier('1234'), null);
+  assert.deepEqual(parseIdentifier('1234'), { username: '1234' });
+});
+test('login accepts backend usernames and emails without changing passwords', () => {
+  for (const identifier of ['patient-one', '1234', 'patient@example.com']) {
+    assert.deepEqual(loginSchema.parse({ identifier: ` ${identifier} `, password: ' secret ' }), {
+      identifier, password: ' secret ',
+    });
+  }
+  assert.equal(loginSchema.safeParse({ identifier: ' ', password: 'secret' }).success, false);
+  assert.equal(loginSchema.safeParse({ identifier: 'patient', password: '' }).success, false);
 });
 test('Sri Lankan local and international numbers normalize to E.164', () => {
   assert.equal(normalizePhone('0771234567'), '+94771234567');

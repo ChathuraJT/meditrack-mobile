@@ -1,11 +1,6 @@
 import React, { useMemo } from 'react';
-import {
-  StyleSheet,
-  View,
-  useColorScheme,
-  type StyleProp,
-  type ViewStyle,
-} from 'react-native';
+import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import Svg, {
   Circle,
   Defs,

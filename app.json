@@ -24,6 +24,15 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      [
+        "react-native-ble-plx",
+        {
+          "isBackgroundEnabled": false,
+          "neverForLocation": true,
+          "modes": [],
+          "bluetoothAlwaysPermission": "MediTrack uses Bluetooth to show nearby devices while you scan. Scan results are not uploaded."
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
@@ -33,7 +42,16 @@
           "imageWidth": 76
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "MediTrack uses your location while you use the app to save your location history for exposure checks.",
+          "isIosBackgroundLocationEnabled": false,
+          "isAndroidBackgroundLocationEnabled": false,
+          "isAndroidForegroundServiceEnabled": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

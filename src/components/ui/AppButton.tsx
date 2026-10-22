@@ -2,11 +2,10 @@ import {
   ActivityIndicator,
   Pressable,
   StyleSheet,
-  useColorScheme,
   type PressableProps,
 } from 'react-native';
 import { AppText } from './AppText';
-import { colors, radius, spacing } from '@/theme/tokens';
+import { radius, spacing, useThemeColors } from '@/theme/tokens';
 
 type Props = Omit<PressableProps, 'children'> & {
   label: string;
@@ -20,7 +19,8 @@ export function AppButton({
   style,
   ...props
 }: Props) {
-  const isDark = useColorScheme() === 'dark';
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const unavailable = disabled || loading;
 
   return (
@@ -32,33 +32,34 @@ export function AppButton({
       disabled={unavailable}
       style={(state) => [
         styles.button,
-        { backgroundColor: isDark ? '#0284C7' : colors.primary },
+        { backgroundColor: colors.button },
         (unavailable || state.pressed) && styles.dimmed,
         typeof style === 'function' ? style(state) : style,
       ]}
     >
-      {loading && <ActivityIndicator color={colors.surface} />}
+      {loading && <ActivityIndicator color="#FFFFFF" />}
       <AppText style={styles.label}>{label}</AppText>
     </Pressable>
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    minHeight: 48,
-    borderRadius: radius.sm,
-    backgroundColor: colors.primary,
-    padding: spacing.md,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing.sm,
-  },
-  label: {
-    color: colors.surface,
-    fontWeight: '600',
-    flexShrink: 1,
-    textAlign: 'center',
-  },
-  dimmed: { opacity: 0.55 },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    button: {
+      minHeight: 48,
+      borderRadius: radius.sm,
+      backgroundColor: colors.button,
+      padding: spacing.md,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: spacing.sm,
+    },
+    label: {
+      color: '#FFFFFF',
+      fontWeight: '600',
+      flexShrink: 1,
+      textAlign: 'center',
+    },
+    dimmed: { opacity: 0.55 },
+  });

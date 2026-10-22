@@ -2,21 +2,11 @@ import { MedicalPatternBackground } from '@/components/MedicalPatternBackground'
 import { AppButton } from '@/components/ui/AppButton';
 import { AppText } from '@/components/ui/AppText';
 import { useAuth } from '@/features/auth/AuthProvider';
-import { colors, spacing } from '@/theme/tokens';
+import { spacing, useThemeColors } from '@/theme/tokens';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useRef, useState } from 'react';
-import {
-  Animated,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-  useColorScheme,
-  type NativeScrollEvent,
-  type NativeSyntheticEvent,
-} from 'react-native';
+import { Animated, Platform, Pressable, ScrollView, StyleSheet, useWindowDimensions, View, type NativeScrollEvent, type NativeSyntheticEvent } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { OnboardingArtwork, type Scene } from './OnboardingArtwork';
@@ -28,29 +18,31 @@ const slides: {
   scene: Scene;
   label: string;
 }[] = [
-    {
-      title: 'Smarter healthcare starts here',
-      description:
-        'Record your symptoms and connect with suitable doctors for your next step.',
-      scene: 'consultation',
-      label: 'CARE THAT STARTS WITH YOU',
-    },
-    {
-      title: 'Stay on track with your recovery',
-      description:
-        'Keep track of prescribed medicines, record your progress, and share recovery updates.',
-      scene: 'recovery',
-      label: 'SMALL STEPS, STEADY SUPPORT',
-    },
-    {
-      title: 'Stay informed. Stay in control.',
-      description:
-        'Choose whether to enable nearby exposure alerts and explore privacy-aware area risk information.',
-      scene: 'privacy',
-      label: 'YOUR CHOICES COME FIRST',
-    },
-  ];
+  {
+    title: 'Smarter healthcare starts here',
+    description:
+      'Record your symptoms and connect with suitable doctors for your next step.',
+    scene: 'consultation',
+    label: 'CARE THAT STARTS WITH YOU',
+  },
+  {
+    title: 'Stay on track with your recovery',
+    description:
+      'Keep track of prescribed medicines, record your progress, and share recovery updates.',
+    scene: 'recovery',
+    label: 'SMALL STEPS, STEADY SUPPORT',
+  },
+  {
+    title: 'Stay informed. Stay in control.',
+    description:
+      'Choose whether to enable nearby exposure alerts and explore privacy-aware area risk information.',
+    scene: 'privacy',
+    label: 'YOUR CHOICES COME FIRST',
+  },
+];
 export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const isDark = useColorScheme() === 'dark';
   const brandColor = isDark ? '#38BDF8' : colors.primary;
   const dotTrackColor = isDark ? '#1C4A75' : colors.border;
@@ -132,7 +124,9 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
               />
             </View>
           )}
-          <AppText style={[styles.brand, { color: brandColor }]}>MediTrack</AppText>
+          <AppText style={[styles.brand, { color: brandColor }]}>
+            MediTrack
+          </AppText>
           {index < 2 ? (
             <Pressable
               accessibilityRole="button"
@@ -140,7 +134,10 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
               disabled={busy}
               style={styles.headerAction}
             >
-              <AppText variant="caption" style={{ color: brandColor, fontWeight: '600' }}>
+              <AppText
+                variant="caption"
+                style={{ color: brandColor, fontWeight: '600' }}
+              >
                 Skip
               </AppText>
             </Pressable>
@@ -178,45 +175,45 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
             const artworkMotion = reduceMotion
               ? undefined
               : {
-                opacity: fade,
-                transform: [
-                  {
-                    translateX: scrollX.interpolate({
-                      inputRange,
-                      outputRange: [-width * 0.14, 0, width * 0.14],
-                      extrapolate: 'clamp',
-                    }),
-                  },
-                  {
-                    scale: scrollX.interpolate({
-                      inputRange,
-                      outputRange: [0.9, 1, 0.9],
-                      extrapolate: 'clamp',
-                    }),
-                  },
-                ],
-              };
+                  opacity: fade,
+                  transform: [
+                    {
+                      translateX: scrollX.interpolate({
+                        inputRange,
+                        outputRange: [-width * 0.14, 0, width * 0.14],
+                        extrapolate: 'clamp',
+                      }),
+                    },
+                    {
+                      scale: scrollX.interpolate({
+                        inputRange,
+                        outputRange: [0.9, 1, 0.9],
+                        extrapolate: 'clamp',
+                      }),
+                    },
+                  ],
+                };
             const textMotion = reduceMotion
               ? undefined
               : {
-                opacity: fade,
-                transform: [
-                  {
-                    translateX: scrollX.interpolate({
-                      inputRange,
-                      outputRange: [-width * 0.05, 0, width * 0.05],
-                      extrapolate: 'clamp',
-                    }),
-                  },
-                  {
-                    translateY: scrollX.interpolate({
-                      inputRange,
-                      outputRange: [22, 0, 22],
-                      extrapolate: 'clamp',
-                    }),
-                  },
-                ],
-              };
+                  opacity: fade,
+                  transform: [
+                    {
+                      translateX: scrollX.interpolate({
+                        inputRange,
+                        outputRange: [-width * 0.05, 0, width * 0.05],
+                        extrapolate: 'clamp',
+                      }),
+                    },
+                    {
+                      translateY: scrollX.interpolate({
+                        inputRange,
+                        outputRange: [22, 0, 22],
+                        extrapolate: 'clamp',
+                      }),
+                    },
+                  ],
+                };
             return (
               <ScrollView
                 key={slide.scene}
@@ -235,17 +232,29 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                   />
                 </Animated.View>
                 <Animated.View style={[styles.copy, textMotion]}>
-                  <AppText variant="caption" style={[styles.eyebrow, { color: eyebrowColor }]}>
+                  <AppText
+                    variant="caption"
+                    style={[styles.eyebrow, { color: eyebrowColor }]}
+                  >
                     {slide.label}
                   </AppText>
                   <AppText
                     variant="title"
                     accessibilityRole="header"
-                    style={[styles.title, { color: titleColor, fontWeight: '700' }]}
+                    style={[
+                      styles.title,
+                      { color: titleColor, fontWeight: '700' },
+                    ]}
                   >
                     {slide.title}
                   </AppText>
-                  <AppText muted style={[styles.description, { color: descColor, fontSize: 16, lineHeight: 24 }]}>
+                  <AppText
+                    muted
+                    style={[
+                      styles.description,
+                      { color: descColor, fontSize: 16, lineHeight: 24 },
+                    ]}
+                  >
                     {slide.description}
                   </AppText>
                 </Animated.View>
@@ -269,7 +278,9 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                 onPress={() => goTo(page)}
                 style={styles.dotTarget}
               >
-                <View style={[styles.dotTrack, { backgroundColor: dotTrackColor }]} />
+                <View
+                  style={[styles.dotTrack, { backgroundColor: dotTrackColor }]}
+                />
                 <Animated.View
                   style={[
                     styles.dot,
@@ -280,14 +291,14 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
                           ? 1
                           : 0
                         : scrollX.interpolate({
-                          inputRange: [
-                            (page - 1) * width,
-                            page * width,
-                            (page + 1) * width,
-                          ],
-                          outputRange: [0, 1, 0],
-                          extrapolate: 'clamp',
-                        }),
+                            inputRange: [
+                              (page - 1) * width,
+                              page * width,
+                              (page + 1) * width,
+                            ],
+                            outputRange: [0, 1, 0],
+                            extrapolate: 'clamp',
+                          }),
                     },
                   ]}
                 />
@@ -304,85 +315,97 @@ export function OnboardingScreen({ onComplete }: { onComplete?: () => void }) {
             loading={busy}
             onPress={() => (index === 2 ? void finish() : goTo(index + 1))}
           />
-          <AppText variant="caption" muted style={[styles.note, { color: isDark ? '#94A3B8' : colors.secondary }]}>
+          <AppText
+            variant="caption"
+            muted
+            style={[
+              styles.note,
+              { color: isDark ? '#94A3B8' : colors.secondary },
+            ]}
+          >
             {index === 2
               ? 'Continuing does not grant location or health-data consent.'
               : 'A thoughtful start to your care journey.'}
           </AppText>
         </View>
-
       </SafeAreaView>
     </MedicalPatternBackground>
   );
 }
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: 'transparent' },
-  top: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: spacing.md,
-    minHeight: 64,
-  },
-  headerAction: {
-    minWidth: 48,
-    minHeight: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  brand: {
-    color: colors.primary,
-    fontWeight: '700',
-    fontSize: 18,
-    letterSpacing: 0.2,
-  },
-  pager: { flex: 1 },
-  slide: {
-    flexGrow: 1,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: spacing.lg,
-  },
-  artwork: { width: '100%', maxWidth: 370 },
-  copy: { width: '100%', maxWidth: 450, gap: spacing.md, alignItems: 'center' },
-  eyebrow: {
-    color: colors.primary,
-    fontWeight: '600',
-    textAlign: 'center',
-    fontSize: 11,
-    letterSpacing: 1.5,
-  },
-  title: { textAlign: 'center', maxWidth: 360 },
-  description: { textAlign: 'center', maxWidth: 380 },
-  footer: {
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
-    width: '100%',
-    maxWidth: 500,
-    alignSelf: 'center',
-    gap: spacing.sm,
-  },
-  dots: { flexDirection: 'row', justifyContent: 'center' },
-  dotTarget: {
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  dotTrack: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.border,
-  },
-  dot: {
-    position: 'absolute',
-    width: 22,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.primary,
-  },
-  note: { textAlign: 'center', fontSize: 11, lineHeight: 17 },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: 'transparent' },
+    top: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: spacing.md,
+      minHeight: 64,
+    },
+    headerAction: {
+      minWidth: 48,
+      minHeight: 48,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    brand: {
+      color: colors.primary,
+      fontWeight: '700',
+      fontSize: 18,
+      letterSpacing: 0.2,
+    },
+    pager: { flex: 1 },
+    slide: {
+      flexGrow: 1,
+      paddingHorizontal: spacing.lg,
+      paddingVertical: spacing.sm,
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: spacing.lg,
+    },
+    artwork: { width: '100%', maxWidth: 370 },
+    copy: {
+      width: '100%',
+      maxWidth: 450,
+      gap: spacing.md,
+      alignItems: 'center',
+    },
+    eyebrow: {
+      color: colors.primary,
+      fontWeight: '600',
+      textAlign: 'center',
+      fontSize: 11,
+      letterSpacing: 1.5,
+    },
+    title: { textAlign: 'center', maxWidth: 360 },
+    description: { textAlign: 'center', maxWidth: 380 },
+    footer: {
+      paddingHorizontal: spacing.lg,
+      paddingBottom: spacing.md,
+      width: '100%',
+      maxWidth: 500,
+      alignSelf: 'center',
+      gap: spacing.sm,
+    },
+    dots: { flexDirection: 'row', justifyContent: 'center' },
+    dotTarget: {
+      width: 44,
+      height: 44,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    dotTrack: {
+      width: 6,
+      height: 6,
+      borderRadius: 3,
+      backgroundColor: colors.border,
+    },
+    dot: {
+      position: 'absolute',
+      width: 22,
+      height: 6,
+      borderRadius: 3,
+      backgroundColor: colors.button,
+    },
+    note: { textAlign: 'center', fontSize: 11, lineHeight: 17 },
+  });
