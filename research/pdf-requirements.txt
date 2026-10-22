@@ -1,0 +1,2 @@
+# Install alongside model-comparison-requirements.txt for report generation/inspection.
+PyMuPDF==1.26.4

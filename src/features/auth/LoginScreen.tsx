@@ -2,13 +2,14 @@ import { AppButton } from '@/components/ui/AppButton';
 import { AppCard } from '@/components/ui/AppCard';
 import { AppText } from '@/components/ui/AppText';
 import { apiFetch } from '@/lib/api';
-import { colors, radius, spacing } from '@/theme/tokens';
+import { radius, spacing, useThemeColors } from '@/theme/tokens';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Alert, Pressable, StyleSheet, View, useColorScheme } from 'react-native';
+import { Alert, Pressable, StyleSheet, View } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
 import { useAuth } from './AuthProvider';
 import {
   AuthScreen,
@@ -21,6 +22,8 @@ import {
 import { loginSchema, parseIdentifier } from './model';
 
 export function LoginScreen() {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   const isDark = useColorScheme() === 'dark';
   const primaryColor = isDark ? '#38BDF8' : colors.primary;
   const dividerLineColor = isDark ? '#1C4A75' : colors.border;
@@ -29,7 +32,6 @@ export function LoginScreen() {
   const { available, signIn, setPendingPhone, setDraft } = useAuth();
   const [message, setMessage] = useState('');
   const { busy, run } = useSubmission();
-
 
   const form = useForm({
     resolver: zodResolver(loginSchema),
@@ -40,7 +42,7 @@ export function LoginScreen() {
     run(async () => {
       setMessage('');
       try {
-        const data = await apiFetch('/mobile/auth/login/', {
+        const data = await apiFetch('/login/', {
           method: 'POST',
           body: JSON.stringify({
             username: values.identifier.trim(),
@@ -48,23 +50,38 @@ export function LoginScreen() {
           }),
         });
 
-        if (!data || !data.access_token || !data.user) {
+        if (!data?.id) {
           throw new Error('Invalid response from server');
         }
 
-        await signIn(data);
+        await signIn();
         // Stack.Protected removes login history as the session changes.
       } catch (error: any) {
         if (error.status === 400) {
-          setMessage(error.data?.error || 'Validation error. Please check your inputs.');
+          setMessage(
+            error.data?.error || 'Validation error. Please check your inputs.',
+          );
         } else if (error.status === 401) {
           setMessage('Invalid username or password.');
         } else if (error.status === 403) {
-          setMessage('Your account is pending administrator approval.');
+          setMessage(
+            error.data?.error ||
+              'The session could not be verified. Reload the app and try again.',
+          );
         } else if (error.status === 429) {
           setMessage('Too many attempts. Wait before trying again.');
         } else if (error.status === 408 || error.status === 0) {
-          setMessage('Unable to reach the service. Check your connection and try again.');
+          setMessage(
+            'Unable to reach the service. Check your connection and try again.',
+          );
+        } else if (error.status >= 500) {
+          setMessage(
+            'The server could not complete login. Please try again shortly.',
+          );
+        } else if (error.status === 404) {
+          setMessage(
+            'The login service was not found. Check the configured backend address.',
+          );
         } else {
           setMessage('Unable to sign in. The request could not be completed.');
         }
@@ -139,7 +156,10 @@ export function LoginScreen() {
               onPress={() => router.push('/forgot-password')}
               style={styles.forgotPassword}
             >
-              <AppText variant="caption" style={{ color: primaryColor, fontWeight: '600' }}>
+              <AppText
+                variant="caption"
+                style={{ color: primaryColor, fontWeight: '600' }}
+              >
                 Forgot password?
               </AppText>
             </Pressable>
@@ -152,11 +172,25 @@ export function LoginScreen() {
             />
 
             <View style={styles.dividerContainer}>
-              <View style={[styles.dividerLine, { backgroundColor: dividerLineColor }]} />
-              <AppText variant="caption" muted style={[styles.dividerText, { color: dividerTextColor }]}>
+              <View
+                style={[
+                  styles.dividerLine,
+                  { backgroundColor: dividerLineColor },
+                ]}
+              />
+              <AppText
+                variant="caption"
+                muted
+                style={[styles.dividerText, { color: dividerTextColor }]}
+              >
                 or continue with
               </AppText>
-              <View style={[styles.dividerLine, { backgroundColor: dividerLineColor }]} />
+              <View
+                style={[
+                  styles.dividerLine,
+                  { backgroundColor: dividerLineColor },
+                ]}
+              />
             </View>
 
             <View style={styles.socialRow}>
@@ -169,7 +203,11 @@ export function LoginScreen() {
                   { borderColor: primaryColor },
                   pressed && [
                     styles.socialCircleButtonPressed,
-                    { backgroundColor: isDark ? 'rgba(56, 189, 248, 0.15)' : 'rgba(20, 93, 160, 0.08)' }
+                    {
+                      backgroundColor: isDark
+                        ? 'rgba(56, 189, 248, 0.15)'
+                        : 'rgba(20, 93, 160, 0.08)',
+                    },
                   ],
                 ]}
               >
@@ -185,7 +223,11 @@ export function LoginScreen() {
                   { borderColor: primaryColor },
                   pressed && [
                     styles.socialCircleButtonPressed,
-                    { backgroundColor: isDark ? 'rgba(56, 189, 248, 0.15)' : 'rgba(20, 93, 160, 0.08)' }
+                    {
+                      backgroundColor: isDark
+                        ? 'rgba(56, 189, 248, 0.15)'
+                        : 'rgba(20, 93, 160, 0.08)',
+                    },
                   ],
                 ]}
               >
@@ -216,44 +258,45 @@ export function LoginScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  forgotPassword: {
-    alignSelf: 'flex-end',
-    paddingVertical: spacing.xs,
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: spacing.xs,
-    gap: spacing.sm,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: colors.border,
-  },
-  dividerText: {
-    paddingHorizontal: spacing.xs,
-  },
-  socialRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: spacing.lg,
-    paddingVertical: spacing.xs,
-  },
-  socialCircleButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: colors.primary,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  socialCircleButtonPressed: {
-    opacity: 0.7,
-    backgroundColor: 'rgba(20, 93, 160, 0.08)',
-  },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    forgotPassword: {
+      alignSelf: 'flex-end',
+      paddingVertical: spacing.xs,
+    },
+    dividerContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginVertical: spacing.xs,
+      gap: spacing.sm,
+    },
+    dividerLine: {
+      flex: 1,
+      height: 1,
+      backgroundColor: colors.border,
+    },
+    dividerText: {
+      paddingHorizontal: spacing.xs,
+    },
+    socialRow: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: spacing.lg,
+      paddingVertical: spacing.xs,
+    },
+    socialCircleButton: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      borderWidth: 2,
+      borderColor: colors.primary,
+      backgroundColor: 'transparent',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    socialCircleButtonPressed: {
+      opacity: 0.7,
+      backgroundColor: 'rgba(20, 93, 160, 0.08)',
+    },
+  });

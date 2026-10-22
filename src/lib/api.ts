@@ -1,21 +1,43 @@
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 
-const LAN_IP = '10.113.207.98';
-
-function getApiBaseUrl(): string {
-  const envUrl = process.env.EXPO_PUBLIC_DJANGO_API_URL || process.env.EXPO_PUBLIC_API_BASE_URL;
+export function getApiBaseUrl(): string {
   if (Platform.OS === 'web') {
-    return envUrl || 'http://127.0.0.1:8000';
+    if (typeof window !== 'undefined' && window.location?.hostname) {
+      const envUrl =
+        process.env.EXPO_PUBLIC_WEB_API_URL ||
+        process.env.EXPO_PUBLIC_DJANGO_API_URL ||
+        process.env.EXPO_PUBLIC_API_BASE_URL;
+      let port = '8000';
+      if (envUrl) {
+        try {
+          const parsed = new URL(envUrl);
+          if (parsed.port) port = parsed.port;
+        } catch {}
+      }
+      return `${window.location.protocol}//${window.location.hostname}:${port}`;
+    }
+    return (
+      process.env.EXPO_PUBLIC_WEB_API_URL ||
+      process.env.EXPO_PUBLIC_DJANGO_API_URL ||
+      'http://localhost:8000'
+    );
   }
-  const lanUrl = process.env.EXPO_PUBLIC_LAN_API_URL || `http://${LAN_IP}:8000`;
-  if (envUrl && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
+  const envUrl =
+    process.env.EXPO_PUBLIC_DJANGO_API_URL ||
+    process.env.EXPO_PUBLIC_API_BASE_URL;
+  const lanUrl = process.env.EXPO_PUBLIC_LAN_API_URL || '';
+  if (
+    envUrl &&
+    !envUrl.includes('localhost') &&
+    !envUrl.includes('127.0.0.1')
+  ) {
     return envUrl;
   }
   return lanUrl;
 }
 
-const API_BASE_URL = getApiBaseUrl();
+export const apiConfigured = !!getApiBaseUrl();
 
 export const SESSION_TOKEN_KEY = 'meditrack_session_token';
 export const SESSION_EXPIRY_KEY = 'meditrack_session_expiry';
@@ -62,28 +84,51 @@ class ApiError extends Error {
   }
 }
 
-export async function apiFetch(path: string, options: RequestInit = {}) {
-  if (!API_BASE_URL) {
-    throw new Error('API Base URL is not configured. Please set EXPO_PUBLIC_DJANGO_API_URL.');
+export async function apiFetch(
+  path: string,
+  options: RequestInit & { expectedUserId?: number } = {},
+) {
+  const { expectedUserId, ...requestOptions } = options;
+  if (options.signal?.aborted) throw new ApiError('Request cancelled');
+  const baseUrl = getApiBaseUrl().trim().replace(/\/+$/, '');
+  if (!baseUrl) {
+    throw new Error(
+      'API Base URL is not configured. Please set EXPO_PUBLIC_DJANGO_API_URL.',
+    );
   }
 
-  const token = await getSessionToken();
   const headers = new Headers(options.headers);
   headers.set('Content-Type', 'application/json');
-  if (token) {
-    headers.set('Authorization', `Bearer ${token}`);
+  const method = (options.method || 'GET').toUpperCase();
+  if (
+    !['GET', 'HEAD', 'OPTIONS'].includes(method) ||
+    expectedUserId !== undefined
+  ) {
+    // Django rotates CSRF tokens at login. Fetch the current token before writes.
+    const session = await apiFetch('/session/', { signal: options.signal });
+    if (expectedUserId !== undefined && session?.user?.id !== expectedUserId)
+      throw new ApiError(
+        'Your account session changed. Please sign in again.',
+        401,
+      );
+    if (!session?.csrfToken)
+      throw new ApiError('Unable to initialize a secure session.');
+    headers.set('X-CSRFToken', session.csrfToken);
   }
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 150000);
-  
+  const cancel = () => controller.abort();
+  options.signal?.addEventListener('abort', cancel, { once: true });
+  if (options.signal?.aborted) controller.abort();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
   try {
-    const response = await fetch(`${API_BASE_URL}${path}`, {
-      ...options,
+    const response = await fetch(`${baseUrl}${path}`, {
+      ...requestOptions,
+      credentials: 'include',
       headers,
       signal: controller.signal,
     });
-    clearTimeout(timeout);
 
     if (response.status === 401) {
       // Return 401 error directly to be handled by caller (like AuthProvider)
@@ -96,15 +141,22 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
       try {
         data = await response.json();
       } catch {
-        throw new ApiError(`Server returned ${response.status}`, response.status);
+        throw new ApiError(
+          `Server returned ${response.status}`,
+          response.status,
+        );
       }
-      throw new ApiError(data?.error || `Error ${response.status}`, response.status, data);
+      throw new ApiError(
+        data?.error || data?.detail || `Error ${response.status}`,
+        response.status,
+        data,
+      );
     }
 
     // Handle empty response (like 204 or logout)
     const text = await response.text();
     if (!text) return null;
-    
+
     try {
       return JSON.parse(text);
     } catch {
@@ -119,5 +171,8 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
       throw new ApiError('Network request failed. Check your connection.', 0);
     }
     throw error;
+  } finally {
+    clearTimeout(timeout);
+    options.signal?.removeEventListener('abort', cancel);
   }
 }

@@ -6,8 +6,10 @@ import { AppButton } from '@/components/ui/AppButton';
 export function EmailLinkScreen() {
   return (
     <Screen>
-      <AppText variant="title">Email Verification</AppText>
-      <AppText>
+      <AppText variant="title" style={{ textAlign: 'center' }}>
+        Email Verification
+      </AppText>
+      <AppText style={{ textAlign: 'center' }}>
         Email verification is not currently supported in this backend.
       </AppText>
       <AppButton label="Go Back" onPress={() => router.back()} />

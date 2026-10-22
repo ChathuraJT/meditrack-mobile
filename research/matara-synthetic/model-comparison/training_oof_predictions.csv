@@ -1,0 +1,2101 @@
+model,patient_id,disease,actual,simulation_score,predicted
+Logistic Regression,SYN003,influenza,0,0.7078901340682513,1
+Logistic Regression,SYN003,chickenpox,0,0.0870742559130262,0
+Logistic Regression,SYN003,measles,0,0.05872915185667994,0
+Logistic Regression,SYN003,mumps,0,0.01957172347672856,0
+Logistic Regression,SYN003,viral_conjunctivitis,1,0.08023079260264221,0
+Logistic Regression,SYN003,viral_gastroenteritis,0,0.11362887888930176,0
+Logistic Regression,SYN076,influenza,0,0.13482850046428987,0
+Logistic Regression,SYN076,chickenpox,0,0.5668679084432576,1
+Logistic Regression,SYN076,measles,0,0.29114894590783746,0
+Logistic Regression,SYN076,mumps,0,0.05445445025559862,0
+Logistic Regression,SYN076,viral_conjunctivitis,0,0.1325539668881456,0
+Logistic Regression,SYN076,viral_gastroenteritis,0,0.10599011327283978,0
+Logistic Regression,SYN026,influenza,0,0.12196777465817518,0
+Logistic Regression,SYN026,chickenpox,1,0.5018809179229381,1
+Logistic Regression,SYN026,measles,0,0.3940227065420036,0
+Logistic Regression,SYN026,mumps,0,0.13673607054257583,0
+Logistic Regression,SYN026,viral_conjunctivitis,1,0.32480100611808255,0
+Logistic Regression,SYN026,viral_gastroenteritis,1,0.3457261406292405,0
+Logistic Regression,SYN058,influenza,1,0.27971433709010163,0
+Logistic Regression,SYN058,chickenpox,0,0.33186193658013347,0
+Logistic Regression,SYN058,measles,0,0.10820653625636827,0
+Logistic Regression,SYN058,mumps,0,0.0948963502604504,0
+Logistic Regression,SYN058,viral_conjunctivitis,0,0.34530313765897863,0
+Logistic Regression,SYN058,viral_gastroenteritis,0,0.5329108484740299,1
+Logistic Regression,SYN049,influenza,0,0.33637533530282787,0
+Logistic Regression,SYN049,chickenpox,0,0.16763612247756116,0
+Logistic Regression,SYN049,measles,0,0.059329447956002944,0
+Logistic Regression,SYN049,mumps,0,0.36947814489037795,0
+Logistic Regression,SYN049,viral_conjunctivitis,0,0.3477489946131856,0
+Logistic Regression,SYN049,viral_gastroenteritis,0,0.17329774851483631,0
+Logistic Regression,SYN038,influenza,1,0.0494379843202196,0
+Logistic Regression,SYN038,chickenpox,0,0.12997408462395138,0
+Logistic Regression,SYN038,measles,1,0.0809231304835667,0
+Logistic Regression,SYN038,mumps,0,0.2102918395629708,0
+Logistic Regression,SYN038,viral_conjunctivitis,0,0.6363262100927414,1
+Logistic Regression,SYN038,viral_gastroenteritis,0,0.32090545201748744,0
+Logistic Regression,SYN091,influenza,1,0.09323655701966979,0
+Logistic Regression,SYN091,chickenpox,0,0.18510612406956592,0
+Logistic Regression,SYN091,measles,0,0.1385400416178048,0
+Logistic Regression,SYN091,mumps,0,0.15683891505556208,0
+Logistic Regression,SYN091,viral_conjunctivitis,1,0.04577787404573212,0
+Logistic Regression,SYN091,viral_gastroenteritis,0,0.16792703200786155,0
+Logistic Regression,SYN048,influenza,0,0.058322061808499276,0
+Logistic Regression,SYN048,chickenpox,0,0.5297817979462593,1
+Logistic Regression,SYN048,measles,1,0.30877115128901295,0
+Logistic Regression,SYN048,mumps,0,0.14609860346105008,0
+Logistic Regression,SYN048,viral_conjunctivitis,0,0.40023580634472466,0
+Logistic Regression,SYN048,viral_gastroenteritis,0,0.49583290716652595,0
+Logistic Regression,SYN075,influenza,1,0.0975223274989546,0
+Logistic Regression,SYN075,chickenpox,0,0.402752248048347,0
+Logistic Regression,SYN075,measles,0,0.0689322482153347,0
+Logistic Regression,SYN075,mumps,0,0.11274102917170345,0
+Logistic Regression,SYN075,viral_conjunctivitis,1,0.5103515059182298,1
+Logistic Regression,SYN075,viral_gastroenteritis,0,0.44048237936758067,0
+Logistic Regression,SYN098,influenza,0,0.14718881106105697,0
+Logistic Regression,SYN098,chickenpox,0,0.3919049250325514,0
+Logistic Regression,SYN098,measles,0,0.15064614107403448,0
+Logistic Regression,SYN098,mumps,1,0.1093469822926104,0
+Logistic Regression,SYN098,viral_conjunctivitis,0,0.22605500346163115,0
+Logistic Regression,SYN098,viral_gastroenteritis,1,0.15342342681153276,0
+Logistic Regression,SYN011,influenza,0,0.10019911875715733,0
+Logistic Regression,SYN011,chickenpox,0,0.08186421039275181,0
+Logistic Regression,SYN011,measles,1,0.30942741388264916,0
+Logistic Regression,SYN011,mumps,0,0.1914423407920684,0
+Logistic Regression,SYN011,viral_conjunctivitis,1,0.23778541227865727,0
+Logistic Regression,SYN011,viral_gastroenteritis,0,0.5113549136573537,1
+Logistic Regression,SYN064,influenza,0,0.0738226091347467,0
+Logistic Regression,SYN064,chickenpox,0,0.13139391570943018,0
+Logistic Regression,SYN064,measles,0,0.14299376595652316,0
+Logistic Regression,SYN064,mumps,0,0.042626346607976,0
+Logistic Regression,SYN064,viral_conjunctivitis,1,0.14072465416899088,0
+Logistic Regression,SYN064,viral_gastroenteritis,1,0.3296646779147989,0
+Logistic Regression,SYN043,influenza,0,0.15247686509365418,0
+Logistic Regression,SYN043,chickenpox,0,0.7745883282231878,1
+Logistic Regression,SYN043,measles,0,0.1868266088504784,0
+Logistic Regression,SYN043,mumps,0,0.026927890111646553,0
+Logistic Regression,SYN043,viral_conjunctivitis,0,0.2647056520851569,0
+Logistic Regression,SYN043,viral_gastroenteritis,0,0.23887078111902113,0
+Logistic Regression,SYN009,influenza,1,0.029031123748734632,0
+Logistic Regression,SYN009,chickenpox,0,0.07915717007261612,0
+Logistic Regression,SYN009,measles,0,0.01776644357601,0
+Logistic Regression,SYN009,mumps,0,0.12648162123489762,0
+Logistic Regression,SYN009,viral_conjunctivitis,1,0.8595408128563095,1
+Logistic Regression,SYN009,viral_gastroenteritis,1,0.49197986539188,0
+Logistic Regression,SYN016,influenza,0,0.3121448063291527,0
+Logistic Regression,SYN016,chickenpox,0,0.1116057689597006,0
+Logistic Regression,SYN016,measles,0,0.2396412622436915,0
+Logistic Regression,SYN016,mumps,0,0.03526858728037337,0
+Logistic Regression,SYN016,viral_conjunctivitis,1,0.25319516542942194,0
+Logistic Regression,SYN016,viral_gastroenteritis,1,0.13893639714799258,0
+Logistic Regression,SYN041,influenza,1,0.11449098602917882,0
+Logistic Regression,SYN041,chickenpox,0,0.08834855887935679,0
+Logistic Regression,SYN041,measles,1,0.10274295865789487,0
+Logistic Regression,SYN041,mumps,0,0.06025622380571918,0
+Logistic Regression,SYN041,viral_conjunctivitis,0,0.5542642406141834,1
+Logistic Regression,SYN041,viral_gastroenteritis,0,0.27017732458818533,0
+Logistic Regression,SYN035,influenza,0,0.06744732577673256,0
+Logistic Regression,SYN035,chickenpox,0,0.260956716697516,0
+Logistic Regression,SYN035,measles,0,0.06606638094924211,0
+Logistic Regression,SYN035,mumps,1,0.2614260299580728,0
+Logistic Regression,SYN035,viral_conjunctivitis,0,0.3154692772026159,0
+Logistic Regression,SYN035,viral_gastroenteritis,0,0.16639634500263095,0
+Logistic Regression,SYN033,influenza,0,0.011639269300675088,0
+Logistic Regression,SYN033,chickenpox,1,0.20716098382244996,0
+Logistic Regression,SYN033,measles,0,0.0942453460861739,0
+Logistic Regression,SYN033,mumps,0,0.8011210399909773,1
+Logistic Regression,SYN033,viral_conjunctivitis,0,0.19705709003251323,0
+Logistic Regression,SYN033,viral_gastroenteritis,0,0.29005811823551353,0
+Logistic Regression,SYN036,influenza,0,0.170626661425569,0
+Logistic Regression,SYN036,chickenpox,1,0.5854158951923666,1
+Logistic Regression,SYN036,measles,0,0.05529829591927164,0
+Logistic Regression,SYN036,mumps,0,0.1937875355688592,0
+Logistic Regression,SYN036,viral_conjunctivitis,1,0.7539955610206539,1
+Logistic Regression,SYN036,viral_gastroenteritis,1,0.20692330319567348,0
+Logistic Regression,SYN046,influenza,1,0.1435959899220989,0
+Logistic Regression,SYN046,chickenpox,0,0.15060561237138917,0
+Logistic Regression,SYN046,measles,1,0.17958383607315692,0
+Logistic Regression,SYN046,mumps,0,0.14597642416367188,0
+Logistic Regression,SYN046,viral_conjunctivitis,0,0.6404413799173836,1
+Logistic Regression,SYN046,viral_gastroenteritis,1,0.33386435647142876,0
+Logistic Regression,SYN021,influenza,0,0.27773679790244693,0
+Logistic Regression,SYN021,chickenpox,0,0.4515956600737362,0
+Logistic Regression,SYN021,measles,0,0.4199607200605734,0
+Logistic Regression,SYN021,mumps,1,0.07665018644394565,0
+Logistic Regression,SYN021,viral_conjunctivitis,0,0.41401412843923013,0
+Logistic Regression,SYN021,viral_gastroenteritis,0,0.17232971217383386,0
+Logistic Regression,SYN013,influenza,0,0.4886176262485642,0
+Logistic Regression,SYN013,chickenpox,0,0.055992008303201835,0
+Logistic Regression,SYN013,measles,0,0.45060033125032084,0
+Logistic Regression,SYN013,mumps,0,0.02580642685196742,0
+Logistic Regression,SYN013,viral_conjunctivitis,0,0.12103786564530136,0
+Logistic Regression,SYN013,viral_gastroenteritis,0,0.1660591103221126,0
+Logistic Regression,SYN014,influenza,0,0.08026231537822992,0
+Logistic Regression,SYN014,chickenpox,1,0.35738929439493355,0
+Logistic Regression,SYN014,measles,0,0.12664109409221397,0
+Logistic Regression,SYN014,mumps,0,0.17424603111480658,0
+Logistic Regression,SYN014,viral_conjunctivitis,0,0.2028901766143924,0
+Logistic Regression,SYN014,viral_gastroenteritis,1,0.04200226674024648,0
+Logistic Regression,SYN004,influenza,0,0.19960414790586728,0
+Logistic Regression,SYN004,chickenpox,0,0.26971982862805866,0
+Logistic Regression,SYN004,measles,0,0.17319136388632422,0
+Logistic Regression,SYN004,mumps,0,0.0744184057385371,0
+Logistic Regression,SYN004,viral_conjunctivitis,0,0.19599408535296578,0
+Logistic Regression,SYN004,viral_gastroenteritis,0,0.14419498372683384,0
+Logistic Regression,SYN059,influenza,0,0.2528498998325588,0
+Logistic Regression,SYN059,chickenpox,0,0.2005071521016279,0
+Logistic Regression,SYN059,measles,0,0.22004515753503265,0
+Logistic Regression,SYN059,mumps,1,0.036429487392682286,0
+Logistic Regression,SYN059,viral_conjunctivitis,1,0.0412635945201972,0
+Logistic Regression,SYN059,viral_gastroenteritis,0,0.1690104353554153,0
+Logistic Regression,SYN061,influenza,0,0.058305169035657634,0
+Logistic Regression,SYN061,chickenpox,0,0.19425297481269516,0
+Logistic Regression,SYN061,measles,0,0.32344893819051723,0
+Logistic Regression,SYN061,mumps,0,0.19061344012381246,0
+Logistic Regression,SYN061,viral_conjunctivitis,0,0.3328795137110056,0
+Logistic Regression,SYN061,viral_gastroenteritis,0,0.14196751491571533,0
+Logistic Regression,SYN092,influenza,0,0.031568373513034834,0
+Logistic Regression,SYN092,chickenpox,0,0.14213284762378903,0
+Logistic Regression,SYN092,measles,0,0.025184347045893344,0
+Logistic Regression,SYN092,mumps,0,0.05809757405482482,0
+Logistic Regression,SYN092,viral_conjunctivitis,0,0.055654683833586856,0
+Logistic Regression,SYN092,viral_gastroenteritis,0,0.3546256759325442,0
+Logistic Regression,SYN093,influenza,0,0.12292848158607783,0
+Logistic Regression,SYN093,chickenpox,0,0.08233775076424481,0
+Logistic Regression,SYN093,measles,0,0.04303623017941689,0
+Logistic Regression,SYN093,mumps,1,0.19995774205395056,0
+Logistic Regression,SYN093,viral_conjunctivitis,0,0.13165688364298744,0
+Logistic Regression,SYN093,viral_gastroenteritis,1,0.20462948346094761,0
+Logistic Regression,SYN018,influenza,1,0.16289901272759655,0
+Logistic Regression,SYN018,chickenpox,1,0.5404238701045534,1
+Logistic Regression,SYN018,measles,0,0.1657011071529118,0
+Logistic Regression,SYN018,mumps,0,0.09237195373615739,0
+Logistic Regression,SYN018,viral_conjunctivitis,0,0.37653887532816516,0
+Logistic Regression,SYN018,viral_gastroenteritis,1,0.21967179950907745,0
+Logistic Regression,SYN029,influenza,0,0.23821612358968722,0
+Logistic Regression,SYN029,chickenpox,0,0.3035198053889332,0
+Logistic Regression,SYN029,measles,0,0.6106788605616632,1
+Logistic Regression,SYN029,mumps,0,0.014785062580631008,0
+Logistic Regression,SYN029,viral_conjunctivitis,0,0.09224203679239268,0
+Logistic Regression,SYN029,viral_gastroenteritis,1,0.2433621142102188,0
+Logistic Regression,SYN057,influenza,1,0.6352055669457428,1
+Logistic Regression,SYN057,chickenpox,0,0.18401712653179456,0
+Logistic Regression,SYN057,measles,0,0.16145655095344721,0
+Logistic Regression,SYN057,mumps,0,0.03642306832436599,0
+Logistic Regression,SYN057,viral_conjunctivitis,0,0.17915949662090339,0
+Logistic Regression,SYN057,viral_gastroenteritis,1,0.6725781488216446,1
+Logistic Regression,SYN073,influenza,1,0.9453251255538407,1
+Logistic Regression,SYN073,chickenpox,0,0.4448423186995998,0
+Logistic Regression,SYN073,measles,0,0.3668035934610866,0
+Logistic Regression,SYN073,mumps,0,0.13665992847458858,0
+Logistic Regression,SYN073,viral_conjunctivitis,0,0.1383341789671397,0
+Logistic Regression,SYN073,viral_gastroenteritis,1,0.6758243397411454,1
+Logistic Regression,SYN051,influenza,0,0.4430921786472715,0
+Logistic Regression,SYN051,chickenpox,0,0.38268656869244355,0
+Logistic Regression,SYN051,measles,0,0.12537792540873463,0
+Logistic Regression,SYN051,mumps,0,0.20791266615211737,0
+Logistic Regression,SYN051,viral_conjunctivitis,1,0.23945356545105276,0
+Logistic Regression,SYN051,viral_gastroenteritis,1,0.32071574361395205,0
+Logistic Regression,SYN037,influenza,0,0.15786441604238108,0
+Logistic Regression,SYN037,chickenpox,0,0.2099285355362338,0
+Logistic Regression,SYN037,measles,0,0.09483275458733866,0
+Logistic Regression,SYN037,mumps,1,0.12459195423449208,0
+Logistic Regression,SYN037,viral_conjunctivitis,0,0.11453036811903262,0
+Logistic Regression,SYN037,viral_gastroenteritis,1,0.07548354595430444,0
+Logistic Regression,SYN047,influenza,0,0.19494223429389282,0
+Logistic Regression,SYN047,chickenpox,1,0.07705886910185164,0
+Logistic Regression,SYN047,measles,0,0.5078819485432053,1
+Logistic Regression,SYN047,mumps,0,0.25840166445097507,0
+Logistic Regression,SYN047,viral_conjunctivitis,0,0.13787479289411209,0
+Logistic Regression,SYN047,viral_gastroenteritis,0,0.25275833555133614,0
+Logistic Regression,SYN040,influenza,0,0.0837387248811122,0
+Logistic Regression,SYN040,chickenpox,0,0.03523065900150662,0
+Logistic Regression,SYN040,measles,1,0.3269442233484629,0
+Logistic Regression,SYN040,mumps,0,0.22924533150775483,0
+Logistic Regression,SYN040,viral_conjunctivitis,1,0.16533271778166014,0
+Logistic Regression,SYN040,viral_gastroenteritis,0,0.3668186695781297,0
+Logistic Regression,SYN032,influenza,0,0.10651056085534902,0
+Logistic Regression,SYN032,chickenpox,0,0.13397645632151695,0
+Logistic Regression,SYN032,measles,0,0.06151518698888275,0
+Logistic Regression,SYN032,mumps,0,0.0579794095264964,0
+Logistic Regression,SYN032,viral_conjunctivitis,0,0.7162222148231957,1
+Logistic Regression,SYN032,viral_gastroenteritis,0,0.43081666128693574,0
+Logistic Regression,SYN006,influenza,0,0.2932292525080949,0
+Logistic Regression,SYN006,chickenpox,0,0.7189234870123729,1
+Logistic Regression,SYN006,measles,0,0.1751522670399605,0
+Logistic Regression,SYN006,mumps,1,0.009853113333686762,0
+Logistic Regression,SYN006,viral_conjunctivitis,0,0.45254716809561313,0
+Logistic Regression,SYN006,viral_gastroenteritis,1,0.49982534543476675,0
+Logistic Regression,SYN053,influenza,0,0.13919422546273374,0
+Logistic Regression,SYN053,chickenpox,0,0.09816307703577483,0
+Logistic Regression,SYN053,measles,1,0.1959129677742339,0
+Logistic Regression,SYN053,mumps,0,0.047442291393810516,0
+Logistic Regression,SYN053,viral_conjunctivitis,1,0.43496383527411553,0
+Logistic Regression,SYN053,viral_gastroenteritis,1,0.3584488706178328,0
+Logistic Regression,SYN001,influenza,0,0.3790529033376727,0
+Logistic Regression,SYN001,chickenpox,0,0.32420033977125334,0
+Logistic Regression,SYN001,measles,0,0.18201765353416338,0
+Logistic Regression,SYN001,mumps,0,0.1139320727741713,0
+Logistic Regression,SYN001,viral_conjunctivitis,0,0.08158354284785851,0
+Logistic Regression,SYN001,viral_gastroenteritis,0,0.43354580983938024,0
+Logistic Regression,SYN100,influenza,0,0.24539317907768027,0
+Logistic Regression,SYN100,chickenpox,1,0.3650335632107737,0
+Logistic Regression,SYN100,measles,1,0.13931456075046353,0
+Logistic Regression,SYN100,mumps,0,0.14952900106836695,0
+Logistic Regression,SYN100,viral_conjunctivitis,1,0.15126002684706924,0
+Logistic Regression,SYN100,viral_gastroenteritis,0,0.38308210046097735,0
+Logistic Regression,SYN017,influenza,1,0.14395699483147784,0
+Logistic Regression,SYN017,chickenpox,1,0.12876872659458305,0
+Logistic Regression,SYN017,measles,0,0.12665082945737138,0
+Logistic Regression,SYN017,mumps,0,0.0437332335628672,0
+Logistic Regression,SYN017,viral_conjunctivitis,0,0.1752249903405915,0
+Logistic Regression,SYN017,viral_gastroenteritis,0,0.40798606521447733,0
+Logistic Regression,SYN094,influenza,0,0.13441204398174778,0
+Logistic Regression,SYN094,chickenpox,0,0.07866534171515799,0
+Logistic Regression,SYN094,measles,0,0.424211129542349,0
+Logistic Regression,SYN094,mumps,0,0.06086314130078623,0
+Logistic Regression,SYN094,viral_conjunctivitis,1,0.3681513050415325,0
+Logistic Regression,SYN094,viral_gastroenteritis,0,0.7189769706470964,1
+Logistic Regression,SYN099,influenza,0,0.15902034381166974,0
+Logistic Regression,SYN099,chickenpox,1,0.4927227653206155,0
+Logistic Regression,SYN099,measles,0,0.10386306273126274,0
+Logistic Regression,SYN099,mumps,1,0.11241587283330559,0
+Logistic Regression,SYN099,viral_conjunctivitis,1,0.07760923366488713,0
+Logistic Regression,SYN099,viral_gastroenteritis,0,0.35539418156499747,0
+Logistic Regression,SYN084,influenza,1,0.3562192949644537,0
+Logistic Regression,SYN084,chickenpox,0,0.10376560907868686,0
+Logistic Regression,SYN084,measles,0,0.013062130273580417,0
+Logistic Regression,SYN084,mumps,0,0.12011252666093794,0
+Logistic Regression,SYN084,viral_conjunctivitis,0,0.41762399270635525,0
+Logistic Regression,SYN084,viral_gastroenteritis,1,0.687056510513069,1
+Logistic Regression,SYN030,influenza,0,0.22371039310334265,0
+Logistic Regression,SYN030,chickenpox,0,0.42272723740170326,0
+Logistic Regression,SYN030,measles,0,0.03976620578965325,0
+Logistic Regression,SYN030,mumps,0,0.039134538505130906,0
+Logistic Regression,SYN030,viral_conjunctivitis,1,0.36609208283066846,0
+Logistic Regression,SYN030,viral_gastroenteritis,0,0.07850919931131563,0
+Logistic Regression,SYN081,influenza,0,0.05467515134810308,0
+Logistic Regression,SYN081,chickenpox,1,0.3741235186683095,0
+Logistic Regression,SYN081,measles,0,0.013253300531809823,0
+Logistic Regression,SYN081,mumps,0,0.4660251740569617,0
+Logistic Regression,SYN081,viral_conjunctivitis,0,0.29044578136424615,0
+Logistic Regression,SYN081,viral_gastroenteritis,0,0.6506408914269507,1
+Logistic Regression,SYN074,influenza,0,0.3517905089856622,0
+Logistic Regression,SYN074,chickenpox,0,0.3757897697887218,0
+Logistic Regression,SYN074,measles,0,0.21359066695423107,0
+Logistic Regression,SYN074,mumps,0,0.08194376903582119,0
+Logistic Regression,SYN074,viral_conjunctivitis,0,0.46392540786369313,0
+Logistic Regression,SYN074,viral_gastroenteritis,0,0.2684183475550064,0
+Logistic Regression,SYN069,influenza,0,0.7583195152984732,1
+Logistic Regression,SYN069,chickenpox,1,0.5307185454087153,1
+Logistic Regression,SYN069,measles,0,0.21986753129274603,0
+Logistic Regression,SYN069,mumps,1,0.09112471288700345,0
+Logistic Regression,SYN069,viral_conjunctivitis,1,0.3910232926607117,0
+Logistic Regression,SYN069,viral_gastroenteritis,0,0.5892627105713111,1
+Logistic Regression,SYN067,influenza,0,0.37317475886001605,0
+Logistic Regression,SYN067,chickenpox,1,0.07124315765799498,0
+Logistic Regression,SYN067,measles,0,0.14583119712874595,0
+Logistic Regression,SYN067,mumps,0,0.02954298126585624,0
+Logistic Regression,SYN067,viral_conjunctivitis,0,0.2181472392340859,0
+Logistic Regression,SYN067,viral_gastroenteritis,0,0.22248678223351728,0
+Logistic Regression,SYN088,influenza,0,0.032513040764457796,0
+Logistic Regression,SYN088,chickenpox,0,0.08671748035529167,0
+Logistic Regression,SYN088,measles,0,0.03772397643286362,0
+Logistic Regression,SYN088,mumps,0,0.16862894204424056,0
+Logistic Regression,SYN088,viral_conjunctivitis,0,0.3709905255619004,0
+Logistic Regression,SYN088,viral_gastroenteritis,0,0.41818662361447917,0
+Logistic Regression,SYN056,influenza,0,0.2523693566945599,0
+Logistic Regression,SYN056,chickenpox,0,0.17686817687410658,0
+Logistic Regression,SYN056,measles,0,0.8343847726767205,1
+Logistic Regression,SYN056,mumps,0,0.024877727844811535,0
+Logistic Regression,SYN056,viral_conjunctivitis,0,0.17840402756872298,0
+Logistic Regression,SYN056,viral_gastroenteritis,1,0.2157734107777786,0
+Logistic Regression,SYN063,influenza,0,0.3445952478015521,0
+Logistic Regression,SYN063,chickenpox,0,0.19919771307689582,0
+Logistic Regression,SYN063,measles,0,0.5417031776387244,1
+Logistic Regression,SYN063,mumps,0,0.026357441303114394,0
+Logistic Regression,SYN063,viral_conjunctivitis,0,0.09532167886294117,0
+Logistic Regression,SYN063,viral_gastroenteritis,0,0.23576256110269017,0
+Logistic Regression,SYN050,influenza,0,0.17043727158604052,0
+Logistic Regression,SYN050,chickenpox,1,0.05481525483682463,0
+Logistic Regression,SYN050,measles,1,0.048267843946900396,0
+Logistic Regression,SYN050,mumps,0,0.04792520875308225,0
+Logistic Regression,SYN050,viral_conjunctivitis,0,0.19331484778611757,0
+Logistic Regression,SYN050,viral_gastroenteritis,0,0.24275707515012962,0
+Logistic Regression,SYN079,influenza,0,0.49002076161540437,0
+Logistic Regression,SYN079,chickenpox,0,0.18170733303284986,0
+Logistic Regression,SYN079,measles,0,0.0957291757698889,0
+Logistic Regression,SYN079,mumps,0,0.1129626479251954,0
+Logistic Regression,SYN079,viral_conjunctivitis,0,0.1713805116776953,0
+Logistic Regression,SYN079,viral_gastroenteritis,0,0.35994386072906714,0
+Logistic Regression,SYN082,influenza,0,0.36467351361673295,0
+Logistic Regression,SYN082,chickenpox,1,0.39794567153617594,0
+Logistic Regression,SYN082,measles,0,0.04647432106168418,0
+Logistic Regression,SYN082,mumps,0,0.18208614420263047,0
+Logistic Regression,SYN082,viral_conjunctivitis,1,0.6931034174046611,1
+Logistic Regression,SYN082,viral_gastroenteritis,1,0.5426759680471113,1
+Logistic Regression,SYN005,influenza,0,0.0775730313256945,0
+Logistic Regression,SYN005,chickenpox,0,0.518863318351044,1
+Logistic Regression,SYN005,measles,0,0.08269546131912897,0
+Logistic Regression,SYN005,mumps,1,0.1275695969080372,0
+Logistic Regression,SYN005,viral_conjunctivitis,0,0.5750200229281731,1
+Logistic Regression,SYN005,viral_gastroenteritis,0,0.5679864309169771,1
+Logistic Regression,SYN024,influenza,0,0.24211368647476864,0
+Logistic Regression,SYN024,chickenpox,1,0.07731598395923137,0
+Logistic Regression,SYN024,measles,0,0.030222412586674623,0
+Logistic Regression,SYN024,mumps,0,0.3059374212595873,0
+Logistic Regression,SYN024,viral_conjunctivitis,0,0.14377455746128232,0
+Logistic Regression,SYN024,viral_gastroenteritis,0,0.19602336383240349,0
+Logistic Regression,SYN055,influenza,0,0.2548950370110979,0
+Logistic Regression,SYN055,chickenpox,0,0.10128836575451271,0
+Logistic Regression,SYN055,measles,0,0.27412589348997835,0
+Logistic Regression,SYN055,mumps,0,0.44567765478267085,0
+Logistic Regression,SYN055,viral_conjunctivitis,0,0.2297308421699363,0
+Logistic Regression,SYN055,viral_gastroenteritis,0,0.24042117620954068,0
+Logistic Regression,SYN045,influenza,0,0.10586327798027782,0
+Logistic Regression,SYN045,chickenpox,0,0.14823823031206496,0
+Logistic Regression,SYN045,measles,0,0.10910297333130392,0
+Logistic Regression,SYN045,mumps,0,0.12777299006953677,0
+Logistic Regression,SYN045,viral_conjunctivitis,0,0.3431478676715977,0
+Logistic Regression,SYN045,viral_gastroenteritis,0,0.20496223298895316,0
+Logistic Regression,SYN034,influenza,0,0.3081224392144888,0
+Logistic Regression,SYN034,chickenpox,0,0.051568352322896416,0
+Logistic Regression,SYN034,measles,0,0.2880321565378892,0
+Logistic Regression,SYN034,mumps,0,0.011444430255386256,0
+Logistic Regression,SYN034,viral_conjunctivitis,0,0.5426982487002681,1
+Logistic Regression,SYN034,viral_gastroenteritis,0,0.3729644372656363,0
+Logistic Regression,SYN023,influenza,0,0.20624483894735454,0
+Logistic Regression,SYN023,chickenpox,1,0.31359162892210124,0
+Logistic Regression,SYN023,measles,1,0.7298283517217825,1
+Logistic Regression,SYN023,mumps,0,0.035236061108441526,0
+Logistic Regression,SYN023,viral_conjunctivitis,1,0.12672536274571256,0
+Logistic Regression,SYN023,viral_gastroenteritis,1,0.2813201279227448,0
+Logistic Regression,SYN052,influenza,0,0.3629496118286643,0
+Logistic Regression,SYN052,chickenpox,0,0.10175316360378094,0
+Logistic Regression,SYN052,measles,0,0.29364487409568496,0
+Logistic Regression,SYN052,mumps,0,0.039053324610570116,0
+Logistic Regression,SYN052,viral_conjunctivitis,0,0.10106718232026593,0
+Logistic Regression,SYN052,viral_gastroenteritis,0,0.21234985208888213,0
+Logistic Regression,SYN042,influenza,1,0.3343492330084328,0
+Logistic Regression,SYN042,chickenpox,0,0.11440070535735679,0
+Logistic Regression,SYN042,measles,0,0.18045584519389482,0
+Logistic Regression,SYN042,mumps,0,0.03852652674068512,0
+Logistic Regression,SYN042,viral_conjunctivitis,0,0.05904155696473882,0
+Logistic Regression,SYN042,viral_gastroenteritis,0,0.11966577197737563,0
+Logistic Regression,SYN090,influenza,0,0.19553884704938262,0
+Logistic Regression,SYN090,chickenpox,0,0.42259675844693667,0
+Logistic Regression,SYN090,measles,0,0.13322649868428382,0
+Logistic Regression,SYN090,mumps,0,0.1538025195171048,0
+Logistic Regression,SYN090,viral_conjunctivitis,0,0.39800073572246614,0
+Logistic Regression,SYN090,viral_gastroenteritis,0,0.6367788343639904,1
+Logistic Regression,SYN054,influenza,1,0.45721283858506523,0
+Logistic Regression,SYN054,chickenpox,0,0.36413638301805806,0
+Logistic Regression,SYN054,measles,0,0.21899818187641154,0
+Logistic Regression,SYN054,mumps,0,0.05289256371236477,0
+Logistic Regression,SYN054,viral_conjunctivitis,0,0.21698813733748004,0
+Logistic Regression,SYN054,viral_gastroenteritis,0,0.28449815811503076,0
+Logistic Regression,SYN028,influenza,0,0.2051854976204151,0
+Logistic Regression,SYN028,chickenpox,0,0.5646998486809153,1
+Logistic Regression,SYN028,measles,0,0.43017893724275935,0
+Logistic Regression,SYN028,mumps,0,0.025577573337828886,0
+Logistic Regression,SYN028,viral_conjunctivitis,1,0.3366570703209118,0
+Logistic Regression,SYN028,viral_gastroenteritis,0,0.4955654880712691,0
+Logistic Regression,SYN008,influenza,0,0.248924123265554,0
+Logistic Regression,SYN008,chickenpox,1,0.27441606973531985,0
+Logistic Regression,SYN008,measles,1,0.13576627856003615,0
+Logistic Regression,SYN008,mumps,0,0.10837451635366835,0
+Logistic Regression,SYN008,viral_conjunctivitis,0,0.32398433084857114,0
+Logistic Regression,SYN008,viral_gastroenteritis,1,0.07526123982793688,0
+Logistic Regression,SYN071,influenza,0,0.04608837072358123,0
+Logistic Regression,SYN071,chickenpox,0,0.1044674659397379,0
+Logistic Regression,SYN071,measles,1,0.11868722670149226,0
+Logistic Regression,SYN071,mumps,0,0.07856637864303474,0
+Logistic Regression,SYN071,viral_conjunctivitis,0,0.30183547162608554,0
+Logistic Regression,SYN071,viral_gastroenteritis,0,0.16124889485213445,0
+Logistic Regression,SYN078,influenza,1,0.15802467461725903,0
+Logistic Regression,SYN078,chickenpox,0,0.146295885566787,0
+Logistic Regression,SYN078,measles,0,0.08823834222050728,0
+Logistic Regression,SYN078,mumps,0,0.040786937641289545,0
+Logistic Regression,SYN078,viral_conjunctivitis,0,0.10741798721654783,0
+Logistic Regression,SYN078,viral_gastroenteritis,1,0.12565155943766113,0
+Random Forest,SYN003,influenza,0,0.5302265196676963,1
+Random Forest,SYN003,chickenpox,0,0.20198677248677255,0
+Random Forest,SYN003,measles,0,0.07421067821067819,0
+Random Forest,SYN003,mumps,0,0.04144047619047619,0
+Random Forest,SYN003,viral_conjunctivitis,1,0.19508458757307884,0
+Random Forest,SYN003,viral_gastroenteritis,0,0.3341749084249084,0
+Random Forest,SYN076,influenza,0,0.2055348060808588,0
+Random Forest,SYN076,chickenpox,0,0.4992712472712474,0
+Random Forest,SYN076,measles,0,0.386558201058201,0
+Random Forest,SYN076,mumps,0,0.03943698893698893,0
+Random Forest,SYN076,viral_conjunctivitis,0,0.17990127124337651,0
+Random Forest,SYN076,viral_gastroenteritis,0,0.18656311308517193,0
+Random Forest,SYN026,influenza,0,0.19394363044363042,0
+Random Forest,SYN026,chickenpox,1,0.3815581051502104,0
+Random Forest,SYN026,measles,0,0.35974897324897304,0
+Random Forest,SYN026,mumps,0,0.257719215969216,0
+Random Forest,SYN026,viral_conjunctivitis,1,0.2752333971169346,0
+Random Forest,SYN026,viral_gastroenteritis,1,0.2964042873051612,0
+Random Forest,SYN058,influenza,1,0.15163961038961046,0
+Random Forest,SYN058,chickenpox,0,0.2631657277907276,0
+Random Forest,SYN058,measles,0,0.1538178210678211,0
+Random Forest,SYN058,mumps,0,0.1309199134199134,0
+Random Forest,SYN058,viral_conjunctivitis,0,0.32411234988208665,0
+Random Forest,SYN058,viral_gastroenteritis,0,0.45706462699380657,0
+Random Forest,SYN049,influenza,0,0.3177353803603807,0
+Random Forest,SYN049,chickenpox,0,0.25327811023399266,0
+Random Forest,SYN049,measles,0,0.20640030340030346,0
+Random Forest,SYN049,mumps,0,0.2594112739112741,0
+Random Forest,SYN049,viral_conjunctivitis,0,0.49026335263177345,0
+Random Forest,SYN049,viral_gastroenteritis,0,0.34931016750134397,0
+Random Forest,SYN038,influenza,1,0.12848389655007306,0
+Random Forest,SYN038,chickenpox,0,0.2601805324305326,0
+Random Forest,SYN038,measles,1,0.1321164021164022,0
+Random Forest,SYN038,mumps,0,0.220412457912458,0
+Random Forest,SYN038,viral_conjunctivitis,0,0.507190008319804,1
+Random Forest,SYN038,viral_gastroenteritis,0,0.2458137359859495,0
+Random Forest,SYN091,influenza,1,0.21110942760942777,0
+Random Forest,SYN091,chickenpox,0,0.22692617105117108,0
+Random Forest,SYN091,measles,0,0.11660672198172194,0
+Random Forest,SYN091,mumps,0,0.34247919672919686,0
+Random Forest,SYN091,viral_conjunctivitis,1,0.16313102638102644,0
+Random Forest,SYN091,viral_gastroenteritis,0,0.32952013233260696,0
+Random Forest,SYN048,influenza,0,0.054284992784992776,0
+Random Forest,SYN048,chickenpox,0,0.4943837551337549,0
+Random Forest,SYN048,measles,1,0.1907687405187405,0
+Random Forest,SYN048,mumps,0,0.21116178266178262,0
+Random Forest,SYN048,viral_conjunctivitis,0,0.42699243485272886,0
+Random Forest,SYN048,viral_gastroenteritis,0,0.5034295068991025,1
+Random Forest,SYN075,influenza,1,0.15857202982202984,0
+Random Forest,SYN075,chickenpox,0,0.3179109917859919,0
+Random Forest,SYN075,measles,0,0.1085655964405964,0
+Random Forest,SYN075,mumps,0,0.12134656084656081,0
+Random Forest,SYN075,viral_conjunctivitis,1,0.4651988235935602,0
+Random Forest,SYN075,viral_gastroenteritis,0,0.25159699995243145,0
+Random Forest,SYN098,influenza,0,0.08343017249634894,0
+Random Forest,SYN098,chickenpox,0,0.3235191126955833,0
+Random Forest,SYN098,measles,0,0.12597449772449773,0
+Random Forest,SYN098,mumps,1,0.2192275132275133,0
+Random Forest,SYN098,viral_conjunctivitis,0,0.30301260454023266,0
+Random Forest,SYN098,viral_gastroenteritis,1,0.19192397950060497,0
+Random Forest,SYN011,influenza,0,0.11778526103526102,0
+Random Forest,SYN011,chickenpox,0,0.15175512450512457,0
+Random Forest,SYN011,measles,1,0.29720308054518574,0
+Random Forest,SYN011,mumps,0,0.28663397713397715,0
+Random Forest,SYN011,viral_conjunctivitis,1,0.39257091986325404,0
+Random Forest,SYN011,viral_gastroenteritis,0,0.44895836462012945,0
+Random Forest,SYN064,influenza,0,0.11903636178636176,0
+Random Forest,SYN064,chickenpox,0,0.16218663674933032,0
+Random Forest,SYN064,measles,0,0.2743996281496281,0
+Random Forest,SYN064,mumps,0,0.05494047619047618,0
+Random Forest,SYN064,viral_conjunctivitis,1,0.29813505955122094,0
+Random Forest,SYN064,viral_gastroenteritis,1,0.26097473047854547,0
+Random Forest,SYN043,influenza,0,0.2510858077108077,0
+Random Forest,SYN043,chickenpox,0,0.47671909571909593,0
+Random Forest,SYN043,measles,0,0.13970189995189988,0
+Random Forest,SYN043,mumps,0,0.10110846560846563,0
+Random Forest,SYN043,viral_conjunctivitis,0,0.3984840532797692,0
+Random Forest,SYN043,viral_gastroenteritis,0,0.2704570362844358,0
+Random Forest,SYN009,influenza,1,0.09308261183261181,0
+Random Forest,SYN009,chickenpox,0,0.14759954859954866,0
+Random Forest,SYN009,measles,0,0.0240966810966811,0
+Random Forest,SYN009,mumps,0,0.10302910052910055,0
+Random Forest,SYN009,viral_conjunctivitis,1,0.35636423897453295,0
+Random Forest,SYN009,viral_gastroenteritis,1,0.27738095829465803,0
+Random Forest,SYN016,influenza,0,0.23045636117694945,0
+Random Forest,SYN016,chickenpox,0,0.11155128173128577,0
+Random Forest,SYN016,measles,0,0.31112734487734484,0
+Random Forest,SYN016,mumps,0,0.016006613756613754,0
+Random Forest,SYN016,viral_conjunctivitis,1,0.2618663686087448,0
+Random Forest,SYN016,viral_gastroenteritis,1,0.1739567973838862,0
+Random Forest,SYN041,influenza,1,0.14351467051467054,0
+Random Forest,SYN041,chickenpox,0,0.15157407407407414,0
+Random Forest,SYN041,measles,1,0.17577535427535426,0
+Random Forest,SYN041,mumps,0,0.12068945406445399,0
+Random Forest,SYN041,viral_conjunctivitis,0,0.595269499019499,1
+Random Forest,SYN041,viral_gastroenteritis,0,0.28537182293683844,0
+Random Forest,SYN035,influenza,0,0.10200905575905572,0
+Random Forest,SYN035,chickenpox,0,0.2942578162578162,0
+Random Forest,SYN035,measles,0,0.20671815221815226,0
+Random Forest,SYN035,mumps,1,0.3379374884374886,0
+Random Forest,SYN035,viral_conjunctivitis,0,0.47077640857532155,0
+Random Forest,SYN035,viral_gastroenteritis,0,0.2166252419894061,0
+Random Forest,SYN033,influenza,0,0.12129401154401158,0
+Random Forest,SYN033,chickenpox,1,0.2971533235283235,0
+Random Forest,SYN033,measles,0,0.12637005124505124,0
+Random Forest,SYN033,mumps,0,0.5241800606800606,1
+Random Forest,SYN033,viral_conjunctivitis,0,0.21543037518037514,0
+Random Forest,SYN033,viral_gastroenteritis,0,0.25462469937469934,0
+Random Forest,SYN036,influenza,0,0.23787980619598278,0
+Random Forest,SYN036,chickenpox,1,0.36500977725977746,0
+Random Forest,SYN036,measles,0,0.12712205387205391,0
+Random Forest,SYN036,mumps,0,0.18584992784992785,0
+Random Forest,SYN036,viral_conjunctivitis,1,0.5108322214751244,1
+Random Forest,SYN036,viral_gastroenteritis,1,0.2609498663387983,0
+Random Forest,SYN046,influenza,1,0.11927176527176528,0
+Random Forest,SYN046,chickenpox,0,0.23867989880489887,0
+Random Forest,SYN046,measles,1,0.1472532467532467,0
+Random Forest,SYN046,mumps,0,0.2696236633736635,0
+Random Forest,SYN046,viral_conjunctivitis,0,0.5399183455433458,1
+Random Forest,SYN046,viral_gastroenteritis,1,0.33110342515528274,0
+Random Forest,SYN021,influenza,0,0.2580096738057263,0
+Random Forest,SYN021,chickenpox,0,0.3236338690549215,0
+Random Forest,SYN021,measles,0,0.4333119288119288,0
+Random Forest,SYN021,mumps,1,0.18934668109668115,0
+Random Forest,SYN021,viral_conjunctivitis,0,0.21837614437219693,0
+Random Forest,SYN021,viral_gastroenteritis,0,0.1810495848851349,0
+Random Forest,SYN013,influenza,0,0.4380665723165721,0
+Random Forest,SYN013,chickenpox,0,0.1660683374359845,0
+Random Forest,SYN013,measles,0,0.24839442039442053,0
+Random Forest,SYN013,mumps,0,0.029055555555555557,0
+Random Forest,SYN013,viral_conjunctivitis,0,0.19050697498958377,0
+Random Forest,SYN013,viral_gastroenteritis,0,0.20149818387699894,0
+Random Forest,SYN014,influenza,0,0.16915008140008142,0
+Random Forest,SYN014,chickenpox,1,0.366444983665572,0
+Random Forest,SYN014,measles,0,0.21521115921115921,0
+Random Forest,SYN014,mumps,0,0.21793169793169795,0
+Random Forest,SYN014,viral_conjunctivitis,0,0.46694642564975036,0
+Random Forest,SYN014,viral_gastroenteritis,1,0.23283129549615614,0
+Random Forest,SYN004,influenza,0,0.240255337727861,0
+Random Forest,SYN004,chickenpox,0,0.2600013240636809,0
+Random Forest,SYN004,measles,0,0.2610078532578533,0
+Random Forest,SYN004,mumps,0,0.12666185666185661,0
+Random Forest,SYN004,viral_conjunctivitis,0,0.25776812831418083,0
+Random Forest,SYN004,viral_gastroenteritis,0,0.23686060866527622,0
+Random Forest,SYN059,influenza,0,0.281663961038961,0
+Random Forest,SYN059,chickenpox,0,0.2647957320457319,0
+Random Forest,SYN059,measles,0,0.38535226810226786,0
+Random Forest,SYN059,mumps,1,0.0868505291005291,0
+Random Forest,SYN059,viral_conjunctivitis,1,0.1932192278238331,0
+Random Forest,SYN059,viral_gastroenteritis,0,0.18640547189383513,0
+Random Forest,SYN061,influenza,0,0.05578439153439153,0
+Random Forest,SYN061,chickenpox,0,0.3522214174714175,0
+Random Forest,SYN061,measles,0,0.24560582010582016,0
+Random Forest,SYN061,mumps,0,0.22558772246272252,0
+Random Forest,SYN061,viral_conjunctivitis,0,0.31139432389935495,0
+Random Forest,SYN061,viral_gastroenteritis,0,0.31304367516690845,0
+Random Forest,SYN092,influenza,0,0.11914267043872308,0
+Random Forest,SYN092,chickenpox,0,0.23479043307913267,0
+Random Forest,SYN092,measles,0,0.1504132164132165,0
+Random Forest,SYN092,mumps,0,0.06914285714285712,0
+Random Forest,SYN092,viral_conjunctivitis,0,0.2210908457283457,0
+Random Forest,SYN092,viral_gastroenteritis,0,0.4694025773175387,0
+Random Forest,SYN093,influenza,0,0.043033068783068784,0
+Random Forest,SYN093,chickenpox,0,0.12667125467125462,0
+Random Forest,SYN093,measles,0,0.02553715728715729,0
+Random Forest,SYN093,mumps,1,0.26739218189218195,0
+Random Forest,SYN093,viral_conjunctivitis,0,0.3012485715036026,0
+Random Forest,SYN093,viral_gastroenteritis,1,0.3415283755227388,0
+Random Forest,SYN018,influenza,1,0.14435548792166444,0
+Random Forest,SYN018,chickenpox,1,0.40899587395175646,0
+Random Forest,SYN018,measles,0,0.23543529618529618,0
+Random Forest,SYN018,mumps,0,0.19011375661375657,0
+Random Forest,SYN018,viral_conjunctivitis,0,0.5153549332641404,1
+Random Forest,SYN018,viral_gastroenteritis,1,0.39727487316032223,0
+Random Forest,SYN029,influenza,0,0.24369774207274206,0
+Random Forest,SYN029,chickenpox,0,0.35456337181337183,0
+Random Forest,SYN029,measles,0,0.35090211640211627,0
+Random Forest,SYN029,mumps,0,0.02630820105820106,0
+Random Forest,SYN029,viral_conjunctivitis,0,0.23213137050147906,0
+Random Forest,SYN029,viral_gastroenteritis,1,0.3150856136041342,0
+Random Forest,SYN057,influenza,1,0.45903417497535143,0
+Random Forest,SYN057,chickenpox,0,0.2716798941798943,0
+Random Forest,SYN057,measles,0,0.20274013949013955,0
+Random Forest,SYN057,mumps,0,0.04203174603174603,0
+Random Forest,SYN057,viral_conjunctivitis,0,0.3738337773337772,0
+Random Forest,SYN057,viral_gastroenteritis,1,0.5377446671262459,1
+Random Forest,SYN073,influenza,1,0.5158023458023457,1
+Random Forest,SYN073,chickenpox,0,0.32861580086580094,0
+Random Forest,SYN073,measles,0,0.24815895800106327,0
+Random Forest,SYN073,mumps,0,0.11147534872534867,0
+Random Forest,SYN073,viral_conjunctivitis,0,0.2831450942798197,0
+Random Forest,SYN073,viral_gastroenteritis,1,0.5404120139120142,1
+Random Forest,SYN051,influenza,0,0.3387637302068414,0
+Random Forest,SYN051,chickenpox,0,0.25333558346251833,0
+Random Forest,SYN051,measles,0,0.3509671717171717,0
+Random Forest,SYN051,mumps,0,0.27595502645502645,0
+Random Forest,SYN051,viral_conjunctivitis,1,0.248558732008732,0
+Random Forest,SYN051,viral_gastroenteritis,1,0.28831721508339164,0
+Random Forest,SYN037,influenza,0,0.1873945036445037,0
+Random Forest,SYN037,chickenpox,0,0.25422801544860374,0
+Random Forest,SYN037,measles,0,0.1659738964738965,0
+Random Forest,SYN037,mumps,1,0.1950964590964591,0
+Random Forest,SYN037,viral_conjunctivitis,0,0.3383629119412367,0
+Random Forest,SYN037,viral_gastroenteritis,1,0.22895190092558523,0
+Random Forest,SYN047,influenza,0,0.20192569467569466,0
+Random Forest,SYN047,chickenpox,1,0.21272291869350704,0
+Random Forest,SYN047,measles,0,0.33195236829447333,0
+Random Forest,SYN047,mumps,0,0.26271466496466506,0
+Random Forest,SYN047,viral_conjunctivitis,0,0.2870489140912482,0
+Random Forest,SYN047,viral_gastroenteritis,0,0.2838472789393842,0
+Random Forest,SYN040,influenza,0,0.14632545695045696,0
+Random Forest,SYN040,chickenpox,0,0.11250634822693643,0
+Random Forest,SYN040,measles,1,0.22259355459355457,0
+Random Forest,SYN040,mumps,0,0.34705617530617555,0
+Random Forest,SYN040,viral_conjunctivitis,1,0.22062215235246596,0
+Random Forest,SYN040,viral_gastroenteritis,0,0.2930121663395658,0
+Random Forest,SYN032,influenza,0,0.15791281866281862,0
+Random Forest,SYN032,chickenpox,0,0.16910279072779077,0
+Random Forest,SYN032,measles,0,0.08413504088504088,0
+Random Forest,SYN032,mumps,0,0.02972390572390572,0
+Random Forest,SYN032,viral_conjunctivitis,0,0.430372970983265,0
+Random Forest,SYN032,viral_gastroenteritis,0,0.2787671140492349,0
+Random Forest,SYN006,influenza,0,0.2353053751803752,0
+Random Forest,SYN006,chickenpox,0,0.5107209827209828,1
+Random Forest,SYN006,measles,0,0.2741098438598437,0
+Random Forest,SYN006,mumps,1,0.02360894660894661,0
+Random Forest,SYN006,viral_conjunctivitis,0,0.27094561749167023,0
+Random Forest,SYN006,viral_gastroenteritis,1,0.33164948176212034,0
+Random Forest,SYN053,influenza,0,0.17856180856180864,0
+Random Forest,SYN053,chickenpox,0,0.2628834221334222,0
+Random Forest,SYN053,measles,1,0.09471055796055795,0
+Random Forest,SYN053,mumps,0,0.06294642857142857,0
+Random Forest,SYN053,viral_conjunctivitis,1,0.3258385925936235,0
+Random Forest,SYN053,viral_gastroenteritis,1,0.45410140902804774,0
+Random Forest,SYN001,influenza,0,0.26343554593554597,0
+Random Forest,SYN001,chickenpox,0,0.3071117123617124,0
+Random Forest,SYN001,measles,0,0.1361708754208754,0
+Random Forest,SYN001,mumps,0,0.16573172198172195,0
+Random Forest,SYN001,viral_conjunctivitis,0,0.17006613955646466,0
+Random Forest,SYN001,viral_gastroenteritis,0,0.3790708768355826,0
+Random Forest,SYN100,influenza,0,0.17544504569504576,0
+Random Forest,SYN100,chickenpox,1,0.44412538850038835,0
+Random Forest,SYN100,measles,1,0.14312193362193357,0
+Random Forest,SYN100,mumps,0,0.18288956876456877,0
+Random Forest,SYN100,viral_conjunctivitis,1,0.13203910776472705,0
+Random Forest,SYN100,viral_gastroenteritis,0,0.47926452546670606,0
+Random Forest,SYN017,influenza,1,0.0891248181929296,0
+Random Forest,SYN017,chickenpox,1,0.13652662175074345,0
+Random Forest,SYN017,measles,0,0.11118884818884821,0
+Random Forest,SYN017,mumps,0,0.04782539682539681,0
+Random Forest,SYN017,viral_conjunctivitis,0,0.1625558119097442,0
+Random Forest,SYN017,viral_gastroenteritis,0,0.26725759934155074,0
+Random Forest,SYN094,influenza,0,0.2664532597032597,0
+Random Forest,SYN094,chickenpox,0,0.18425817700817698,0
+Random Forest,SYN094,measles,0,0.2392835093756147,0
+Random Forest,SYN094,mumps,0,0.1935645743145743,0
+Random Forest,SYN094,viral_conjunctivitis,1,0.3927903834348847,0
+Random Forest,SYN094,viral_gastroenteritis,0,0.4963490213490213,0
+Random Forest,SYN099,influenza,0,0.14199733626939515,0
+Random Forest,SYN099,chickenpox,1,0.34483975848139936,0
+Random Forest,SYN099,measles,0,0.1925860158360159,0
+Random Forest,SYN099,mumps,1,0.09503703703703702,0
+Random Forest,SYN099,viral_conjunctivitis,1,0.21749924166540305,0
+Random Forest,SYN099,viral_gastroenteritis,0,0.3111318546724343,0
+Random Forest,SYN084,influenza,1,0.317991341991342,0
+Random Forest,SYN084,chickenpox,0,0.10064245014245009,0
+Random Forest,SYN084,measles,0,0.07357828282828283,0
+Random Forest,SYN084,mumps,0,0.11443650793650792,0
+Random Forest,SYN084,viral_conjunctivitis,0,0.36963667278140955,0
+Random Forest,SYN084,viral_gastroenteritis,1,0.44799695076165647,0
+Random Forest,SYN030,influenza,0,0.18998258304875953,0
+Random Forest,SYN030,chickenpox,0,0.3492081366346074,0
+Random Forest,SYN030,measles,0,0.14284728234728228,0
+Random Forest,SYN030,mumps,0,0.13198677248677246,0
+Random Forest,SYN030,viral_conjunctivitis,1,0.5460962491141521,1
+Random Forest,SYN030,viral_gastroenteritis,0,0.30907963920038234,0
+Random Forest,SYN081,influenza,0,0.0701468253968254,0
+Random Forest,SYN081,chickenpox,1,0.340961422836423,0
+Random Forest,SYN081,measles,0,0.024830808080808085,0
+Random Forest,SYN081,mumps,0,0.27172496947496955,0
+Random Forest,SYN081,viral_conjunctivitis,0,0.3086344317447259,0
+Random Forest,SYN081,viral_gastroenteritis,0,0.3885837659241045,0
+Random Forest,SYN074,influenza,0,0.35628431290931306,0
+Random Forest,SYN074,chickenpox,0,0.36199119344707587,0
+Random Forest,SYN074,measles,0,0.12244324194324195,0
+Random Forest,SYN074,mumps,0,0.1664206349206349,0
+Random Forest,SYN074,viral_conjunctivitis,0,0.6267559352412293,1
+Random Forest,SYN074,viral_gastroenteritis,0,0.45145087537734585,0
+Random Forest,SYN069,influenza,0,0.39911335695894506,0
+Random Forest,SYN069,chickenpox,1,0.3841104045020453,0
+Random Forest,SYN069,measles,0,0.40242340067340066,0
+Random Forest,SYN069,mumps,1,0.21488756613756615,0
+Random Forest,SYN069,viral_conjunctivitis,1,0.29428679864167473,0
+Random Forest,SYN069,viral_gastroenteritis,0,0.40330910881057935,0
+Random Forest,SYN067,influenza,0,0.24632104551222211,0
+Random Forest,SYN067,chickenpox,1,0.1134202279202279,0
+Random Forest,SYN067,measles,0,0.16867074592074596,0
+Random Forest,SYN067,mumps,0,0.04032142857142857,0
+Random Forest,SYN067,viral_conjunctivitis,0,0.2310814262227304,0
+Random Forest,SYN067,viral_gastroenteritis,0,0.14994348383241582,0
+Random Forest,SYN088,influenza,0,0.13465644540644547,0
+Random Forest,SYN088,chickenpox,0,0.24889454526954544,0
+Random Forest,SYN088,measles,0,0.12277944277944276,0
+Random Forest,SYN088,mumps,0,0.18626497113997112,0
+Random Forest,SYN088,viral_conjunctivitis,0,0.28327581677581687,0
+Random Forest,SYN088,viral_gastroenteritis,0,0.3886118737500314,0
+Random Forest,SYN056,influenza,0,0.3266239084989083,0
+Random Forest,SYN056,chickenpox,0,0.20708795019984283,0
+Random Forest,SYN056,measles,0,0.3439356661856661,0
+Random Forest,SYN056,mumps,0,0.04888936988936989,0
+Random Forest,SYN056,viral_conjunctivitis,0,0.19279792692264086,0
+Random Forest,SYN056,viral_gastroenteritis,1,0.2563925025591692,0
+Random Forest,SYN063,influenza,0,0.29412123334182144,0
+Random Forest,SYN063,chickenpox,0,0.21496440269969677,0
+Random Forest,SYN063,measles,0,0.3687987382987383,0
+Random Forest,SYN063,mumps,0,0.03888011063011062,0
+Random Forest,SYN063,viral_conjunctivitis,0,0.19125826889548284,0
+Random Forest,SYN063,viral_gastroenteritis,0,0.2773846691478506,0
+Random Forest,SYN050,influenza,0,0.10765139490139487,0
+Random Forest,SYN050,chickenpox,1,0.10993213268213273,0
+Random Forest,SYN050,measles,1,0.011562950937950938,0
+Random Forest,SYN050,mumps,0,0.07985606060606061,0
+Random Forest,SYN050,viral_conjunctivitis,0,0.20510829783391712,0
+Random Forest,SYN050,viral_gastroenteritis,0,0.3197441089350668,0
+Random Forest,SYN079,influenza,0,0.4692948995448995,0
+Random Forest,SYN079,chickenpox,0,0.23890319865319867,0
+Random Forest,SYN079,measles,0,0.09794985569985568,0
+Random Forest,SYN079,mumps,0,0.11663227513227512,0
+Random Forest,SYN079,viral_conjunctivitis,0,0.2847128473801816,0
+Random Forest,SYN079,viral_gastroenteritis,0,0.34909543234543255,0
+Random Forest,SYN082,influenza,0,0.16977200577200582,0
+Random Forest,SYN082,chickenpox,1,0.29767176804676815,0
+Random Forest,SYN082,measles,0,0.07313407888407887,0
+Random Forest,SYN082,mumps,0,0.15130483405483405,0
+Random Forest,SYN082,viral_conjunctivitis,1,0.47169368004429924,0
+Random Forest,SYN082,viral_gastroenteritis,1,0.40220950480797035,0
+Random Forest,SYN005,influenza,0,0.08025541125541123,0
+Random Forest,SYN005,chickenpox,0,0.3282331048581049,0
+Random Forest,SYN005,measles,0,0.08971705146705145,0
+Random Forest,SYN005,mumps,1,0.1712692585192585,0
+Random Forest,SYN005,viral_conjunctivitis,0,0.49979276551335405,0
+Random Forest,SYN005,viral_gastroenteritis,0,0.4575856083082999,0
+Random Forest,SYN024,influenza,0,0.2791870074370074,0
+Random Forest,SYN024,chickenpox,1,0.23089870314870325,0
+Random Forest,SYN024,measles,0,0.0926486568986569,0
+Random Forest,SYN024,mumps,0,0.33146598771598795,0
+Random Forest,SYN024,viral_conjunctivitis,0,0.22812357826150062,0
+Random Forest,SYN024,viral_gastroenteritis,0,0.32315665502081925,0
+Random Forest,SYN055,influenza,0,0.18626917989417993,0
+Random Forest,SYN055,chickenpox,0,0.11830205197852259,0
+Random Forest,SYN055,measles,0,0.19897258297258302,0
+Random Forest,SYN055,mumps,0,0.2490109612609614,0
+Random Forest,SYN055,viral_conjunctivitis,0,0.26482519658492193,0
+Random Forest,SYN055,viral_gastroenteritis,0,0.2128455035103642,0
+Random Forest,SYN045,influenza,0,0.10599321266968324,0
+Random Forest,SYN045,chickenpox,0,0.23729335521794132,0
+Random Forest,SYN045,measles,0,0.2155220057720058,0
+Random Forest,SYN045,mumps,0,0.15106216931216934,0
+Random Forest,SYN045,viral_conjunctivitis,0,0.20411743365859503,0
+Random Forest,SYN045,viral_gastroenteritis,0,0.17639946750622373,0
+Random Forest,SYN034,influenza,0,0.427190762940763,0
+Random Forest,SYN034,chickenpox,0,0.1662716379481086,0
+Random Forest,SYN034,measles,0,0.25391414141414137,0
+Random Forest,SYN034,mumps,0,0.005999999999999999,0
+Random Forest,SYN034,viral_conjunctivitis,0,0.4352850163926248,0
+Random Forest,SYN034,viral_gastroenteritis,0,0.334206657545511,0
+Random Forest,SYN023,influenza,0,0.23924452861952858,0
+Random Forest,SYN023,chickenpox,1,0.32894981869981876,0
+Random Forest,SYN023,measles,1,0.5393386798386798,1
+Random Forest,SYN023,mumps,0,0.11736952861952861,0
+Random Forest,SYN023,viral_conjunctivitis,1,0.2659668043415183,0
+Random Forest,SYN023,viral_gastroenteritis,1,0.316763784605089,0
+Random Forest,SYN052,influenza,0,0.2404441206941208,0
+Random Forest,SYN052,chickenpox,0,0.11008541458541458,0
+Random Forest,SYN052,measles,0,0.18559641868852406,0
+Random Forest,SYN052,mumps,0,0.05012878787878787,0
+Random Forest,SYN052,viral_conjunctivitis,0,0.2089241983930031,0
+Random Forest,SYN052,viral_gastroenteritis,0,0.23247807543047486,0
+Random Forest,SYN042,influenza,1,0.24821663840974983,0
+Random Forest,SYN042,chickenpox,0,0.18512043459997424,0
+Random Forest,SYN042,measles,0,0.29534118659118663,0
+Random Forest,SYN042,mumps,0,0.05609920634920634,0
+Random Forest,SYN042,viral_conjunctivitis,0,0.13826583477438745,0
+Random Forest,SYN042,viral_gastroenteritis,0,0.22115427046156963,0
+Random Forest,SYN090,influenza,0,0.05536772486772486,0
+Random Forest,SYN090,chickenpox,0,0.29425455562955555,0
+Random Forest,SYN090,measles,0,0.11206878306878307,0
+Random Forest,SYN090,mumps,0,0.10055591630591626,0
+Random Forest,SYN090,viral_conjunctivitis,0,0.3564892904796155,0
+Random Forest,SYN090,viral_gastroenteritis,0,0.4970924747362187,0
+Random Forest,SYN054,influenza,1,0.34219482008646085,0
+Random Forest,SYN054,chickenpox,0,0.28997163259856756,0
+Random Forest,SYN054,measles,0,0.1311230713730714,0
+Random Forest,SYN054,mumps,0,0.01589814814814815,0
+Random Forest,SYN054,viral_conjunctivitis,0,0.22007694344705223,0
+Random Forest,SYN054,viral_gastroenteritis,0,0.220479975143519,0
+Random Forest,SYN028,influenza,0,0.2770012996262995,0
+Random Forest,SYN028,chickenpox,0,0.40122847522847527,0
+Random Forest,SYN028,measles,0,0.22889638139638133,0
+Random Forest,SYN028,mumps,0,0.059989417989418,0
+Random Forest,SYN028,viral_conjunctivitis,1,0.35375672995305346,0
+Random Forest,SYN028,viral_gastroenteritis,0,0.42583877597174696,0
+Random Forest,SYN008,influenza,0,0.15393055637173286,0
+Random Forest,SYN008,chickenpox,1,0.36176263823322635,0
+Random Forest,SYN008,measles,1,0.1985297816218869,0
+Random Forest,SYN008,mumps,0,0.1425913900913901,0
+Random Forest,SYN008,viral_conjunctivitis,0,0.3795903437707854,0
+Random Forest,SYN008,viral_gastroenteritis,1,0.11825787518008883,0
+Random Forest,SYN071,influenza,0,0.17385149110149115,0
+Random Forest,SYN071,chickenpox,0,0.15014814814814817,0
+Random Forest,SYN071,measles,1,0.07625420875420875,0
+Random Forest,SYN071,mumps,0,0.1529446849446849,0
+Random Forest,SYN071,viral_conjunctivitis,0,0.30354793553826054,0
+Random Forest,SYN071,viral_gastroenteritis,0,0.1819099326599326,0
+Random Forest,SYN078,influenza,1,0.12597546897546893,0
+Random Forest,SYN078,chickenpox,0,0.1765853544603545,0
+Random Forest,SYN078,measles,0,0.05775793650793651,0
+Random Forest,SYN078,mumps,0,0.06278428978428978,0
+Random Forest,SYN078,viral_conjunctivitis,0,0.1353608970865163,0
+Random Forest,SYN078,viral_gastroenteritis,1,0.2931703962961702,0
+XGBoost,SYN003,influenza,0,0.47986388206481934,0
+XGBoost,SYN003,chickenpox,0,0.19917747378349304,0
+XGBoost,SYN003,measles,0,0.1708720326423645,0
+XGBoost,SYN003,mumps,0,0.1488974690437317,0
+XGBoost,SYN003,viral_conjunctivitis,1,0.1667814701795578,0
+XGBoost,SYN003,viral_gastroenteritis,0,0.1486489623785019,0
+XGBoost,SYN076,influenza,0,0.20644830167293549,0
+XGBoost,SYN076,chickenpox,0,0.24103842675685883,0
+XGBoost,SYN076,measles,0,0.2837202250957489,0
+XGBoost,SYN076,mumps,0,0.10669373720884323,0
+XGBoost,SYN076,viral_conjunctivitis,0,0.14015169441699982,0
+XGBoost,SYN076,viral_gastroenteritis,0,0.19882792234420776,0
+XGBoost,SYN026,influenza,0,0.20806603133678436,0
+XGBoost,SYN026,chickenpox,1,0.3525398373603821,0
+XGBoost,SYN026,measles,0,0.3209773898124695,0
+XGBoost,SYN026,mumps,0,0.10669373720884323,0
+XGBoost,SYN026,viral_conjunctivitis,1,0.18610897660255432,0
+XGBoost,SYN026,viral_gastroenteritis,1,0.43626418709754944,0
+XGBoost,SYN058,influenza,1,0.14837995171546936,0
+XGBoost,SYN058,chickenpox,0,0.263883113861084,0
+XGBoost,SYN058,measles,0,0.1047268658876419,0
+XGBoost,SYN058,mumps,0,0.16601362824440002,0
+XGBoost,SYN058,viral_conjunctivitis,0,0.16026034951210022,0
+XGBoost,SYN058,viral_gastroenteritis,0,0.43147218227386475,0
+XGBoost,SYN049,influenza,0,0.38745585083961487,0
+XGBoost,SYN049,chickenpox,0,0.16814693808555603,0
+XGBoost,SYN049,measles,0,0.17458470165729523,0
+XGBoost,SYN049,mumps,0,0.1488974690437317,0
+XGBoost,SYN049,viral_conjunctivitis,0,0.4280824661254883,0
+XGBoost,SYN049,viral_gastroenteritis,0,0.35400521755218506,0
+XGBoost,SYN038,influenza,1,0.11438138037919998,0
+XGBoost,SYN038,chickenpox,0,0.25482064485549927,0
+XGBoost,SYN038,measles,1,0.17350593209266663,0
+XGBoost,SYN038,mumps,0,0.1488974690437317,0
+XGBoost,SYN038,viral_conjunctivitis,0,0.371651291847229,0
+XGBoost,SYN038,viral_gastroenteritis,0,0.1095307394862175,0
+XGBoost,SYN091,influenza,1,0.14837995171546936,0
+XGBoost,SYN091,chickenpox,0,0.1797368973493576,0
+XGBoost,SYN091,measles,0,0.1047268658876419,0
+XGBoost,SYN091,mumps,0,0.17125815153121948,0
+XGBoost,SYN091,viral_conjunctivitis,1,0.2546970546245575,0
+XGBoost,SYN091,viral_gastroenteritis,0,0.241037517786026,0
+XGBoost,SYN048,influenza,0,0.14837995171546936,0
+XGBoost,SYN048,chickenpox,0,0.46950072050094604,0
+XGBoost,SYN048,measles,1,0.1047268658876419,0
+XGBoost,SYN048,mumps,0,0.17125815153121948,0
+XGBoost,SYN048,viral_conjunctivitis,0,0.36473533511161804,0
+XGBoost,SYN048,viral_gastroenteritis,0,0.6682427525520325,1
+XGBoost,SYN075,influenza,1,0.14837995171546936,0
+XGBoost,SYN075,chickenpox,0,0.2552069127559662,0
+XGBoost,SYN075,measles,0,0.1047268658876419,0
+XGBoost,SYN075,mumps,0,0.16601362824440002,0
+XGBoost,SYN075,viral_conjunctivitis,1,0.5222359895706177,1
+XGBoost,SYN075,viral_gastroenteritis,0,0.2606012225151062,0
+XGBoost,SYN098,influenza,0,0.10546085983514786,0
+XGBoost,SYN098,chickenpox,0,0.2417801022529602,0
+XGBoost,SYN098,measles,0,0.17458470165729523,0
+XGBoost,SYN098,mumps,1,0.1488974690437317,0
+XGBoost,SYN098,viral_conjunctivitis,0,0.4712678790092468,0
+XGBoost,SYN098,viral_gastroenteritis,1,0.28620481491088867,0
+XGBoost,SYN011,influenza,0,0.09510647505521774,0
+XGBoost,SYN011,chickenpox,0,0.1423875093460083,0
+XGBoost,SYN011,measles,1,0.17458470165729523,0
+XGBoost,SYN011,mumps,0,0.1488974690437317,0
+XGBoost,SYN011,viral_conjunctivitis,1,0.5066157579421997,1
+XGBoost,SYN011,viral_gastroenteritis,0,0.6105842590332031,1
+XGBoost,SYN064,influenza,0,0.16052952408790588,0
+XGBoost,SYN064,chickenpox,0,0.2051713764667511,0
+XGBoost,SYN064,measles,0,0.1612740010023117,0
+XGBoost,SYN064,mumps,0,0.10669373720884323,0
+XGBoost,SYN064,viral_conjunctivitis,1,0.31545960903167725,0
+XGBoost,SYN064,viral_gastroenteritis,1,0.4413481056690216,0
+XGBoost,SYN043,influenza,0,0.29029381275177,0
+XGBoost,SYN043,chickenpox,0,0.4206595718860626,0
+XGBoost,SYN043,measles,0,0.1708720326423645,0
+XGBoost,SYN043,mumps,0,0.1488974690437317,0
+XGBoost,SYN043,viral_conjunctivitis,0,0.30503740906715393,0
+XGBoost,SYN043,viral_gastroenteritis,0,0.2778187096118927,0
+XGBoost,SYN009,influenza,1,0.14837995171546936,0
+XGBoost,SYN009,chickenpox,0,0.11912596225738525,0
+XGBoost,SYN009,measles,0,0.1047268658876419,0
+XGBoost,SYN009,mumps,0,0.16601362824440002,0
+XGBoost,SYN009,viral_conjunctivitis,1,0.3584306836128235,0
+XGBoost,SYN009,viral_gastroenteritis,1,0.27133670449256897,0
+XGBoost,SYN016,influenza,0,0.20699883997440338,0
+XGBoost,SYN016,chickenpox,0,0.15419386327266693,0
+XGBoost,SYN016,measles,0,0.3304359018802643,0
+XGBoost,SYN016,mumps,0,0.10669373720884323,0
+XGBoost,SYN016,viral_conjunctivitis,1,0.26706692576408386,0
+XGBoost,SYN016,viral_gastroenteritis,1,0.19428779184818268,0
+XGBoost,SYN041,influenza,1,0.14837995171546936,0
+XGBoost,SYN041,chickenpox,0,0.07723654806613922,0
+XGBoost,SYN041,measles,1,0.1047268658876419,0
+XGBoost,SYN041,mumps,0,0.16864928603172302,0
+XGBoost,SYN041,viral_conjunctivitis,0,0.5641960501670837,1
+XGBoost,SYN041,viral_gastroenteritis,0,0.256964772939682,0
+XGBoost,SYN035,influenza,0,0.10913075506687164,0
+XGBoost,SYN035,chickenpox,0,0.22836899757385254,0
+XGBoost,SYN035,measles,0,0.17350593209266663,0
+XGBoost,SYN035,mumps,1,0.1488974690437317,0
+XGBoost,SYN035,viral_conjunctivitis,0,0.35302552580833435,0
+XGBoost,SYN035,viral_gastroenteritis,0,0.21333277225494385,0
+XGBoost,SYN033,influenza,0,0.14837995171546936,0
+XGBoost,SYN033,chickenpox,1,0.3107846975326538,0
+XGBoost,SYN033,measles,0,0.1047268658876419,0
+XGBoost,SYN033,mumps,0,0.17125815153121948,0
+XGBoost,SYN033,viral_conjunctivitis,0,0.1973462998867035,0
+XGBoost,SYN033,viral_gastroenteritis,0,0.21913616359233856,0
+XGBoost,SYN036,influenza,0,0.1481403112411499,0
+XGBoost,SYN036,chickenpox,1,0.3066224753856659,0
+XGBoost,SYN036,measles,0,0.17350593209266663,0
+XGBoost,SYN036,mumps,0,0.1488974690437317,0
+XGBoost,SYN036,viral_conjunctivitis,1,0.3643357455730438,0
+XGBoost,SYN036,viral_gastroenteritis,1,0.13914501667022705,0
+XGBoost,SYN046,influenza,1,0.14837995171546936,0
+XGBoost,SYN046,chickenpox,0,0.21883516013622284,0
+XGBoost,SYN046,measles,1,0.1047268658876419,0
+XGBoost,SYN046,mumps,0,0.17125815153121948,0
+XGBoost,SYN046,viral_conjunctivitis,0,0.467607319355011,0
+XGBoost,SYN046,viral_gastroenteritis,1,0.48005005717277527,0
+XGBoost,SYN021,influenza,0,0.2712985873222351,0
+XGBoost,SYN021,chickenpox,0,0.30558791756629944,0
+XGBoost,SYN021,measles,0,0.3931195139884949,0
+XGBoost,SYN021,mumps,1,0.10669373720884323,0
+XGBoost,SYN021,viral_conjunctivitis,0,0.14768511056900024,0
+XGBoost,SYN021,viral_gastroenteritis,0,0.16168537735939026,0
+XGBoost,SYN013,influenza,0,0.494836688041687,0
+XGBoost,SYN013,chickenpox,0,0.09838873147964478,0
+XGBoost,SYN013,measles,0,0.2639073431491852,0
+XGBoost,SYN013,mumps,0,0.10669373720884323,0
+XGBoost,SYN013,viral_conjunctivitis,0,0.2450345754623413,0
+XGBoost,SYN013,viral_gastroenteritis,0,0.23151354491710663,0
+XGBoost,SYN014,influenza,0,0.1261427253484726,0
+XGBoost,SYN014,chickenpox,1,0.24796932935714722,0
+XGBoost,SYN014,measles,0,0.17350593209266663,0
+XGBoost,SYN014,mumps,0,0.1488974690437317,0
+XGBoost,SYN014,viral_conjunctivitis,0,0.4548175632953644,0
+XGBoost,SYN014,viral_gastroenteritis,1,0.12295535206794739,0
+XGBoost,SYN004,influenza,0,0.1556958705186844,0
+XGBoost,SYN004,chickenpox,0,0.18199749290943146,0
+XGBoost,SYN004,measles,0,0.21327762305736542,0
+XGBoost,SYN004,mumps,0,0.10669373720884323,0
+XGBoost,SYN004,viral_conjunctivitis,0,0.14720724523067474,0
+XGBoost,SYN004,viral_gastroenteritis,0,0.20181886851787567,0
+XGBoost,SYN059,influenza,0,0.3261984586715698,0
+XGBoost,SYN059,chickenpox,0,0.17815940082073212,0
+XGBoost,SYN059,measles,0,0.2720821797847748,0
+XGBoost,SYN059,mumps,1,0.10669373720884323,0
+XGBoost,SYN059,viral_conjunctivitis,1,0.13254429399967194,0
+XGBoost,SYN059,viral_gastroenteritis,0,0.36198389530181885,0
+XGBoost,SYN061,influenza,0,0.14837995171546936,0
+XGBoost,SYN061,chickenpox,0,0.26870277523994446,0
+XGBoost,SYN061,measles,0,0.1047268658876419,0
+XGBoost,SYN061,mumps,0,0.1685900092124939,0
+XGBoost,SYN061,viral_conjunctivitis,0,0.28009557723999023,0
+XGBoost,SYN061,viral_gastroenteritis,0,0.24903936684131622,0
+XGBoost,SYN092,influenza,0,0.1348569244146347,0
+XGBoost,SYN092,chickenpox,0,0.20496128499507904,0
+XGBoost,SYN092,measles,0,0.10580097138881683,0
+XGBoost,SYN092,mumps,0,0.10669373720884323,0
+XGBoost,SYN092,viral_conjunctivitis,0,0.1802002191543579,0
+XGBoost,SYN092,viral_gastroenteritis,0,0.2984471023082733,0
+XGBoost,SYN093,influenza,0,0.14837995171546936,0
+XGBoost,SYN093,chickenpox,0,0.10806867480278015,0
+XGBoost,SYN093,measles,0,0.1047268658876419,0
+XGBoost,SYN093,mumps,1,0.16864928603172302,0
+XGBoost,SYN093,viral_conjunctivitis,0,0.3289295732975006,0
+XGBoost,SYN093,viral_gastroenteritis,1,0.3136661648750305,0
+XGBoost,SYN018,influenza,1,0.1239347979426384,0
+XGBoost,SYN018,chickenpox,1,0.318489134311676,0
+XGBoost,SYN018,measles,0,0.17458470165729523,0
+XGBoost,SYN018,mumps,0,0.1488974690437317,0
+XGBoost,SYN018,viral_conjunctivitis,0,0.5037634372711182,1
+XGBoost,SYN018,viral_gastroenteritis,1,0.5268261432647705,1
+XGBoost,SYN029,influenza,0,0.27254536747932434,0
+XGBoost,SYN029,chickenpox,0,0.2018992304801941,0
+XGBoost,SYN029,measles,0,0.29799115657806396,0
+XGBoost,SYN029,mumps,0,0.10669373720884323,0
+XGBoost,SYN029,viral_conjunctivitis,0,0.2700965702533722,0
+XGBoost,SYN029,viral_gastroenteritis,1,0.46630480885505676,0
+XGBoost,SYN057,influenza,1,0.40752705931663513,0
+XGBoost,SYN057,chickenpox,0,0.2502728998661041,0
+XGBoost,SYN057,measles,0,0.17193783819675446,0
+XGBoost,SYN057,mumps,0,0.1488974690437317,0
+XGBoost,SYN057,viral_conjunctivitis,0,0.19280223548412323,0
+XGBoost,SYN057,viral_gastroenteritis,1,0.5943843722343445,1
+XGBoost,SYN073,influenza,1,0.4375268518924713,0
+XGBoost,SYN073,chickenpox,0,0.3485170602798462,0
+XGBoost,SYN073,measles,0,0.17193783819675446,0
+XGBoost,SYN073,mumps,0,0.1488974690437317,0
+XGBoost,SYN073,viral_conjunctivitis,0,0.2495434284210205,0
+XGBoost,SYN073,viral_gastroenteritis,1,0.653267502784729,1
+XGBoost,SYN051,influenza,0,0.3055258095264435,0
+XGBoost,SYN051,chickenpox,0,0.18966630101203918,0
+XGBoost,SYN051,measles,0,0.35954636335372925,0
+XGBoost,SYN051,mumps,0,0.10669373720884323,0
+XGBoost,SYN051,viral_conjunctivitis,1,0.3037313222885132,0
+XGBoost,SYN051,viral_gastroenteritis,1,0.3516389727592468,0
+XGBoost,SYN037,influenza,0,0.11316680163145065,0
+XGBoost,SYN037,chickenpox,0,0.22724498808383942,0
+XGBoost,SYN037,measles,0,0.17350593209266663,0
+XGBoost,SYN037,mumps,1,0.1488974690437317,0
+XGBoost,SYN037,viral_conjunctivitis,0,0.396576464176178,0
+XGBoost,SYN037,viral_gastroenteritis,1,0.15712960064411163,0
+XGBoost,SYN047,influenza,0,0.20124244689941406,0
+XGBoost,SYN047,chickenpox,1,0.1231164038181305,0
+XGBoost,SYN047,measles,0,0.17350593209266663,0
+XGBoost,SYN047,mumps,0,0.1488974690437317,0
+XGBoost,SYN047,viral_conjunctivitis,0,0.2610073685646057,0
+XGBoost,SYN047,viral_gastroenteritis,0,0.2644489109516144,0
+XGBoost,SYN040,influenza,0,0.16615113615989685,0
+XGBoost,SYN040,chickenpox,0,0.10148347914218903,0
+XGBoost,SYN040,measles,1,0.1708720326423645,0
+XGBoost,SYN040,mumps,0,0.1488974690437317,0
+XGBoost,SYN040,viral_conjunctivitis,1,0.2243332415819168,0
+XGBoost,SYN040,viral_gastroenteritis,0,0.17701123654842377,0
+XGBoost,SYN032,influenza,0,0.14837995171546936,0
+XGBoost,SYN032,chickenpox,0,0.1618243306875229,0
+XGBoost,SYN032,measles,0,0.1047268658876419,0
+XGBoost,SYN032,mumps,0,0.16601362824440002,0
+XGBoost,SYN032,viral_conjunctivitis,0,0.4371398091316223,0
+XGBoost,SYN032,viral_gastroenteritis,0,0.46606144309043884,0
+XGBoost,SYN006,influenza,0,0.24320679903030396,0
+XGBoost,SYN006,chickenpox,0,0.5025587677955627,1
+XGBoost,SYN006,measles,0,0.25753846764564514,0
+XGBoost,SYN006,mumps,1,0.10669373720884323,0
+XGBoost,SYN006,viral_conjunctivitis,0,0.2020731121301651,0
+XGBoost,SYN006,viral_gastroenteritis,1,0.3413096070289612,0
+XGBoost,SYN053,influenza,0,0.14837995171546936,0
+XGBoost,SYN053,chickenpox,0,0.22687144577503204,0
+XGBoost,SYN053,measles,1,0.1047268658876419,0
+XGBoost,SYN053,mumps,0,0.16601362824440002,0
+XGBoost,SYN053,viral_conjunctivitis,1,0.3630457818508148,0
+XGBoost,SYN053,viral_gastroenteritis,1,0.3786363899707794,0
+XGBoost,SYN001,influenza,0,0.14837995171546936,0
+XGBoost,SYN001,chickenpox,0,0.20362116396427155,0
+XGBoost,SYN001,measles,0,0.1047268658876419,0
+XGBoost,SYN001,mumps,0,0.16864928603172302,0
+XGBoost,SYN001,viral_conjunctivitis,0,0.20609833300113678,0
+XGBoost,SYN001,viral_gastroenteritis,0,0.2603943347930908,0
+XGBoost,SYN100,influenza,0,0.14837995171546936,0
+XGBoost,SYN100,chickenpox,1,0.32632073760032654,0
+XGBoost,SYN100,measles,1,0.1047268658876419,0
+XGBoost,SYN100,mumps,0,0.16864928603172302,0
+XGBoost,SYN100,viral_conjunctivitis,1,0.20024460554122925,0
+XGBoost,SYN100,viral_gastroenteritis,0,0.432912141084671,0
+XGBoost,SYN017,influenza,1,0.19642361998558044,0
+XGBoost,SYN017,chickenpox,1,0.14863930642604828,0
+XGBoost,SYN017,measles,0,0.11767652630805969,0
+XGBoost,SYN017,mumps,0,0.10669373720884323,0
+XGBoost,SYN017,viral_conjunctivitis,0,0.18412664532661438,0
+XGBoost,SYN017,viral_gastroenteritis,0,0.2895750105381012,0
+XGBoost,SYN094,influenza,0,0.2708243131637573,0
+XGBoost,SYN094,chickenpox,0,0.16581815481185913,0
+XGBoost,SYN094,measles,0,0.17193783819675446,0
+XGBoost,SYN094,mumps,0,0.1488974690437317,0
+XGBoost,SYN094,viral_conjunctivitis,1,0.47757789492607117,0
+XGBoost,SYN094,viral_gastroenteritis,0,0.629071831703186,1
+XGBoost,SYN099,influenza,0,0.18389123678207397,0
+XGBoost,SYN099,chickenpox,1,0.21859033405780792,0
+XGBoost,SYN099,measles,0,0.2394232153892517,0
+XGBoost,SYN099,mumps,1,0.10669373720884323,0
+XGBoost,SYN099,viral_conjunctivitis,1,0.2720320522785187,0
+XGBoost,SYN099,viral_gastroenteritis,0,0.4967559278011322,0
+XGBoost,SYN084,influenza,1,0.14837995171546936,0
+XGBoost,SYN084,chickenpox,0,0.10345105081796646,0
+XGBoost,SYN084,measles,0,0.1047268658876419,0
+XGBoost,SYN084,mumps,0,0.16601362824440002,0
+XGBoost,SYN084,viral_conjunctivitis,0,0.2997191846370697,0
+XGBoost,SYN084,viral_gastroenteritis,1,0.47052741050720215,0
+XGBoost,SYN030,influenza,0,0.12608763575553894,0
+XGBoost,SYN030,chickenpox,0,0.194698765873909,0
+XGBoost,SYN030,measles,0,0.17193783819675446,0
+XGBoost,SYN030,mumps,0,0.1488974690437317,0
+XGBoost,SYN030,viral_conjunctivitis,1,0.5309751033782959,1
+XGBoost,SYN030,viral_gastroenteritis,0,0.5169119834899902,1
+XGBoost,SYN081,influenza,0,0.14837995171546936,0
+XGBoost,SYN081,chickenpox,1,0.25879186391830444,0
+XGBoost,SYN081,measles,0,0.1047268658876419,0
+XGBoost,SYN081,mumps,0,0.1685900092124939,0
+XGBoost,SYN081,viral_conjunctivitis,0,0.2998615503311157,0
+XGBoost,SYN081,viral_gastroenteritis,0,0.33356794714927673,0
+XGBoost,SYN074,influenza,0,0.3316786587238312,0
+XGBoost,SYN074,chickenpox,0,0.22443418204784393,0
+XGBoost,SYN074,measles,0,0.17193783819675446,0
+XGBoost,SYN074,mumps,0,0.1488974690437317,0
+XGBoost,SYN074,viral_conjunctivitis,0,0.48158031702041626,0
+XGBoost,SYN074,viral_gastroenteritis,0,0.3803701400756836,0
+XGBoost,SYN069,influenza,0,0.4307641088962555,0
+XGBoost,SYN069,chickenpox,1,0.16293245553970337,0
+XGBoost,SYN069,measles,0,0.339743435382843,0
+XGBoost,SYN069,mumps,1,0.10669373720884323,0
+XGBoost,SYN069,viral_conjunctivitis,1,0.1641514003276825,0
+XGBoost,SYN069,viral_gastroenteritis,0,0.4358086884021759,0
+XGBoost,SYN067,influenza,0,0.1879909336566925,0
+XGBoost,SYN067,chickenpox,1,0.13458815217018127,0
+XGBoost,SYN067,measles,0,0.17350593209266663,0
+XGBoost,SYN067,mumps,0,0.1488974690437317,0
+XGBoost,SYN067,viral_conjunctivitis,0,0.15025712549686432,0
+XGBoost,SYN067,viral_gastroenteritis,0,0.14938008785247803,0
+XGBoost,SYN088,influenza,0,0.14837995171546936,0
+XGBoost,SYN088,chickenpox,0,0.2732216417789459,0
+XGBoost,SYN088,measles,0,0.1047268658876419,0
+XGBoost,SYN088,mumps,0,0.1685900092124939,0
+XGBoost,SYN088,viral_conjunctivitis,0,0.20543457567691803,0
+XGBoost,SYN088,viral_gastroenteritis,0,0.4512215852737427,0
+XGBoost,SYN056,influenza,0,0.3906218111515045,0
+XGBoost,SYN056,chickenpox,0,0.23446308076381683,0
+XGBoost,SYN056,measles,0,0.3555395305156708,0
+XGBoost,SYN056,mumps,0,0.10669373720884323,0
+XGBoost,SYN056,viral_conjunctivitis,0,0.18985013663768768,0
+XGBoost,SYN056,viral_gastroenteritis,1,0.32267770171165466,0
+XGBoost,SYN063,influenza,0,0.3329913020133972,0
+XGBoost,SYN063,chickenpox,0,0.17205557227134705,0
+XGBoost,SYN063,measles,0,0.35916170477867126,0
+XGBoost,SYN063,mumps,0,0.10669373720884323,0
+XGBoost,SYN063,viral_conjunctivitis,0,0.2063189148902893,0
+XGBoost,SYN063,viral_gastroenteritis,0,0.4277222156524658,0
+XGBoost,SYN050,influenza,0,0.14837995171546936,0
+XGBoost,SYN050,chickenpox,1,0.10022436827421188,0
+XGBoost,SYN050,measles,1,0.1047268658876419,0
+XGBoost,SYN050,mumps,0,0.16864928603172302,0
+XGBoost,SYN050,viral_conjunctivitis,0,0.23763325810432434,0
+XGBoost,SYN050,viral_gastroenteritis,0,0.2952617108821869,0
+XGBoost,SYN079,influenza,0,0.4349852204322815,0
+XGBoost,SYN079,chickenpox,0,0.23616188764572144,0
+XGBoost,SYN079,measles,0,0.1708720326423645,0
+XGBoost,SYN079,mumps,0,0.1488974690437317,0
+XGBoost,SYN079,viral_conjunctivitis,0,0.23906807601451874,0
+XGBoost,SYN079,viral_gastroenteritis,0,0.18193987011909485,0
+XGBoost,SYN082,influenza,0,0.14837995171546936,0
+XGBoost,SYN082,chickenpox,1,0.2469252496957779,0
+XGBoost,SYN082,measles,0,0.1047268658876419,0
+XGBoost,SYN082,mumps,0,0.16864928603172302,0
+XGBoost,SYN082,viral_conjunctivitis,1,0.370037317276001,0
+XGBoost,SYN082,viral_gastroenteritis,1,0.49301576614379883,0
+XGBoost,SYN005,influenza,0,0.14837995171546936,0
+XGBoost,SYN005,chickenpox,0,0.33253180980682373,0
+XGBoost,SYN005,measles,0,0.1047268658876419,0
+XGBoost,SYN005,mumps,1,0.16864928603172302,0
+XGBoost,SYN005,viral_conjunctivitis,0,0.4838196337223053,0
+XGBoost,SYN005,viral_gastroenteritis,0,0.4248610734939575,0
+XGBoost,SYN024,influenza,0,0.12676513195037842,0
+XGBoost,SYN024,chickenpox,1,0.15051749348640442,0
+XGBoost,SYN024,measles,0,0.1708720326423645,0
+XGBoost,SYN024,mumps,0,0.1488974690437317,0
+XGBoost,SYN024,viral_conjunctivitis,0,0.21663889288902283,0
+XGBoost,SYN024,viral_gastroenteritis,0,0.2709968686103821,0
+XGBoost,SYN055,influenza,0,0.17703060805797577,0
+XGBoost,SYN055,chickenpox,0,0.1406063437461853,0
+XGBoost,SYN055,measles,0,0.17350593209266663,0
+XGBoost,SYN055,mumps,0,0.1488974690437317,0
+XGBoost,SYN055,viral_conjunctivitis,0,0.24950551986694336,0
+XGBoost,SYN055,viral_gastroenteritis,0,0.19920015335083008,0
+XGBoost,SYN045,influenza,0,0.09533079713582993,0
+XGBoost,SYN045,chickenpox,0,0.18268947303295135,0
+XGBoost,SYN045,measles,0,0.17463409900665283,0
+XGBoost,SYN045,mumps,0,0.10669373720884323,0
+XGBoost,SYN045,viral_conjunctivitis,0,0.37086641788482666,0
+XGBoost,SYN045,viral_gastroenteritis,0,0.22347785532474518,0
+XGBoost,SYN034,influenza,0,0.4565562903881073,0
+XGBoost,SYN034,chickenpox,0,0.1336449384689331,0
+XGBoost,SYN034,measles,0,0.23641055822372437,0
+XGBoost,SYN034,mumps,0,0.10669373720884323,0
+XGBoost,SYN034,viral_conjunctivitis,0,0.4505908191204071,0
+XGBoost,SYN034,viral_gastroenteritis,0,0.38660457730293274,0
+XGBoost,SYN023,influenza,0,0.2774691879749298,0
+XGBoost,SYN023,chickenpox,1,0.18314263224601746,0
+XGBoost,SYN023,measles,1,0.5186773538589478,1
+XGBoost,SYN023,mumps,0,0.10669373720884323,0
+XGBoost,SYN023,viral_conjunctivitis,1,0.1821155697107315,0
+XGBoost,SYN023,viral_gastroenteritis,1,0.4273901879787445,0
+XGBoost,SYN052,influenza,0,0.41211017966270447,0
+XGBoost,SYN052,chickenpox,0,0.09709043055772781,0
+XGBoost,SYN052,measles,0,0.17350593209266663,0
+XGBoost,SYN052,mumps,0,0.1488974690437317,0
+XGBoost,SYN052,viral_conjunctivitis,0,0.24026653170585632,0
+XGBoost,SYN052,viral_gastroenteritis,0,0.19483385980129242,0
+XGBoost,SYN042,influenza,1,0.22884638607501984,0
+XGBoost,SYN042,chickenpox,0,0.16786305606365204,0
+XGBoost,SYN042,measles,0,0.26682576537132263,0
+XGBoost,SYN042,mumps,0,0.10669373720884323,0
+XGBoost,SYN042,viral_conjunctivitis,0,0.17963692545890808,0
+XGBoost,SYN042,viral_gastroenteritis,0,0.22922499477863312,0
+XGBoost,SYN090,influenza,0,0.14837995171546936,0
+XGBoost,SYN090,chickenpox,0,0.3266107439994812,0
+XGBoost,SYN090,measles,0,0.1047268658876419,0
+XGBoost,SYN090,mumps,0,0.16601362824440002,0
+XGBoost,SYN090,viral_conjunctivitis,0,0.30055689811706543,0
+XGBoost,SYN090,viral_gastroenteritis,0,0.4358580708503723,0
+XGBoost,SYN054,influenza,1,0.33290979266166687,0
+XGBoost,SYN054,chickenpox,0,0.18979081511497498,0
+XGBoost,SYN054,measles,0,0.1682036966085434,0
+XGBoost,SYN054,mumps,0,0.10669373720884323,0
+XGBoost,SYN054,viral_conjunctivitis,0,0.26248669624328613,0
+XGBoost,SYN054,viral_gastroenteritis,0,0.33112919330596924,0
+XGBoost,SYN028,influenza,0,0.2993042469024658,0
+XGBoost,SYN028,chickenpox,0,0.20892493426799774,0
+XGBoost,SYN028,measles,0,0.1910979300737381,0
+XGBoost,SYN028,mumps,0,0.10669373720884323,0
+XGBoost,SYN028,viral_conjunctivitis,1,0.27807414531707764,0
+XGBoost,SYN028,viral_gastroenteritis,0,0.45369312167167664,0
+XGBoost,SYN008,influenza,0,0.12718398869037628,0
+XGBoost,SYN008,chickenpox,1,0.237933948636055,0
+XGBoost,SYN008,measles,1,0.17350593209266663,0
+XGBoost,SYN008,mumps,0,0.1488974690437317,0
+XGBoost,SYN008,viral_conjunctivitis,0,0.31940338015556335,0
+XGBoost,SYN008,viral_gastroenteritis,1,0.10614383965730667,0
+XGBoost,SYN071,influenza,0,0.14837995171546936,0
+XGBoost,SYN071,chickenpox,0,0.1641383022069931,0
+XGBoost,SYN071,measles,1,0.1047268658876419,0
+XGBoost,SYN071,mumps,0,0.16864928603172302,0
+XGBoost,SYN071,viral_conjunctivitis,0,0.3566936254501343,0
+XGBoost,SYN071,viral_gastroenteritis,0,0.16753250360488892,0
+XGBoost,SYN078,influenza,1,0.14837995171546936,0
+XGBoost,SYN078,chickenpox,0,0.10146774351596832,0
+XGBoost,SYN078,measles,0,0.1047268658876419,0
+XGBoost,SYN078,mumps,0,0.16601362824440002,0
+XGBoost,SYN078,viral_conjunctivitis,0,0.14857622981071472,0
+XGBoost,SYN078,viral_gastroenteritis,1,0.13551673293113708,0
+CatBoost,SYN003,influenza,0,0.8167547230991296,1
+CatBoost,SYN003,chickenpox,0,0.1342544450025354,0
+CatBoost,SYN003,measles,0,0.04283285057394449,0
+CatBoost,SYN003,mumps,0,0.015488101492020144,0
+CatBoost,SYN003,viral_conjunctivitis,1,0.08129164851113684,0
+CatBoost,SYN003,viral_gastroenteritis,0,0.264432549007218,0
+CatBoost,SYN076,influenza,0,0.12262740925235165,0
+CatBoost,SYN076,chickenpox,0,0.6723621686087796,1
+CatBoost,SYN076,measles,0,0.4169736208281417,0
+CatBoost,SYN076,mumps,0,0.01734674876698895,0
+CatBoost,SYN076,viral_conjunctivitis,0,0.13669105510465923,0
+CatBoost,SYN076,viral_gastroenteritis,0,0.16549111910504216,0
+CatBoost,SYN026,influenza,0,0.09117876399347964,0
+CatBoost,SYN026,chickenpox,1,0.44875163547380276,0
+CatBoost,SYN026,measles,0,0.34490819019823826,0
+CatBoost,SYN026,mumps,0,0.12117342191383224,0
+CatBoost,SYN026,viral_conjunctivitis,1,0.16048598116069493,0
+CatBoost,SYN026,viral_gastroenteritis,1,0.13916812793692276,0
+CatBoost,SYN058,influenza,1,0.05659096448070388,0
+CatBoost,SYN058,chickenpox,0,0.16988604258431356,0
+CatBoost,SYN058,measles,0,0.045853333445945756,0
+CatBoost,SYN058,mumps,0,0.05128622867323038,0
+CatBoost,SYN058,viral_conjunctivitis,0,0.42203372646153786,0
+CatBoost,SYN058,viral_gastroenteritis,0,0.33968664424076106,0
+CatBoost,SYN049,influenza,0,0.4003311908517886,0
+CatBoost,SYN049,chickenpox,0,0.20035687814509395,0
+CatBoost,SYN049,measles,0,0.06710456168879902,0
+CatBoost,SYN049,mumps,0,0.3679913645956232,0
+CatBoost,SYN049,viral_conjunctivitis,0,0.5737035675769396,1
+CatBoost,SYN049,viral_gastroenteritis,0,0.4975159326689285,0
+CatBoost,SYN038,influenza,1,0.06928174457252843,0
+CatBoost,SYN038,chickenpox,0,0.19249740734326304,0
+CatBoost,SYN038,measles,1,0.030243039151559997,0
+CatBoost,SYN038,mumps,0,0.11056616749701387,0
+CatBoost,SYN038,viral_conjunctivitis,0,0.49225125886537996,0
+CatBoost,SYN038,viral_gastroenteritis,0,0.12865785078900302,0
+CatBoost,SYN091,influenza,1,0.25779532766605895,0
+CatBoost,SYN091,chickenpox,0,0.29218528512215175,0
+CatBoost,SYN091,measles,0,0.04817682781559546,0
+CatBoost,SYN091,mumps,0,0.16008593522920245,0
+CatBoost,SYN091,viral_conjunctivitis,1,0.022054319201629393,0
+CatBoost,SYN091,viral_gastroenteritis,0,0.16521170514281577,0
+CatBoost,SYN048,influenza,0,0.02291388511243547,0
+CatBoost,SYN048,chickenpox,0,0.5095978681563055,1
+CatBoost,SYN048,measles,1,0.12829468046458967,0
+CatBoost,SYN048,mumps,0,0.07488242031507189,0
+CatBoost,SYN048,viral_conjunctivitis,0,0.5157260044938546,1
+CatBoost,SYN048,viral_gastroenteritis,0,0.6500297099477367,1
+CatBoost,SYN075,influenza,1,0.053648694229799586,0
+CatBoost,SYN075,chickenpox,0,0.25484882007098675,0
+CatBoost,SYN075,measles,0,0.0712595017820684,0
+CatBoost,SYN075,mumps,0,0.07071585574591822,0
+CatBoost,SYN075,viral_conjunctivitis,1,0.6367377016173704,1
+CatBoost,SYN075,viral_gastroenteritis,0,0.16775518947349732,0
+CatBoost,SYN098,influenza,0,0.04134197267875645,0
+CatBoost,SYN098,chickenpox,0,0.2933424961584083,0
+CatBoost,SYN098,measles,0,0.03251113768819471,0
+CatBoost,SYN098,mumps,1,0.18393179505947235,0
+CatBoost,SYN098,viral_conjunctivitis,0,0.09941689828063596,0
+CatBoost,SYN098,viral_gastroenteritis,1,0.13582753743140116,0
+CatBoost,SYN011,influenza,0,0.04692423738222378,0
+CatBoost,SYN011,chickenpox,0,0.03481985236404728,0
+CatBoost,SYN011,measles,1,0.40227418524353675,0
+CatBoost,SYN011,mumps,0,0.23922717033179347,0
+CatBoost,SYN011,viral_conjunctivitis,1,0.3208591371925844,0
+CatBoost,SYN011,viral_gastroenteritis,0,0.25030632740744624,0
+CatBoost,SYN064,influenza,0,0.038546304514570334,0
+CatBoost,SYN064,chickenpox,0,0.09467171770705934,0
+CatBoost,SYN064,measles,0,0.2302097984380277,0
+CatBoost,SYN064,mumps,0,0.016414132417517397,0
+CatBoost,SYN064,viral_conjunctivitis,1,0.14121774636864656,0
+CatBoost,SYN064,viral_gastroenteritis,1,0.16793644199358207,0
+CatBoost,SYN043,influenza,0,0.12940216815865302,0
+CatBoost,SYN043,chickenpox,0,0.7627062253993135,1
+CatBoost,SYN043,measles,0,0.04546407946307438,0
+CatBoost,SYN043,mumps,0,0.028105769494288738,0
+CatBoost,SYN043,viral_conjunctivitis,0,0.39186345828240116,0
+CatBoost,SYN043,viral_gastroenteritis,0,0.10923517744538021,0
+CatBoost,SYN009,influenza,1,0.026455477220495963,0
+CatBoost,SYN009,chickenpox,0,0.11367943468299767,0
+CatBoost,SYN009,measles,0,0.01701289729759862,0
+CatBoost,SYN009,mumps,0,0.0563767371638245,0
+CatBoost,SYN009,viral_conjunctivitis,1,0.11536327354391047,0
+CatBoost,SYN009,viral_gastroenteritis,1,0.21732061267799185,0
+CatBoost,SYN016,influenza,0,0.12840204460859828,0
+CatBoost,SYN016,chickenpox,0,0.03676873127458899,0
+CatBoost,SYN016,measles,0,0.34011426338330203,0
+CatBoost,SYN016,mumps,0,0.007459458700343053,0
+CatBoost,SYN016,viral_conjunctivitis,1,0.18534393573496358,0
+CatBoost,SYN016,viral_gastroenteritis,1,0.07703403282794803,0
+CatBoost,SYN041,influenza,1,0.05091321248304361,0
+CatBoost,SYN041,chickenpox,0,0.07649126527900184,0
+CatBoost,SYN041,measles,1,0.0318499096632709,0
+CatBoost,SYN041,mumps,0,0.049260967728350036,0
+CatBoost,SYN041,viral_conjunctivitis,0,0.739114398386096,1
+CatBoost,SYN041,viral_gastroenteritis,0,0.22405393091347844,0
+CatBoost,SYN035,influenza,0,0.03606749352214686,0
+CatBoost,SYN035,chickenpox,0,0.23266500893728273,0
+CatBoost,SYN035,measles,0,0.12885377131442044,0
+CatBoost,SYN035,mumps,1,0.5802792198576027,1
+CatBoost,SYN035,viral_conjunctivitis,0,0.6081773716221321,1
+CatBoost,SYN035,viral_gastroenteritis,0,0.09102554957451069,0
+CatBoost,SYN033,influenza,0,0.044735573266511924,0
+CatBoost,SYN033,chickenpox,1,0.2336593038835223,0
+CatBoost,SYN033,measles,0,0.03141202865109216,0
+CatBoost,SYN033,mumps,0,0.8777459153991094,1
+CatBoost,SYN033,viral_conjunctivitis,0,0.05584774442718955,0
+CatBoost,SYN033,viral_gastroenteritis,0,0.19367075622164395,0
+CatBoost,SYN036,influenza,0,0.131065261229816,0
+CatBoost,SYN036,chickenpox,1,0.5284772263462185,1
+CatBoost,SYN036,measles,0,0.02060380273219918,0
+CatBoost,SYN036,mumps,0,0.07028994899235112,0
+CatBoost,SYN036,viral_conjunctivitis,1,0.4933446306366803,0
+CatBoost,SYN036,viral_gastroenteritis,1,0.12043295238498777,0
+CatBoost,SYN046,influenza,1,0.0364264864653071,0
+CatBoost,SYN046,chickenpox,0,0.09090804911620387,0
+CatBoost,SYN046,measles,1,0.06650898422266062,0
+CatBoost,SYN046,mumps,0,0.09021145062888185,0
+CatBoost,SYN046,viral_conjunctivitis,0,0.6395204529035096,1
+CatBoost,SYN046,viral_gastroenteritis,1,0.2279919617407264,0
+CatBoost,SYN021,influenza,0,0.14713899424766488,0
+CatBoost,SYN021,chickenpox,0,0.507536036913548,1
+CatBoost,SYN021,measles,0,0.6715126864316895,1
+CatBoost,SYN021,mumps,1,0.16839872622015165,0
+CatBoost,SYN021,viral_conjunctivitis,0,0.1489047658223486,0
+CatBoost,SYN021,viral_gastroenteritis,0,0.06749649559977407,0
+CatBoost,SYN013,influenza,0,0.5555987004000073,1
+CatBoost,SYN013,chickenpox,0,0.06442928402664641,0
+CatBoost,SYN013,measles,0,0.23923573145588853,0
+CatBoost,SYN013,mumps,0,0.006614427145521473,0
+CatBoost,SYN013,viral_conjunctivitis,0,0.07892917450480905,0
+CatBoost,SYN013,viral_gastroenteritis,0,0.08240370600190576,0
+CatBoost,SYN014,influenza,0,0.03135878690913094,0
+CatBoost,SYN014,chickenpox,1,0.23125553839420435,0
+CatBoost,SYN014,measles,0,0.1439008732704867,0
+CatBoost,SYN014,mumps,0,0.12302863079401664,0
+CatBoost,SYN014,viral_conjunctivitis,0,0.493078089839858,0
+CatBoost,SYN014,viral_gastroenteritis,1,0.09413390777831139,0
+CatBoost,SYN004,influenza,0,0.1174303917668996,0
+CatBoost,SYN004,chickenpox,0,0.20876894131201934,0
+CatBoost,SYN004,measles,0,0.23851185049801707,0
+CatBoost,SYN004,mumps,0,0.018461695041146507,0
+CatBoost,SYN004,viral_conjunctivitis,0,0.21280108034094758,0
+CatBoost,SYN004,viral_gastroenteritis,0,0.08478857664948995,0
+CatBoost,SYN059,influenza,0,0.3071155758913662,0
+CatBoost,SYN059,chickenpox,0,0.18108972574200666,0
+CatBoost,SYN059,measles,0,0.6019428514486448,1
+CatBoost,SYN059,mumps,1,0.07870316599778976,0
+CatBoost,SYN059,viral_conjunctivitis,1,0.09249569159186442,0
+CatBoost,SYN059,viral_gastroenteritis,0,0.06791023557723742,0
+CatBoost,SYN061,influenza,0,0.031186159594246476,0
+CatBoost,SYN061,chickenpox,0,0.26520705316097903,0
+CatBoost,SYN061,measles,0,0.21078240770834009,0
+CatBoost,SYN061,mumps,0,0.19831648256281634,0
+CatBoost,SYN061,viral_conjunctivitis,0,0.21218513036865977,0
+CatBoost,SYN061,viral_gastroenteritis,0,0.1369349656638558,0
+CatBoost,SYN092,influenza,0,0.0484594726191601,0
+CatBoost,SYN092,chickenpox,0,0.15001555111986933,0
+CatBoost,SYN092,measles,0,0.05790017093148289,0
+CatBoost,SYN092,mumps,0,0.013743097563593718,0
+CatBoost,SYN092,viral_conjunctivitis,0,0.10934115300767021,0
+CatBoost,SYN092,viral_gastroenteritis,0,0.4482395061253384,0
+CatBoost,SYN093,influenza,0,0.03197540035053514,0
+CatBoost,SYN093,chickenpox,0,0.061957958740596154,0
+CatBoost,SYN093,measles,0,0.02401589506080784,0
+CatBoost,SYN093,mumps,1,0.136547384150989,0
+CatBoost,SYN093,viral_conjunctivitis,0,0.16290559114227948,0
+CatBoost,SYN093,viral_gastroenteritis,1,0.3775245377435519,0
+CatBoost,SYN018,influenza,1,0.050925356183216995,0
+CatBoost,SYN018,chickenpox,1,0.546638377208457,1
+CatBoost,SYN018,measles,0,0.04599739878052364,0
+CatBoost,SYN018,mumps,0,0.10403269904749858,0
+CatBoost,SYN018,viral_conjunctivitis,0,0.5511266424853423,1
+CatBoost,SYN018,viral_gastroenteritis,1,0.379813530748605,0
+CatBoost,SYN029,influenza,0,0.2309424572607493,0
+CatBoost,SYN029,chickenpox,0,0.17461832559334745,0
+CatBoost,SYN029,measles,0,0.37057380118864675,0
+CatBoost,SYN029,mumps,0,0.0089844291595758,0
+CatBoost,SYN029,viral_conjunctivitis,0,0.06644857948908678,0
+CatBoost,SYN029,viral_gastroenteritis,1,0.14511699175654422,0
+CatBoost,SYN057,influenza,1,0.6567757601424721,1
+CatBoost,SYN057,chickenpox,0,0.2489485442918252,0
+CatBoost,SYN057,measles,0,0.08529945013237412,0
+CatBoost,SYN057,mumps,0,0.01659559881292316,0
+CatBoost,SYN057,viral_conjunctivitis,0,0.45792878816840105,0
+CatBoost,SYN057,viral_gastroenteritis,1,0.7326065867259256,1
+CatBoost,SYN073,influenza,1,0.8627897226586352,1
+CatBoost,SYN073,chickenpox,0,0.2598618972385647,0
+CatBoost,SYN073,measles,0,0.38391057812561874,0
+CatBoost,SYN073,mumps,0,0.037263407557874224,0
+CatBoost,SYN073,viral_conjunctivitis,0,0.15772439923512563,0
+CatBoost,SYN073,viral_gastroenteritis,1,0.452170221879676,0
+CatBoost,SYN051,influenza,0,0.2831256612462572,0
+CatBoost,SYN051,chickenpox,0,0.09358212076178402,0
+CatBoost,SYN051,measles,0,0.3620758106184859,0
+CatBoost,SYN051,mumps,0,0.5684254562132857,1
+CatBoost,SYN051,viral_conjunctivitis,1,0.11083546071420772,0
+CatBoost,SYN051,viral_gastroenteritis,1,0.1455560147441384,0
+CatBoost,SYN037,influenza,0,0.08569752235822266,0
+CatBoost,SYN037,chickenpox,0,0.15999288486155858,0
+CatBoost,SYN037,measles,0,0.08096832418670523,0
+CatBoost,SYN037,mumps,1,0.10901181841387249,0
+CatBoost,SYN037,viral_conjunctivitis,0,0.34369156835978487,0
+CatBoost,SYN037,viral_gastroenteritis,1,0.10396252288410993,0
+CatBoost,SYN047,influenza,0,0.05281314440708948,0
+CatBoost,SYN047,chickenpox,1,0.05609300936317797,0
+CatBoost,SYN047,measles,0,0.4142541265189822,0
+CatBoost,SYN047,mumps,0,0.18359861080051126,0
+CatBoost,SYN047,viral_conjunctivitis,0,0.2129181683684032,0
+CatBoost,SYN047,viral_gastroenteritis,0,0.1166688427820915,0
+CatBoost,SYN040,influenza,0,0.04317314434429656,0
+CatBoost,SYN040,chickenpox,0,0.047548803375119915,0
+CatBoost,SYN040,measles,1,0.057836036565642276,0
+CatBoost,SYN040,mumps,0,0.24408627060019647,0
+CatBoost,SYN040,viral_conjunctivitis,1,0.11942587353535611,0
+CatBoost,SYN040,viral_gastroenteritis,0,0.27116256598048355,0
+CatBoost,SYN032,influenza,0,0.07755924792500815,0
+CatBoost,SYN032,chickenpox,0,0.10032740111797092,0
+CatBoost,SYN032,measles,0,0.029125354201857682,0
+CatBoost,SYN032,mumps,0,0.017662388097848317,0
+CatBoost,SYN032,viral_conjunctivitis,0,0.28760353968274777,0
+CatBoost,SYN032,viral_gastroenteritis,0,0.14965404513459113,0
+CatBoost,SYN006,influenza,0,0.09996375457079122,0
+CatBoost,SYN006,chickenpox,0,0.40398499475499977,0
+CatBoost,SYN006,measles,0,0.4264108158060905,0
+CatBoost,SYN006,mumps,1,0.013362066430508426,0
+CatBoost,SYN006,viral_conjunctivitis,0,0.21057173109277924,0
+CatBoost,SYN006,viral_gastroenteritis,1,0.1443397294422595,0
+CatBoost,SYN053,influenza,0,0.06149095560215849,0
+CatBoost,SYN053,chickenpox,0,0.14008459542316784,0
+CatBoost,SYN053,measles,1,0.029573022825698052,0
+CatBoost,SYN053,mumps,0,0.04723861998713502,0
+CatBoost,SYN053,viral_conjunctivitis,1,0.15243396040473525,0
+CatBoost,SYN053,viral_gastroenteritis,1,0.5606352959526355,1
+CatBoost,SYN001,influenza,0,0.2696632535836219,0
+CatBoost,SYN001,chickenpox,0,0.24463686479633534,0
+CatBoost,SYN001,measles,0,0.08440845969738867,0
+CatBoost,SYN001,mumps,0,0.0559554568504114,0
+CatBoost,SYN001,viral_conjunctivitis,0,0.03677558536229773,0
+CatBoost,SYN001,viral_gastroenteritis,0,0.30433322917539757,0
+CatBoost,SYN100,influenza,0,0.18526596239107015,0
+CatBoost,SYN100,chickenpox,1,0.343290072417193,0
+CatBoost,SYN100,measles,1,0.04751170237078788,0
+CatBoost,SYN100,mumps,0,0.06636820102808624,0
+CatBoost,SYN100,viral_conjunctivitis,1,0.034995121287603126,0
+CatBoost,SYN100,viral_gastroenteritis,0,0.3872689846929171,0
+CatBoost,SYN017,influenza,1,0.06871820431220847,0
+CatBoost,SYN017,chickenpox,1,0.061553002050386274,0
+CatBoost,SYN017,measles,0,0.04319752677883639,0
+CatBoost,SYN017,mumps,0,0.006526546665605327,0
+CatBoost,SYN017,viral_conjunctivitis,0,0.18453907352699975,0
+CatBoost,SYN017,viral_gastroenteritis,0,0.12631723114092153,0
+CatBoost,SYN094,influenza,0,0.23361059720059468,0
+CatBoost,SYN094,chickenpox,0,0.060832108441799614,0
+CatBoost,SYN094,measles,0,0.18740235393820392,0
+CatBoost,SYN094,mumps,0,0.05719871775727375,0
+CatBoost,SYN094,viral_conjunctivitis,1,0.36415815770356136,0
+CatBoost,SYN094,viral_gastroenteritis,0,0.3449134625678248,0
+CatBoost,SYN099,influenza,0,0.08041200255678534,0
+CatBoost,SYN099,chickenpox,1,0.43355999827817815,0
+CatBoost,SYN099,measles,0,0.09738762614965756,0
+CatBoost,SYN099,mumps,1,0.01624026191864368,0
+CatBoost,SYN099,viral_conjunctivitis,1,0.06682257907698809,0
+CatBoost,SYN099,viral_gastroenteritis,0,0.14224107067409514,0
+CatBoost,SYN084,influenza,1,0.4466620888844637,0
+CatBoost,SYN084,chickenpox,0,0.03173945623732337,0
+CatBoost,SYN084,measles,0,0.019923140099702533,0
+CatBoost,SYN084,mumps,0,0.05089296116704811,0
+CatBoost,SYN084,viral_conjunctivitis,0,0.18254218476129672,0
+CatBoost,SYN084,viral_gastroenteritis,1,0.6409942555087855,1
+CatBoost,SYN030,influenza,0,0.06327060966447381,0
+CatBoost,SYN030,chickenpox,0,0.22258059125221127,0
+CatBoost,SYN030,measles,0,0.038677367830483055,0
+CatBoost,SYN030,mumps,0,0.03652398766167102,0
+CatBoost,SYN030,viral_conjunctivitis,1,0.6530042701045315,1
+CatBoost,SYN030,viral_gastroenteritis,0,0.2835318048070674,0
+CatBoost,SYN081,influenza,0,0.041131197781498804,0
+CatBoost,SYN081,chickenpox,1,0.34417713403675126,0
+CatBoost,SYN081,measles,0,0.020119369315116473,0
+CatBoost,SYN081,mumps,0,0.495006656497534,0
+CatBoost,SYN081,viral_conjunctivitis,0,0.2618132336624662,0
+CatBoost,SYN081,viral_gastroenteritis,0,0.3773369289319908,0
+CatBoost,SYN074,influenza,0,0.3059240940953679,0
+CatBoost,SYN074,chickenpox,0,0.38395407482005967,0
+CatBoost,SYN074,measles,0,0.1078417129291013,0
+CatBoost,SYN074,mumps,0,0.0731860767517968,0
+CatBoost,SYN074,viral_conjunctivitis,0,0.9017577885686943,1
+CatBoost,SYN074,viral_gastroenteritis,0,0.5081456831485374,1
+CatBoost,SYN069,influenza,0,0.2634503236441935,0
+CatBoost,SYN069,chickenpox,1,0.3872293124637826,0
+CatBoost,SYN069,measles,0,0.41299350603726376,0
+CatBoost,SYN069,mumps,1,0.13838211751541485,0
+CatBoost,SYN069,viral_conjunctivitis,1,0.21606028398760727,0
+CatBoost,SYN069,viral_gastroenteritis,0,0.18442016385250612,0
+CatBoost,SYN067,influenza,0,0.15057212765855862,0
+CatBoost,SYN067,chickenpox,1,0.06516693722122353,0
+CatBoost,SYN067,measles,0,0.06720283104813415,0
+CatBoost,SYN067,mumps,0,0.015051715431043708,0
+CatBoost,SYN067,viral_conjunctivitis,0,0.17375270626310094,0
+CatBoost,SYN067,viral_gastroenteritis,0,0.09406588219792338,0
+CatBoost,SYN088,influenza,0,0.045614579612901,0
+CatBoost,SYN088,chickenpox,0,0.07674016621422367,0
+CatBoost,SYN088,measles,0,0.10577530171813268,0
+CatBoost,SYN088,mumps,0,0.07188907840305299,0
+CatBoost,SYN088,viral_conjunctivitis,0,0.18377841624250876,0
+CatBoost,SYN088,viral_gastroenteritis,0,0.566536629030954,1
+CatBoost,SYN056,influenza,0,0.23139471417279006,0
+CatBoost,SYN056,chickenpox,0,0.07899366181949494,0
+CatBoost,SYN056,measles,0,0.3639957831534579,0
+CatBoost,SYN056,mumps,0,0.011595067034184682,0
+CatBoost,SYN056,viral_conjunctivitis,0,0.1493195796838481,0
+CatBoost,SYN056,viral_gastroenteritis,1,0.2948946603423707,0
+CatBoost,SYN063,influenza,0,0.33996411339942495,0
+CatBoost,SYN063,chickenpox,0,0.07389289076929832,0
+CatBoost,SYN063,measles,0,0.5969304423278017,1
+CatBoost,SYN063,mumps,0,0.01117743435596647,0
+CatBoost,SYN063,viral_conjunctivitis,0,0.0997197056836839,0
+CatBoost,SYN063,viral_gastroenteritis,0,0.10250242311381035,0
+CatBoost,SYN050,influenza,0,0.04434975424430873,0
+CatBoost,SYN050,chickenpox,1,0.02905654924232362,0
+CatBoost,SYN050,measles,1,0.011406961301135873,0
+CatBoost,SYN050,mumps,0,0.03139927473018083,0
+CatBoost,SYN050,viral_conjunctivitis,0,0.04867191992030242,0
+CatBoost,SYN050,viral_gastroenteritis,0,0.2828912003798005,0
+CatBoost,SYN079,influenza,0,0.6587781471651292,1
+CatBoost,SYN079,chickenpox,0,0.2220734162415304,0
+CatBoost,SYN079,measles,0,0.03977992891482654,0
+CatBoost,SYN079,mumps,0,0.08208965737098334,0
+CatBoost,SYN079,viral_conjunctivitis,0,0.15957472064891481,0
+CatBoost,SYN079,viral_gastroenteritis,0,0.23811992080740702,0
+CatBoost,SYN082,influenza,0,0.05464344580197754,0
+CatBoost,SYN082,chickenpox,1,0.3155011332605818,0
+CatBoost,SYN082,measles,0,0.016062314022001624,0
+CatBoost,SYN082,mumps,0,0.06068665520374592,0
+CatBoost,SYN082,viral_conjunctivitis,1,0.6536917505484184,1
+CatBoost,SYN082,viral_gastroenteritis,1,0.5120988411849609,1
+CatBoost,SYN005,influenza,0,0.019848781713887903,0
+CatBoost,SYN005,chickenpox,0,0.32329787211815497,0
+CatBoost,SYN005,measles,0,0.027440300571072718,0
+CatBoost,SYN005,mumps,1,0.0789347736142226,0
+CatBoost,SYN005,viral_conjunctivitis,0,0.7501324942109999,1
+CatBoost,SYN005,viral_gastroenteritis,0,0.5092782590802599,1
+CatBoost,SYN024,influenza,0,0.2385320880620796,0
+CatBoost,SYN024,chickenpox,1,0.06565804654272278,0
+CatBoost,SYN024,measles,0,0.0547499711691614,0
+CatBoost,SYN024,mumps,0,0.5063791766394536,1
+CatBoost,SYN024,viral_conjunctivitis,0,0.1234437441857066,0
+CatBoost,SYN024,viral_gastroenteritis,0,0.1685318982097251,0
+CatBoost,SYN055,influenza,0,0.08378307651182723,0
+CatBoost,SYN055,chickenpox,0,0.04498147333496453,0
+CatBoost,SYN055,measles,0,0.1088511283039031,0
+CatBoost,SYN055,mumps,0,0.31189165673546715,0
+CatBoost,SYN055,viral_conjunctivitis,0,0.1670546705602347,0
+CatBoost,SYN055,viral_gastroenteritis,0,0.1722909413016253,0
+CatBoost,SYN045,influenza,0,0.04265440247785859,0
+CatBoost,SYN045,chickenpox,0,0.24546924417661475,0
+CatBoost,SYN045,measles,0,0.13335299540829376,0
+CatBoost,SYN045,mumps,0,0.02783050950779558,0
+CatBoost,SYN045,viral_conjunctivitis,0,0.1712242313573794,0
+CatBoost,SYN045,viral_gastroenteritis,0,0.12126313369093629,0
+CatBoost,SYN034,influenza,0,0.548934329925409,1
+CatBoost,SYN034,chickenpox,0,0.08919927541190358,0
+CatBoost,SYN034,measles,0,0.29360697905176053,0
+CatBoost,SYN034,mumps,0,0.009076039572984754,0
+CatBoost,SYN034,viral_conjunctivitis,0,0.38173683960988014,0
+CatBoost,SYN034,viral_gastroenteritis,0,0.1734811736977019,0
+CatBoost,SYN023,influenza,0,0.1184901821169507,0
+CatBoost,SYN023,chickenpox,1,0.146271512786076,0
+CatBoost,SYN023,measles,1,0.8337031742244084,1
+CatBoost,SYN023,mumps,0,0.24459210799040626,0
+CatBoost,SYN023,viral_conjunctivitis,1,0.14732038636749065,0
+CatBoost,SYN023,viral_gastroenteritis,1,0.3284616667817153,0
+CatBoost,SYN052,influenza,0,0.3045273151753951,0
+CatBoost,SYN052,chickenpox,0,0.08229825344085097,0
+CatBoost,SYN052,measles,0,0.21818775413184113,0
+CatBoost,SYN052,mumps,0,0.02013382706501164,0
+CatBoost,SYN052,viral_conjunctivitis,0,0.13213771080138326,0
+CatBoost,SYN052,viral_gastroenteritis,0,0.1362699768487421,0
+CatBoost,SYN042,influenza,1,0.17674101140915646,0
+CatBoost,SYN042,chickenpox,0,0.08919885404526748,0
+CatBoost,SYN042,measles,0,0.3269851424311922,0
+CatBoost,SYN042,mumps,0,0.01068440709181107,0
+CatBoost,SYN042,viral_conjunctivitis,0,0.06004084707068394,0
+CatBoost,SYN042,viral_gastroenteritis,0,0.11843581702755268,0
+CatBoost,SYN090,influenza,0,0.027127875690687423,0
+CatBoost,SYN090,chickenpox,0,0.27660313358871824,0
+CatBoost,SYN090,measles,0,0.039697122906763506,0
+CatBoost,SYN090,mumps,0,0.0420027835598262,0
+CatBoost,SYN090,viral_conjunctivitis,0,0.5172941985699323,1
+CatBoost,SYN090,viral_gastroenteritis,0,0.5893638047354681,1
+CatBoost,SYN054,influenza,1,0.3176787561479323,0
+CatBoost,SYN054,chickenpox,0,0.2420362697580725,0
+CatBoost,SYN054,measles,0,0.12904052342098962,0
+CatBoost,SYN054,mumps,0,0.008308630906258123,0
+CatBoost,SYN054,viral_conjunctivitis,0,0.20268066452275246,0
+CatBoost,SYN054,viral_gastroenteritis,0,0.08099078955376245,0
+CatBoost,SYN028,influenza,0,0.11935758748397508,0
+CatBoost,SYN028,chickenpox,0,0.43505536066725,0
+CatBoost,SYN028,measles,0,0.25776975188484774,0
+CatBoost,SYN028,mumps,0,0.011918728179275138,0
+CatBoost,SYN028,viral_conjunctivitis,1,0.21777939989038678,0
+CatBoost,SYN028,viral_gastroenteritis,0,0.2111737803170795,0
+CatBoost,SYN008,influenza,0,0.13773394892877766,0
+CatBoost,SYN008,chickenpox,1,0.24290601333350287,0
+CatBoost,SYN008,measles,1,0.15045230776096236,0
+CatBoost,SYN008,mumps,0,0.06467593321930605,0
+CatBoost,SYN008,viral_conjunctivitis,0,0.39656887690828185,0
+CatBoost,SYN008,viral_gastroenteritis,1,0.056534928104849086,0
+CatBoost,SYN071,influenza,0,0.036192019604784714,0
+CatBoost,SYN071,chickenpox,0,0.0646949708633259,0
+CatBoost,SYN071,measles,1,0.049380241546736876,0
+CatBoost,SYN071,mumps,0,0.04712585405277757,0
+CatBoost,SYN071,viral_conjunctivitis,0,0.2410729780248268,0
+CatBoost,SYN071,viral_gastroenteritis,0,0.07242034322453811,0
+CatBoost,SYN078,influenza,1,0.05690316684489174,0
+CatBoost,SYN078,chickenpox,0,0.27188380880684954,0
+CatBoost,SYN078,measles,0,0.02337468733617543,0
+CatBoost,SYN078,mumps,0,0.08192657108810095,0
+CatBoost,SYN078,viral_conjunctivitis,0,0.02811768823654433,0
+CatBoost,SYN078,viral_gastroenteritis,1,0.22374929104333852,0
+Majority baseline,SYN003,influenza,0,0.2391304347826087,0
+Majority baseline,SYN003,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN003,measles,0,0.17391304347826086,0
+Majority baseline,SYN003,mumps,0,0.15217391304347827,0
+Majority baseline,SYN003,viral_conjunctivitis,1,0.32608695652173914,0
+Majority baseline,SYN003,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN076,influenza,0,0.2553191489361702,0
+Majority baseline,SYN076,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN076,measles,0,0.23404255319148937,0
+Majority baseline,SYN076,mumps,0,0.10638297872340426,0
+Majority baseline,SYN076,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN076,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN026,influenza,0,0.2553191489361702,0
+Majority baseline,SYN026,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN026,measles,0,0.23404255319148937,0
+Majority baseline,SYN026,mumps,0,0.10638297872340426,0
+Majority baseline,SYN026,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN026,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN058,influenza,1,0.14893617021276595,0
+Majority baseline,SYN058,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN058,measles,0,0.10638297872340426,0
+Majority baseline,SYN058,mumps,0,0.1702127659574468,0
+Majority baseline,SYN058,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN058,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN049,influenza,0,0.2391304347826087,0
+Majority baseline,SYN049,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN049,measles,0,0.17391304347826086,0
+Majority baseline,SYN049,mumps,0,0.15217391304347827,0
+Majority baseline,SYN049,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN049,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN038,influenza,1,0.2391304347826087,0
+Majority baseline,SYN038,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN038,measles,1,0.17391304347826086,0
+Majority baseline,SYN038,mumps,0,0.15217391304347827,0
+Majority baseline,SYN038,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN038,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN091,influenza,1,0.14893617021276595,0
+Majority baseline,SYN091,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN091,measles,0,0.10638297872340426,0
+Majority baseline,SYN091,mumps,0,0.1702127659574468,0
+Majority baseline,SYN091,viral_conjunctivitis,1,0.3191489361702128,0
+Majority baseline,SYN091,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN048,influenza,0,0.14893617021276595,0
+Majority baseline,SYN048,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN048,measles,1,0.10638297872340426,0
+Majority baseline,SYN048,mumps,0,0.1702127659574468,0
+Majority baseline,SYN048,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN048,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN075,influenza,1,0.14893617021276595,0
+Majority baseline,SYN075,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN075,measles,0,0.10638297872340426,0
+Majority baseline,SYN075,mumps,0,0.1702127659574468,0
+Majority baseline,SYN075,viral_conjunctivitis,1,0.3191489361702128,0
+Majority baseline,SYN075,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN098,influenza,0,0.2391304347826087,0
+Majority baseline,SYN098,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN098,measles,0,0.17391304347826086,0
+Majority baseline,SYN098,mumps,1,0.15217391304347827,0
+Majority baseline,SYN098,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN098,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN011,influenza,0,0.2391304347826087,0
+Majority baseline,SYN011,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN011,measles,1,0.17391304347826086,0
+Majority baseline,SYN011,mumps,0,0.15217391304347827,0
+Majority baseline,SYN011,viral_conjunctivitis,1,0.32608695652173914,0
+Majority baseline,SYN011,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN064,influenza,0,0.2553191489361702,0
+Majority baseline,SYN064,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN064,measles,0,0.23404255319148937,0
+Majority baseline,SYN064,mumps,0,0.10638297872340426,0
+Majority baseline,SYN064,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN064,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN043,influenza,0,0.2391304347826087,0
+Majority baseline,SYN043,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN043,measles,0,0.17391304347826086,0
+Majority baseline,SYN043,mumps,0,0.15217391304347827,0
+Majority baseline,SYN043,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN043,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN009,influenza,1,0.14893617021276595,0
+Majority baseline,SYN009,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN009,measles,0,0.10638297872340426,0
+Majority baseline,SYN009,mumps,0,0.1702127659574468,0
+Majority baseline,SYN009,viral_conjunctivitis,1,0.3191489361702128,0
+Majority baseline,SYN009,viral_gastroenteritis,1,0.3404255319148936,0
+Majority baseline,SYN016,influenza,0,0.2553191489361702,0
+Majority baseline,SYN016,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN016,measles,0,0.23404255319148937,0
+Majority baseline,SYN016,mumps,0,0.10638297872340426,0
+Majority baseline,SYN016,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN016,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN041,influenza,1,0.14893617021276595,0
+Majority baseline,SYN041,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN041,measles,1,0.10638297872340426,0
+Majority baseline,SYN041,mumps,0,0.1702127659574468,0
+Majority baseline,SYN041,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN041,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN035,influenza,0,0.2391304347826087,0
+Majority baseline,SYN035,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN035,measles,0,0.17391304347826086,0
+Majority baseline,SYN035,mumps,1,0.15217391304347827,0
+Majority baseline,SYN035,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN035,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN033,influenza,0,0.14893617021276595,0
+Majority baseline,SYN033,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN033,measles,0,0.10638297872340426,0
+Majority baseline,SYN033,mumps,0,0.1702127659574468,0
+Majority baseline,SYN033,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN033,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN036,influenza,0,0.2391304347826087,0
+Majority baseline,SYN036,chickenpox,1,0.21739130434782608,0
+Majority baseline,SYN036,measles,0,0.17391304347826086,0
+Majority baseline,SYN036,mumps,0,0.15217391304347827,0
+Majority baseline,SYN036,viral_conjunctivitis,1,0.32608695652173914,0
+Majority baseline,SYN036,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN046,influenza,1,0.14893617021276595,0
+Majority baseline,SYN046,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN046,measles,1,0.10638297872340426,0
+Majority baseline,SYN046,mumps,0,0.1702127659574468,0
+Majority baseline,SYN046,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN046,viral_gastroenteritis,1,0.3404255319148936,0
+Majority baseline,SYN021,influenza,0,0.2553191489361702,0
+Majority baseline,SYN021,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN021,measles,0,0.23404255319148937,0
+Majority baseline,SYN021,mumps,1,0.10638297872340426,0
+Majority baseline,SYN021,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN021,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN013,influenza,0,0.2553191489361702,0
+Majority baseline,SYN013,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN013,measles,0,0.23404255319148937,0
+Majority baseline,SYN013,mumps,0,0.10638297872340426,0
+Majority baseline,SYN013,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN013,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN014,influenza,0,0.2391304347826087,0
+Majority baseline,SYN014,chickenpox,1,0.21739130434782608,0
+Majority baseline,SYN014,measles,0,0.17391304347826086,0
+Majority baseline,SYN014,mumps,0,0.15217391304347827,0
+Majority baseline,SYN014,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN014,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN004,influenza,0,0.2553191489361702,0
+Majority baseline,SYN004,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN004,measles,0,0.23404255319148937,0
+Majority baseline,SYN004,mumps,0,0.10638297872340426,0
+Majority baseline,SYN004,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN004,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN059,influenza,0,0.2553191489361702,0
+Majority baseline,SYN059,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN059,measles,0,0.23404255319148937,0
+Majority baseline,SYN059,mumps,1,0.10638297872340426,0
+Majority baseline,SYN059,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN059,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN061,influenza,0,0.14893617021276595,0
+Majority baseline,SYN061,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN061,measles,0,0.10638297872340426,0
+Majority baseline,SYN061,mumps,0,0.1702127659574468,0
+Majority baseline,SYN061,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN061,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN092,influenza,0,0.2553191489361702,0
+Majority baseline,SYN092,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN092,measles,0,0.23404255319148937,0
+Majority baseline,SYN092,mumps,0,0.10638297872340426,0
+Majority baseline,SYN092,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN092,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN093,influenza,0,0.14893617021276595,0
+Majority baseline,SYN093,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN093,measles,0,0.10638297872340426,0
+Majority baseline,SYN093,mumps,1,0.1702127659574468,0
+Majority baseline,SYN093,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN093,viral_gastroenteritis,1,0.3404255319148936,0
+Majority baseline,SYN018,influenza,1,0.2391304347826087,0
+Majority baseline,SYN018,chickenpox,1,0.21739130434782608,0
+Majority baseline,SYN018,measles,0,0.17391304347826086,0
+Majority baseline,SYN018,mumps,0,0.15217391304347827,0
+Majority baseline,SYN018,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN018,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN029,influenza,0,0.2553191489361702,0
+Majority baseline,SYN029,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN029,measles,0,0.23404255319148937,0
+Majority baseline,SYN029,mumps,0,0.10638297872340426,0
+Majority baseline,SYN029,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN029,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN057,influenza,1,0.2391304347826087,0
+Majority baseline,SYN057,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN057,measles,0,0.17391304347826086,0
+Majority baseline,SYN057,mumps,0,0.15217391304347827,0
+Majority baseline,SYN057,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN057,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN073,influenza,1,0.2391304347826087,0
+Majority baseline,SYN073,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN073,measles,0,0.17391304347826086,0
+Majority baseline,SYN073,mumps,0,0.15217391304347827,0
+Majority baseline,SYN073,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN073,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN051,influenza,0,0.2553191489361702,0
+Majority baseline,SYN051,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN051,measles,0,0.23404255319148937,0
+Majority baseline,SYN051,mumps,0,0.10638297872340426,0
+Majority baseline,SYN051,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN051,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN037,influenza,0,0.2391304347826087,0
+Majority baseline,SYN037,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN037,measles,0,0.17391304347826086,0
+Majority baseline,SYN037,mumps,1,0.15217391304347827,0
+Majority baseline,SYN037,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN037,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN047,influenza,0,0.2391304347826087,0
+Majority baseline,SYN047,chickenpox,1,0.21739130434782608,0
+Majority baseline,SYN047,measles,0,0.17391304347826086,0
+Majority baseline,SYN047,mumps,0,0.15217391304347827,0
+Majority baseline,SYN047,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN047,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN040,influenza,0,0.2391304347826087,0
+Majority baseline,SYN040,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN040,measles,1,0.17391304347826086,0
+Majority baseline,SYN040,mumps,0,0.15217391304347827,0
+Majority baseline,SYN040,viral_conjunctivitis,1,0.32608695652173914,0
+Majority baseline,SYN040,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN032,influenza,0,0.14893617021276595,0
+Majority baseline,SYN032,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN032,measles,0,0.10638297872340426,0
+Majority baseline,SYN032,mumps,0,0.1702127659574468,0
+Majority baseline,SYN032,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN032,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN006,influenza,0,0.2553191489361702,0
+Majority baseline,SYN006,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN006,measles,0,0.23404255319148937,0
+Majority baseline,SYN006,mumps,1,0.10638297872340426,0
+Majority baseline,SYN006,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN006,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN053,influenza,0,0.14893617021276595,0
+Majority baseline,SYN053,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN053,measles,1,0.10638297872340426,0
+Majority baseline,SYN053,mumps,0,0.1702127659574468,0
+Majority baseline,SYN053,viral_conjunctivitis,1,0.3191489361702128,0
+Majority baseline,SYN053,viral_gastroenteritis,1,0.3404255319148936,0
+Majority baseline,SYN001,influenza,0,0.14893617021276595,0
+Majority baseline,SYN001,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN001,measles,0,0.10638297872340426,0
+Majority baseline,SYN001,mumps,0,0.1702127659574468,0
+Majority baseline,SYN001,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN001,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN100,influenza,0,0.14893617021276595,0
+Majority baseline,SYN100,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN100,measles,1,0.10638297872340426,0
+Majority baseline,SYN100,mumps,0,0.1702127659574468,0
+Majority baseline,SYN100,viral_conjunctivitis,1,0.3191489361702128,0
+Majority baseline,SYN100,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN017,influenza,1,0.2553191489361702,0
+Majority baseline,SYN017,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN017,measles,0,0.23404255319148937,0
+Majority baseline,SYN017,mumps,0,0.10638297872340426,0
+Majority baseline,SYN017,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN017,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN094,influenza,0,0.2391304347826087,0
+Majority baseline,SYN094,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN094,measles,0,0.17391304347826086,0
+Majority baseline,SYN094,mumps,0,0.15217391304347827,0
+Majority baseline,SYN094,viral_conjunctivitis,1,0.32608695652173914,0
+Majority baseline,SYN094,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN099,influenza,0,0.2553191489361702,0
+Majority baseline,SYN099,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN099,measles,0,0.23404255319148937,0
+Majority baseline,SYN099,mumps,1,0.10638297872340426,0
+Majority baseline,SYN099,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN099,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN084,influenza,1,0.14893617021276595,0
+Majority baseline,SYN084,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN084,measles,0,0.10638297872340426,0
+Majority baseline,SYN084,mumps,0,0.1702127659574468,0
+Majority baseline,SYN084,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN084,viral_gastroenteritis,1,0.3404255319148936,0
+Majority baseline,SYN030,influenza,0,0.2391304347826087,0
+Majority baseline,SYN030,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN030,measles,0,0.17391304347826086,0
+Majority baseline,SYN030,mumps,0,0.15217391304347827,0
+Majority baseline,SYN030,viral_conjunctivitis,1,0.32608695652173914,0
+Majority baseline,SYN030,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN081,influenza,0,0.14893617021276595,0
+Majority baseline,SYN081,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN081,measles,0,0.10638297872340426,0
+Majority baseline,SYN081,mumps,0,0.1702127659574468,0
+Majority baseline,SYN081,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN081,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN074,influenza,0,0.2391304347826087,0
+Majority baseline,SYN074,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN074,measles,0,0.17391304347826086,0
+Majority baseline,SYN074,mumps,0,0.15217391304347827,0
+Majority baseline,SYN074,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN074,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN069,influenza,0,0.2553191489361702,0
+Majority baseline,SYN069,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN069,measles,0,0.23404255319148937,0
+Majority baseline,SYN069,mumps,1,0.10638297872340426,0
+Majority baseline,SYN069,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN069,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN067,influenza,0,0.2391304347826087,0
+Majority baseline,SYN067,chickenpox,1,0.21739130434782608,0
+Majority baseline,SYN067,measles,0,0.17391304347826086,0
+Majority baseline,SYN067,mumps,0,0.15217391304347827,0
+Majority baseline,SYN067,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN067,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN088,influenza,0,0.14893617021276595,0
+Majority baseline,SYN088,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN088,measles,0,0.10638297872340426,0
+Majority baseline,SYN088,mumps,0,0.1702127659574468,0
+Majority baseline,SYN088,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN088,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN056,influenza,0,0.2553191489361702,0
+Majority baseline,SYN056,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN056,measles,0,0.23404255319148937,0
+Majority baseline,SYN056,mumps,0,0.10638297872340426,0
+Majority baseline,SYN056,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN056,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN063,influenza,0,0.2553191489361702,0
+Majority baseline,SYN063,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN063,measles,0,0.23404255319148937,0
+Majority baseline,SYN063,mumps,0,0.10638297872340426,0
+Majority baseline,SYN063,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN063,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN050,influenza,0,0.14893617021276595,0
+Majority baseline,SYN050,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN050,measles,1,0.10638297872340426,0
+Majority baseline,SYN050,mumps,0,0.1702127659574468,0
+Majority baseline,SYN050,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN050,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN079,influenza,0,0.2391304347826087,0
+Majority baseline,SYN079,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN079,measles,0,0.17391304347826086,0
+Majority baseline,SYN079,mumps,0,0.15217391304347827,0
+Majority baseline,SYN079,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN079,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN082,influenza,0,0.14893617021276595,0
+Majority baseline,SYN082,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN082,measles,0,0.10638297872340426,0
+Majority baseline,SYN082,mumps,0,0.1702127659574468,0
+Majority baseline,SYN082,viral_conjunctivitis,1,0.3191489361702128,0
+Majority baseline,SYN082,viral_gastroenteritis,1,0.3404255319148936,0
+Majority baseline,SYN005,influenza,0,0.14893617021276595,0
+Majority baseline,SYN005,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN005,measles,0,0.10638297872340426,0
+Majority baseline,SYN005,mumps,1,0.1702127659574468,0
+Majority baseline,SYN005,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN005,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN024,influenza,0,0.2391304347826087,0
+Majority baseline,SYN024,chickenpox,1,0.21739130434782608,0
+Majority baseline,SYN024,measles,0,0.17391304347826086,0
+Majority baseline,SYN024,mumps,0,0.15217391304347827,0
+Majority baseline,SYN024,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN024,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN055,influenza,0,0.2391304347826087,0
+Majority baseline,SYN055,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN055,measles,0,0.17391304347826086,0
+Majority baseline,SYN055,mumps,0,0.15217391304347827,0
+Majority baseline,SYN055,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN055,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN045,influenza,0,0.2553191489361702,0
+Majority baseline,SYN045,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN045,measles,0,0.23404255319148937,0
+Majority baseline,SYN045,mumps,0,0.10638297872340426,0
+Majority baseline,SYN045,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN045,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN034,influenza,0,0.2553191489361702,0
+Majority baseline,SYN034,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN034,measles,0,0.23404255319148937,0
+Majority baseline,SYN034,mumps,0,0.10638297872340426,0
+Majority baseline,SYN034,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN034,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN023,influenza,0,0.2553191489361702,0
+Majority baseline,SYN023,chickenpox,1,0.2553191489361702,0
+Majority baseline,SYN023,measles,1,0.23404255319148937,0
+Majority baseline,SYN023,mumps,0,0.10638297872340426,0
+Majority baseline,SYN023,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN023,viral_gastroenteritis,1,0.3191489361702128,0
+Majority baseline,SYN052,influenza,0,0.2391304347826087,0
+Majority baseline,SYN052,chickenpox,0,0.21739130434782608,0
+Majority baseline,SYN052,measles,0,0.17391304347826086,0
+Majority baseline,SYN052,mumps,0,0.15217391304347827,0
+Majority baseline,SYN052,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN052,viral_gastroenteritis,0,0.32608695652173914,0
+Majority baseline,SYN042,influenza,1,0.2553191489361702,0
+Majority baseline,SYN042,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN042,measles,0,0.23404255319148937,0
+Majority baseline,SYN042,mumps,0,0.10638297872340426,0
+Majority baseline,SYN042,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN042,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN090,influenza,0,0.14893617021276595,0
+Majority baseline,SYN090,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN090,measles,0,0.10638297872340426,0
+Majority baseline,SYN090,mumps,0,0.1702127659574468,0
+Majority baseline,SYN090,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN090,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN054,influenza,1,0.2553191489361702,0
+Majority baseline,SYN054,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN054,measles,0,0.23404255319148937,0
+Majority baseline,SYN054,mumps,0,0.10638297872340426,0
+Majority baseline,SYN054,viral_conjunctivitis,0,0.2553191489361702,0
+Majority baseline,SYN054,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN028,influenza,0,0.2553191489361702,0
+Majority baseline,SYN028,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN028,measles,0,0.23404255319148937,0
+Majority baseline,SYN028,mumps,0,0.10638297872340426,0
+Majority baseline,SYN028,viral_conjunctivitis,1,0.2553191489361702,0
+Majority baseline,SYN028,viral_gastroenteritis,0,0.3191489361702128,0
+Majority baseline,SYN008,influenza,0,0.2391304347826087,0
+Majority baseline,SYN008,chickenpox,1,0.21739130434782608,0
+Majority baseline,SYN008,measles,1,0.17391304347826086,0
+Majority baseline,SYN008,mumps,0,0.15217391304347827,0
+Majority baseline,SYN008,viral_conjunctivitis,0,0.32608695652173914,0
+Majority baseline,SYN008,viral_gastroenteritis,1,0.32608695652173914,0
+Majority baseline,SYN071,influenza,0,0.14893617021276595,0
+Majority baseline,SYN071,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN071,measles,1,0.10638297872340426,0
+Majority baseline,SYN071,mumps,0,0.1702127659574468,0
+Majority baseline,SYN071,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN071,viral_gastroenteritis,0,0.3404255319148936,0
+Majority baseline,SYN078,influenza,1,0.14893617021276595,0
+Majority baseline,SYN078,chickenpox,0,0.2553191489361702,0
+Majority baseline,SYN078,measles,0,0.10638297872340426,0
+Majority baseline,SYN078,mumps,0,0.1702127659574468,0
+Majority baseline,SYN078,viral_conjunctivitis,0,0.3191489361702128,0
+Majority baseline,SYN078,viral_gastroenteritis,1,0.3404255319148936,0

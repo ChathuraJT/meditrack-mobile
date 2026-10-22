@@ -1,16 +1,20 @@
-import { View, StyleSheet, useColorScheme, type ViewProps } from 'react-native';
-import { colors, radius, spacing } from '@/theme/tokens';
-import { MedicalPatternBackground } from '@/components/MedicalPatternBackground';
+import { View, StyleSheet, type ViewProps } from 'react-native';
+import { useColorScheme } from '@/theme/ThemeProvider';
+import { darkColors, radius, spacing, useThemeColors } from '@/theme/tokens';
 
 export function AppCard({ style, children, ...props }: ViewProps) {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
+  const isDark = useColorScheme() === 'dark';
+
   return (
     <View
       {...props}
       style={[
         styles.card,
         {
-          backgroundColor: '#FFFFFF',
-          borderColor: '#E2E8F0',
+          backgroundColor: isDark ? darkColors.surface : colors.surface,
+          borderColor: isDark ? darkColors.border : colors.border,
           shadowColor: '#64748B',
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.06,
@@ -25,14 +29,15 @@ export function AppCard({ style, children, ...props }: ViewProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  card: {
-    borderWidth: 1,
-    borderRadius: radius.md,
-    overflow: 'hidden',
-  },
-  content: {
-    padding: spacing.lg,
-    gap: spacing.md,
-  },
-});
+const createStyles = (colors: ReturnType<typeof useThemeColors>) =>
+  StyleSheet.create({
+    card: {
+      borderWidth: 1,
+      borderRadius: radius.md,
+      overflow: 'hidden',
+    },
+    content: {
+      padding: spacing.lg,
+      gap: spacing.md,
+    },
+  });
