@@ -1,6 +1,12 @@
-import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import { AppState, Linking, Platform, StyleSheet, View } from 'react-native';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AppButton } from '@/components/ui/AppButton';
 import { AppCard } from '@/components/ui/AppCard';
@@ -9,10 +15,27 @@ import { Screen } from '@/components/ui/Screen';
 import { spacing, useThemeColors } from '@/theme/tokens';
 import { NearbyController } from './controller';
 import { availabilityMessage, createScanner } from './scanner';
+import { useConsentController } from '@/features/consent/ConsentProvider';
 
 export function NearbyDevicesScreen() {
   const colors = useThemeColors();
-  const controller = useMemo(() => new NearbyController(createScanner), []);
+  const consent = useConsentController();
+  const controller = useMemo(
+    () =>
+      new NearbyController(
+        createScanner,
+        Date.now,
+        () => consent?.canTrack() ?? false,
+      ),
+    [consent],
+  );
+  useEffect(
+    () =>
+      consent?.subscribe(() => {
+        if (!consent.canTrack()) controller.stop('Tracking consent is off.');
+      }),
+    [consent, controller],
+  );
   const state = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,
@@ -43,6 +66,10 @@ export function NearbyDevicesScreen() {
           Discover devices broadcasting Bluetooth Low Energy signals.
         </AppText>
       </View>
+      <AppButton
+        label="Terms & consent settings"
+        onPress={() => router.push('/consent-settings')}
+      />
       <AppCard>
         <AppText variant="heading">
           {state.starting
@@ -62,6 +89,7 @@ export function NearbyDevicesScreen() {
             {!active && (
               <AppButton
                 label="Start scan"
+                disabled={!consent?.canTrack()}
                 onPress={() => void controller.start()}
               />
             )}

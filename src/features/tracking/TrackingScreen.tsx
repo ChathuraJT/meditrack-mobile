@@ -9,6 +9,7 @@ import { Screen } from '@/components/ui/Screen';
 import { spacing, useThemeColors } from '@/theme/tokens';
 import { useTrackingController, useTrackingState } from './TrackingProvider';
 import type { TrackingController } from './controller';
+import { useConsentController } from '@/features/consent/ConsentProvider';
 
 export function TrackingScreen() {
   const controller = useTrackingController();
@@ -22,6 +23,7 @@ export function TrackingScreen() {
 }
 
 function TrackingContent({ controller }: { controller: TrackingController }) {
+  const consent = useConsentController();
   const state = useTrackingState(controller);
   const palette = useThemeColors();
   const [confirmClear, setConfirmClear] = useState(false);
@@ -55,10 +57,11 @@ function TrackingContent({ controller }: { controller: TrackingController }) {
             </AppText>
           </View>
           <Switch
-            accessibilityLabel="Location tracking consent and capture"
+            accessibilityLabel="Start or stop location recording"
             value={state.enabled}
             disabled={
               !state.ready ||
+              (!state.enabled && !consent?.canTrack()) ||
               (!state.enabled && (state.busy || state.pendingOff))
             }
             trackColor={{ false: palette.border, true: palette.accent }}
@@ -69,10 +72,14 @@ function TrackingContent({ controller }: { controller: TrackingController }) {
           />
         </View>
         <AppText>
-          Turning on gives consent to collect your coordinates, time and
-          location accuracy and upload them to your account for exposure
-          research. Your consent choice is saved to your account.
+          Manage your tracking consent in Terms & consent settings first.
+          Turning on here requests device permission and starts the existing
+          foreground location feature. It does not authorise research copying.
         </AppText>
+        <AppButton
+          label="Terms & consent settings"
+          onPress={() => router.push('/consent-settings')}
+        />
         <AppText muted variant="caption">
           A location is requested about once a minute while the app is active.
           Recording pauses when you lock the phone or leave the app. Turn it on
@@ -96,9 +103,9 @@ function TrackingContent({ controller }: { controller: TrackingController }) {
         </View>
         {!state.enabled && state.consent && !state.pendingOff && (
           <AppButton
-            label="Withdraw account consent"
+            label="Withdraw tracking consent"
             disabled={state.busy}
-            onPress={() => void controller.stop()}
+            onPress={() => router.push('/consent-settings')}
           />
         )}
         {state.busy && (

@@ -17,6 +17,7 @@ export type TrackingState = {
   lastUpload: string | null;
 };
 type Dependencies = {
+  canCollect(): boolean;
   store: TrackingStore;
   consent(granted?: boolean): Promise<boolean>;
   permission(request: boolean): Promise<string>;
@@ -122,6 +123,12 @@ export class TrackingController {
     }
   }
   async start() {
+    if (!this.deps.canCollect()) {
+      this.fail(
+        new Error('Enable tracking consent in Terms & consent settings first.'),
+      );
+      return;
+    }
     if (
       !this.alive ||
       !this.state.ready ||
@@ -133,7 +140,12 @@ export class TrackingController {
     this.update({ busy: true, error: null });
     try {
       const permission = await this.deps.permission(true);
-      if (!this.alive || generation !== this.generation) return;
+      if (
+        !this.alive ||
+        generation !== this.generation ||
+        !this.deps.canCollect()
+      )
+        return;
       this.update({ permission });
       if (permission !== 'granted')
         throw new Error(
@@ -141,7 +153,12 @@ export class TrackingController {
         );
       if (!(await this.deps.consent(true)))
         throw new Error('The server did not confirm tracking consent.');
-      if (!this.alive || generation !== this.generation) return;
+      if (
+        !this.alive ||
+        generation !== this.generation ||
+        !this.deps.canCollect()
+      )
+        return;
       this.update({ consent: true, enabled: true });
       this.lastAttempt = 0;
     } catch (error) {
@@ -183,6 +200,7 @@ export class TrackingController {
   }
   async tick() {
     if (
+      !this.deps.canCollect() ||
       !this.alive ||
       !this.state.foreground ||
       !this.state.enabled ||
@@ -206,10 +224,12 @@ export class TrackingController {
         });
         return;
       }
-      if (abort.signal.aborted || !this.alive) return;
+      if (abort.signal.aborted || !this.alive || !this.deps.canCollect())
+        return;
       const sample = await this.deps.capture(abort.signal);
       if (
         !this.alive ||
+        !this.deps.canCollect() ||
         abort.signal.aborted ||
         generation !== this.generation ||
         !this.state.enabled
@@ -229,6 +249,7 @@ export class TrackingController {
   }
   async sync() {
     if (
+      !this.deps.canCollect() ||
       !this.alive ||
       !this.deps.upload ||
       this.uploadAbort ||
@@ -245,9 +266,16 @@ export class TrackingController {
       // Bound each pass; remaining backlog resumes on the next minute or manual retry.
       for (let batch = 0; batch < 4; batch++) {
         const samples = await this.deps.store.pending(500);
-        if (!samples.length || abort.signal.aborted || !this.alive) break;
+        if (
+          !samples.length ||
+          abort.signal.aborted ||
+          !this.alive ||
+          !this.deps.canCollect()
+        )
+          break;
         const result = await this.deps.upload(samples, abort.signal);
-        if (abort.signal.aborted || !this.alive) break;
+        if (abort.signal.aborted || !this.alive || !this.deps.canCollect())
+          break;
         if (
           !Number.isInteger(result?.created) ||
           !Number.isInteger(result?.duplicates) ||

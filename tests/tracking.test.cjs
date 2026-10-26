@@ -62,6 +62,7 @@ function setup(t, overrides = {}) {
   const store = createTrackingStore(memory(), 'server|1');
   const writes = [];
   const controller = new TrackingController({
+    canCollect: () => true,
     store,
     consent: async (value) => {
       writes.push(value);
@@ -89,6 +90,53 @@ test('local records are isolated by account and backend; clear preserves other a
   assert.equal((await b.summary()).count, 1);
   assert.equal((await c.summary()).count, 1);
   assert.equal(await db.getItem('unrelated'), 'keep');
+});
+
+test('app consent gate prevents permissions, capture and uploads even when server consent exists', async (t) => {
+  let requests = 0;
+  let captures = 0;
+  let uploads = 0;
+  const { controller } = setup(t, {
+    canCollect: () => false,
+    consent: async () => true,
+    permission: async (request) => {
+      if (request) requests++;
+      return 'granted';
+    },
+    capture: async () => {
+      captures++;
+      return sample();
+    },
+    upload: async () => {
+      uploads++;
+      return { created: 0, duplicates: 0 };
+    },
+  });
+  await controller.initialize();
+  await controller.start();
+  await controller.tick();
+  await controller.sync();
+  assert.equal(requests, 0);
+  assert.equal(captures, 0);
+  assert.equal(uploads, 0);
+  assert.equal(controller.getSnapshot().enabled, false);
+});
+
+test('withdrawal while permission is pending cannot grant server consent or start capture', async (t) => {
+  let allowed = true;
+  const permission = deferred();
+  const { controller, writes } = setup(t, {
+    canCollect: () => allowed,
+    permission: (request) =>
+      request ? permission.promise : Promise.resolve('granted'),
+  });
+  await controller.initialize();
+  const start = controller.start();
+  allowed = false;
+  permission.resolve('granted');
+  await start;
+  assert.equal(writes.includes(true), false);
+  assert.equal(controller.getSnapshot().enabled, false);
 });
 test('retention expires on recorded time, including the exact 14-day boundary', async () => {
   const store = createTrackingStore(memory(), '1'),

@@ -11,8 +11,26 @@ import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator } from 'react-native';
 import { ThemeProvider, useColorScheme } from '@/theme/ThemeProvider';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  ConsentProvider,
+  useConsentController,
+  useConsentState,
+} from '@/features/consent/ConsentProvider';
+import type { ConsentController } from '@/features/consent/controller';
 
 function Routes() {
+  const consent = useConsentController();
+  return consent ? (
+    <ConsentRoutes consent={consent} />
+  ) : (
+    <Screen>
+      <AppText>Loading your choices…</AppText>
+    </Screen>
+  );
+}
+
+function ConsentRoutes({ consent }: { consent: ConsentController }) {
+  const consentState = useConsentState(consent);
   const colors = useThemeColors();
   const auth = useAuth();
   const destination = launchDestination(
@@ -20,7 +38,7 @@ function Routes() {
     !!auth.session,
     auth.onboarded,
   );
-  if (destination === 'loading')
+  if (destination === 'loading' || (!consentState.ready && !consentState.error))
     return (
       <Screen>
         <ActivityIndicator
@@ -30,7 +48,18 @@ function Routes() {
         <AppText>Getting MediTrack ready…</AppText>
       </Screen>
     );
-  if (auth.error)
+  if (!consentState.ready && consentState.error)
+    return (
+      <Screen>
+        <AppText accessibilityRole="alert">{consentState.error}</AppText>
+        <AppButton
+          label="Retry loading choices"
+          onPress={() => void consent.initialize()}
+        />
+      </Screen>
+    );
+  const accepted = consent.requiredAccepted();
+  if (auth.error && accepted)
     return (
       <Screen>
         <AppText accessibilityRole="alert">{auth.error}</AppText>
@@ -44,13 +73,16 @@ function Routes() {
         contentStyle: { backgroundColor: colors.background },
       }}
     >
-      <Stack.Protected guard={destination === 'onboarding'}>
+      <Stack.Protected guard={!accepted}>
+        <Stack.Screen name="terms" />
+      </Stack.Protected>
+      <Stack.Protected guard={accepted && destination === 'onboarding'}>
         <Stack.Screen name="onboarding" />
       </Stack.Protected>
-      <Stack.Protected guard={destination === 'login'}>
+      <Stack.Protected guard={accepted && destination === 'login'}>
         <Stack.Screen name="(auth)" />
       </Stack.Protected>
-      <Stack.Protected guard={destination === 'patient'}>
+      <Stack.Protected guard={accepted && destination === 'patient'}>
         <Stack.Screen name="(patient)" />
       </Stack.Protected>
     </Stack>
@@ -71,7 +103,9 @@ function ThemedRoot() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
-          <Routes />
+          <ConsentProvider>
+            <Routes />
+          </ConsentProvider>
         </AuthProvider>
       </QueryClientProvider>
     </SafeAreaProvider>

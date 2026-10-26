@@ -42,6 +42,7 @@ function setup(t, options = {}) {
       },
     }),
     options.now,
+    options.canScan ?? (() => true),
   );
   t.after(() => controller.stop());
   return {
@@ -53,6 +54,12 @@ function setup(t, options = {}) {
   };
 }
 const ad = (id, rssi = -60) => ({ id, rssi, name: 'Test beacon' });
+test('denied app consent prevents starting the BLE driver', async (t) => {
+  const s = setup(t, { canScan: () => false });
+  await s.controller.start();
+  assert.equal(s.starts(), 0);
+  assert.equal(s.controller.getSnapshot().scanning, false);
+});
 test('deduplicates advertisements, sorts signals, applies hysteresis and expires stale devices', async (t) => {
   let now = 1000;
   const s = setup(t, { now: () => now });

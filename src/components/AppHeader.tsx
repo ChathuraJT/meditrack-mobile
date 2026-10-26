@@ -22,6 +22,7 @@ export function AppHeader() {
   const pathname = usePathname();
   const showBack = [
     '/profile',
+    '/consent-settings',
     '/email-link',
     '/tracking',
     '/location-history',

@@ -66,6 +66,13 @@ export function MoreScreen() {
       </AppCard>
       <SignOutButton />
       <AppCard>
+        <AppText variant="heading">Privacy & consent</AppText>
+        <AppButton
+          label="Terms & consent settings"
+          onPress={() => router.push('/consent-settings')}
+        />
+      </AppCard>
+      <AppCard>
         <AppText variant="heading">Appearance</AppText>
         <AppText muted>
           Current mode: {appearance.mode}. Your choice is saved on this device.

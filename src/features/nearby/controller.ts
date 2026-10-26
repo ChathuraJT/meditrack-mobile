@@ -38,6 +38,7 @@ export class NearbyController {
   constructor(
     private createScanner: () => Scanner,
     private now = Date.now,
+    private canScan: () => boolean = () => false,
   ) {}
   getSnapshot = () => this.state;
   subscribe = (callback: () => void) => {
@@ -58,6 +59,12 @@ export class NearbyController {
     });
   }
   async start() {
+    if (!this.canScan()) {
+      this.update({
+        error: 'Enable tracking consent in Terms & consent settings first.',
+      });
+      return;
+    }
     if (this.state.starting || this.state.scanning) return;
     const generation = ++this.generation;
     const driver = this.createScanner();
@@ -66,9 +73,14 @@ export class NearbyController {
     try {
       await this.cleanup;
       if (generation !== this.generation) return;
+      if (!this.canScan()) {
+        this.stop('Tracking consent is off.');
+        return;
+      }
       await driver.start(
         (device) => {
-          if (generation !== this.generation || !device.id) return;
+          if (generation !== this.generation || !device.id || !this.canScan())
+            return;
           const previous = this.state.devices.find(
             (row) => row.id === device.id,
           );
@@ -107,8 +119,10 @@ export class NearbyController {
           this.update({ error: message });
         },
       );
-      if (generation !== this.generation) {
+      if (generation !== this.generation || !this.canScan()) {
         await driver.stop();
+        if (generation === this.generation)
+          this.stop('Tracking consent is off.');
         return;
       }
       this.update({ starting: false, scanning: true });
